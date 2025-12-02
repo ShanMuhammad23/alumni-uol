@@ -1,0 +1,821 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Local Chapter Details - UOL Alumni</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/hover-reveal.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<style>
+   .chapter-detail-hero {
+      background: linear-gradient(135deg, #B70A14 0%, #8a0a25 100%);
+      padding: 120px 0 80px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+   }
+
+   .chapter-detail-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+      opacity: 0.3;
+   }
+
+   .chapter-detail-content {
+      padding: 80px 0;
+   }
+
+   .chapter-info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+   }
+
+   .chapter-info-card h3 {
+      color: var(--tp-heading-primary);
+      margin-bottom: 25px;
+      font-size: 28px;
+      font-weight: 600;
+   }
+
+   .chapter-info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f0f0f0;
+   }
+
+   .chapter-info-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+   }
+
+   .chapter-info-item i {
+      color: #B70A14;
+      font-size: 20px;
+      margin-right: 15px;
+      margin-top: 5px;
+      min-width: 25px;
+   }
+
+   .chapter-info-item-content h4 {
+      color: var(--tp-heading-primary);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+   }
+
+   .chapter-info-item-content p {
+      color: #666;
+      margin: 0;
+      line-height: 1.6;
+   }
+
+   .chapter-leadership {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+   }
+
+   .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+   }
+
+   .leadership-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+   }
+
+   .leadership-card:hover {
+      transform: translateY(-5px);
+   }
+
+   .leadership-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B70A14, #8a0a25);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      font-weight: 600;
+   }
+
+   .leadership-card h4 {
+      color: var(--tp-heading-primary);
+      font-size: 20px;
+      margin-bottom: 8px;
+   }
+
+   .leadership-card p {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+   }
+
+   .chapter-events {
+      margin-top: 40px;
+   }
+
+   .event-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      gap: 20px;
+      align-items: center;
+   }
+
+   .event-date {
+      background: #B70A14;
+      color: white;
+      border-radius: 10px;
+      padding: 15px 20px;
+      text-align: center;
+      min-width: 80px;
+   }
+
+   .event-date .day {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+   }
+
+   .event-date .month {
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-top: 5px;
+   }
+
+   .event-content h4 {
+      color: var(--tp-heading-primary);
+      font-size: 20px;
+      margin-bottom: 8px;
+   }
+
+   .event-content p {
+      color: #666;
+      margin: 0;
+   }
+
+   .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: opacity 0.3s ease;
+   }
+
+   .back-link:hover {
+      opacity: 0.8;
+   }
+
+   .back-link i {
+      margin-right: 10px;
+   }
+
+   .chapter-regions-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+   }
+
+   .region-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(183, 10, 20, 0.1);
+      color: #B70A14;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+   }
+
+   #loading {
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+   }
+
+   #loading.hidden {
+      display: none !important;
+      visibility: hidden;
+      opacity: 0;
+   }
+</style>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li class="tp-static"><a class="tp-static" href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+
+   <main>
+      <!-- Chapter Detail Hero -->
+      <section class="chapter-detail-hero">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8">
+                  <a href="/local-chapters/" class="back-link">
+                     <i class="fa-solid fa-arrow-left"></i> Back to Local Chapters
+                  </a>
+                  <h1 id="chapter-title" class="tp-hero-title" style="color: white; margin-bottom: 20px;">Chapter Details</h1>
+                  <p id="chapter-subtitle" style="font-size: 18px; opacity: 0.9;color:white;">Loading chapter information...</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Chapter Detail Content -->
+      <section class="chapter-detail-content">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8">
+                  <!-- Chapter Information -->
+                  <div class="chapter-info-card">
+                     <h3>About This Chapter</h3>
+                     <div id="chapter-description">
+                        <p>Loading chapter information...</p>
+                     </div>
+                     <div id="chapter-regions" class="chapter-regions-list"></div>
+                  </div>
+
+                  <!-- Upcoming Events -->
+                  <div class="chapter-info-card chapter-events">
+                     <h3>Upcoming Events</h3>
+                     <div id="chapter-events">
+                        <p>Loading events...</p>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-lg-4">
+                  <!-- Contact Information -->
+                  <div class="chapter-info-card">
+                     <h3>Contact Information</h3>
+                     <div id="chapter-contact">
+                        <div class="chapter-info-item">
+                           <i class="fa-solid fa-envelope"></i>
+                           <div class="chapter-info-item-content">
+                              <h4>Email</h4>
+                              <p id="chapter-email">Loading...</p>
+                           </div>
+                        </div>
+                        <div class="chapter-info-item">
+                           <i class="fa-solid fa-phone"></i>
+                           <div class="chapter-info-item-content">
+                              <h4>Phone</h4>
+                              <p id="chapter-phone">Loading...</p>
+                           </div>
+                        </div>
+                        <div class="chapter-info-item">
+                           <i class="fa-solid fa-location-dot"></i>
+                           <div class="chapter-info-item-content">
+                              <h4>Location</h4>
+                              <p id="chapter-location">Loading...</p>
+                           </div>
+                        </div>
+                        <div class="chapter-info-item">
+                           <i class="fa-solid fa-users"></i>
+                           <div class="chapter-info-item-content">
+                              <h4>Members</h4>
+                              <p id="chapter-members">Loading...</p>
+                           </div>
+                        </div>
+                        <div class="chapter-info-item">
+                           <i class="fa-solid fa-link"></i>
+                           <div class="chapter-info-item-content">
+                              <h4>WhatsApp Group</h4>
+                              <p id="chapter-whatsapp">Loading...</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Chapter Leadership -->
+                  <div class="chapter-leadership">
+                     <h3 style="color: var(--tp-heading-primary); margin-bottom: 20px;">Chapter Leadership</h3>
+                     <div class="leadership-grid" id="chapter-leadership">
+                        <p>Loading leadership...</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer area start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Benefits</a></li>
+ <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer area end -->
+
+   <script>
+      // Hide preloader immediately - fallback
+      (function() {
+         function hideLoader() {
+            const loader = document.getElementById('loading');
+            if (loader) {
+               loader.style.display = 'none';
+               loader.classList.add('hidden');
+            }
+         }
+         if (document.readyState === 'complete') {
+            hideLoader();
+         } else {
+            window.addEventListener('load', hideLoader);
+            document.addEventListener('DOMContentLoaded', hideLoader);
+         }
+      })();
+   </script>
+
+   <script src="/assets/js/jquery.js"></script>
+   <script src="/assets/js/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/counterup.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+
+   <script>
+      // Local chapter data
+      const localChapterData = {
+         'lahore-surrounding': {
+            name: 'Lahore & Surrounding Chapter',
+            description: 'This chapter includes alumni from Lahore, Kasur, Kot Radha Kishen, Sharaqpur Sharif, Muridke, Narang Mandi, Sheikhupura, Chunian, Pattoki, Renala Khurd, Okara, Depalpur, Haveli Lakha, Hujra Shah Muqeem, and Manwala. Together, this diverse and vibrant region forms a strong alumni network that fosters learning, collaboration, and professional growth through shared experiences and opportunities.',
+            email: 'lahore@uolalumni.edu.pk',
+            phone: '+92-42-111 865 865',
+            location: 'Lahore, Pakistan',
+            members: '1,091',
+            whatsapp: 'https://chat.whatsapp.com/CPh4OZiIUWS209Wl4tcc1l',
+            regions: ['Lahore', 'Kasur', 'Sheikhupura', 'Okara', 'Muridke', 'Pattoki'],
+            leadership: [],
+            events: [
+               { day: '15', month: 'Mar', title: 'Lahore Alumni Meetup', description: 'Networking event for Lahore-based alumni at a central location.' },
+               { day: '28', month: 'Apr', title: 'Career Development Workshop', description: 'Professional development workshop focusing on career growth.' },
+               { day: '10', month: 'May', title: 'Annual Chapter Dinner', description: 'Annual dinner gathering for all chapter members.' }
+            ]
+         },
+         'gujranwala-gujrat-sialkot': {
+            name: 'Gujranwala–Gujrat–Sialkot Chapter',
+            description: 'This chapter brings together alumni from Gujranwala, Gujrat, Sialkot, Daska, Wazirabad, Kamoke, Hafizabad, Alipur Chattha, Lala Musa, and Kharian. Representing an important industrial and commercial belt, this chapter provides valuable networking, mentorship, and development opportunities for alumni.',
+            email: 'gujranwala@uolalumni.edu.pk',
+            phone: '+92-55-123 4567',
+            location: 'Gujranwala, Pakistan',
+            members: '64',
+            whatsapp: 'https://chat.whatsapp.com/HGCt4gt4r3l8DbAjTqs18m',
+            regions: ['Gujranwala', 'Gujrat', 'Sialkot', 'Wazirabad', 'Daska'],
+            leadership: [],
+            events: [
+               { day: '20', month: 'Mar', title: 'Industrial Networking Event', description: 'Networking event for professionals in the industrial sector.' },
+               { day: '05', month: 'Apr', title: 'Sialkot Alumni Gathering', description: 'Meetup for Sialkot-based alumni.' },
+               { day: '18', month: 'May', title: 'Business Development Seminar', description: 'Seminar on business growth and opportunities.' }
+            ]
+         },
+         'faisalabad': {
+            name: 'Faisalabad Chapter',
+            description: 'The Faisalabad chapter includes alumni from Faisalabad, Jaranwala, Samundri, Gojra, Toba Tek Singh, Chiniot, and Jhang. With representation from one of Pakistan\'s major economic hubs, this chapter facilitates rich learning experiences, professional collaboration, and continuous growth for its members.',
+            email: 'faisalabad@uolalumni.edu.pk',
+            phone: '+92-41-123 4567',
+            location: 'Faisalabad, Pakistan',
+            members: '40',
+            whatsapp: 'https://chat.whatsapp.com/FveBtUfHfwB5AlVKB3uP1g',
+            regions: ['Faisalabad', 'Jhang', 'Toba Tek Singh', 'Chiniot', 'Gojra'],
+            leadership: [],
+            events: [
+               { day: '18', month: 'Mar', title: 'Faisalabad Networking Mixer', description: 'Evening networking event for Faisalabad alumni.' },
+               { day: '02', month: 'Apr', title: 'Textile Industry Meetup', description: 'Networking for alumni in the textile industry.' },
+               { day: '20', month: 'May', title: 'Jhang Alumni Dinner', description: 'Dinner event for Jhang-based alumni.' }
+            ]
+         },
+         'sargodha-khushab': {
+            name: 'Sargodha–Khushab Chapter',
+            description: 'This chapter consists of alumni from Sargodha, Khushab, Jauharabad, Bhalwal, and Mianwali. These interconnected cities form a cohesive alumni community that supports peer learning, career development, and collective progress through regular engagement and knowledge-sharing.',
+            email: 'sargodha@uolalumni.edu.pk',
+            phone: '+92-48-123 4567',
+            location: 'Sargodha, Pakistan',
+            members: '27',
+            whatsapp: 'https://chat.whatsapp.com/LtRq0lc7KDlJRBh1cfgdvy',
+            regions: ['Sargodha', 'Khushab', 'Mianwali', 'Bhalwal', 'Jauharabad'],
+            leadership: [],
+            events: [
+               { day: '22', month: 'Mar', title: 'Sargodha Alumni Meetup', description: 'Networking event in Sargodha.' },
+               { day: '08', month: 'Apr', title: 'Career Guidance Session', description: 'Session for recent graduates.' },
+               { day: '25', month: 'May', title: 'Mianwali Gathering', description: 'Social gathering for Mianwali alumni.' }
+            ]
+         },
+         'multan': {
+            name: 'Multan Chapter',
+            description: 'The Multan chapter covers alumni living in Multan, Khanewal, Lodhran, Vehari, and nearby areas such as Jahanian. This chapter represents a dynamic blend of professional fields and offers alumni meaningful opportunities for growth, leadership building, and networking.',
+            email: 'multan@uolalumni.edu.pk',
+            phone: '+92-61-123 4567',
+            location: 'Multan, Pakistan',
+            members: '17',
+            whatsapp: 'https://chat.whatsapp.com/HDHyhiWAHMGI1XBiqBUSGr',
+            regions: ['Multan', 'Khanewal', 'Lodhran', 'Vehari', 'Jahanian'],
+            leadership: [],
+            events: [
+               { day: '25', month: 'Mar', title: 'Multan Networking Evening', description: 'Professional networking event in Multan.' },
+               { day: '12', month: 'Apr', title: 'Agriculture Sector Meetup', description: 'Networking for alumni in agriculture.' },
+               { day: '28', month: 'May', title: 'Khanewal Alumni Dinner', description: 'Dinner event for Khanewal-based alumni.' }
+            ]
+         },
+         'bahawalpur-bahawalnagar': {
+            name: 'Bahawalpur–Bahawalnagar Chapter',
+            description: 'This chapter includes alumni from Bahawalpur, Bahawalnagar, Chishtian, Haroonabad, Hasilpur, and surrounding towns such as Fatehpur. It serves as a strong platform for alumni to connect, learn, and advance professionally while contributing to community development in the region.',
+            email: 'bahawalpur@uolalumni.edu.pk',
+            phone: '+92-62-123 4567',
+            location: 'Bahawalpur, Pakistan',
+            members: '25',
+            whatsapp: 'https://chat.whatsapp.com/CPh4OZiIUWS209Wl4tcc1l',
+            regions: ['Bahawalpur', 'Bahawalnagar', 'Chishtian', 'Hasilpur', 'Fatehpur'],
+            leadership: [],
+            events: [
+               { day: '28', month: 'Mar', title: 'Bahawalpur Alumni Meetup', description: 'Networking event in Bahawalpur.' },
+               { day: '15', month: 'Apr', title: 'Community Service Event', description: 'Volunteer activity for community development.' },
+               { day: '30', month: 'May', title: 'Annual Chapter Gala', description: 'Annual gala dinner for chapter members.' }
+            ]
+         },
+         'sahiwal-pakpattan': {
+            name: 'Sahiwal–Pakpattan Chapter',
+            description: 'The Sahiwal chapter brings together alumni from Sahiwal, Pakpattan, Arifwala, Chichawatni, and Shorkot. This chapter fosters collaboration across education, business, and social sectors while promoting continuous learning and mutual growth among its members.',
+            email: 'sahiwal@uolalumni.edu.pk',
+            phone: '+92-40-123 4567',
+            location: 'Sahiwal, Pakistan',
+            members: '14',
+            whatsapp: 'https://chat.whatsapp.com/CPh4OZiIUWS209Wl4tcc1l',
+            regions: ['Sahiwal', 'Pakpattan', 'Arifwala', 'Chichawatni', 'Shorkot'],
+            leadership: [],
+            events: [
+               { day: '30', month: 'Mar', title: 'Sahiwal Networking Event', description: 'Professional networking evening in Sahiwal.' },
+               { day: '18', month: 'Apr', title: 'Education Sector Meetup', description: 'Networking for alumni in education.' },
+               { day: '05', month: 'Jun', title: 'Pakpattan Alumni Gathering', description: 'Social gathering for Pakpattan alumni.' }
+            ]
+         },
+         'southern-punjab': {
+            name: 'Southern Punjab Chapter',
+            description: 'This chapter comprises alumni from Dera Ghazi Khan, Jampur, Rajanpur, Kot Addu, Layyah, Muzaffargarh, Jatoi, Liaqatpur, Rahim Yar Khan, and Sadiqabad. Spanning a broad yet connected region, it empowers alumni by building networks that encourage personal development, knowledge exchange, and career enhancement.',
+            email: 'dgk@uolalumni.edu.pk',
+            phone: '+92-64-123 4567',
+            location: 'Dera Ghazi Khan, Pakistan',
+            members: '23',
+            whatsapp: 'https://chat.whatsapp.com/KhRoIGGPOXm9ySqJyOBc3u',
+            regions: ['Dera Ghazi Khan', 'Rahim Yar Khan', 'Muzaffargarh', 'Layyah', 'Jampur'],
+            leadership: [],
+            events: [
+               { day: '01', month: 'Apr', title: 'DG Khan Networking Event', description: 'Networking event in Dera Ghazi Khan.' },
+               { day: '20', month: 'Apr', title: 'Rahim Yar Khan Meetup', description: 'Gathering for RYK-based alumni.' },
+               { day: '08', month: 'Jun', title: 'Regional Alumni Conference', description: 'Annual conference for Southern Punjab alumni.' }
+            ]
+         },
+         'islamabad-rawalpindi': {
+            name: 'Islamabad–Rawalpindi Chapter',
+            description: 'The Islamabad–Rawalpindi chapter consists of alumni from Islamabad, Rawalpindi, Wah Cantt, Tarbela Ghazi, Attock, Chakwal, Dina, and Jhelum. Located at the center of national activity, this chapter provides strong opportunities for professional advancement through interaction, mentorship, and innovative learning.',
+            email: 'islamabad@uolalumni.edu.pk',
+            phone: '+92-51-123 4567',
+            location: 'Islamabad, Pakistan',
+            members: '77',
+            whatsapp: 'https://chat.whatsapp.com/G2dGRlpOIUwBAmjuEUUcOR',
+            regions: ['Islamabad', 'Rawalpindi', 'Attock', 'Jhelum', 'Chakwal'],
+            leadership: [],
+            events: [
+               { day: '05', month: 'Apr', title: 'Islamabad Networking Mixer', description: 'Evening networking event in Islamabad.' },
+               { day: '22', month: 'Apr', title: 'Government Sector Meetup', description: 'Networking for alumni in government service.' },
+               { day: '12', month: 'May', title: 'Rawalpindi Alumni Dinner', description: 'Formal dinner event for Rawalpindi alumni.' }
+            ]
+         },
+         'peshawar-northern-kp': {
+            name: 'Peshawar & Northern KP Chapter',
+            description: 'This chapter includes alumni from Peshawar, Kohat, Bannu, Batkhela, Buner, Parachinar, Abbottabad, and Mansehra. Bringing together graduates across northern Khyber Pakhtunkhwa, this chapter promotes academic enrichment, leadership growth, and meaningful professional connections.',
+            email: 'peshawar@uolalumni.edu.pk',
+            phone: '+92-91-123 4567',
+            location: 'Peshawar, Pakistan',
+            members: '10',
+            whatsapp: 'https://chat.whatsapp.com/IGYxt5hz5Ao7ku20EKEjjG',
+            regions: ['Peshawar', 'Abbottabad', 'Kohat', 'Bannu', 'Mansehra'],
+            leadership: [],
+            events: [
+               { day: '08', month: 'Apr', title: 'Peshawar Networking Evening', description: 'Professional networking event in Peshawar.' },
+               { day: '25', month: 'Apr', title: 'Abbottabad Alumni Meetup', description: 'Gathering for Abbottabad-based alumni.' },
+               { day: '15', month: 'May', title: 'Northern KP Conference', description: 'Annual conference for Northern KP alumni.' }
+            ]
+         },
+         'kashmir': {
+            name: 'Kashmir Chapter',
+            description: 'The Kashmir chapter includes alumni from Azad Jammu Kashmir, Bhimber, Kotli, and Poonch. With strong ties to the region\'s educational and social landscape, this chapter supports its members through collaborative learning, community engagement, and skill-building opportunities.',
+            email: 'kashmir@uolalumni.edu.pk',
+            phone: '+92-58-123 4567',
+            location: 'Muzaffarabad, Azad Jammu Kashmir',
+            members: '4',
+            whatsapp: 'https://chat.whatsapp.com/LqFVwTNNApK6KE1V3FGnJY',
+            regions: ['Azad Jammu Kashmir', 'Bhimber', 'Kotli', 'Poonch'],
+            leadership: [],
+            events: [
+               { day: '12', month: 'Apr', title: 'Muzaffarabad Networking Event', description: 'Networking event in Muzaffarabad.' },
+               { day: '30', month: 'Apr', title: 'Kotli Alumni Gathering', description: 'Social gathering for Kotli-based alumni.' },
+               { day: '18', month: 'May', title: 'Cultural Heritage Tour', description: 'Explore Kashmiri culture and heritage.' }
+            ]
+         },
+         'sindh': {
+            name: 'Sindh Chapter',
+            description: 'This chapter comprises alumni from Karachi and Ghotki, representing both the metropolitan center and upper Sindh. It serves as a bridge for alumni across diverse industries, offering opportunities for career growth, networking, and continuous professional development.',
+            email: 'karachi@uolalumni.edu.pk',
+            phone: '+92-21-123 4567',
+            location: 'Karachi, Pakistan',
+            members: '17',
+            whatsapp: 'https://chat.whatsapp.com/LkuNitH9N8r8OBc7ugHRjT',
+            regions: ['Karachi', 'Ghotki'],
+            leadership: [
+               { name: 'Ahmed Sheikh', role: 'Chapter President', initials: 'AS' },
+               { name: 'Fatima Ali', role: 'Vice President', initials: 'FA' },
+               { name: 'Hassan Raza', role: 'Treasurer', initials: 'HR' }
+            ],
+            events: [
+               { day: '15', month: 'Apr', title: 'Karachi Networking Mixer', description: 'Evening networking event in Karachi.' },
+               { day: '02', month: 'May', title: 'Business Sector Meetup', description: 'Networking for business professionals.' },
+               { day: '25', month: 'May', title: 'Ghotki Alumni Dinner', description: 'Dinner event for Ghotki-based alumni.' }
+            ]
+         },
+         'balochistan': {
+            name: 'Balochistan Chapter',
+            description: 'The Balochistan chapter consists of alumni from Quetta and Dalbandin. United by regional pride and professional ambition, this chapter enables alumni to collaborate, learn, and grow through shared experiences and development-focused activities.',
+            email: 'quetta@uolalumni.edu.pk',
+            phone: '+92-81-123 4567',
+            location: 'Quetta, Pakistan',
+            members: '5',
+            whatsapp: 'https://chat.whatsapp.com/GPXDK9YJbua6Ixygm5Jlvn',
+            regions: ['Quetta', 'Dalbandin'],
+            leadership: [],
+            events: [
+               { day: '20', month: 'Apr', title: 'Quetta Networking Event', description: 'Professional networking evening in Quetta.' },
+               { day: '10', month: 'May', title: 'Dalbandin Alumni Meetup', description: 'Gathering for Dalbandin-based alumni.' },
+               { day: '28', month: 'May', title: 'Balochistan Cultural Event', description: 'Celebrate Balochi culture and traditions.' }
+            ]
+         },
+         'northern-pakistan': {
+            name: 'Northern Pakistan Chapter',
+            description: 'This chapter includes alumni from Gilgit and Skardu, representing the northernmost regions of Pakistan. Through this chapter, alumni benefit from a supportive community that encourages personal enrichment, learning opportunities, and professional networking despite geographical distances.',
+            email: 'gilgit@uolalumni.edu.pk',
+            phone: '+92-57-123 4567',
+            location: 'Gilgit, Pakistan',
+            members: '6',
+            whatsapp: 'https://chat.whatsapp.com/Kwn0z2CovE885jDu4Vveue',
+            regions: ['Gilgit', 'Skardu'],
+            leadership: [],
+            events: [
+               { day: '25', month: 'Apr', title: 'Gilgit Networking Event', description: 'Networking event in Gilgit.' },
+               { day: '15', month: 'May', title: 'Skardu Alumni Gathering', description: 'Social gathering for Skardu-based alumni.' },
+               { day: '05', month: 'Jun', title: 'Northern Pakistan Tour', description: 'Explore the beautiful northern regions.' }
+            ]
+         }
+      };
+
+      // Get chapter from URL parameter
+      function getUrlParameter(name) {
+         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+         const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+         const results = regex.exec(location.search);
+         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+
+      // Function to hide preloader
+      function hidePreloader() {
+         const preloader = document.getElementById('loading');
+         if (preloader) {
+            preloader.classList.add('hidden');
+            setTimeout(function() {
+               preloader.style.display = 'none';
+            }, 500);
+         }
+      }
+
+      // Hide preloader when page loads
+      if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', hidePreloader);
+      } else {
+         hidePreloader();
+      }
+
+      window.addEventListener('load', hidePreloader);
+
+      // Load chapter data
+      document.addEventListener('DOMContentLoaded', function() {
+         hidePreloader();
+
+         const chapterSlug = getUrlParameter('chapter') || 'lahore-surrounding';
+         const chapter = localChapterData[chapterSlug] || localChapterData['lahore-surrounding'];
+
+         // Update page title
+         document.title = `${chapter.name} - UOL Alumni`;
+
+         // Update hero section
+         document.getElementById('chapter-title').textContent = chapter.name;
+         document.getElementById('chapter-subtitle').textContent = `Connecting ${chapter.members} alumni across ${chapter.location}`;
+
+         // Update description
+         document.getElementById('chapter-description').innerHTML = `<p>${chapter.description}</p>`;
+
+         // Update regions
+         const regionsHtml = chapter.regions.map(region => `<span class="region-tag">${region}</span>`).join('');
+         document.getElementById('chapter-regions').innerHTML = regionsHtml;
+
+         // Update contact information
+         document.getElementById('chapter-email').textContent = chapter.email;
+         document.getElementById('chapter-phone').textContent = chapter.phone;
+         document.getElementById('chapter-location').textContent = chapter.location;
+         document.getElementById('chapter-members').textContent = chapter.members;
+         document.getElementById('chapter-whatsapp').innerHTML = chapter.whatsapp ? `<a href="${chapter.whatsapp}" target="_blank">Join WhatsApp Group</a>` : 'Not available';
+
+         // Update leadership
+         const leadershipHtml = chapter.leadership.map(leader => `
+            <div class="leadership-card">
+               <div class="leadership-avatar">${leader.initials}</div>
+               <h4>${leader.name}</h4>
+               <p>${leader.role}</p>
+            </div>
+         `).join('');
+         document.getElementById('chapter-leadership').innerHTML = leadershipHtml;
+
+         // Update events
+         const eventsHtml = chapter.events.length > 0 ? chapter.events.map(event => `
+            <div class="event-card">
+               <div class="event-date">
+                  <div class="day">${event.day}</div>
+                  <div class="month">${event.month}</div>
+               </div>
+               <div class="event-content">
+                  <h4>${event.title}</h4>
+                  <p>${event.description}</p>
+               </div>
+            </div>
+         `).join('') : '<p>No upcoming events scheduled. Check back soon!</p>';
+         document.getElementById('chapter-events').innerHTML = eventsHtml;
+      });
+   </script>
+
+</body>
+
+</html>
+

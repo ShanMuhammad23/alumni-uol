@@ -1,0 +1,534 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title id="page-title">Distinguished Alumni Stories</title>
+      <meta name="description" content="" id="page-description">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta property="og:title" content="Distinguished Alumni Stories" id="og-title">
+      <meta property="og:description" content="Celebrating the journeys of University of Lahore alumni creating global impact." id="og-description">
+      <meta property="og:image" content="/assets/img/about/about-1.jpg" id="og-image">
+
+      <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+      <!-- CSS here -->
+      <link rel="stylesheet" href="/assets/css/bootstrap.css">
+      <link rel="stylesheet" href="/assets/css/animate.css">
+      <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+      <link rel="stylesheet" href="/assets/css/slick.css">
+      <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+      <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+      <link rel="stylesheet" href="/assets/css/spacing.css">
+      <link rel="stylesheet" href="/assets/css/main.css">
+      <style>
+         .tp-alumni-hero {
+            background: linear-gradient(135deg, rgba(16, 24, 40, 0.75), rgba(16, 24, 40, 0.55)), url("/assets/img/breadcrumb/about-breadcrumb.jpg");
+            background-size: cover;
+            background-position: center;
+         }
+         .tp-alumni-hero .tp-breadcrumb__title {
+            letter-spacing: -0.48px;
+         }
+         .tp-alumni-content {
+            position: relative;
+         }
+         .tp-alumni-loader,
+         .tp-alumni-error {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--tp-common-white);
+            border-radius: 16px;
+            box-shadow: 0px 20px 50px rgba(15, 18, 38, 0.06);
+         }
+         .tp-loader-spinner {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 3px solid rgba(171, 12, 47, 0.2);
+            border-top-color: var(--tp-theme-primary);
+            display: inline-block;
+            animation: tp-spin 1s linear infinite;
+            margin-bottom: 20px;
+         }
+         @keyframes tp-spin {
+            to {
+               transform: rotate(360deg);
+            }
+         }
+         .tp-alumni-detail {
+            background: var(--tp-common-white);
+            border-radius: 20px;
+            box-shadow: 0px 20px 60px rgba(15, 18, 38, 0.08);
+            overflow: hidden;
+         }
+         .tp-alumni-detail__hero {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(13, 25, 47, 0.05), rgba(171, 12, 47, 0.08));
+         }
+         .tp-alumni-detail__media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+         }
+         .tp-alumni-detail__meta {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+         }
+         .tp-alumni-detail__eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.24em;
+            color: var(--tp-theme-primary);
+         }
+         .tp-alumni-detail__role {
+            font-size: 18px;
+            color: #555861;
+            margin: 0;
+         }
+         .tp-alumni-detail__headline {
+            font-size: 20px;
+            color: #1b1d22;
+            margin: 0;
+         }
+         .tp-alumni-detail__body {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+            gap: 60px;
+            padding: 60px 50px 70px;
+         }
+         .tp-alumni-detail__summary {
+            font-size: 18px;
+            color: #343641;
+            font-weight: 500;
+            margin-bottom: 24px;
+            letter-spacing: -0.25px;
+         }
+         .tp-alumni-detail__story p {
+            color: #4b4d57;
+            font-size: 17px;
+            line-height: 1.75;
+            margin-bottom: 24px;
+         }
+         .tp-alumni-detail__story p:last-child {
+            margin-bottom: 0;
+         }
+         .tp-alumni-detail__aside {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+         }
+         .tp-alumni-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+         }
+         .tp-alumni-stat {
+            background: var(--tp-common-white);
+            border: 1px solid rgba(15, 18, 38, 0.08);
+            border-radius: 14px;
+            padding: 18px 20px;
+            min-width: 140px;
+         }
+         .tp-alumni-stat__value {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--tp-theme-primary);
+         }
+         .tp-alumni-stat__label {
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #727378;
+         }
+         .tp-alumni-achievements {
+            background: rgba(13, 25, 47, 0.04);
+            border-radius: 18px;
+            padding: 28px;
+         }
+         .tp-alumni-achievements h4 {
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+         }
+         .tp-alumni-achievements ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 14px;
+         }
+         .tp-alumni-achievements li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #424554;
+         }
+         .tp-alumni-achievements i {
+            color: var(--tp-theme-primary);
+            margin-top: 3px;
+         }
+         .tp-alumni-quote {
+            margin-top: 40px;
+            padding: 32px;
+            border-left: 4px solid var(--tp-theme-primary);
+            background: rgba(171, 12, 47, 0.05);
+         }
+         .tp-alumni-quote blockquote {
+            font-size: 21px;
+            line-height: 1.6;
+            color: #1b1d22;
+            margin: 0 0 14px;
+         }
+         .tp-alumni-quote i {
+            color: var(--tp-theme-primary);
+            font-size: 24px;
+            margin-bottom: 18px;
+            display: inline-block;
+         }
+         .tp-alumni-quote__by {
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #727378;
+         }
+         .tp-alumni-more h4 {
+            margin-bottom: 18px;
+            letter-spacing: -0.3px;
+         }
+         .tp-alumni-more ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 14px;
+         }
+         .tp-alumni-more a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(15, 18, 38, 0.08);
+            background: var(--tp-common-white);
+         }
+         .tp-alumni-more a:hover {
+            border-color: var(--tp-theme-primary);
+            color: var(--tp-theme-primary);
+         }
+         .tp-alumni-more strong {
+            display: block;
+            font-size: 17px;
+         }
+         .tp-alumni-more em {
+            font-size: 13px;
+            color: #727378;
+            font-style: normal;
+         }
+         .tp-alumni-not-found {
+            text-align: center;
+            margin-bottom: 50px;
+         }
+         .tp-alumni-not-found h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+         }
+         .tp-alumni-not-found p {
+            max-width: 520px;
+            margin: 0 auto 24px;
+            color: #4b4d57;
+         }
+         .tp-alumni-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.16em;
+            color: var(--tp-theme-primary);
+         }
+         @media (max-width: 991px) {
+            .tp-alumni-detail__hero,
+            .tp-alumni-detail__body {
+               grid-template-columns: 1fr;
+            }
+            .tp-alumni-detail__hero {
+               padding: 40px 30px;
+            }
+            .tp-alumni-detail__body {
+               padding: 40px 30px 50px;
+            }
+         }
+         @media (max-width: 575px) {
+            .tp-alumni-detail__hero,
+            .tp-alumni-detail__body {
+               padding: 30px 22px;
+            }
+            .tp-alumni-detail__summary {
+               font-size: 17px;
+            }
+            .tp-alumni-detail__story p {
+               font-size: 16px;
+            }
+         }
+      </style>
+</head>
+
+<body>
+
+      <!-- pre loader area start -->
+      <div id="loading">
+         <div id="loading-center">
+            <div id="loading-center-absolute">
+               <div class="tp-preloader-content">
+                  <div class="tp-preloader-logo">
+                     <div class="tp-preloader-circle">
+                        <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                           </circle>
+                           <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        </svg>
+                     </div>
+                     <img src="/assets/img/icon/favicon.ico" alt="">
+                  </div>
+                  <p class="tp-preloader-subtitle">Loading...</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- pre loader area end -->
+
+      <!-- back to top start -->
+      <div class="back-to-top-wrapper">
+         <button id="back_to_top" type="button" class="back-to-top-btn">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+            </svg>
+         </button>
+      </div>
+      <!-- back to top end -->
+
+      <!-- header-area-start -->
+      <header class="header-area tp-header-transparent p-relative">
+         <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+            <div class="">
+               <div class="row align-items-center">
+                  <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                     <div class="tp-header-logo-1 tp-header-logo">
+                        <a href="/">
+                           <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                           <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                     <div class="main-menu text-end">
+                        <nav class="tp-main-menu-content">
+                           <ul>
+                              <li class="tp-static">
+                                 <a class="tp-static" href="/">Home</a>
+                              </li>
+                              <li>
+                                 <a href="/about/">About</a>
+                              </li>
+                              <li>
+                                 <a href="/jobs/">Jobs</a>
+                              </li>
+                              <li class="tp-static">
+                                 <a class="tp-static" href="/events/">Events</a>
+                              </li>
+                              <li>
+                                 <a href="/benefits/">Benefits</a>
+                              </li>
+                              <li>
+                                 <a href="/stories/">Stories</a>
+                              </li>
+                              <li>
+                                 <a href="/contact/">Contact</a>
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+                  <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                     <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                        <div class="tp-header-btn d-none d-md-block ml-30">
+                           <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login </a>
+                        </div>
+                        <div class="tp-header-bar d-xl-none ml-30">
+                           <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- header-area-end -->
+          <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/">
+                     <img src="/assets/img/brand/logo-black.png" alt="logo">
+                  </a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+      <section class="tp-breadcrumb__area tp-alumni-hero pt-160 pb-150 p-relative z-index-1 fix">
+         <div class="tp-breadcrumb__bg overlay" data-background="/assets/img/breadcrumb/about-breadcrumb.jpg"></div>
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-12">
+                  <div class="tp-breadcrumb__content text-center">
+                     
+                     <h3 class="tp-breadcrumb__title color" id="breadcrumb-title"></h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <main>
+         <section class="tp-alumni-section pt-50 pb-120">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-xl-11">
+                     <div class="tp-alumni-content" data-alumni-stories></div>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </main>
+
+      <!-- footer-area-start -->
+      <footer>
+         <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-4 col-lg-3 col-sm-6">
+                     <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                        <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                           <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-3 col-sm-6">
+                     <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                        <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                        <div class="tp-footer-widget-link">
+                           <ul>
+                              <li><a href="/about/">About Us</a></li>
+                              <li><a href="/contact/">Contact</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-sm-4">
+                     <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                        <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                        <div class="tp-footer-widget-link">
+                           <ul>
+                              <li><a href="/associations/">Alumni Associations</a></li>
+                              <li><a href="/benefits/">Alumni Benefits</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-sm-8">
+                     <div class="p-footer-widget tp-footer-col-4 mb-30">
+                        <div class="tp-footer-newsletter-wrap">
+                           <div class="tp-footer-newsletter-social">
+                              <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                              <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="tp-footer-bottom">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="tp-footer-copyright text-center">
+                        <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- footer-area-end -->
+
+      <!-- JS here -->
+      <script src="/assets/js/vendor/jquery.js"></script>
+      <script src="/assets/js/vendor/waypoints.js"></script>
+      <script src="/assets/js/bootstrap-bundle.js"></script>
+      <script src="/assets/js/swiper-bundle.js"></script>
+      <script src="/assets/js/slick.js"></script>
+      <script src="/assets/js/range-slider.js"></script>
+      <script src="/assets/js/magnific-popup.js"></script>
+      <script src="/assets/js/nice-select.js"></script>
+      <script src="/assets/js/select2.min.js"></script>
+      <script src="/assets/js/purecounter.js"></script>
+      <script src="/assets/js/countdown.js"></script>
+      <script src="/assets/js/wow.js"></script>
+      <script src="/assets/js/isotope-pkgd.js"></script>
+      <script src="/assets/js/imagesloaded-pkgd.js"></script>
+      <script src="/assets/js/flatpickr.js"></script>
+      <script src="/assets/js/ajax-form.js"></script>
+      <script src="/assets/js/alumni-stories.js"></script>
+      <script src="/assets/js/main.js"></script>
+
+      <script>
+         // Get alumni slug from URL query parameter (following chapters/associations pattern)
+         // This will be used by alumni-stories.js
+         (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (slug) {
+               window.alumniSlugFromQuery = slug;
+            } else {
+               // Redirect to stories list if no slug found
+               window.location.href = '/stories/';
+            }
+         })();
+      </script>
+
+</body>
+
+</html>
+

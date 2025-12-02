@@ -1,0 +1,588 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>UOL Alumni - Events</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Place favicon.ico in the root directory -->
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <!-- CSS here -->
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/flatpickr.min.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .about-area {
+         font-family: 'Outfit', sans-serif;
+      }
+      .about-area h1,
+      .about-area h2,
+      .about-area h3,
+      .about-area h4,
+      .about-area h5,
+      .about-area h6,
+      .about-area p {
+         font-family: 'Outfit', sans-serif;
+      }
+      [data-featured-event] {
+         overflow: hidden;
+         border-radius: 24px;
+      }
+      [data-featured-event] .tp-blog-stories-banner-thumb img {
+         width: 100%;
+         max-height: 600px;
+         object-fit: cover;
+      }
+      @media (min-width: 992px) {
+         [data-featured-event] .tp-blog-stories-banner-content {
+            padding: 40px;
+         }
+      }
+    
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <!-- loading content here -->
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                        </circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+               stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+
+
+   <!-- search area end -->
+
+
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li><a href="/chapters/">Chapters</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+
+
+   <!-- offcanvas area start -->
+
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+   <main>
+
+      <!-- about breadcrumb start -->
+      <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix red-shadow">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-12">
+                  <div class="tp-breadcrumb__content">
+                     <div class="tp-breadcrumb__list inner-after">
+                        <span class="white"><a href="index.html"><svg width="17" height="14" viewBox="0 0 17 14"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z"
+                                    fill="currentColor" />
+                              </svg></a></span>
+                        <span class="white">Events</span>
+                     </div>
+                     <h3 class="tp-breadcrumb__title color">Events</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- about breadcrumb end -->
+
+   <!-- blog stories banner area start -->
+   <section class="tp-blog-stories-area fix p-relative pt-120 pb-60">
+    <div class="tp-blog-stories-bg" data-background="assets/img/blog/blog-stories/blog-stories-bg.png"></div>
+    <div class="container">
+       <div class="row align-items-center">
+          <div class="col-sm-12">
+             <div class="tp-breadcrumb__content">
+               <div class="tp-blog-stories-btn-box mb-60" data-category-container>
+                 
+               </div>
+             </div>
+          </div>
+          <div class="col-lg-12">
+             <div class="tp-blog-stories-banner-wrap p-relative" data-featured-event>
+                <div class="tp-blog-stories-banner-empty">
+                   <p class="mb-0">Events will appear here once categories are loaded.</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+  
+
+ <!-- blog stories area -->
+ <section class="tp-blog-stories-area p-relative pb-120">
+    <div class="container">
+       <div class="row" data-events-grid>
+          <div class="col-12">
+             <p class="mb-0">Select a category to explore upcoming events.</p>
+          </div>
+       </div>
+     
+    </div>
+ </section>
+      <!-- counter-area-start -->
+    
+   </main>
+
+   <footer>
+      <div class="tp-footer-main  pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="index.html"><img src="/assets/img/brand/logo-black.png" alt=""
+                              style="width: 200px;"></a>
+                     </div>
+
+
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/jobs/">Career Opportunities</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Benefits</a></li>
+ <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations"
+                              target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations"
+                              target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i
+                                 class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+   
+   <!-- Supabase Client Library -->
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   
+   <script>
+      (function () {
+         // Supabase Configuration
+         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+         // Initialize Supabase client
+         const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+         
+         if (!supabase) {
+            console.error('Failed to initialize Supabase client');
+         }
+
+         // Helper function to format date
+         function formatDate(dateString, timeString) {
+            if (!dateString) return '';
+            
+            try {
+               const date = new Date(dateString);
+               if (isNaN(date.getTime())) return dateString;
+               
+               const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+               const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+               
+               if (timeString) {
+                  return `${formattedDate} ${timeString}`;
+               }
+               return formattedDate;
+            } catch (error) {
+               return dateString;
+            }
+         }
+
+         // Helper function to build image path
+         function buildImagePath(imageName) {
+            if (!imageName) return null;
+            // If image is already an absolute URL, return as is
+            if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+               return imageName;
+            }
+            // Otherwise, fetch from remote images base URL followed by the filename from the database
+            const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+            return `${BASE_IMAGE_URL}/${imageName}`;
+         }
+
+         // Transform database event to UI format
+         function transformEvent(dbEvent) {
+            const contentImages = [];
+            
+            // Add image2-image5 to contentImages array if they exist
+            if (dbEvent.image2) contentImages.push(buildImagePath(dbEvent.image2));
+            if (dbEvent.image3) contentImages.push(buildImagePath(dbEvent.image3));
+            if (dbEvent.image4) contentImages.push(buildImagePath(dbEvent.image4));
+            if (dbEvent.image5) contentImages.push(buildImagePath(dbEvent.image5));
+
+            // Format date - use fromdate as primary, append todate if different
+            let dateString = formatDate(dbEvent.fromdate, dbEvent.eventtime);
+            if (dbEvent.todate && dbEvent.todate !== dbEvent.fromdate) {
+               const toDateString = formatDate(dbEvent.todate, null);
+               dateString = `${dateString} - ${toDateString}`;
+            }
+
+            return {
+               id: dbEvent.id,
+               title: dbEvent.title || 'Untitled Event',
+               date: dateString,
+               bannerImage: buildImagePath(dbEvent.image1) || '/assets/img/event/event-01.jpg',
+               contentImages: contentImages,
+               content: dbEvent.longdescription || dbEvent.shortdescription || '',
+               category: dbEvent.category || 'Event',
+               parentType: dbEvent.parent_type || null,
+               parentId: dbEvent.parent_id || null
+            };
+         }
+
+         // Load events from database
+         async function loadEvents() {
+            const categoryContainer = document.querySelector('[data-category-container]');
+            const featuredContainer = document.querySelector('[data-featured-event]');
+            const gridContainer = document.querySelector('[data-events-grid]');
+
+            if (!categoryContainer || !featuredContainer || !gridContainer) {
+               console.error('Missing required elements');
+               return;
+            }
+
+            let events = [];
+
+            try {
+               if (!supabase) {
+                  throw new Error('Supabase client not initialized');
+               }
+
+               // Get filter parameters from URL
+               const urlParams = new URLSearchParams(window.location.search);
+               const parentType = urlParams.get('parent_type');
+               const parentId = urlParams.get('parent_id');
+
+               // Build query
+               let query = supabase
+                  .from('tbl_events')
+                  .select('*');
+
+               // Apply filters if provided
+               if (parentType && parentId) {
+                  query = query
+                     .eq('parent_type', parentType)
+                     .eq('parent_id', parseInt(parentId, 10));
+               }
+
+               // Fetch events from database
+               const { data: dbEvents, error } = await query
+                  .order('fromdate', { ascending: false, nullsLast: true });
+
+               if (error) {
+                  throw error;
+               }
+
+               if (!dbEvents || dbEvents.length === 0) {
+                  featuredContainer.innerHTML = '<p class="mb-0">No events available right now. Please check back soon.</p>';
+                  gridContainer.innerHTML = '';
+                  return;
+               }
+
+               // Transform database events to UI format
+               events = dbEvents.map(transformEvent);
+            } catch (error) {
+               console.error('Error loading events:', error);
+               featuredContainer.innerHTML = '<p class="mb-0">Error loading events. Please refresh the page.</p>';
+               gridContainer.innerHTML = '';
+               return;
+            }
+
+            if (!Array.isArray(events) || events.length === 0) {
+               featuredContainer.innerHTML = '<p class="mb-0">No events available right now. Please check back soon.</p>';
+               gridContainer.innerHTML = '';
+               return;
+            }
+
+            const categories = Array.from(
+               new Set(events.map((event) => event.category).filter(Boolean))
+            );
+
+            if (categories.length === 0) {
+               featuredContainer.innerHTML = '<p class="mb-0">No categories available.</p>';
+               gridContainer.innerHTML = '';
+               return;
+            }
+
+            const searchTrigger = categoryContainer.querySelector('.tp-search-open-btn');
+
+            const categoryButtonFragment = document.createDocumentFragment();
+
+            categories.forEach((category, index) => {
+               const anchor = document.createElement('a');
+               anchor.href = '#';
+               anchor.role = 'button';
+               anchor.dataset.category = category;
+               anchor.textContent = category;
+               anchor.className = index === 0 ? 'active' : '';
+               categoryButtonFragment.appendChild(anchor);
+            });
+
+            if (searchTrigger) {
+               categoryContainer.insertBefore(categoryButtonFragment, searchTrigger);
+            } else {
+               categoryContainer.appendChild(categoryButtonFragment);
+            }
+
+            const truncate = (value, length = 220) => {
+               if (!value) return '';
+               const text = value.replace(/\s+/g, ' ').trim();
+               return text.length > length ? text.slice(0, length - 1).trim() + '…' : text;
+            };
+
+            const renderFeatured = (event, eventId) => {
+               const description = truncate(event.content);
+               const eventUrl = `../event-details.html?id=${eventId}`;
+               featuredContainer.innerHTML = `
+                  <div class="tp-blog-stories-banner-thumb p-relative" style="cursor: pointer;" onclick="window.location.href='${eventUrl}'">
+                     <img src="${event.bannerImage}" alt="${event.title}">
+                  </div>
+                  <div class="tp-blog-stories-banner-content">
+                     
+                    
+                     <div class="tp-blog-stories-banner-user d-flex align-items-center">
+                       
+                     </div>
+                      
+                  </div>
+                  <h3 class="tp-blog-stories-banner-title" style="cursor: pointer;color:black;" onclick="window.location.href='${eventUrl}'">${event.title}</h3>
+                   <div class="tp-blog-stories-user-content" style="color:black;">
+                           <h6 class="mb-5">${event.date || ''}</h6>
+                           ${description ? `<p class="mb-0 ">${description}</p>` : ''}
+                           <a href="${eventUrl}" class="tp-btn tp-btn-sm mt-20" style="display: inline-block;">Read More</a>
+                        </div>
+               `;
+            };
+
+            const renderList = (eventListWithIndices) => {
+               const fragment = document.createDocumentFragment();
+
+               eventListWithIndices.forEach(({ event, id }) => {
+                  const eventUrl = `../event-details.html?id=${id}`;
+                  const column = document.createElement('div');
+                  column.className = 'col-lg-4 col-md-6';
+                  column.innerHTML = `
+                     <div class="tp-blog-stories-item p-relative mb-50" style="cursor: pointer;" onclick="window.location.href='${eventUrl}'">
+                        <div class="tp-blog-stories-thumb">
+                           <img src="${event.bannerImage}" alt="${event.title}">
+                        </div>
+                        <div class="tp-blog-stories-content">
+                           <div class="tp-blog-stories-tag-wrap d-flex">
+                              <span>${event.category || 'Event'}</span>
+                              <span>${event.date || ''}</span>
+                           </div>
+                           <h4 class="tp-blog-stories-title">${event.title}</h4>
+                           ${event.content ? `<p class="mb-0">${truncate(event.content, 140)}</p>` : ''}
+                        </div>
+                     </div>
+                  `;
+                  fragment.appendChild(column);
+               });
+
+               gridContainer.innerHTML = '';
+               if (fragment.hasChildNodes()) {
+                  gridContainer.appendChild(fragment);
+               }
+            };
+
+            const renderCategory = (category) => {
+               // Create array with events and their IDs
+               const filteredWithIds = events
+                  .map((event) => ({ event, id: event.id }))
+                  .filter(({ event }) => event.category === category);
+               
+               if (filteredWithIds.length === 0) {
+                  featuredContainer.innerHTML = '<p class="mb-0">No featured event available for this category.</p>';
+                  gridContainer.innerHTML = '';
+                  return;
+               }
+
+               const [featured, ...rest] = filteredWithIds;
+               if (featured) {
+                  renderFeatured(featured.event, featured.id);
+               } else {
+                  featuredContainer.innerHTML = '<p class="mb-0">No featured event available for this category.</p>';
+               }
+               renderList(rest);
+            };
+
+            let activeCategory = categories[0];
+            renderCategory(activeCategory);
+
+            categoryContainer.addEventListener('click', (event) => {
+               const target = event.target;
+               if (target instanceof HTMLAnchorElement && target.dataset.category) {
+                  event.preventDefault();
+                  const selectedCategory = target.dataset.category;
+                  if (selectedCategory === activeCategory) return;
+                  activeCategory = selectedCategory;
+
+                  categoryContainer
+                     .querySelectorAll('a[data-category]')
+                     .forEach((anchor) => anchor.classList.remove('active'));
+
+                  target.classList.add('active');
+                  renderCategory(selectedCategory);
+               }
+            });
+         }
+
+         // Initialize events on page load
+         function initEvents() {
+            loadEvents();
+         }
+
+         if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initEvents);
+         } else {
+            initEvents();
+         }
+      })();
+   </script>
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+</body>
+
+</html>

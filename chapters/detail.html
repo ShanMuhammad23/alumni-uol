@@ -1,0 +1,1526 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title id="page-title">Alumni Chapter | UOL Alumni</title>
+   <meta name="description" content="" id="page-description">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .tp-association-hero {
+         background: linear-gradient(135deg, rgba(16, 24, 40, 0.85), rgba(16, 24, 40, 0.65)), url("/assets/img/breadcrumb/about-breadcrumb.jpg");
+         background-size: cover;
+         background-position: center;
+         padding: 100px 0;
+      }
+      .tp-association-detail {
+         background: var(--tp-common-white);
+         border-radius: 20px;
+         box-shadow: 0px 20px 60px rgba(15, 18, 38, 0.08);
+         overflow: hidden;
+         margin-top: -60px;
+         position: relative;
+         z-index: 2;
+      }
+      .tp-association-header {
+         padding: 50px;
+         background: linear-gradient(135deg, rgba(13, 25, 47, 0.05), rgba(171, 12, 47, 0.08));
+         display: flex;
+         align-items: center;
+         gap: 40px;
+      }
+      .tp-association-logo {
+         flex-shrink: 0;
+         width: 200px;
+         height: 200px;
+         background: white;
+         border-radius: 16px;
+         padding: 20px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .tp-association-logo img {
+         max-width: 100%;
+         max-height: 100%;
+         object-fit: contain;
+      }
+      .tp-dean-picture {
+         flex-shrink: 0;
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         overflow: hidden;
+         border: 4px solid white;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+         background: white;
+         margin-right: 30px;
+      }
+      .tp-dean-picture img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+      .tp-dean-message-wrapper {
+         display: flex;
+         align-items: flex-start;
+         gap: 30px;
+         margin-top: 20px;
+      }
+      .tp-dean-message-content {
+         flex: 1;
+      }
+      .tp-association-header-content {
+         display: flex;
+         align-items: center;
+         gap: 40px;
+         flex: 1;
+      }
+      .tp-association-info h1 {
+         font-size: 42px;
+         font-weight: 600;
+         margin-bottom: 15px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-association-stats {
+         display: flex;
+         gap: 30px;
+         margin-top: 20px;
+         flex-wrap: wrap;
+      }
+      .tp-association-stat {
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-association-stat-value {
+         font-size: 32px;
+         font-weight: 600;
+         color: var(--tp-theme-primary);
+      }
+      .tp-association-stat-label {
+         font-size: 14px;
+         color: #666;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+      }
+      .tp-association-content {
+         padding: 50px;
+      }
+      .tp-association-section {
+         margin-bottom: 40px;
+      }
+      .tp-association-section h3 {
+         font-size: 28px;
+         font-weight: 600;
+         margin-bottom: 20px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-association-section p {
+         font-size: 16px;
+         line-height: 1.8;
+         color: #555;
+         margin-bottom: 15px;
+      }
+      .tp-president-card {
+         background: linear-gradient(135deg, rgba(171, 12, 47, 0.05), rgba(171, 12, 47, 0.02));
+         padding: 30px;
+         border-radius: 16px;
+         border: 1px solid rgba(171, 12, 47, 0.1);
+      }
+      .tp-president-card h4 {
+         font-size: 20px;
+         font-weight: 600;
+         margin-bottom: 10px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-president-card p {
+         margin-bottom: 5px;
+         color: #666;
+      }
+      .tp-contact-info {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+      }
+      .tp-contact-item {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+      }
+      .tp-contact-item i {
+         width: 40px;
+         height: 40px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background: rgba(171, 12, 47, 0.1);
+         border-radius: 8px;
+         color: var(--tp-theme-primary);
+      }
+      .tp-users-section {
+         margin-top: 40px;
+      }
+      .tp-users-list {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 15px;
+         margin-top: 20px;
+      }
+      .tp-user-item {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         padding: 10px 0;
+      }
+      .tp-user-item-row-divider {
+         grid-column: 1 / -1;
+         height: 1px;
+         background: rgba(0, 0, 0, 0.18);
+         margin: 10px 0;
+         border: none;
+      }
+      .tp-members-search {
+         margin-bottom: 25px;
+      }
+      .tp-members-search input {
+         width: 100%;
+         padding: 12px 20px;
+         border: 1px solid rgba(0, 0, 0, 0.1);
+         border-radius: 8px;
+         font-size: 15px;
+         transition: all 0.3s ease;
+      }
+      .tp-members-search input:focus {
+         outline: none;
+         border-color: var(--tp-theme-primary);
+         box-shadow: 0 0 0 3px rgba(171, 12, 47, 0.1);
+      }
+      .tp-members-pagination {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top: 30px;
+         padding-top: 20px;
+         border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .tp-pagination-info {
+         color: #666;
+         font-size: 14px;
+      }
+      .tp-pagination-buttons {
+         display: flex;
+         gap: 10px;
+      }
+      .tp-pagination-btn {
+         padding: 10px 20px;
+         border: 1px solid rgba(0, 0, 0, 0.1);
+         background: white;
+         border-radius: 6px;
+         cursor: pointer;
+         font-size: 14px;
+         font-weight: 500;
+         color: var(--tp-heading-primary);
+         transition: all 0.3s ease;
+      }
+      .tp-pagination-btn:hover:not(:disabled) {
+         background: var(--tp-theme-primary);
+         color: white;
+         border-color: var(--tp-theme-primary);
+      }
+      .tp-pagination-btn:disabled {
+         opacity: 0.5;
+         cursor: not-allowed;
+      }
+      .tp-event-card {
+         background: white;
+         border-radius: 12px;
+         overflow: hidden;
+         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+         transition: transform 0.3s ease, box-shadow 0.3s ease;
+         cursor: pointer;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-event-card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+      }
+      .tp-event-card-thumb {
+         width: 100%;
+         height: 200px;
+         overflow: hidden;
+         position: relative;
+      }
+      .tp-event-card-thumb img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         transition: transform 0.3s ease;
+      }
+      .tp-event-card:hover .tp-event-card-thumb img {
+         transform: scale(1.05);
+      }
+      .tp-event-card-content {
+         padding: 20px;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-event-card-tag {
+         display: inline-block;
+         background: rgba(171, 12, 47, 0.1);
+         color: var(--tp-theme-primary);
+         padding: 4px 12px;
+         border-radius: 4px;
+         font-size: 12px;
+         font-weight: 600;
+         margin-bottom: 10px;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+      }
+      .tp-event-card-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: var(--tp-heading-primary);
+         margin-bottom: 8px;
+         line-height: 1.4;
+      }
+      .tp-event-card-date {
+         font-size: 14px;
+         color: #666;
+         margin-top: auto;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+      }
+      .tp-event-card-date i {
+         color: var(--tp-theme-primary);
+      }
+      .tp-events-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+         gap: 25px;
+         margin-top: 20px;
+      }
+      .tp-user-avatar {
+         width: 70px;
+         height: 90px;
+         border-radius: 16px;
+         background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7));
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 18px;
+         font-weight: 600;
+         flex-shrink: 0;
+         overflow: hidden;
+      }
+      .tp-user-avatar-initials {
+         width: 100%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 18px;
+         font-weight: 600;
+      }
+      .tp-user-name {
+         font-size: 18px;
+         font-weight: 500;
+         color: #2c0091;
+         margin: 0;
+      }
+      .tp-user-degree {
+         font-size: 13px;
+         color: #666;
+         margin-top: 4px;
+      }
+      .tp-leadership-section {
+         margin-bottom: 40px;
+      }
+      .tp-leadership-container {
+         background: white;
+         border-radius: 12px;
+         padding: 20px;
+         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+         border: 1px solid rgba(171, 12, 47, 0.1);
+         margin-top: 20px;
+      }
+      .tp-leadership-item {
+         display: flex;
+         align-items: center;
+         gap: 12px;
+         padding: 12px 0;
+      }
+      .tp-leadership-item:last-child {
+         padding-bottom: 0;
+      }
+      .tp-leadership-container hr {
+         margin: 0;
+         border: none;
+         border-top: 1px solid rgba(171, 12, 47, 0.1);
+      }
+      .tp-leadership-icon {
+         width: 40px;
+         height: 40px;
+         border-radius: 8px;
+         background: linear-gradient(135deg, rgba(171, 12, 47, 0.1), rgba(171, 12, 47, 0.05));
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: var(--tp-theme-primary);
+         font-size: 18px;
+         flex-shrink: 0;
+      }
+      .tp-leadership-info {
+         flex: 1;
+      }
+      .tp-leadership-position {
+         font-size: 15px;
+         font-weight: 600;
+         color: var(--tp-heading-primary);
+         margin-bottom: 3px;
+      }
+      .tp-leadership-status {
+         display: inline-block;
+         padding: 3px 8px;
+         border-radius: 4px;
+         font-size: 11px;
+         font-weight: 500;
+         background: rgba(255, 152, 0, 0.1);
+         color: #f57c00;
+         margin-top: 3px;
+      }
+      .tp-leadership-name {
+         font-size: 13px;
+         color: #999;
+         font-style: italic;
+         margin-bottom: 3px;
+      }
+      @keyframes tp-spin {
+         from {
+            transform: rotate(0deg);
+         }
+         to {
+            transform: rotate(360deg);
+         }
+      }
+      @media (max-width: 768px) {
+         .tp-association-header {
+            flex-direction: column;
+            text-align: center;
+         }
+         .tp-association-header-content {
+            flex-direction: column;
+            gap: 20px;
+         }
+         .tp-association-logo {
+            width: 150px;
+            height: 150px;
+         }
+         .tp-dean-picture {
+            width: 120px;
+            height: 120px;
+         }
+         .tp-dean-message-wrapper {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+         }
+         .tp-dean-picture {
+            margin-right: 0;
+            margin-bottom: 20px;
+         }
+         .tp-users-list {
+            grid-template-columns: 1fr;
+         }
+         .tp-events-grid {
+            grid-template-columns: repeat(3,1fr);
+         }
+         .tp-association-info h1 {
+            font-size: 32px;
+         }
+         .tp-members-pagination {
+            flex-direction: column;
+            gap: 15px;
+            align-items: stretch;
+         }
+         .tp-pagination-buttons {
+            width: 100%;
+            justify-content: space-between;
+         }
+         .tp-pagination-btn {
+            flex: 1;
+         }
+         .tp-pagination-info {
+            text-align: center;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li><a href="/get-involved/">Get Involved</a></li>
+                           <li class="tp-static"><a class="tp-static" href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+      <!-- offcanvas area start -->
+      <div class="offcanvas__area">
+         <div class="offcanvas__wrapper">
+            <div class="offcanvas__close">
+               <button class="offcanvas__close-btn offcanvas-close-btn">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+               </button>
+            </div>
+            <div class="offcanvas__content">
+               <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+                  <div class="offcanvas__logo tp-header-logo">
+                     <a href="/">
+                        <img src="/assets/img/logo/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="offcanvas-main">
+                  <div class="tp-main-menu-mobile d-xl-none"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="body-overlay"></div>
+      <!-- offcanvas area end -->
+   <!-- header-area-end -->
+
+   <main>
+      <section class="tp-association-hero" id="association-hero">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-breadcrumb text-center">
+                     <div class="tp-breadcrumb-list">
+                        <span><a href="/">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span><a href="/chapters/">Chapters</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span id="breadcrumb-name">Loading...</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="pt-0 pb-120">
+         <div class="container">
+            <div class="tp-association-detail" id="association-detail">
+               <div class="tp-association-loader" style="text-align: center; padding: 80px 20px;">
+                  <div class="tp-loader-spinner" style="width: 42px; height: 42px; border-radius: 50%; border: 3px solid rgba(171, 12, 47, 0.2); border-top-color: var(--tp-theme-primary); display: inline-block; animation: tp-spin 1s linear infinite; margin-bottom: 20px;"></div>
+                  <p>Loading chapter information...</p>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+ <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/hover-reveal.js"></script>
+   <script src="/assets/js/tween-max.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+
+   <!-- Supabase Client Library -->
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+   <script>
+      // Supabase Configuration
+      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+      // Initialize Supabase client
+      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      
+      if (!supabase) {
+         console.error('Failed to initialize Supabase client');
+      }
+
+      // Get chapter ID from URL query parameter
+      function getChapterIdFromURL() {
+         const urlParams = new URLSearchParams(window.location.search);
+         const chapterId = urlParams.get('id') || urlParams.get('chapterId') || urlParams.get('chapter_id');
+         return chapterId ? parseInt(chapterId, 10) : null;
+      }
+
+      // Fetch chapter details from database by ID
+      async function fetchChapterById(chapterId) {
+         if (!supabase || !chapterId) return null;
+
+         try {
+            // Try tblchapters first
+            const { data: chapter, error } = await supabase
+               .from('tblchapters')
+               .select('*')
+               .eq('id', chapterId)
+         
+               .maybeSingle();
+
+            if (!error && chapter) {
+               return chapter;
+            }
+
+            // Try alumnichapterslocation as fallback
+            const { data: locationChapter, error: locationError } = await supabase
+               .from('alumnichapterslocation')
+               .select('*')
+               .eq('chapterid', chapterId)
+               .maybeSingle();
+
+            if (!locationError && locationChapter) {
+               return {
+                  id: locationChapter.chapterid,
+                  chaptertitle: locationChapter.chaptertitle,
+                  chapterlocation: locationChapter.chapterlocation,
+                  chapterwhatsapp: locationChapter.chapterwhatsapp,
+                  description: `Chapter located in ${locationChapter.chapterlocation}`,
+                  chapter_image: null,
+                  is_active: true
+               };
+            }
+
+            return null;
+         } catch (error) {
+            console.error('Error fetching chapter:', error);
+            return null;
+         }
+      }
+
+      async function fetchChapterMembers(chapterId) {
+         if (!supabase || !chapterId) return { count: 0, members: [] };
+
+         const chapterIdNum = Number(chapterId);
+         console.log(chapterIdNum);
+         if (isNaN(chapterIdNum)) {
+            console.error('Invalid chapter ID:', chapterId);
+            return { count: 0, members: [] };
+         }
+
+         try {
+          
+            const { data: chapterMembers, error: chapterError } = await supabase
+               .from('alumni_chapter')
+               .select('id')
+               .eq('chapter1', chapterIdNum);
+               console.log(chapterMembers);
+
+            if (chapterError) {
+               console.error('Error fetching chapter members:', chapterError);
+               return { count: 0, members: [] };
+            }
+
+            if (!chapterMembers || chapterMembers.length === 0) {
+               console.log(`No members found for chapter1 = ${chapterIdNum}`);
+               return { count: 0, members: [] };
+            }
+
+            // Extract alumni IDs (alumni_chapter.id = tbl_alumni.alumniid)
+            const alumniIds = chapterMembers.map(item => item.id).filter(id => id != null);
+
+            if (alumniIds.length === 0) {
+               console.log('No valid alumni IDs found');
+               return { count: 0, members: [] };
+            }
+
+            console.log(`Found ${alumniIds.length} alumni IDs for chapter ${chapterIdNum}`);
+
+            // Step 2: Fetch alumni details from tbl_alumni
+            // Supabase PostgREST has a limit on .in() queries (around 100-200 items)
+            // So we need to batch the queries if there are many IDs
+            const batchSize = 100;
+            let allMembers = [];
+            
+            for (let i = 0; i < alumniIds.length; i += batchSize) {
+               const batch = alumniIds.slice(i, i + batchSize);
+               
+               const { data: members, error: membersError } = await supabase
+                  .from('tbl_alumni')
+                  .select('alumniid, alumniname, degreetitle, yearofending, image1')
+                  .in('alumniid', batch);
+
+               if (membersError) {
+                  console.error(`Error fetching alumni details for batch ${i / batchSize + 1}:`, membersError);
+                  // Continue with other batches even if one fails
+                  continue;
+               }
+
+               if (members && members.length > 0) {
+                  allMembers = allMembers.concat(members);
+               }
+            }
+
+            // Don't sort here - let the user control sorting via the UI
+            // Initial sort will be applied in initializeMembersPagination
+
+            console.log(`Successfully fetched ${allMembers.length} member details out of ${alumniIds.length} alumni IDs`);
+
+            // Use actual members length for count, not alumniIds.length
+            // This ensures count matches the actual members we can display
+            return {
+               count: allMembers.length,
+               members: allMembers
+            };
+         } catch (error) {
+            console.error('Unexpected error fetching chapter members:', error);
+            return { count: 0, members: [] };
+         }
+      }
+
+      // Helper to build remote image path (shared with events & members)
+      function buildRemoteImagePath(imageName) {
+         if (!imageName) return null;
+         // If already absolute URL, keep as is
+         if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+            return imageName;
+         }
+         const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+         return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      // Format member name for display
+      function getMemberInitials(name) {
+         if (!name) return '??';
+         const parts = name.trim().split(' ');
+         if (parts.length >= 2) {
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+         }
+         return name.substring(0, 2).toUpperCase();
+      }
+
+      // Format degree for display
+      function formatDegree(degreeTitle, yearOfEnding) {
+         if (!degreeTitle) return 'N/A';
+         if (yearOfEnding) {
+            return `${degreeTitle}, ${yearOfEnding}`;
+         }
+         return degreeTitle;
+      }
+
+      // Render chapter detail page
+      function renderChapterDetail(chapter, membersData, chapterId) {
+         const memberCount = membersData.count || 0;
+         const members = membersData.members || [];
+
+         // Update page title - handle both tblchapters and alumnichapterslocation structures
+         const pageTitle = chapter.national_chapter || chapter.international_chapter || chapter.chaptertitle || 'Chapter';
+         const chapterWhatsapp = chapter.chapter_whatsapp || chapter.chapterwhatsapp || null;
+         const chapterImage = chapter.chapter_image || null;
+         
+         document.getElementById('page-title').textContent = `${pageTitle} | UOL Alumni`;
+         document.getElementById('page-description').content = chapter.description || '';
+         document.getElementById('breadcrumb-name').textContent = pageTitle;
+
+         // Render chapter detail
+         const detailHTML = `
+            <div class="tp-association-header">
+               <div class="tp-association-logo">
+                  ${chapterImage ? `<img src="${chapterImage}" alt="${pageTitle}">` : `
+                     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7)); border-radius: 16px;">
+                        <i class="fa-solid fa-map-marker-alt" style="font-size: 80px; color: white;"></i>
+                     </div>
+                  `}
+               </div>
+               <div class="tp-association-info">
+                  <h1>${pageTitle}</h1>
+                  
+                  <p style="font-size: 18px; color: #666; margin-bottom: 20px;">${chapter.description || 'No description available.'}</p>
+                  <div class="tp-association-stats">
+                     <div class="tp-association-stat">
+                        <span class="tp-association-stat-value">${memberCount.toLocaleString()}</span>
+                        <span class="tp-association-stat-label">Members</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tp-association-content">
+               <div class="row">
+                  <div class="col-lg-8">
+                     <div class="tp-association-section">
+                        <h3>Past Events</h3>
+                        <div class="tp-events-grid" id="past-events-container">
+                           <!-- Past events will be loaded here -->
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <h3>Upcoming Events</h3>
+                        <div class="tp-events-grid" id="upcoming-events-container">
+                           <!-- Upcoming events will be loaded here -->
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4">
+                     <div class="tp-association-section tp-leadership-section">
+                        <h3>Leadership</h3>
+                        <div class="tp-leadership-container">
+                           <div class="tp-leadership-item">
+                              <div class="tp-leadership-icon">
+                                 <i class="fa-solid fa-user-tie"></i>
+                              </div>
+                              <div class="tp-leadership-info">
+                                 <div class="tp-leadership-position">President</div>
+                                 <div class="tp-leadership-name">Vacant</div>
+                                
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="tp-leadership-item">
+                              <div class="tp-leadership-icon">
+                                 <i class="fa-solid fa-user-tie"></i>
+                              </div>
+                              <div class="tp-leadership-info">
+                                 <div class="tp-leadership-position">Vice President</div>
+                                 <div class="tp-leadership-name">Vacant</div>
+                               
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="tp-leadership-item">
+                              <div class="tp-leadership-icon">
+                                 <i class="fa-solid fa-user-gear"></i>
+                              </div>
+                              <div class="tp-leadership-info">
+                                 <div class="tp-leadership-position">Coordinator</div>
+                                 <div class="tp-leadership-name">Vacant</div>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <h3>Contact Information</h3>
+                        <div class="tp-contact-info">
+                           ${chapterWhatsapp ? `
+                              <div class="tp-contact-item">
+                                 <i class="fa-brands fa-whatsapp"></i>
+                                 <div>
+                                    <strong>WhatsApp</strong><br>
+                                    <a href="${chapterWhatsapp}" target="_blank">Join Group</a>
+                                 </div>
+                              </div>
+                           ` : ''}
+                           <div class="tp-contact-item">
+                              <i class="fa-solid fa-building"></i>
+                              <div>
+                                 <strong>Office of Alumni Relations</strong><br>
+                                 <span style="color: #333; font-weight: 500;">The University of Lahore</span><br>
+                                 <span style="color: #666; font-size: 14px;">1-KM Defence Road, Off Raiwind Road, Lahore, Pakistan</span>
+                              </div>
+                           </div>
+                           <div class="tp-contact-item">
+                              <i class="fa-solid fa-envelope"></i>
+                              <div>
+                                 <strong>Email</strong><br>
+                                 <a href="mailto:alumni@uol.edu.pk">alumni@uol.edu.pk</a>
+                              </div>
+                           </div>
+                           <div class="tp-contact-item">
+                              <i class="fa-solid fa-phone"></i>
+                              <div>
+                                 <strong>Phone</strong><br>
+                                 <a href="tel:+92-42-111-865-865">+92-42-111-865-865</a>
+                              </div>
+                           </div>
+                           <div class="tp-contact-item">
+                              <i class="fa-solid fa-globe"></i>
+                              <div>
+                                 <strong>Website</strong><br>
+                                 <a href="https://alumni.uol.edu.pk" target="_blank">alumni.uol.edu.pk</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <a href="/chapters/" class="tp-btn w-100 text-center">View All Chapters</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="tp-association-section tp-users-section">
+                  <div class="d-flex justify-content-between align-items-center mb-20" style="flex-wrap: wrap; gap: 15px;">
+                     <h3 style="margin: 0;">Members (${memberCount})</h3>
+                     <div class="tp-members-sort" style="display: flex; align-items: center; gap: 10px;">
+                        <label for="members-sort-select" style="margin: 0; font-size: 14px; color: #666;">Sort by Year:</label>
+                        <select id="members-sort-select" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                           <option value="desc">Newest First (Descending)</option>
+                           <option value="asc">Oldest First (Ascending)</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="tp-members-search">
+                     <input type="text" id="members-search-input" placeholder="Search members by name..." autocomplete="off">
+                  </div>
+                  <div class="tp-users-list" id="members-list-container">
+                     <!-- Members will be rendered here -->
+                  </div>
+                  <div class="tp-members-pagination" id="members-pagination" style="display: none;">
+                     <div class="tp-pagination-info" id="pagination-info"></div>
+                     <div class="tp-pagination-buttons">
+                        <button class="tp-pagination-btn" id="prev-btn">Previous</button>
+                        <button class="tp-pagination-btn" id="next-btn">Next</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         `;
+         
+         document.getElementById('association-detail').innerHTML = detailHTML;
+         
+         // Initialize members pagination and search
+         initializeMembersPagination(members);
+         
+         // Load and display events
+         loadChapterEvents(chapterId);
+      }
+
+      // Members pagination and search functionality
+      let allMembers = [];
+      let filteredMembers = [];
+      let currentPage = 1;
+      let sortOrder = 'desc'; // 'asc' or 'desc'
+      const membersPerPage = 30;
+      const membersPerRow = 3;
+
+      function initializeMembersPagination(members) {
+         allMembers = members || [];
+         sortOrder = 'desc'; // Reset to default
+         applySortAndFilter();
+         currentPage = 1;
+         
+         // Setup search input
+         const searchInput = document.getElementById('members-search-input');
+         if (searchInput) {
+            searchInput.addEventListener('input', handleMembersSearch);
+         }
+         
+         // Setup sort select
+         const sortSelect = document.getElementById('members-sort-select');
+         if (sortSelect) {
+            sortSelect.value = sortOrder;
+            sortSelect.addEventListener('change', handleSortChange);
+         }
+         
+         // Setup pagination buttons
+         const prevBtn = document.getElementById('prev-btn');
+         const nextBtn = document.getElementById('next-btn');
+         if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+               if (currentPage > 1) {
+                  currentPage--;
+                  renderMembers();
+               }
+            });
+         }
+         if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+               const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+               if (currentPage < totalPages) {
+                  currentPage++;
+                  renderMembers();
+               }
+            });
+         }
+         
+         // Initial render
+         renderMembers();
+      }
+
+      function handleSortChange(e) {
+         sortOrder = e.target.value;
+         currentPage = 1; // Reset to first page on sort change
+         applySortAndFilter();
+         renderMembers();
+      }
+
+      function applySortAndFilter() {
+         // First, apply sorting
+         const sorted = [...allMembers].sort((a, b) => {
+            const yearA = a.yearofending || 0;
+            const yearB = b.yearofending || 0;
+            
+            if (sortOrder === 'asc') {
+               return yearA - yearB; // Ascending: oldest first
+            } else {
+               return yearB - yearA; // Descending: newest first
+            }
+         });
+         
+         // Then apply search filter if there's a search term
+         const searchInput = document.getElementById('members-search-input');
+         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+         
+         if (searchTerm === '') {
+            filteredMembers = sorted;
+         } else {
+            filteredMembers = sorted.filter(member => {
+               const name = (member.alumniname || 'Unknown').toLowerCase();
+               return name.includes(searchTerm);
+            });
+         }
+      }
+
+      function handleMembersSearch(e) {
+         currentPage = 1; // Reset to first page on search
+         applySortAndFilter();
+         renderMembers();
+      }
+
+      function renderMembers() {
+         const container = document.getElementById('members-list-container');
+         const paginationContainer = document.getElementById('members-pagination');
+         const paginationInfo = document.getElementById('pagination-info');
+         const prevBtn = document.getElementById('prev-btn');
+         const nextBtn = document.getElementById('next-btn');
+         
+         if (!container) return;
+         
+         if (filteredMembers.length === 0) {
+            container.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No members found.</p>';
+            if (paginationContainer) paginationContainer.style.display = 'none';
+            return;
+         }
+         
+         // Calculate pagination
+         const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+         const startIndex = (currentPage - 1) * membersPerPage;
+         const endIndex = Math.min(startIndex + membersPerPage, filteredMembers.length);
+         const currentMembers = filteredMembers.slice(startIndex, endIndex);
+         
+         // Detect if mobile (1 column) or desktop (3 columns)
+         const isMobile = window.innerWidth <= 768;
+         const itemsPerRow = isMobile ? 1 : membersPerRow;
+         
+         // Render members with row dividers
+         let membersHTML = '';
+         currentMembers.forEach((member, index) => {
+            const name = member.alumniname || 'Unknown';
+            const initials = getMemberInitials(name);
+            const avatarUrl = member.image1 ? buildRemoteImagePath(member.image1) : null;
+            const degree = formatDegree(member.degreetitle, member.yearofending);
+            
+            membersHTML += `
+               <div class="tp-user-item">
+                  <div class="tp-user-avatar">
+                     ${
+                        avatarUrl
+                           ? `<img src="${avatarUrl}" alt="${name}" style="width:100%;height:100%;object-fit:cover;"
+                                   onerror="this.style.display='none'; this.parentElement.querySelector('.tp-user-avatar-initials').style.display='flex';">`
+                           : ''
+                     }
+                     <div class="tp-user-avatar-initials" style="display:${avatarUrl ? 'none' : 'flex'};">
+                        ${initials}
+                     </div>
+                  </div>
+                  <div>
+                     <h4 class="tp-user-name">${name}</h4>
+                     <p class="tp-user-degree">${degree}</p>
+                  </div>
+               </div>
+            `;
+            
+            // Add divider after every row
+            if ((index + 1) % itemsPerRow === 0 && index < currentMembers.length - 1) {
+               membersHTML += '<hr class="tp-user-item-row-divider">';
+            }
+         });
+         
+         container.innerHTML = membersHTML;
+         
+         // Update pagination controls
+         if (paginationContainer) {
+            if (filteredMembers.length > membersPerPage) {
+               paginationContainer.style.display = 'flex';
+               
+               if (paginationInfo) {
+                  paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredMembers.length} members`;
+               }
+               
+               if (prevBtn) {
+                  prevBtn.disabled = currentPage === 1;
+               }
+               
+               if (nextBtn) {
+                  nextBtn.disabled = currentPage >= totalPages;
+               }
+            } else {
+               paginationContainer.style.display = 'none';
+            }
+         }
+      }
+
+      // Fetch chapter image from JSON file
+      async function fetchChapterImageFromJSON(chapterId) {
+         try {
+            const response = await fetch('/assets/data/chapters.json');
+            if (!response.ok) {
+               return null;
+            }
+            
+            const data = await response.json();
+            
+            // Search in local chapters
+            if (data.local) {
+               const localChapter = data.local.find(ch => ch.id === chapterId);
+               if (localChapter && localChapter.image) {
+                  return localChapter.image;
+               }
+            }
+            
+            // Search in international chapters
+            if (data.international) {
+               const internationalChapter = data.international.find(ch => ch.id === chapterId);
+               if (internationalChapter && internationalChapter.image) {
+                  return internationalChapter.image;
+               }
+            }
+            
+            return null;
+         } catch (error) {
+            console.error('Error fetching chapter image from JSON:', error);
+            return null;
+         }
+      }
+
+      // Main function to load chapter data
+      async function loadChapterData() {
+         const chapterId = getChapterIdFromURL();
+         
+         if (!chapterId) {
+            document.getElementById('association-detail').innerHTML = `
+               <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
+                  <h3>Chapter ID Required</h3>
+                  <p>Please provide a valid chapter ID in the URL.</p>
+                  <a href="/chapters/" class="tp-btn mt-3">Back to Chapters</a>
+               </div>
+            `;
+            return;
+         }
+
+         // Fetch chapter details from database and image from JSON in parallel
+         const [chapter, jsonImage] = await Promise.all([
+            fetchChapterById(chapterId),
+            fetchChapterImageFromJSON(chapterId)
+         ]);
+
+         if (!chapter) {
+            document.getElementById('association-detail').innerHTML = `
+               <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
+                  <h3>Chapter Not Found</h3>
+                  <p>The chapter you're looking for doesn't exist in the database.</p>
+                  <a href="/chapters/" class="tp-btn mt-3">Back to Chapters</a>
+               </div>
+            `;
+            document.getElementById('breadcrumb-name').textContent = 'Not Found';
+            return;
+         }
+
+         // Override chapter image with JSON image if available
+         if (jsonImage) {
+            chapter.chapter_image = jsonImage;
+         }
+
+         // Fetch members for this chapter
+         const membersData = await fetchChapterMembers(chapterId);
+         
+         // Render the page
+         renderChapterDetail(chapter, membersData, chapterId);
+      }
+
+      // Initialize page load
+      loadChapterData();
+
+      // Helper function to format date
+      function formatDate(dateString, timeString) {
+         if (!dateString) return '';
+         
+         try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+            
+            if (timeString) {
+               return `${formattedDate} ${timeString}`;
+            }
+            return formattedDate;
+         } catch (error) {
+            return dateString;
+         }
+      }
+
+      // Helper function to build event image path
+      function buildImagePath(imageName) {
+         return buildRemoteImagePath(imageName);
+      }
+
+      // Transform database event to UI format
+      function transformEvent(dbEvent) {
+         const contentImages = [];
+         
+         if (dbEvent.image2) contentImages.push(buildImagePath(dbEvent.image2));
+         if (dbEvent.image3) contentImages.push(buildImagePath(dbEvent.image3));
+         if (dbEvent.image4) contentImages.push(buildImagePath(dbEvent.image4));
+         if (dbEvent.image5) contentImages.push(buildImagePath(dbEvent.image5));
+
+         let dateString = formatDate(dbEvent.fromdate, dbEvent.eventtime);
+         if (dbEvent.todate && dbEvent.todate !== dbEvent.fromdate) {
+            const toDateString = formatDate(dbEvent.todate, null);
+            dateString = `${dateString} - ${toDateString}`;
+         }
+
+         return {
+            id: dbEvent.id,
+            title: dbEvent.title || 'Untitled Event',
+            date: dateString,
+            bannerImage: buildImagePath(dbEvent.image1) || '/assets/img/event/event-01.jpg',
+            contentImages: contentImages,
+            content: dbEvent.longdescription || dbEvent.shortdescription || '',
+            category: dbEvent.category || 'Event',
+            fromdate: dbEvent.fromdate
+         };
+      }
+
+      // Function to load and filter events for the chapter
+      async function loadChapterEvents(chapterId) {
+         if (!supabase || !chapterId) {
+            console.log('loadChapterEvents: Missing supabase or chapterId', { supabase: !!supabase, chapterId });
+                     showNoEventsMessage();
+                     return;
+                  }
+
+         // Ensure chapterId is a number
+         const chapterIdNum = typeof chapterId === 'number' ? chapterId : parseInt(chapterId, 10);
+         
+         if (isNaN(chapterIdNum)) {
+            console.error('loadChapterEvents: Invalid chapterId', chapterId);
+                  showNoEventsMessage();
+                  return;
+               }
+
+         console.log('loadChapterEvents: Fetching events for chapter', chapterIdNum);
+
+         try {
+            // Fetch events for this chapter using parent_type and parent_id
+            const { data: dbEvents, error } = await supabase
+               .from('tbl_events')
+               .select('*')
+               .eq('parent_type', 'chapter')
+               .eq('parent_id', chapterIdNum)
+               .order('fromdate', { ascending: false, nullsLast: true });
+
+            if (error) {
+               console.error('loadChapterEvents: Supabase error', error);
+               throw error;
+            }
+
+            console.log('loadChapterEvents: Fetched events', dbEvents?.length || 0, dbEvents);
+
+            if (!dbEvents || dbEvents.length === 0) {
+               console.log('loadChapterEvents: No events found for chapter', chapterIdNum);
+               showNoEventsMessage();
+               return;
+            }
+
+            // Transform database events to UI format
+            const events = dbEvents.map(transformEvent);
+
+               // Separate past and upcoming events based on date
+               const today = new Date();
+               today.setHours(0, 0, 0, 0);
+            today.setMinutes(0, 0);
+            today.setSeconds(0, 0);
+            today.setMilliseconds(0);
+
+               const pastEvents = [];
+               const upcomingEvents = [];
+
+            events.forEach((event) => {
+               if (!event.fromdate) {
+                     // If no date, consider it as past event
+                  pastEvents.push({ event });
+                     return;
+                  }
+
+               try {
+                  // Parse date string (format: 'YYYY-MM-DD' or ISO string)
+                  let eventDate;
+                  if (typeof event.fromdate === 'string') {
+                     // Handle date string like '2024-11-25'
+                     const dateParts = event.fromdate.split('T')[0].split('-');
+                     eventDate = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+                  } else {
+                     eventDate = new Date(event.fromdate);
+                  }
+                  
+                  eventDate.setHours(0, 0, 0, 0);
+                  eventDate.setMinutes(0, 0);
+                  eventDate.setSeconds(0, 0);
+                  eventDate.setMilliseconds(0);
+                  
+                  // Compare dates - if event date is before today, it's past
+                  if (eventDate < today) {
+                     pastEvents.push({ event });
+                  } else {
+                     upcomingEvents.push({ event });
+                  }
+               } catch (error) {
+                  console.error('Error parsing event date:', event.fromdate, error);
+                  // If date parsing fails, treat as past event
+                  pastEvents.push({ event });
+                  }
+               });
+
+               // Sort past events by date (newest first)
+               pastEvents.sort((a, b) => {
+               const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(0);
+               const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(0);
+                  return dateB - dateA;
+               });
+
+               // Sort upcoming events by date (soonest first)
+               upcomingEvents.sort((a, b) => {
+               const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(9999999999999);
+               const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(9999999999999);
+                  return dateA - dateB;
+               });
+
+               // Render events
+               renderEvents(pastEvents, 'past-events-container');
+               renderEvents(upcomingEvents, 'upcoming-events-container');
+         } catch (error) {
+            console.error('Error loading chapter events:', error);
+               showNoEventsMessage();
+         }
+      }
+
+      // Function to show no events message
+      function showNoEventsMessage() {
+         const pastContainer = document.getElementById('past-events-container');
+         const upcomingContainer = document.getElementById('upcoming-events-container');
+         
+         if (pastContainer) {
+            pastContainer.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No past events available at this time.</p>';
+         }
+         if (upcomingContainer) {
+            upcomingContainer.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No upcoming events scheduled at this time.</p>';
+         }
+      }
+
+
+      // Function to render event cards
+      function renderEvents(events, containerId) {
+         const container = document.getElementById(containerId);
+         if (!container) return;
+
+         if (events.length === 0) {
+            container.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No events available at this time.</p>';
+            return;
+         }
+
+         const eventsHTML = events.map(({ event }) => {
+            const eventUrl = `/event-details.html?id=${event.id}`;
+            const truncate = (text, length = 100) => {
+               if (!text) return '';
+               return text.length > length ? text.slice(0, length).trim() + '...' : text;
+            };
+
+            return `
+               <div class="tp-event-card" onclick="window.location.href='${eventUrl}'">
+                  <div class="tp-event-card-thumb">
+                     <img src="${event.bannerImage || '/assets/img/event/event-default.jpg'}" alt="${event.title}">
+                  </div>
+                  <div class="tp-event-card-content">
+                     <span class="tp-event-card-tag">${event.category || 'Event'}</span>
+                     <h4 class="tp-event-card-title">${event.title}</h4>
+                     ${event.date ? `
+                        <div class="tp-event-card-date">
+                           <i class="fa-solid fa-calendar"></i>
+                           <span>${event.date}</span>
+                        </div>
+                     ` : ''}
+                  </div>
+               </div>
+            `;
+         }).join('');
+
+         container.innerHTML = eventsHTML;
+      }
+   </script>
+
+</body>
+
+</html>
+

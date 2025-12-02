@@ -1,0 +1,3697 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>UOL Alumni</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/hover-reveal.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<style>
+   .inactive {
+      color: gray;
+      cursor: none;
+      pointer-events: none;
+   }
+
+   /* Ensure all swiper-slides have equal height */
+   .tp-program-equal .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+   }
+
+   .tp-program-equal .tp-program-item {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+   }
+
+   .tp-program-equal .tp-program-item {
+      box-sizing: border-box;
+      overflow: hidden;
+      min-width: 0;
+   }
+
+   .tp-program-equal .tp-program-thumb {
+      flex-shrink: 0;
+      height: 300px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+   }
+
+   .tp-program-equal .tp-program-thumb a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+   }
+
+   .tp-program-equal .tp-program-thumb img {
+      width: -webkit-fill-available;
+      width: -moz-available;
+      width: stretch;
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      box-sizing: border-box;
+   }
+
+   .tp-program-equal .tp-program-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 200px;
+   }
+
+   .tp-program-equal .swiper-slide {
+      box-sizing: border-box;
+      width: 100%;
+   }
+
+   .tp-program-equal {
+      width: 100%;
+      overflow: hidden;
+   }
+
+   /* Map container styles */
+   #map {
+      width: 100%;
+      position: relative;
+      overflow: visible;
+      max-width: 100%;
+   }
+
+   /* Hide copyright anchor tag in map */
+   #map_inner > div > a,
+   #map_inner div a,
+   [id*="inner"] > div > a,
+   [id*="inner"] div a,
+   #map [id*="inner"] > div > a,
+   #map [id*="inner"] div a,
+   #map > div > div > a,
+   .tp-chapter-map-wrapper [id*="inner"] > div > a,
+   .tp-chapter-map-wrapper [id*="inner"] div a {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      left: -9999px !important;
+   }
+
+   @media only screen and (max-width: 767px) {
+      .tp-program-equal .tp-program-thumb {
+         height: 250px;
+         width: 100%;
+         max-width: 100%;
+      }
+
+      .tp-program-equal .swiper-slide {
+         min-width: 0;
+         width: 100% !important;
+         max-width: 100%;
+         box-sizing: border-box;
+      }
+
+      .tp-program-equal .tp-program-item {
+         min-width: 0;
+         width: 100%;
+         max-width: 100%;
+         box-sizing: border-box;
+      }
+
+      .tp-program-equal .swiper-wrapper {
+         width: 100%;
+      }
+   }
+
+   .tp-program-equal .tp-program-content h3 {
+      flex-shrink: 0;
+   }
+
+   .tp-program-equal .tp-program-content p {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+   }
+
+   .tp-program-equal .tp-program-btn {
+      margin-top: auto;
+      flex-shrink: 0;
+   }
+
+   /* Upcoming Engagements Slider Styles */
+   .tp-engagement-item {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-engagement-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+   }
+
+   .tp-engagement-thumb {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+   }
+
+   .tp-engagement-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+   }
+
+   .tp-engagement-item:hover .tp-engagement-thumb img {
+      transform: scale(1.05);
+   }
+
+   .tp-engagement-date {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 60px;
+   }
+
+   .tp-engagement-day {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+   }
+
+   .tp-engagement-month {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-top: 4px;
+      opacity: 0.9;
+   }
+
+   .tp-engagement-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-engagement-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #666;
+   }
+
+   .tp-engagement-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+   }
+
+   .tp-engagement-meta i {
+      color: var(--tp-theme-primary, #AB0C2F);
+      font-size: 14px;
+   }
+
+   .tp-engagement-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.3;
+   }
+
+   .tp-engagement-title a {
+      color: var(--tp-heading-primary, #161613);
+      transition: color 0.3s ease;
+   }
+
+   .tp-engagement-title a:hover {
+      color: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   .tp-engagement-content p {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+   }
+
+   .tp-engagement-btn {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-align: center;
+      margin-top: auto;
+   }
+
+   .tp-engagement-btn:hover {
+      background: var(--tp-heading-primary, #161613);
+      color: #fff;
+      transform: translateY(-2px);
+   }
+
+   .tp-engagements-active {
+      padding-bottom: 50px;
+   }
+
+   .tp-engagements-pagination {
+      bottom: 0 !important;
+   }
+
+   .tp-engagements-active .swiper-slide {
+      height: auto;
+   }
+
+   @media (max-width: 768px) {
+      .tp-engagement-thumb {
+         height: 200px;
+      }
+
+      .tp-engagement-content {
+         padding: 20px;
+      }
+
+      .tp-engagement-title {
+         font-size: 20px;
+      }
+   }
+
+   /* Jobs Section Styles */
+
+   .tp-jobs-section {
+      height: 100%;
+   }
+
+   .tp-jobs-header {
+      margin-bottom: 40px;
+   }
+
+   .tp-jobs-section-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--tp-heading-primary, #161613);
+      margin-bottom: 10px;
+      line-height: 1.2;
+   }
+
+   .tp-jobs-section-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+   }
+
+   .tp-jobs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 30px;
+   }
+
+   .tp-job-item {
+      background: var(--tp-common-white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+   }
+
+   .tp-job-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+      border-color: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   .tp-job-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+   }
+
+   .tp-job-header-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      flex-wrap: wrap;
+   }
+
+   .tp-job-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+      flex: 1;
+      line-height: 1.3;
+   }
+
+   .tp-job-title a {
+      color: var(--tp-heading-primary, #161613);
+      transition: color 0.3s ease;
+   }
+
+   .tp-job-title a:hover {
+      color: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   .tp-job-type {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(171, 12, 47, 0.1);
+      color: var(--tp-theme-primary, #AB0C2F);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      white-space: nowrap;
+   }
+
+   .tp-job-type-external {
+      background: rgba(22, 22, 19, 0.1);
+      color: var(--tp-heading-primary, #161613);
+   }
+
+   .tp-job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      color: #666;
+   }
+
+   .tp-job-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+   }
+
+   .tp-job-meta i {
+      color: var(--tp-theme-primary, #AB0C2F);
+      font-size: 14px;
+   }
+
+   .tp-job-footer {
+      margin-top: 5px;
+      display: flex;
+      justify-content: flex-end;
+   }
+
+   .tp-job-link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(171, 12, 47, 0.1);
+      color: var(--tp-theme-primary, #AB0C2F);
+      border-radius: 50%;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+   }
+
+   .tp-job-link-icon:hover {
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      transform: translateY(-2px);
+   }
+
+   .tp-jobs-footer {
+      text-align: center;
+      margin-top: 20px;
+   }
+
+   /* Benefits grid anchor links */
+   .tp-service-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+   }
+
+   .tp-service-link:hover {
+      text-decoration: none;
+      color: inherit;
+   }
+
+   .tp-service-link .tp-service-wrap {
+      height: 100%;
+   }
+
+   /* Fix navbar buttons on small screens */
+   @media (max-width: 1199px) {
+      .tp-header-contact {
+         flex-wrap: nowrap !important;
+         gap: 15px;
+      }
+
+      .tp-header-btn {
+         white-space: nowrap;
+         flex-shrink: 0;
+      }
+
+      .tp-header-bar {
+         flex-shrink: 0;
+      }
+   }
+
+   @media (max-width: 991px) {
+      .tp-header-contact {
+         gap: 10px;
+      }
+
+      .jobs-area {
+         padding-top: 80px;
+         padding-bottom: 80px;
+      }
+
+      .tp-jobs-section-title {
+         font-size: 28px;
+      }
+   }
+
+   @media (max-width: 768px) {
+      .jobs-area {
+         padding-top: 60px;
+         padding-bottom: 60px;
+      }
+
+      .tp-jobs-section-title {
+         font-size: 24px;
+      }
+
+      .tp-jobs-section-subtitle {
+         font-size: 14px;
+      }
+
+      .tp-job-item {
+         padding: 20px;
+      }
+
+      .tp-job-title {
+         font-size: 18px;
+      }
+
+      .tp-job-meta {
+         gap: 15px;
+         font-size: 13px;
+      }
+
+      .tp-jobs-list {
+         gap: 15px;
+      }
+   }
+
+   /* Association logos with faculty names */
+   .tp-association-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+      padding: 10px;
+      border-radius: 8px;
+   }
+
+   .tp-association-item:hover {
+      transform: translateY(-5px);
+   }
+
+   .tp-association-item a {
+      display: block;
+      text-decoration: none;
+      width: 100%;
+   }
+
+   .tp-association-item img {
+      width: 120px;
+      height: 62px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+   }
+
+   .tp-association-item:hover img {
+      transform: scale(1.05);
+   }
+
+   .tp-association-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tp-heading-primary, #1a1a1a);
+      margin-top: 8px;
+      line-height: 1.4;
+      max-width: 140px;
+   }
+
+   .tp-association-item:hover .tp-association-name {
+      color: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   @media (max-width: 991px) {
+      .tp-association-item img {
+         width: 100px;
+         height: 100px;
+      }
+
+      .tp-association-name {
+         font-size: 12px;
+         max-width: 120px;
+      }
+   }
+
+   @media (max-width: 767px) {
+      .tp-association-item img {
+         width: 80px;
+         height: 80px;
+      }
+
+      .tp-association-name {
+         font-size: 11px;
+         max-width: 100px;
+      }
+   }
+
+   .brand-area {
+      padding-left: 60px;
+      padding-right: 30px;
+
+      @media (max-width: 768px) {
+         padding-left: 15px;
+         padding-right: 15px;
+      }
+   }
+
+   .tp-brand-2-description {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      max-width: 600px;
+
+
+      @media (max-width: 768px) {
+         font-size: 1rem;
+      }
+   }
+
+   /* Alumni Chapters Styles */
+   .tp-chapters-split-wrapper {
+      display: flex;
+      align-items: stretch;
+      gap: 60px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+   }
+
+   .tp-chapters-left {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+
+   }
+
+   .tp-chapters-right {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-chapters-right .tp-chapter-section {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-chapters-right .tp-chapter-map-wrapper {
+      flex: 1;
+      min-height: 500px;
+   }
+
+   .tp-chapters-flags-section {
+      margin-top: 60px;
+   }
+
+   .tp-chapter-section-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--tp-heading-primary);
+      margin-bottom: 30px;
+   }
+
+   .tp-chapter-map-wrapper {
+      height: 600px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-chapter-map-wrapper #map {
+
+      min-height: 0;
+      max-height: 540px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      overflow: hidden;
+      position: relative;
+   }
+
+   /* Ensure map internal elements don't overflow */
+   .tp-chapter-map-wrapper #map>* {
+      max-width: 100%;
+      max-height: 100%;
+   }
+
+   .tp-chapter-map-wrapper #map svg {
+      max-width: 100% !important;
+      max-height: 540px !important;
+      width: 100% !important;
+      height: auto !important;
+      display: block;
+   }
+
+   /* Ensure any direct children of map respect height */
+   .tp-chapter-map-wrapper #map>div,
+   .tp-chapter-map-wrapper #map>svg {
+      max-height: 540px !important;
+      height: auto !important;
+   }
+
+   /* Map holder container and all SimpleMaps containers */
+   .tp-chapter-map-wrapper #map_holder,
+   .tp-chapter-map-wrapper [id^="map_holder"],
+   .tp-chapter-map-wrapper [id*="_holder"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100% !important;
+      max-height: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box;
+   }
+
+   /* Ensure all map wrapper divs respect boundaries */
+   .tp-chapter-map-wrapper [id*="map"],
+   .tp-chapter-map-wrapper [id*="holder"] {
+      max-width: 100%;
+      max-height: 100%;
+   }
+
+   .tp-chapter-map-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: calc(600px - 60px);
+      display: block;
+      object-fit: contain;
+   }
+
+   /* Hide copyright/attribution links in map wrapper */
+   .tp-chapter-map-wrapper a[href*="openstreetmap"],
+   .tp-chapter-map-wrapper a[href*="copyright"],
+   .tp-chapter-map-wrapper a[title*="OpenStreetMap"],
+   .tp-chapter-map-wrapper a[title*="copyright"],
+   .tp-chapter-map-wrapper [id*="inner"] a {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+   }
+
+   /* Map legend styles */
+   .tp-map-legend {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+   }
+
+
+   .tp-map-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+   }
+
+   .tp-map-legend-circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+   }
+
+   .tp-map-legend-circle.active {
+      background-color: #ef4444;
+   }
+
+   .tp-map-legend-circle.coming {
+      background-color: blue;
+   }
+
+   .tp-map-legend-caption {
+      color: #333;
+      font-weight: 500;
+   }
+
+   .city-pin {
+      transition: transform 0.3s ease;
+      display: block;
+   }
+
+   .city-pin:hover {
+      transform: scale(1.3);
+   }
+
+   .city-pin circle {
+      transition: all 0.3s ease;
+   }
+
+   .city-pin:hover circle {
+      fill: #8a0a25 !important;
+      r: 10;
+   }
+
+   @keyframes pulse {
+      0% {
+         opacity: 0.4;
+         transform: scale(1);
+      }
+
+      50% {
+         opacity: 0.6;
+         transform: scale(1.1);
+      }
+
+      100% {
+         opacity: 0.4;
+         transform: scale(1);
+      }
+   }
+
+   .pulse-animation {
+      animation: pulse 2s ease-in-out infinite;
+   }
+
+   .chapter-area {
+      padding-left: 100px;
+   }
+
+   .tp-chapter-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+   }
+
+   .tp-chapter-list li {
+      margin-bottom: 15px;
+   }
+
+   .tp-chapter-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: white;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--tp-heading-primary);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+   }
+
+   .tp-chapter-link:hover {
+      background: var(--tp-theme-primary);
+      color: white;
+      transform: translateX(5px);
+      border-color: var(--tp-theme-primary);
+   }
+
+   .tp-chapter-link i {
+      color: var(--tp-theme-primary);
+      transition: color 0.3s ease;
+   }
+
+   .tp-chapter-link:hover i {
+      color: white;
+   }
+
+   .tp-chapter-international svg {
+      min-height: 50px;
+      min-width: 50px;
+   }
+
+   .tp-chapter-international {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      align-items: center;
+      padding: 0px 20px;
+   }
+
+   #map_zoom {
+      display: none;
+   }
+
+   /* Clickable flag styles */
+   .tp-chapter-flag-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      padding: 8px;
+      background: transparent;
+      text-decoration: none;
+      color: inherit;
+   }
+
+   .tp-chapter-flag-link:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   }
+
+   .tp-chapter-flag-link svg {
+      display: block;
+      transition: filter 0.3s ease;
+   }
+
+   .tp-chapter-flag-link:hover svg {
+      filter: brightness(1.1);
+   }
+
+   .tp-chapter-flag-name {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--tp-heading-primary);
+      text-align: center;
+      transition: color 0.3s ease;
+      line-height: 1.2;
+   }
+
+   .tp-chapter-flag-link:hover .tp-chapter-flag-name {
+      color: var(--tp-theme-primary);
+   }
+
+   /* Inactive/disabled flag styles */
+   .tp-chapter-flag-link.inactive {
+      opacity: 0.75;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: grayscale(25%);
+      position: relative;
+   }
+
+   .tp-chapter-flag-link.inactive::after {
+      content: 'Coming Soon';
+      position: absolute;
+      top: 0;
+      text-align: center;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 10px;
+      border-radius: 8px;
+      pointer-events: none;
+   }
+
+   .tp-chapter-flag-link.inactive svg {
+      filter: grayscale(40%) opacity(0.85);
+   }
+
+   .tp-chapter-flag-link.inactive .tp-chapter-flag-name {
+      color: #777;
+      opacity: 0.8;
+   }
+
+   .tp-chapter-flag-link.inactive:hover {
+      transform: none;
+      background: transparent;
+      box-shadow: none;
+   }
+
+   .tp-chapter-flag-link.inactive:hover svg {
+      filter: grayscale(40%) opacity(0.85);
+   }
+
+   .tp-chapter-flag-link.inactive:hover .tp-chapter-flag-name {
+      color: #777;
+   }
+
+   .tp-chapter-international-item:hover {
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+      border-color: var(--tp-theme-primary);
+   }
+
+   .tp-chapter-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+   }
+
+   .tp-chapter-name a {
+      color: var(--tp-heading-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+   }
+
+   .tp-chapter-name a:hover {
+      color: var(--tp-theme-primary);
+   }
+
+   .tp-chapter-description {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+   }
+
+   @media (max-width: 991px) {
+      .tp-chapters-split-wrapper {
+         flex-direction: column;
+         gap: 40px;
+      }
+
+      .tp-chapters-left,
+      .tp-chapters-right {
+         min-width: 100%;
+      }
+
+      .tp-chapter-map-wrapper {
+         height: 500px;
+         margin-bottom: 30px;
+      }
+
+      .tp-chapter-map-wrapper #map {
+         height: 440px;
+         max-height: 440px;
+      }
+
+      .tp-chapter-map-wrapper #map svg {
+         max-height: 440px !important;
+      }
+
+      .tp-chapters-flags-section {
+         margin-top: 40px;
+      }
+
+   }
+
+   @media (max-width: 767px) {
+      .tp-chapter-map-wrapper {
+         height: 400px;
+         padding: 20px;
+      }
+
+      .tp-chapter-map-wrapper #map {
+         height: 340px;
+         max-height: 340px;
+      }
+
+      .tp-chapter-map-wrapper #map svg {
+         max-height: 340px !important;
+      }
+
+      .tp-chapter-international {
+         gap: 15px;
+      }
+   }
+
+   /* About Area Flexbox Layout */
+   .tp-about-flex-wrapper {
+      display: flex;
+      align-items: stretch;
+      gap: 60px;
+      flex-wrap: wrap;
+   }
+
+   .tp-about-left {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+   }
+
+   .tp-about-right {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px 30px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+   }
+
+   .tp-about-card-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+   }
+
+   .tp-about-card-image {
+      margin-bottom: 30px;
+
+   }
+
+   .tp-about-card-image img {
+      width: 100%;
+      max-width: 400px;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+   }
+
+   .tp-about-card-image img:hover {
+      transform: translateY(-5px);
+   }
+
+   .tp-about-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+   }
+
+   .tp-about-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--tp-heading-primary, #161613);
+      line-height: 1.3;
+   }
+
+   .tp-about-card-content p {
+      color: #666;
+      line-height: 1.7;
+      flex: 1;
+
+   }
+
+   /* About Heading - Keep on one line */
+   .tp-about-heading {
+      white-space: nowrap;
+  
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow: visible;
+      width: 100%;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+   }
+
+   .tp-about-heading span {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+   }
+
+   .tp-about-heading svg {
+      flex-shrink: 0;
+      width: clamp(140px, 12vw, 180px);
+      height: auto;
+      margin: 0 5px;
+   }
+
+   .tp-about-heading img {
+      flex-shrink: 0;
+      width: auto;
+      height: clamp(45px, 4vw, 60px);
+      margin-left: 5px;
+   }
+
+   /* Stats Card */
+   .tp-about-stats-card {
+      background: linear-gradient(135deg, var(--tp-theme-primary, #AB0C2F) 0%, rgba(171, 12, 47, 0.9) 100%);
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 30px rgba(171, 12, 47, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 300px;
+   }
+
+   .tp-about-stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(171, 12, 47, 0.3);
+   }
+
+   .tp-about-stats-content {
+      text-align: center;
+   }
+
+   .tp-about-stats-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+   }
+
+   .tp-about-stats-label {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.95);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+   }
+
+   @media (max-width: 991px) {
+      .tp-about-flex-wrapper {
+         flex-direction: column;
+         gap: 40px;
+      }
+
+      .tp-about-left,
+      .tp-about-right {
+         min-width: 100%;
+      }
+
+      .tp-about-right {
+         padding: 40px 30px;
+      }
+
+      .tp-about-heading {
+         font-size: clamp(1.5rem, 4vw, 2rem);
+      }
+
+      .tp-about-heading svg {
+         width: clamp(120px, 15vw, 180px);
+      }
+
+      .tp-about-heading img {
+         min-height: clamp(40px, 5vw, 60px);
+      }
+
+      .tp-about-stats-card {
+         max-width: 100%;
+         padding: 25px 30px;
+      }
+
+      .tp-about-stats-number {
+         font-size: 40px;
+      }
+
+      .tp-about-stats-label {
+         font-size: 16px;
+      }
+   }
+
+   @media (max-width: 767px) {
+      .tp-about-heading {
+         font-size: clamp(1.2rem, 5vw, 1.8rem);
+      }
+
+      .tp-about-stats-card {
+         padding: 20px 25px;
+      }
+
+      .tp-about-stats-number {
+         font-size: 36px;
+      }
+
+      .tp-about-stats-label {
+         font-size: 14px;
+      }
+   }
+
+   @media (max-width: 767px) {
+      .tp-about-right {
+         padding: 30px 20px;
+      }
+
+      .tp-about-card-image img {
+         max-height: 200px;
+      }
+   }
+
+
+
+   .tp-alumni-profile-card {
+      text-align: center;
+      padding: 15px;
+      transition: all 0.3s ease;
+   }
+
+   .tp-alumni-profile-card:hover {
+      transform: translateY(-3px);
+   }
+
+   .tp-alumni-profile-avatar {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #f3f4f6;
+      display: inline-block;
+      margin: 0 auto 15px;
+      position: relative;
+      transition: all 0.3s ease;
+   }
+
+   .tp-alumni-profile-card:hover .tp-alumni-profile-avatar {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+   }
+
+   .tp-alumni-profile-avatar a {
+      display: block;
+      width: 100%;
+      height: 100%;
+   }
+
+   .tp-alumni-profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+   }
+
+   .tp-alumni-profile-card:hover .tp-alumni-profile-avatar img {
+      transform: scale(1.05);
+   }
+
+   .tp-alumni-profile-info {
+      position: relative;
+      padding-top: 10px;
+   }
+
+   .tp-alumni-profile-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      position: relative;
+      padding-right: 35px;
+   }
+
+   .tp-alumni-profile-name a {
+      color: #1e293b;
+      text-decoration: none;
+      transition: color 0.3s ease;
+   }
+
+   .tp-alumni-profile-name a:hover {
+      color: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   .tp-alumni-profile-role {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 0;
+      line-height: 1.4;
+   }
+
+   .tp-alumni-profile-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--tp-theme-primary, #AB0C2F);
+      text-decoration: none;
+      opacity: 1;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      background: rgba(171, 12, 47, 0.1);
+   }
+
+   .tp-alumni-profile-card:hover .tp-alumni-profile-link {
+      opacity: 1;
+   }
+
+   .tp-alumni-profile-link:hover {
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      transform: scale(1.1);
+   }
+
+   .tp-alumni-profile-link i {
+      font-size: 12px;
+   }
+
+   /* Distinguished Alumni Slider Navigation */
+   .tp-distinguished-alumni-active .swiper-button-next,
+   .tp-distinguished-alumni-active .swiper-button-prev {
+      width: 40px;
+      height: 40px;
+      background: rgba(171, 12, 47, 0.1);
+      border-radius: 50%;
+      color: var(--tp-theme-primary, #AB0C2F);
+      transition: all 0.3s ease;
+   }
+
+   .tp-distinguished-alumni-active .swiper-button-next:hover,
+   .tp-distinguished-alumni-active .swiper-button-prev:hover {
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      transform: scale(1.1);
+   }
+
+   .tp-distinguished-alumni-active .swiper-button-next:after,
+   .tp-distinguished-alumni-active .swiper-button-prev:after {
+      font-size: 16px;
+      font-weight: 700;
+   }
+
+   .tp-distinguished-alumni-active .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: rgba(171, 12, 47, 0.3);
+      opacity: 1;
+   }
+
+   .tp-distinguished-alumni-active .swiper-pagination-bullet-active {
+      background: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   @media (max-width: 767px) {
+      .tp-alumni-profile-avatar {
+         width: 100px;
+         height: 100px;
+      }
+
+      .tp-alumni-profile-name {
+         font-size: 14px;
+      }
+
+      .tp-alumni-profile-role {
+         font-size: 12px;
+      }
+
+      .tp-alumni-profile-link {
+         opacity: 1;
+         width: 20px;
+         height: 20px;
+      }
+
+      .tp-alumni-profile-link i {
+         font-size: 10px;
+      }
+   }
+
+   /* Hero Section Full Height and Width */
+   .tp-hero-area {
+      width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      position: relative;
+   }
+
+   .tp-hero-area .tp-slider-active {
+      width: 100%;
+      height: 100%;
+   }
+
+   .tp-hero-area .swiper-wrapper {
+      height: 100%;
+   }
+
+   .tp-hero-area .swiper-slide {
+      height: 100%;
+   }
+
+   .tp-hero-area .tp-hero-item {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      padding-top: 0;
+      padding-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
+   @media only screen and (max-width: 767px) {
+      .tp-hero-area {
+         height: 100vh;
+         min-height: 100vh;
+      }
+
+      .tp-hero-area .tp-hero-item {
+         min-height: 100vh;
+         padding-top: 0;
+         padding-bottom: 0;
+      }
+   }
+
+   .office-of-alumni-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 50%;
+   }
+
+   .tp-explore-tile {
+      text-decoration: none;
+      display: block;
+   }
+
+   .tp-explore-tile:hover .tp-explore-tile-inner {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+   }
+
+   .tp-explore-tile .tp-explore-tile-inner {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+</style>
+
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <!-- loading content here -->
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                        </circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+               stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+
+   <!-- search area end -->
+
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-4 col-4">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class=" tp-static">
+                              <a class="tp-static" href="/">Home</a>
+                           </li>
+                           <li class="">
+                              <a href="/about/">About</a>
+
+                           </li>
+                           <li class="">
+                              <a href="/jobs/">Jobs</a>
+
+                           </li>
+                           <li class=" tp-static">
+                              <a class="tp-static" href="/events/">Events</a>
+
+                           </li>
+                           <li class="">
+                              <a href="/benefits/">Perks & Benefits</a>
+                           </li>
+                           <li class="">
+                              <a href="/give-back/">Give Back</a>
+
+                           </li>
+                           <li class="">
+                              <a href="/associations/">Associations</a>
+                           </li>
+                           <li class="">
+                              <a href="/chapters/">Chapters</a>
+                           </li>
+                           <li class="">
+                              <a href="/newsletters/">Newsletters</a>
+                           </li>
+                           <li class="">
+                              <a href="/contact/">Contact</a>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end flex-nowrap">
+
+                     <div class="tp-header-btn d-none d-md-block">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login </a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+
+
+   <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/">
+                     <img src="/assets/img/logo/logo-black.png" alt="logo">
+                  </a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+   <main>
+
+      <section class="tp-hero-area">
+         <div class="swiper tp-slider-active">
+            <div class="swiper-wrapper">
+               <div class="swiper-slide">
+                  <div class="tp-hero-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-xxl-9 col-lg-11">
+                              <div class="tp-hero-wrapper">
+                                 <h2 class="tp-hero-title">Reconnect, Rediscover, Rise</h2>
+
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-hero-bg" data-background="/assets/img/hero/hero-1.jpg"></div>
+                     <p class="tp-hero-caption">Alumni Meetup with the Dean - Faculty of Social Sciences (Aug 2025)</p>
+                  </div>
+               </div>
+               <div class="swiper-slide">
+                  <div class="tp-hero-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-xxl-9 col-lg-12">
+                              <div class="tp-hero-wrapper">
+                                 <h2 class="tp-hero-title">Our Alumni, Our Pride</h2>
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-hero-bg" data-background="assets/img/hero/hero-02.JPG"></div>
+                     <p class="tp-hero-caption">Alumni Mentorship and Coaching Series (Nov 2025)</p>
+                  </div>
+               </div>
+               <div class="swiper-slide">
+                  <div class="tp-hero-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-xxl-9 col-lg-11">
+                              <div class="tp-hero-wrapper">
+                                 <h2 class="tp-hero-title">Our Alumni Our Pride</h2>
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-hero-bg" data-background="assets/img/hero/hero-03.jpg"></div>
+                     <p class="tp-hero-caption">Reliving the Moments! Alumni Meet with Dean - Faculty of IT (Feb 2025)</p>
+                  </div>
+               </div>
+               <div class="swiper-slide">
+                  <div class="tp-hero-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-xxl-9 col-lg-11">
+                              <div class="tp-hero-wrapper">
+                                 <h2 class="tp-hero-title">Our Alumni Our Pride</h2>
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-hero-bg" data-background="assets/img/hero/hero-04.jpg"></div>
+                     <p class="tp-hero-caption">Alumni Meetup - Islamabad Chapter (Sep 2025)</p>
+                  </div>
+               </div>
+            </div>
+            <!-- Navigation arrows -->
+            <div class="swiper-button-next tp-hero-next"></div>
+            <div class="swiper-button-prev tp-hero-prev"></div>
+            <!-- Pagination dots -->
+            <div class="swiper-pagination tp-hero-pagination"></div>
+         </div>
+      </section>
+      <!-- hero-area-end -->
+
+
+
+      <!-- service-area-end -->
+
+
+      <!-- about-area-start -->
+      <section class="about-area tp-about-bg pt-105 pb-105">
+         <div class="container">
+            <div class="tp-about-flex-wrapper">
+               <!-- Left Side: Office of Alumni Info -->
+               <div class="tp-about-left wow fadeInLeft" data-wow-delay=".3s">
+                  <div class="tp-section">
+                     <h3 class="tp-section-title tp-about-heading mb-30">Office of Alumni <span
+                           style="margin-left: 10px;"> Relations <svg width="180" height="13" viewBox="0 0 180 13"
+                              fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
+                                 fill="currentColor" />
+                           </svg>
+                           <img src="assets/img/icon/about/about-icon-1.svg" alt="about-icon" style="min-height: 60px;">
+                        </span>
+                     </h3>
+                     <p class="mb-40"> <b>Welcome Alumni!</b> <br>
+                        As a UOL graduate, you are part of a thriving global community of alumni across the globe.
+                        The Office of Alumni Relations keeps you connected to your alma mater through meaningful
+                        engagement, collaboration, and opportunities for continued growth. Together, we celebrate our
+                        shared journey and strengthen a vibrant network that inspires success across generations.</p>
+                     <!-- Stats Card -->
+
+                  </div>
+
+                  <div class="tp-about-list">
+                     <div class="tp-about-list-item d-flex align-items-center mb-35">
+                        <div class="tp-about-list-icon">
+                           <span><img src="assets/img/icon/about/about-icon-1.svg" alt="about-icon"></span>
+                        </div>
+                        <div class="tp-about-list-content">
+                           <h5 class="tp-about-list-title">80000+</h5>
+                           <p>UOL Alumni Worldwide <br></p>
+                        </div>
+                      
+                     </div>
+                     <div class="d-flex gap-3" style="flex-wrap: wrap;">
+                        <a href="/newsletters/" class="tp-explore-tile" style="flex: 1; min-width: 200px; max-width: 250px;">
+                           <div class="tp-explore-tile-inner" style="background-image: url('assets/img/banner/newsletter.jpg'); background-size: cover; background-position: center; border-radius: 12px; padding: 30px 20px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                              <div style="position: relative; z-index: 2;">
+                                 <h5 class="tp-about-list-title" style="color: var(--tp-common-white); text-align: center; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Explore Newsletters</h5>
+                              </div>
+                              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(171, 12, 47, 0.7), rgba(171, 12, 47, 0.5)); z-index: 1;"></div>
+                           </div>
+                        </a>
+                        <a href="/jobs/" class="tp-explore-tile" style="flex: 1; min-width: 200px; max-width: 250px;">
+                           <div class="tp-explore-tile-inner" style="background-image: url('assets/img/banner/jobs-banner.png'); background-size: cover; background-position: center; border-radius: 12px; padding: 30px 20px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                              <div style="position: relative; z-index: 2;">
+                                 <h5 class="tp-about-list-title" style="color: var(--tp-common-white); text-align: center; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Explore Jobs</h5>
+                              </div>
+                              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(171, 12, 47, 0.7), rgba(171, 12, 47, 0.5)); z-index: 1;"></div>
+                           </div>
+                        </a>
+                     </div>
+                    
+
+                  </div>
+               </div>
+               <!-- Right Side: Card Info with Picture and Button -->
+               <div class="tp-about-right grey-bg wow fadeInRight" data-wow-delay=".3s">
+                  <div class="tp-about-card-wrapper">
+                     <div class="tp-about-card-image">
+                        <img src="/assets/img/banner/card-picture.png" alt="Alumni Honor Card" class="rounded-3" />
+                     </div>
+                     <div class="tp-about-card-content">
+                        <h3 class="tp-about-title mb-20">Alumni Honor Card</h3>
+                        <p class="mb-30">The University of Lahore`s Alumni Honor Card offers exclusive perks and
+                           privileges to the
+                           alumni. With this card, you can access a range of benefits, including scholarships,
+                           healthcare
+                           services, upskill courses, mentorships, discounts on campus
+                           services and partner organizations</p>
+                        <div class="tp-about-btn">
+                           <a class="tp-btn tp-btn-sm swing" href="https://alumni-portal-uol.vercel.app/signin"
+                              target="_blank">Apply Now</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- about-area-end -->
+
+      <!-- Distinguished Alumni Slider Section -->
+      <section class="distinguished-alumni-slider-area pt-10 pb-80">
+         <div class="container">
+            <div class="row justify-content-between align-items-center mb-50">
+               <div class="col-md-8 col-lg-9">
+                  <div class="tp-section text-start">
+                     <h3 class="tp-section-title" style="text-align: left; margin-bottom: 0;">Distinguished <span>Alumni
+                           <svg width="180" height="13" viewBox="0 0 180 13" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
+                                 fill="currentColor" />
+                           </svg>
+                        </span></h3>
+                  </div>
+               </div>
+               <div class="col-md-4 col-lg-3 text-md-end mt-3 mt-md-0">
+                  <a href="/stories/" class="tp-btn tp-btn-sm" style="white-space: nowrap;">View All</a>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="swiper tp-distinguished-alumni-active wow fadeInUp" data-wow-delay=".3s"
+                     id="distinguished-alumni-slider">
+                     <div class="swiper-wrapper" id="distinguished-alumni-wrapper">
+                        <!-- Alumni slides will be loaded dynamically -->
+                     </div>
+                     <!-- Navigation arrows -->
+                     <div class="swiper-button-next tp-distinguished-alumni-next"></div>
+                     <div class="swiper-button-prev tp-distinguished-alumni-prev"></div>
+                     <!-- Pagination dots -->
+                     <div class="swiper-pagination tp-distinguished-alumni-pagination"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Distinguished Alumni Slider Section End -->
+
+      <!-- counter-area-start -->
+      <!-- <section class="counter-area tp-counter-wrap mb-90">
+         <div class="container">
+            <div class="tp-counter-bg wow fadeInUp" data-wow-delay=".3s"
+               data-background="/assets/img/bg/counter-bg.jpg">
+               <div class="row">
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-counter-item text-center">
+                        <h3 class="tp-counter-count mb-10">
+                           <span data-purecounter-duration="1" data-purecounter-end="30" class="purecounter">30</span>k+
+                        </h3>
+                        <p>undergraduate and graduate students </p>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-counter-item text-center">
+                        <h3 class="tp-counter-count mb-10">
+                           <span data-purecounter-duration="1" data-purecounter-end="6" class="purecounter">6</span>k+
+                        </h3>
+                        <p>UOL University Faculty and Staff </p>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-counter-item text-center">
+                        <h3 class="tp-counter-count mb-10">
+                           <span data-purecounter-duration="1" data-purecounter-end="84" class="purecounter">84</span>k+
+                        </h3>
+                        <p>UOL Alumni Worldwide</p>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </section> -->
+      <!-- counter-area-end -->
+
+      <section class="tp-our-mission-area   pt-50 pb-50"
+         style="background: var(--tp-red-1); color: var(--tp-common-white);">
+         <div class="container">
+            <div class="row">
+
+               <div class="">
+                  <div class="tp-our-mission-wrapper wow fadeInUp" data-wow-delay=".5s">
+                     <div class="tp-our-mission-heading">
+                        <h3 class="" style="color: var(--tp-common-white);text-align: center;font-size: 4rem;">Perks &
+                           Benefits</h3>
+                     </div>
+                     <div class="tp-benefits-grid">
+                        <a href="/benefits/#academic-benefits" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/reading.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Academic Benefits</h4>
+                           </div>
+                        </a>
+                        <a href="/benefits/#healthcare-benefits" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/healthcare.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Healthcare Benefits</h4>
+                           </div>
+                        </a>
+
+                        <a href="/benefits/#campus-facilities-and-memberships" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/amenities.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Campus Facilities and Memberships</h4>
+                           </div>
+                        </a>
+                        <a href="/benefits/#merchant-promotions" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/employee.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Merchant and Business Promotions</h4>
+                           </div>
+                        </a>
+                        <a href="/benefits/#career-mentorship" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/career.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Career and Mentorship</h4>
+                           </div>
+                        </a>
+                        <a href="/benefits/#networking" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/graduate.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Chapters & Engagement Events</h4>
+                           </div>
+                        </a>
+                        <a href="/benefits/#recognition" class="tp-service-link">
+                           <div class="tp-service-wrap">
+                              <div class="tp-service-icon">
+                                 <span><img src="assets/img/benefits/ribbon-badge.png" alt="service-icon"
+                                       class="benefits-icon"></span>
+                              </div>
+                              <h4 class="tp-service-title">Identity, Inclusion & Recognition</h4>
+                           </div>
+                        </a>
+
+                     </div>
+
+
+
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="chapters-area pt-50 pb-90 grey-bg">
+         <div class="container">
+            <!-- Top Section: Split Layout -->
+            <div class="tp-chapters-split-wrapper">
+               <!-- Left Side: Heading and Description -->
+               <div class="tp-chapters-left">
+                  <div class="tp-section">
+                     <h3 class="tp-section-title mb-30">Alumni <span>Chapters
+                           <svg width="180" height="13" viewBox="0 0 180 13" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
+                                 fill="currentColor" />
+                           </svg>
+                        </span></h3>
+                     <p class="mt-20">Our alumni chapters around the world create local networks that help keep the UOL
+                        spirit alive,
+                        no matter where our graduates are. These chapters organize regional events, foster professional
+                        and social connections and provide opportunities for alumni to engage with their peers and
+                        support university initiatives. They serve as vibrant communities that strengthen the global UOL
+                        alumni network.</p>
+                  </div>
+                  <div class="tp-chapters-flags-section">
+                     <h4 class="tp-chapter-section-title mb-40 text-start">International Chapters</h4>
+                     <div class="tp-chapter-international">
+
+
+
+
+                        <a href="/chapters/detail.html?id=16" class="tp-chapter-flag-link "
+                           title="Kuwait Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path fill="#fff" d="M1 11H31V21H1z"></path>
+                              <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z" fill="#357942"></path>
+                              <path d="M5,20H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 16 24)" fill="#be2a2c"></path>
+                              <path
+                                 d="M11,12L2.316,5.053c-.803,.732-1.316,1.776-1.316,2.947V24c0,1.172,.513,2.216,1.316,2.947l8.684-6.947V12Z">
+                              </path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Kuwait</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=22" class="tp-chapter-flag-link"
+                           title="Qatar Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path d="M27,4H9V28H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Z" fill="#801d36"></path>
+                              <path
+                                 d="M10,23.2l6-2.4-6-2.4,6-2.4-6-2.4,6-2.4-6-2.4,6-2.4-6-2.4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4h5l6-2.4-6-2.4Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Qatar</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=19" class="tp-chapter-flag-link"
+                           title="Bahrain Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path d="M27,4H9V28H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Z" fill="#ea3323"></path>
+                              <path
+                                 d="M10,23.2l6-2.4-6-2.4,6-2.4-6-2.4,6-2.4-6-2.4,6-2.4-6-2.4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4h5l6-2.4-6-2.4Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Bahrain</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=18" class="tp-chapter-flag-link"
+                           title="United Kingdom Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#071b65"></rect>
+                              <path
+                                 d="M5.101,4h-.101c-1.981,0-3.615,1.444-3.933,3.334L26.899,28h.101c1.981,0,3.615-1.444,3.933-3.334L5.101,4Z"
+                                 fill="#fff"></path>
+                              <path d="M22.25,19h-2.5l9.934,7.947c.387-.353,.704-.777,.929-1.257l-8.363-6.691Z"
+                                 fill="#b92932"></path>
+                              <path d="M1.387,6.309l8.363,6.691h2.5L2.316,5.053c-.387,.353-.704,.777-.929,1.257Z"
+                                 fill="#b92932"></path>
+                              <path
+                                 d="M5,28h.101L30.933,7.334c-.318-1.891-1.952-3.334-3.933-3.334h-.101L1.067,24.666c.318,1.891,1.952,3.334,3.933,3.334Z"
+                                 fill="#fff"></path>
+                              <rect x="13" y="4" width="6" height="24" fill="#fff"></rect>
+                              <rect x="1" y="13" width="30" height="6" fill="#fff"></rect>
+                              <rect x="14" y="4" width="4" height="24" fill="#b92932"></rect>
+                              <rect x="14" y="1" width="4" height="30" transform="translate(32) rotate(90)"
+                                 fill="#b92932">
+                              </rect>
+                              <path d="M28.222,4.21l-9.222,7.376v1.414h.75l9.943-7.94c-.419-.384-.918-.671-1.471-.85Z"
+                                 fill="#b92932"></path>
+                              <path
+                                 d="M2.328,26.957c.414,.374,.904,.656,1.447,.832l9.225-7.38v-1.408h-.75L2.328,26.957Z"
+                                 fill="#b92932"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">UK</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=23" class="tp-chapter-flag-link"
+                        title="Germany Chapter">
+                        <div class="d-flex">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"
+                              style="height: 50px;width:50px">
+                              <path fill="#cc2b1d" d="M1 11H31V21H1z"></path>
+                              <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z"></path>
+                              <path d="M5,20H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 16 24)" fill="#f8d147"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                              <path fill="#fff" d="M1 11H31V21H1z"></path>
+                              <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z" fill="#b92932">
+                              </path>
+                              <path d="M5,20H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 16 24)" fill="#b92932"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                        </div>
+
+                        <span class="tp-chapter-flag-name">Germany-Austria</span>
+                     </a>
+                     <a href="/chapters/detail.html?id=21" class="tp-chapter-flag-link"
+                           title="United States Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"></rect>
+                              <path
+                                 d="M1.638,5.846H30.362c-.711-1.108-1.947-1.846-3.362-1.846H5c-1.414,0-2.65,.738-3.362,1.846Z"
+                                 fill="#a62842"></path>
+                              <path
+                                 d="M2.03,7.692c-.008,.103-.03,.202-.03,.308v1.539H31v-1.539c0-.105-.022-.204-.03-.308H2.03Z"
+                                 fill="#a62842"></path>
+                              <path fill="#a62842" d="M2 11.385H31V13.231H2z"></path>
+                              <path fill="#a62842" d="M2 15.077H31V16.923000000000002H2z"></path>
+                              <path fill="#a62842" d="M1 18.769H31V20.615H1z"></path>
+                              <path
+                                 d="M1,24c0,.105,.023,.204,.031,.308H30.969c.008-.103,.031-.202,.031-.308v-1.539H1v1.539Z"
+                                 fill="#a62842"></path>
+                              <path
+                                 d="M30.362,26.154H1.638c.711,1.108,1.947,1.846,3.362,1.846H27c1.414,0,2.65-.738,3.362-1.846Z"
+                                 fill="#a62842"></path>
+                              <path d="M5,4h11v12.923H1V8c0-2.208,1.792-4,4-4Z" fill="#102d5e"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                              <path fill="#fff"
+                                 d="M4.601 7.463L5.193 7.033 4.462 7.033 4.236 6.338 4.01 7.033 3.279 7.033 3.87 7.463 3.644 8.158 4.236 7.729 4.827 8.158 4.601 7.463z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M7.58 7.463L8.172 7.033 7.441 7.033 7.215 6.338 6.989 7.033 6.258 7.033 6.849 7.463 6.623 8.158 7.215 7.729 7.806 8.158 7.58 7.463z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M10.56 7.463L11.151 7.033 10.42 7.033 10.194 6.338 9.968 7.033 9.237 7.033 9.828 7.463 9.603 8.158 10.194 7.729 10.785 8.158 10.56 7.463z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M6.066 9.283L6.658 8.854 5.927 8.854 5.701 8.158 5.475 8.854 4.744 8.854 5.335 9.283 5.109 9.979 5.701 9.549 6.292 9.979 6.066 9.283z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M9.046 9.283L9.637 8.854 8.906 8.854 8.68 8.158 8.454 8.854 7.723 8.854 8.314 9.283 8.089 9.979 8.68 9.549 9.271 9.979 9.046 9.283z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M12.025 9.283L12.616 8.854 11.885 8.854 11.659 8.158 11.433 8.854 10.702 8.854 11.294 9.283 11.068 9.979 11.659 9.549 12.251 9.979 12.025 9.283z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M6.066 12.924L6.658 12.494 5.927 12.494 5.701 11.799 5.475 12.494 4.744 12.494 5.335 12.924 5.109 13.619 5.701 13.19 6.292 13.619 6.066 12.924z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M9.046 12.924L9.637 12.494 8.906 12.494 8.68 11.799 8.454 12.494 7.723 12.494 8.314 12.924 8.089 13.619 8.68 13.19 9.271 13.619 9.046 12.924z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M12.025 12.924L12.616 12.494 11.885 12.494 11.659 11.799 11.433 12.494 10.702 12.494 11.294 12.924 11.068 13.619 11.659 13.19 12.251 13.619 12.025 12.924z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M13.539 7.463L14.13 7.033 13.399 7.033 13.173 6.338 12.947 7.033 12.216 7.033 12.808 7.463 12.582 8.158 13.173 7.729 13.765 8.158 13.539 7.463z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M4.601 11.104L5.193 10.674 4.462 10.674 4.236 9.979 4.01 10.674 3.279 10.674 3.87 11.104 3.644 11.799 4.236 11.369 4.827 11.799 4.601 11.104z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M7.58 11.104L8.172 10.674 7.441 10.674 7.215 9.979 6.989 10.674 6.258 10.674 6.849 11.104 6.623 11.799 7.215 11.369 7.806 11.799 7.58 11.104z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M10.56 11.104L11.151 10.674 10.42 10.674 10.194 9.979 9.968 10.674 9.237 10.674 9.828 11.104 9.603 11.799 10.194 11.369 10.785 11.799 10.56 11.104z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M13.539 11.104L14.13 10.674 13.399 10.674 13.173 9.979 12.947 10.674 12.216 10.674 12.808 11.104 12.582 11.799 13.173 11.369 13.765 11.799 13.539 11.104z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M4.601 14.744L5.193 14.315 4.462 14.315 4.236 13.619 4.01 14.315 3.279 14.315 3.87 14.744 3.644 15.44 4.236 15.01 4.827 15.44 4.601 14.744z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M7.58 14.744L8.172 14.315 7.441 14.315 7.215 13.619 6.989 14.315 6.258 14.315 6.849 14.744 6.623 15.44 7.215 15.01 7.806 15.44 7.58 14.744z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M10.56 14.744L11.151 14.315 10.42 14.315 10.194 13.619 9.968 14.315 9.237 14.315 9.828 14.744 9.603 15.44 10.194 15.01 10.785 15.44 10.56 14.744z">
+                              </path>
+                              <path fill="#fff"
+                                 d="M13.539 14.744L14.13 14.315 13.399 14.315 13.173 13.619 12.947 14.315 12.216 14.315 12.808 14.744 12.582 15.44 13.173 15.01 13.765 15.44 13.539 14.744z">
+                              </path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">USA</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=15" class="tp-chapter-flag-link"
+                           title="Saudi Arabia Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#215230"></rect>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                              <path
+                                 d="M25.47,15.008c.105-.506-.616-3.171-.092-2.76,.071-.184-.288-.624-.39-.863-.362,1.107,.47,3.281,.2,4.749-.205,.431-1.607,.948-1.937,1.134,.74,.218,2.5-.651,2.218-2.26Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M10.505,16.004c.189-.342,.23-.711,.203-1.119,.285-.116,.625-.309,.739-.323-.078,.268,.108,.557,.485,.52,.075,2.143,.346,1.695,.235-.061,.244-.113,.285-.331,.376-.424,.529,.867,1.302-.28,.818-.752-.005,.039-.118,.415-.118,.415,0,0,.108,.114,.113,.17-.117,.14-.654,.045-.621-.172,.026-.059,.152-.363-.028-.182-.163,.166-.247,.518-.574,.578,.021-.738-.397-2.077-.198-2.519,.186,.233,.189,.069,.075-.16-.189-.337-.287-.981-.469-.283,.189,.786,.217,2.078,.349,2.962-.361-.07-.248-.325-.244-.489-.049-.033-.698,.313-.968,.396-.032-.274-.072-.521-.089-.724,1.012-.097,.623-1.314,.414-1.883,.025-.034,.297,.197,.133-.076-.251-.317-.358-.681-.477-.079,.157,.294,.301,1.089,.451,1.42-.103,.073-.337,.195-.569,.188,.019-.348-.281-1.172-.047-1.233,.161,.185,.185,.105,.072-.126-.195-.297-.349-1.048-.488-.321,.167,.343,.096,.842,.207,1.609-.632-.338-.133-1.385-.652-1.885-.024,.057-.13,.41-.13,.41,.515,.73-.338,2.343-1.17,1.331-.098-.544,.476-2.27-.336-.957-.16,.529-.555,2.134-1.013,.927-.089-.336,.098-1.28-.115-.503-.119,.293,.045,1.443,.567,1.308,.471-.253,.488-1.453,.854-1.754-.724,1.53,.977,2.599,1.429,.747,.013,.287,.224,.749,.612,.848,.023,.228,.06,.525,.094,.838-.072,.022-.144,.042-.217,.059-.605-1.576-2.019,.892-.179,.401,.024,.072,.04,.143,.042,.207-.852,1.187-3.966,1.185-1.934-.889,.066,.024,.191,.147,.18,.158,.073-.112,.11-.232-.09-.308,.33-.876-.875-.159-.14,.119-.149,.156-.5,.385-.715,.519-.167,.094-.68,.407-.803,.479-.057,.104,.455-.213,.61-.266-1.488,2.836,2.314,2.381,3.326,.88Zm-3.208-.938c.106-.053,.207-.104,.29-.15-1.363,2.364,2.618,1.812,2.664,.131,.069-.021,.138-.044,.208-.068,.024,.255,.041,.505,.042,.723-.365,.429-1.203,.928-1.945,1.131-1.368,.433-1.852-.966-1.259-1.766Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M16.342,16.611c.242-.267,1.915-.721,2.199-.864,.025-.071,.148-.321,.156-.373-.557,.05-2.089,.134-2.7,.103,.126-.108,.736-.422,1.182-.554,.042,.074,.073,.148,.079,.212,.032-.033,.056-.142,.048-.253,.293-.093,.443-.124,.508-.142,.041-.053,.114-.268,.125-.425-.359-.659-1.502-.446-.957,.322-.457,.192-1.222,.541-1.44,.856l-.035,.017c-.009,.017-.069,.266-.089,.343-.262-.782-.341-1.798-.795-2.093-.247,.506,.507,1.512,.517,2.056-.142,.33-1.991,1.757-2.309,.939,1.134-.431,2.304-1.185,1.336-2.289-.01-.041,.115,.017,.188,.02,.053-.113-.348-.347-.448-.46-.089-.016-.103,.303-.102,.38,.123,.179,.492,.887,.586,1.102-.139,.177-.837,.553-1.518,.863,.005-.176,.414-.656,.299-.786-.283,.515-.322-.323-.122-.485,.201-.642-.663,.951-.09,.897-.06,.114-.134,.253-.187,.419-.792,.369-2,.72-2.528,.893,.029-.094,.025-.174-.006-.15-.542,.637-.017-.81-.096-.67-.302,.23-.48,1.59,.087,.861,.44-.099,1.918-.203,2.471-.534,.084,1.499,2.627-.297,2.513-1.062,.064,.906,.55,1.539,1.847,1.609,.003-.103-.038-.425-.038-.425-.164-.023-.579-.086-.68-.326Zm-.913-.73c.257,.005,1.655-.032,1.921-.04-.491,.171-1.171,.271-1.14,.96-.403-.091-.624-.464-.781-.92Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M12.822,13.817c.459-.246,.482-1.398,.854-1.685-.765,1.473,1.05,2.445,1.404,.667,.322,1.701,2.18,.64,1.302-.691-.241-.549,.228,.023,.066-.334-.251-.316-.358-.681-.477-.079,.16,.291,.317,1.085,.451,1.42-1.359,.72-.927-1.166-1.428-1.825-.024,.057-.13,.41-.13,.41,.838,1.883-1.884,2.344-.998,.137-.447-.722-.639,1.657-1.145,1.614-.411,0-.413-.913-.358-1.107-.292,.019-.146,1.653,.458,1.473Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M23.777,14.233c.057,.949,.148,1.852,.117,2.524,.349-.356,.155-1.494,.145-2.223,.438,.519,.919,1.113,1.024,1.678,.013,.036,.069-.11,.06-.338,.048-.4-.665-1.312-1.115-1.788,.058-.461-.361-1.665-.114-1.934,.161,.186,.185,.105,.072-.126-.194-.304-.337-1.009-.476-.298,.17,.367,.134,1.245,.25,2.057-.385-.43-.627-.687-.828-.906,.011-.189-.181-.792,.017-.716,.161,.185,.185,.105,.072-.127-.205-.324-.348-1.024-.491-.286,.133,.193,.073,.417,.129,.814-.3-.442-.684-.627-.168-.578-.212-.149-1.029-.919-.813-.171,.305,.143,.63,.818,1.022,1.192,.063,.847,.258,2.221,.288,3.015-.809,.711-.96,.011-1.425-.246,.002-.225-.005-.444-.005-.573,.11-.505-.579-3.324-.041-2.908-.042-.23-.467-1.414-.568-.555,.225,.773,.255,2.393,.371,3.462,.011,.101,.024,.291,.035,.497-.002,0-.003-.001-.004-.002-.664,.19-.965,2.265-1.701,1.066,1.334-1.002,.41-3.321,.327-4.613,.008-.082,.139,.112,.207,.126,.049-.187-.281-.67-.399-.912-.476,.972,.751,3.11,.284,4.421,.061-.629-.685-1.392-1.221-1.883,.048-.267-.519-2.128-.024-1.609,.045-.023-.005-.16-.067-.282-.198-.331-.312-.975-.476-.273,.137,.173,.197,1.62,.287,1.904-.317-.37-1.855-1.462-1.123-1.362-.006-.02-.038-.068-.119-.117-.276-.09-.873-.788-.694-.054,.038,.003,.106,.049,.155,.107,.379,.518,1.263,1.37,1.843,1.886,.221,2.776,.599,3.546,.278,.267,.461,.469,.995,.976,1.103,1.565-.097,.201-.238,.38-.445,.525-.058-.379,.005-.686-.05-.715-.115,.07-.081,.556-.059,.79-1.629,.876-1.893,1.088,.063,.311,.679,1.706,1.129-.408,1.804-.783,.018,.016,.033,.025,.051,.04,.007,.215,.008,.399-.001,.459,.09-.001,.139-.14,.165-.33,1.967,1.537,1.697-1.371,1.455-2.888,.33,.384,.542,.608,.806,.888Z"
+                                 fill="#fff"></path>
+                              <path
+                                 d="M22.159,20.66h0s-1.5,0-1.5,0c.115-.083,.176-.205,.159-.327-.01-.077-.087-.135-.181-.143h-.047c-.114,.011-.196,.093-.184,.183l.005,.035,.006,.053c.006,.067,0,.134-.019,.199H9.313c.165,.24,.465,.386,.789,.386l10.116-.006c-.116,.083-.176,.205-.16,.328,.012,.09,.114,.154,.227,.143,.114-.011,.196-.093,.184-.183l-.005-.035-.006-.053c-.006-.067,0-.134,.019-.2h1.248s.035,.058,.035,.058c.031,.053,.071,.1,.117,.142l.064,.053h0c.126,.088,.287,.14,.456,.14,.16,0,.289-.111,.289-.248v-.072c0-.25-.237-.453-.529-.453Z"
+                                 fill="#fff"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Saudi Arabia</span>
+                        </a>
+
+                        
+
+
+                        <a href="/chapters/detail.html?id=17" class="tp-chapter-flag-link"
+                           title="United Arab Emirates Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#ea3323"></path>
+                              <path d="M10,20v8H27c2.209,0,4-1.791,4-4v-4H10Z"></path>
+                              <path fill="#fff" d="M10 11H31V21H10z"></path>
+                              <path d="M27,4H10V12H31v-4c0-2.209-1.791-4-4-4Z" fill="#317234"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">UAE</span>
+                        </a>
+                       
+
+                        <a href="/chapters/detail.html?id=20" class="tp-chapter-flag-link"
+                           title="Canada Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path fill="#fff" d="M8 4H24V28H8z"></path>
+                              <path d="M5,4h4V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#c53a28"></path>
+                              <path d="M27,4h4V28h-4c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 27 16)" fill="#c53a28"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M16.275,22.167l-.138-2.641c-.007-.16,.117-.296,.277-.304,.021,0,.042,0,.063,.004l2.629,.462-.355-.979c-.03-.08-.005-.17,.061-.223l2.88-2.332-.649-.303c-.091-.043-.135-.146-.104-.242l.569-1.751-1.659,.352c-.093,.019-.186-.029-.223-.116l-.321-.756-1.295,1.389c-.076,.08-.201,.083-.281,.007-.049-.047-.071-.115-.058-.182l.624-3.22-1.001,.578c-.095,.056-.217,.024-.272-.071-.002-.004-.004-.008-.006-.012l-1.016-1.995-1.016,1.995c-.049,.098-.169,.138-.267,.089-.004-.002-.008-.004-.012-.006l-1.001-.578,.624,3.22c.021,.108-.05,.212-.158,.233-.067,.013-.135-.009-.182-.058l-1.295-1.389-.321,.756c-.037,.087-.131,.136-.223,.116l-1.659-.352,.569,1.751c.031,.095-.013,.199-.104,.242l-.649,.303,2.88,2.332c.066,.054,.091,.144,.061,.223l-.355,.979,2.629-.462c.158-.027,.309,.079,.336,.237,.004,.021,.005,.042,.004,.063l-.138,2.641h.551Z"
+                                 fill="#c53a28"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Canada</span>
+                        </a>
+
+                        <a href="/chapters/detail.html?id=28" class="tp-chapter-flag-link"
+                           title="Ireland Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path fill="#fff" d="M10 4H22V28H10z"></path>
+                              <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#479a67"></path>
+                              <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 26 16)" fill="#ef8f4e"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Ireland</span>
+                        </a>
+
+
+
+
+
+                        <a href="/chapters/detail.html?id=24" class="tp-chapter-flag-link inactive"
+                           title="China Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#db362f"></rect>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path fill="#ff0"
+                                 d="M7.958 10.152L7.19 7.786 6.421 10.152 3.934 10.152 5.946 11.614 5.177 13.979 7.19 12.517 9.202 13.979 8.433 11.614 10.446 10.152 7.958 10.152z">
+                              </path>
+                              <path fill="#ff0"
+                                 d="M12.725 8.187L13.152 8.898 13.224 8.072 14.032 7.886 13.269 7.562 13.342 6.736 12.798 7.361 12.035 7.037 12.461 7.748 11.917 8.373 12.725 8.187z">
+                              </path>
+                              <path fill="#ff0"
+                                 d="M14.865 10.372L14.982 11.193 15.37 10.46 16.187 10.602 15.61 10.007 15.997 9.274 15.253 9.639 14.675 9.044 14.793 9.865 14.048 10.23 14.865 10.372z">
+                              </path>
+                              <path fill="#ff0"
+                                 d="M15.597 13.612L16.25 13.101 15.421 13.13 15.137 12.352 14.909 13.149 14.081 13.179 14.769 13.642 14.541 14.439 15.194 13.928 15.881 14.391 15.597 13.612z">
+                              </path>
+                              <path fill="#ff0"
+                                 d="M13.26 15.535L13.298 14.707 12.78 15.354 12.005 15.062 12.46 15.754 11.942 16.402 12.742 16.182 13.198 16.875 13.236 16.047 14.036 15.827 13.26 15.535z">
+                              </path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">China</span>
+                        </a>
+
+                        <a href="/chapters/detail.html?id=25" class="tp-chapter-flag-link inactive"
+                           title="Italy Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <path fill="#fff" d="M10 4H22V28H10z"></path>
+                              <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#41914d"></path>
+                              <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                 transform="rotate(180 26 16)" fill="#bf393b"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Italy</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=26" class="tp-chapter-flag-link inactive"
+                           title="Oman Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#cd312c"></rect>
+                              <path d="M11,20v8H27c2.209,0,4-1.791,4-4v-4H11Z" fill="#377d41"></path>
+                              <path d="M27,4H11V12H31v-4c0-2.209-1.791-4-4-4Z" fill="#fff"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                              <path
+                                 d="M9.225,12.667c-.582-.605-1.779-1.187-2.217-2.117-.004-.002-.004-.007,0-.009-.045-.239,.096-.503,.28-.627,.025,.382,.576,.11,.756,.091-.158,.409,1.087,.14,1.224,.213,.213,.02,.083-.53,.117-.632-.012-.162-1.501-.257-1.341,.104-.184,.036-.208-.181-.46-.151,1.727-2.926,1.109-3.078-.512-.206l.044,.02c-.209,.32-.015-.35-.105-.484h0v-.093c-.112,.006-.27-.065-.248-.18h-.007v-.002h-.037s0-.18,0-.18h-.036v-.364h-.037v-.23h.013c.405-.478,.577-.41-.148-.819-.706,.4-.55,.321-.182,.819h.013v.23h-.036v.364h-.036v.181h-.038s-.007,.001-.007,.001c.027,.085-.1,.186-.248,.181v.167h0c-.124,.175,.068,.358-.022,.539-.034-.046-.064-.089-.093-.13l.044-.02c-1.604-2.844-2.245-2.741-.529,.176-.247-.012-.251,.192-.442,.152,.13-.359-1.088-.21-1.224-.183-.191,.038-.112,.528-.117,.632-.007,.162,1.532,.273,1.341-.134,.198-.004,.566,.269,.746,.002,.117,.044,.224,.138,.275,.262h-.002s-.008,.008-.008,.008c.012,.245-1.2,.201-1.297,.201,.006,0-.125,.007-.124,.002-1.004,.066,.447,.71,.447,.71,0,0,.394,.099,.439,.099-1.192,.878-1.641,2.056-.529,1.076,0,0,.76-.864,1.268-1.024,.069-.014,.571-.2,.596-.222,.47,.476,.953,.87,1.175,1.093s2.063,1.223,1.305,.486Z"
+                                 fill="#fff"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Oman</span>
+                        </a>
+                        <a href="/chapters/detail.html?id=27" class="tp-chapter-flag-link inactive"
+                           title="Australia Chapter">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#061b65"></rect>
+                              <path
+                                 d="M6.5,13.774v2.226h4v-2.227l3.037,2.227h2.463v-1.241l-3.762-2.759h3.762v-4h-2.74l2.74-2.009v-1.991h-1.441l-4.059,2.977v-2.977H6.5v2.794l-3.257-2.389c-.767,.374-1.389,.983-1.786,1.738l2.532,1.858H1s0,0,0,0v4h3.763l-3.763,2.76v1.24H3.464l3.036-2.226Z"
+                                 fill="#fff"></path>
+                              <path d="M1.805,5.589l3.285,2.411h1.364L2.359,4.995c-.204,.18-.39,.377-.554,.594Z"
+                                 fill="#d22d32"></path>
+                              <path fill="#d22d32" d="M1 16L6.454 12 6.454 13 2.363 16 1 16z"></path>
+                              <path id="1705926025352-5861297_Star7"
+                                 d="M6.838,18.741l.536,1.666,1.636-.62-.968,1.457,1.505,.893-1.743,.152,.24,1.733-1.205-1.268-1.205,1.268,.24-1.733-1.743-.152,1.505-.893-.968-1.457,1.636,.62,.536-1.666Z"
+                                 fill="#fff"></path>
+                              <path id="1705926025352-5861297_Star7-2"
+                                 d="M23.113,21.755l.291,.906,.89-.337-.527,.793,.819,.486-.948,.082,.131,.943-.656-.69-.656,.69,.131-.943-.948-.082,.819-.486-.527-.793,.89,.337,.291-.906Z"
+                                 fill="#fff"></path>
+                              <path id="1705926025352-5861297_Star7-3"
+                                 d="M20.166,13.127l.291,.906,.89-.337-.527,.793,.819,.486-.948,.082,.131,.943-.656-.69-.656,.69,.131-.943-.948-.082,.819-.486-.527-.793,.89,.337,.291-.906Z"
+                                 fill="#fff"></path>
+                              <path id="1705926025352-5861297_Star7-4"
+                                 d="M23.43,7.127l.291,.906,.89-.337-.527,.793,.819,.486-.948,.082,.131,.943-.656-.69-.656,.69,.131-.943-.948-.082,.819-.486-.527-.793,.89,.337,.291-.906Z"
+                                 fill="#fff"></path>
+                              <path id="1705926025352-5861297_Star7-5"
+                                 d="M28.132,10.817l.291,.906,.89-.337-.527,.793,.819,.486-.948,.082,.131,.943-.656-.69-.656,.69,.131-.943-.948-.082,.819-.486-.527-.793,.89,.337,.291-.906Z"
+                                 fill="#fff"></path>
+                              <path id="1705926025352-5861297_Star5"
+                                 d="M25.742,16l.23,.565,.608,.045-.466,.393,.146,.592-.518-.321-.518,.321,.146-.592-.466-.393,.608-.045,.23-.565Z"
+                                 fill="#fff"></path>
+                              <path fill="#d22d32"
+                                 d="M9.5 16L7.5 16 7.5 11 1 11 1 9 7.5 9 7.5 4 9.5 4 9.5 9 16 9 16 11 9.5 11 9.5 16z">
+                              </path>
+                              <path fill="#d22d32" d="M16 15.667L11 12 11 13 15.091 16 16 16 16 15.667z"></path>
+                              <path fill="#d22d32" d="M16 4L15.752 4 10.291 8.004 11.655 8.004 16 4.818 16 4z"></path>
+                              <path
+                                 d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                 opacity=".15"></path>
+                              <path
+                                 d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                 fill="#fff" opacity=".2"></path>
+                           </svg>
+                           <span class="tp-chapter-flag-name">Australia</span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <!-- Right Side: Pakistan Map -->
+               <div class="tp-chapters-right">
+                  <div class="tp-chapter-section chapter-area">
+                     <h4 class="tp-chapter-section-title mb-40">Local Chapters</h4>
+                     <div class="tp-chapter-map-wrapper position-relative">
+                        <div id="map"></div>
+                        <!-- Map Legend -->
+                        <div class="tp-map-legend">
+                           <div class="tp-map-legend-item">
+                              <div class="tp-map-legend-circle active"></div>
+                              <span class="tp-map-legend-caption">Active Chapters</span>
+                           </div>
+                           <div class="tp-map-legend-item">
+                              <div class="tp-map-legend-circle coming"></div>
+                              <span class="tp-map-legend-caption">Upcoming Chapters</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Bottom Section: International Flags Row -->
+
+         </div>
+         </div>
+         </div>
+         <div class="d-flex justify-content-center">
+            <a class="tp-btn-3" href="/chapters/">View All Chapters</a>
+         </div>
+      </section>
+      <section class="brand-area  pt-50 pb-50 px-3">
+         <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="row">
+               <div class="col-lg-4">
+                  <h4 class="tp-section-title">Alumni
+                     <span>Associations
+                        <img class="tp-underline-shape-10 wow bounceIn" data-wow-duration="1.5s" data-wow-delay=".4s"
+                           src="assets/img/unlerline/brand-2-svg-1.svg" alt="">
+                     </span>
+                  </h4>
+                  <p class="tp-brand-2-description">The Alumni Associations are at the heart of our alumni network. They
+                     serve as a platform for maintaining strong connections with your alma mater, faculty, and fellow
+                     graduates.
+                     As a member, you will be part of a dynamic group that actively contributes to the growth and
+                     development of the university, organizes events and creates opportunities for alumni to engage with
+                     each other. Be part of something bigger by joining the UOL Alumni Association and make your voice
+                     heard in shaping our community.</p>
+               </div>
+               <div class="col-lg-8" style="display: flex; justify-content: center; align-items: center;">
+                  <div class="tp-brand-2-wrapper" id="associations-logos-wrapper"
+                     style="display: flex; flex-wrap: wrap; gap: 15px;">
+                     <!-- Associations will be loaded dynamically -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <hr style="margin: 0;">
+
+      <!-- Alumni Chapters Section -->
+
+      <!-- Alumni Chapters Section End -->
+
+      <section class="event-area tp-event-4 pt-50 pb-50 grey-bg">
+         <div class="container">
+            <div class="row align-items-end">
+               <div class="col-lg-6">
+                  <div class="tp-event-4-section mb-60">
+                     <h3 class="tp-section-4-title"><span> Events and Meetups
+                           <svg xmlns="http://www.w3.org/2000/svg" width="130" height="10" viewBox="0 0 130 10"
+                              fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M125.062 8.93792C70.1883 -2.76192 22.1358 4.10077 5.29024 8.85108C3.83077 9.26264 1.75893 9.15211 0.66266 8.6042C-0.433612 8.0563 -0.139185 7.2785 1.32028 6.86694C19.892 1.62988 70.7793 -5.48976 128.327 6.7801C129.914 7.11852 130.47 7.8759 129.568 8.47177C128.667 9.06763 126.649 9.27634 125.062 8.93792Z"
+                                 fill="#161613" />
+                           </svg>
+                        </span></h3>
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="tp-event-4-all-btn text-lg-end mb-70">
+                     <a class="tp-btn-3" href="/events/">See More Events</a>
+                  </div>
+               </div>
+            </div>
+            <div class="row" id="home-events-grid">
+               <div class="col-12">
+                  <p class="mb-0">Events will appear here once they are available.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Events Section End -->
+
+      <!-- Coaching and Mentorship Section Start -->
+      <section class="event-area tp-event-4 pt-50 pb-50 ">
+         <div class="container">
+            <div class="row">
+               <h3 class="tp-section-4-title mb-10 col-lg-6">Coaching and<span> Mentorship
+                     <svg xmlns="http://www.w3.org/2000/svg" width="130" height="10" viewBox="0 0 130 10" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                           d="M125.062 8.93792C70.1883 -2.76192 22.1358 4.10077 5.29024 8.85108C3.83077 9.26264 1.75893 9.15211 0.66266 8.6042C-0.433612 8.0563 -0.139185 7.2785 1.32028 6.86694C19.892 1.62988 70.7793 -5.48976 128.327 6.7801C129.914 7.11852 130.47 7.8759 129.568 8.47177C128.667 9.06763 126.649 9.27634 125.062 8.93792Z"
+                           fill="#161613" />
+                     </svg>
+                  </span></h3>
+               <div class="col-lg-6">
+                  <div class="tp-event-4-all-btn text-lg-end mb-70">
+                     <a class="tp-btn-3" href="/events/#Coaching%20and%20Mentorships">See More Events</a>
+                  </div>
+               </div>
+
+            </div>
+
+            <div class="row ">
+               <div class="col-lg-4">
+                  <div class="tp-event-4-section mb-60">
+                     <p>The Alumni Mentorship Program bridges the gap between experienced professionals and fresh
+                        graduates or current students. Whether you want to share your career insights, offer guidance on
+                        academic pursuits or provide support for personal growth, becoming a mentor is a fulfilling way
+                        to give back. Your expertise can shape the future of our students and fellow alumni. Join us
+                        today and help guide the next generation of University of Lahore graduates toward success.</p>
+                  </div>
+               </div>
+               <div class="col-lg-8 col-md-8">
+                  <div class="row" id="home-coaching-grid">
+                     <div class="col-12">
+                        <p class="mb-0">Coaching and Mentorship events will appear here once they are available.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Coaching and Mentorship Section End -->
+
+      <!-- <section class="tp-admission-cta-area  pb-160">
+         <div class="container">
+            <div class="tp-admission-cta-box">
+               <div class="row">
+                  <div class="col-lg-6">
+                     <div class="tp-admission-cta-heading wow fadeInUp" data-wow-delay=".3s">
+                        <h3 class="tp-admission-cta-title">Alumni Honor Card</h3>
+                        <p>The University of Lahore`s Alumni Honor Card offers exclusive perks and privileges to the
+                           alumni. With this card, you can access a range of benefits, including discounts on campus
+                           services and partner organizations</p>
+                        <div class="tp-admission-cta-btn">
+                           <a class="tp-btn" href="university-tuition-fees.html">Explore Benefits<span>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12"
+                                    fill="none">
+                                    <path d="M1 11L6 6L1 1" stroke="currentColor" stroke-width="2"
+                                       stroke-linecap="round" stroke-linejoin="round" />
+                                 </svg></span>
+                           </a>
+                           <a class="tp-btn" href="university-tuition-fees.html" style="margin-left: 20px;">Apply
+                              Now<span>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12"
+                                    fill="none">
+                                    <path d="M1 11L6 6L1 1" stroke="currentColor" stroke-width="2"
+                                       stroke-linecap="round" stroke-linejoin="round" />
+                                 </svg></span>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="tp-admission-cta-thumb wow fadeInUp" data-wow-delay=".5s">
+                        <img src="assets/img/banner/card-picture.jpg" alt="">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> -->
+      <!-- <section class="tp-admission-apply-area  pt-40 pb-50 mt-20 mb-100 grey-bg">
+         <div class="row justify-content-center">
+            <div class="col-lg-6">
+               <div class="tp-event-section text-center mb-60 wow fadeInUp" data-wow-delay=".2s">
+                  <div class="tp-section">
+                     <h3 class="tp-section-title">
+                        <span>
+                           Newsletters
+                           <svg class="tp-underline-shape-4 wow bounceIn" data-wow-duration="1.5s" data-wow-delay=".4s"
+                              width="150" height="11" viewBox="0 0 150 11" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M144.302 10.313C80.9865 -3.18683 25.5413 4.73166 6.10412 10.2128C4.42012 10.6877 2.02954 10.5601 0.764608 9.92793C-0.500322 9.29573 -0.160598 8.39826 1.5234 7.92339C22.9523 1.88063 81.6684 -6.33434 148.069 7.82319C149.901 8.21367 150.542 9.08758 149.502 9.77512C148.462 10.4627 146.134 10.7035 144.302 10.313Z"
+                                 fill="#161613" />
+                           </svg>
+                        </span>
+                     </h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+            <div class="row">
+
+               <div class="col-lg-4 col-md-6">
+                  <div class="tp-financial-item mb-30">
+                     <div class="tp-financial-thumb">
+                        <img src="assets/img/banner/newsletter.jpg" alt="">
+                     </div>
+                     <div class="tp-financial-content">
+                        <a href="https://sites.uol.edu.pk/newsletter/alumni/sept2025/" target="_blank">
+                           <h4 class="tp-financial-content-title">September 2025</h4>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="lucide lucide-external-link-icon lucide-external-link">
+                              <path d="M15 3h6v6" />
+                              <path d="M10 14 21 3" />
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                           </svg>
+                        </a>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> -->
+
+      <!-- upcoming-engagements-area-start -->
+      <section class="event-area tp-event-4 pt-50 pb-50 grey-bg">
+         <div class="container">
+            <div class="row align-items-end">
+               <div class="col-lg-6">
+                  <div class="tp-event-4-section mb-60">
+                     <h3 class="tp-section-4-title"><span> Upcoming Engagements
+                           <svg xmlns="http://www.w3.org/2000/svg" width="130" height="10" viewBox="0 0 130 10"
+                              fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M125.062 8.93792C70.1883 -2.76192 22.1358 4.10077 5.29024 8.85108C3.83077 9.26264 1.75893 9.15211 0.66266 8.6042C-0.433612 8.0563 -0.139185 7.2785 1.32028 6.86694C19.892 1.62988 70.7793 -5.48976 128.327 6.7801C129.914 7.11852 130.47 7.8759 129.568 8.47177C128.667 9.06763 126.649 9.27634 125.062 8.93792Z"
+                                 fill="#161613" />
+                           </svg>
+                        </span></h3>
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="tp-event-4-all-btn text-lg-end mb-70">
+                     <a class="tp-btn-3" href="/events/">See More Engagements</a>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-3 col-md-3">
+                  <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".5s">
+                     <div class="tp-event-4-thumb-wrap text-center">
+                        <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
+                           <img
+                              src="data:image/jpeg;base64,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"
+                              alt="" style="height: 100%; width: 100%; object-fit: cover;">
+                        </div>
+                     </div>
+                     <div class="tp-event-4-box">
+                        <div class="tp-event-4-content">
+                           <p> 2026</p>
+                           <h4 class="tp-event-4-title"><a href="#">UOL Alumni Meetup - Karachi
+                                 Chapter</a>
+                           </h4>
+                        </div>
+                        <div class="tp-event-4-info d-flex align-items-center justify-content-between">
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-3 col-md-3">
+                  <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".3s">
+                     <div class="tp-event-4-thumb-wrap text-center">
+                        <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
+                           <img
+                              src="data:image/jpeg;base64,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"
+                              alt="" style="height: 100%; width: 100%; object-fit: cover;">
+                        </div>
+                     </div>
+                     <div class="tp-event-4-box">
+                        <div class="tp-event-4-content">
+                           <p> 2026</p>
+                           <h4 class="tp-event-4-title"><a href="#">Alumni Meetup - Faisalabad
+                                 Chapter
+                                 2025</a></h4>
+                        </div>
+                        <div class="tp-event-4-info d-flex align-items-center justify-content-between">
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
+
+            </div>
+         </div>
+      </section>
+      <!-- upcoming-engagements-area-end -->
+
+     
+      <!-- jobs-area-end -->
+
+      <!-- instagram-area-start -->
+      <div class="instagram-area tp-instagram-wrapper  pt-20 pb-20">
+         <h2 class="text-center mb-30">Alumni Wall</h2>
+         <div class="swiper tp-instagram-active">
+            <div class="swiper-wrapper wow fadeInUp" data-wow-delay=".2s">
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/11228-02052025-155950.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">Ali Shan <br>2024 <br>DPT</span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/11232-01052025-182524.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Hussnain <br> 2024 <br> Bhakkar
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/11233-30042025-140818.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Abdul Ahad <br> 2022 <br> Lahore <br>Engineering & Technology
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/26855-30042025-170303.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Umar Maqsood <br> 2025 <br> Kasur <br>English Language & Literature
+
+
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/26862-06062025-143803.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad saad Aleem <br>2025 <br>Department of Chemistry
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/27521-30052025-155508.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Abdullah Aziz
+                        <br> 2021 <br> Lahore <br> Software Engineering
+                     </span>
+                  </div>
+               </div>
+
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/28784-01072025-004401.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Ashiq Hussain <br> 2025 <br> Lahore <br> School of Creative Arts
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/29545-04072025-173240.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Muzzammil <br> 2025 <br>Civil Engineering
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/29549-30062025-163423.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Imran <br> 2023 <br> Lahore
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/30612-18092025-150441.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Nadeem <br> 2025 <br> Pattoki
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/30619-29092025-130017.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Ayesha Farooq <br> 2025 <br> Lahore
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/30621-29092025-151442.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Mahmood Ebrahemi <br> 2019 <br> Peshawar
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="assets/img/wall/30641-06102025-204555.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Taimoor Ahmad <br>2025
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="/assets/img/wall/30662-11102025-085033.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+
+                        Gulsher Amjad <br> 2025
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="/assets/img/wall/30686-21102025-091751.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Abdul Noor Khan Waleed <br> 2021 <br> Sargodha
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="/assets/img/wall/27522-29052025-165834.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Muhammad Hassam <br> 2023 <br> Bahawalnagar
+                     </span>
+                  </div>
+               </div>
+               <div class="swiper-slide tp-instagram-item">
+                  <div>
+                     <img src="/assets/img/wall/11231-23072025-072331.jpg" alt="">
+                  </div>
+                  <div class="tp-instagram-shape">
+                     <span class="wall-name" style="color: #f5f5f5;">
+                        Abdul Rehman Butt <br> 2024 <br> Köln
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </section>
+      <!-- CTA -->
+      <section class="cta-area tp-cta-bg grey-bg" data-background="/assets/img/cta/cta-bg-1.jpg">
+         <div class="container">
+            <div class="row align-items-center wow fadeInUp" data-wow-delay=".2s">
+               <div class="col-xxl-10 col-lg-9">
+                  <div class="tp-cta-wrapper d-flex align-items-center">
+
+                     <div class="tp-cta-content">
+                        <span>Reconnect & Contribute</span>
+                        <h3 class="tp-cta-title">Sign up today to connect with fellow alumni and shape the UOL legacy.
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-lg-3">
+                  <div class="tp-cta-btn-wrap">
+                     <div class="tp-cta-btn ">
+                        <a class="tp-btn" href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Register Now
+                           <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                 <path d="M7 1L13 7L7 13" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                              </svg></span></a>
+                     </div>
+                     <div class="tp-cta-shape-1">
+                        <img src="/assets/img/cta/cta-shape-1.png" alt="">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- program-area-end -->
+
+
+      <!-- event-area -->
+
+      <!-- event-area-end -->
+
+
+      <!-- testimonial-area-start -->
+
+      <!-- testimonial-area-end -->
+
+
+      <!-- blog-area-start -->
+      <!-- <section class="messages-section  pt-110 pb-95" style="background:var(--tp-red-1);">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-6">
+                  <div class="tp-event-section text-center mb-60 wow fadeInUp" data-wow-delay=".2s">
+                     <div class="tp-section">
+                        <h3 class="tp-section-2-title" style="color: #fff;">
+                           <span>
+                              Messages
+
+                           </span>
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div style="display: flex ; flex-wrap: no-wrap; gap: 20px;">
+
+
+               <div class="tp-course-4-item d-flex wow fadeInUp  col-lg-6 col-md-6" data-wow-delay=".3s"
+                  style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="tp-course-4-thumb">
+                     <img src="assets/img/banner/Awais-Raoof.jpg" alt="">
+                  </div>
+                  <div class="tp-course-4-content">
+
+                     <h4 class=""><a href="chairman-message">Awais Raoof </a></h4>
+                     <h6 style="padding-bottom:5px;">Chairman,&nbsp;Board of Governors <br>The University of Lahore</h6>
+                     <p style="text-align:justify;">
+                        "Welcome to the UOL Alumni Portal. We are proud to have been part of your educational journey
+                        and value the bond that continues beyond graduation."
+                     </p>
+                     <div class="tp-course-4-avatar d-flex align-items-center justify-content-between">
+                        <div class="tp-course-4-avatar-info d-flex align-items-center">
+
+                        </div>
+                        <div class="tp-course-4-ammount">
+                           <span style="font-size:16px;"><a href="chairman-message">Read More</a></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="tp-course-4-item d-flex wow fadeInUp col-lg-6 col-md-6" data-wow-delay=".3s"
+                  style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="tp-course-4-thumb">
+                     <img src="assets/img/banner/Prof.-Dr.-Muhammad-Ashraf.jpg" alt="">
+                  </div>
+                  <div class="tp-course-4-content">
+
+                     <h4 class=""><a href="chairman-message">Prof. Dr. Muhammad Ashraf </a></h4>
+                     <h6 style="padding-bottom:5px;">Rector,&nbsp;The University of Lahore</h6>
+                     <p style="text-align:justify;">
+                        "As the Rector of the University of Lahore, it is both an honor and a privilege to connect with
+                        you through our alumni website."
+                     </p>
+                     <div class="tp-course-4-avatar d-flex align-items-center justify-content-between">
+                        <div class="tp-course-4-avatar-info d-flex align-items-center">
+
+                        </div>
+                        <div class="tp-course-4-ammount">
+                           <span style="font-size:16px;"><a href="chairman-message">Read More</a></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> -->
+      <!-- blog-area-end -->
+
+
+      <!-- instagram-area-end -->
+
+
+      <!-- cta-area-start -->
+      <!-- <section class="cta-area tp-cta-bg grey-bg" data-background="assets/img/cta/cta-bg-1.jpg">
+         <div class="container">
+            <div class="row align-items-center wow fadeInUp" data-wow-delay=".2s">
+               <div class="col-xxl-10 col-lg-9">
+                  <div class="tp-cta-wrapper d-flex align-items-center">
+                     <div class="tp-cta-logo">
+                        <a href="index.html"><img src="/assets/img/cta/cta-logo-1.png" alt=""></a>
+                     </div>
+                     <div class="tp-cta-content">
+                        <span>COURSES FOR FREE, REGISTER NOW</span>
+                        <h3 class="tp-cta-title">CREATIVE IN RESEARCH AND TEACHING.</h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-lg-3">
+                  <div class="tp-cta-btn-wrap">
+                     <div class="tp-cta-btn text-lg-end">
+                        <a class="tp-btn" href="university-apply.html">Apply Now <span><svg width="14" height="14"
+                                 viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                 <path d="M7 1L13 7L7 13" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                              </svg></span>
+                        </a>
+                     </div>
+                     <div class="tp-cta-shape-1">
+                        <img src="assets/img/cta/cta-shape-1.png" alt="">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> -->
+      <!-- cta-area-end -->
+
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main  pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+
+
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/jobs/">Career Opportunities</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/chapters/">Alumni Chapters</a></li>
+
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations"
+                              target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations"
+                              target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i
+                                 class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="assets/js/hover-reveal.js"></script>
+   <script src="/assets/js/tween-max.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+   <script type="text/javascript" src="/assets/map/mapdata.js"></script>
+   <script type="text/javascript" src="/assets/map/countrymap.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script>
+      // Supabase Configuration for homepage events
+      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      if (!supabase) {
+         console.error('Failed to initialize Supabase client for homepage events');
+      }
+
+      function formatEventDate(dateString, timeString) {
+         if (!dateString) return '';
+         try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+            if (timeString) {
+               return `${formattedDate} ${timeString}`;
+            }
+            return formattedDate;
+         } catch (error) {
+            return dateString;
+         }
+      }
+
+      function buildEventImagePath(imageName) {
+         if (!imageName) return null;
+         // If image is already an absolute URL, return as is
+         if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+            return imageName;
+         }
+         // Otherwise, fetch from remote images base URL followed by the filename from the database
+         const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+         return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      async function loadHomeEvents() {
+         const grid = document.getElementById('home-events-grid');
+         if (!grid || !supabase) return;
+
+         try {
+            const { data: dbEvents, error } = await supabase
+               .from('tbl_events')
+               .select('*')
+               .neq('category', 'Coaching and Mentorships')
+               .order('fromdate', { ascending: false, nullsLast: true })
+               .limit(4);
+
+            if (error) {
+               throw error;
+            }
+
+            if (!dbEvents || dbEvents.length === 0) {
+               grid.innerHTML = '<div class="col-12"><p class="mb-0">No events available right now. Please check back soon.</p></div>';
+               return;
+            }
+
+            const fragment = document.createDocumentFragment();
+
+            dbEvents.forEach((dbEvent, index) => {
+               // Show only the date (no time) on the homepage
+               const dateString = formatEventDate(dbEvent.fromdate, null);
+               const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
+               const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+
+               const column = document.createElement('div');
+               column.className = 'col-lg-3 col-md-3';
+               column.innerHTML = `
+                  <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".${index + 3}s">
+                     <div class="tp-event-4-thumb-wrap text-center">
+                        <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
+                           <a href="${eventUrl}">
+                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                                 style="height: 100%; width: 100%; object-fit: cover;">
+                           </a>
+                        </div>
+                     </div>
+                     <div class="tp-event-4-box">
+                        <div class="tp-event-4-content">
+                           <p>${dateString || ''}</p>
+                           <h4 class="tp-event-4-title">
+                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                           </h4>
+                        </div>
+                        <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
+                     </div>
+                  </div>
+               `;
+
+               fragment.appendChild(column);
+            });
+
+            grid.innerHTML = '';
+            grid.appendChild(fragment);
+         } catch (error) {
+            console.error('Error loading homepage events:', error);
+            grid.innerHTML = '<div class="col-12"><p class="mb-0">Error loading events. Please refresh the page.</p></div>';
+         }
+      }
+
+      async function loadHomeCoachingEvents() {
+         const grid = document.getElementById('home-coaching-grid');
+         if (!grid || !supabase) return;
+
+         try {
+            const { data: dbEvents, error } = await supabase
+               .from('tbl_events')
+               .select('*')
+               .eq('category', 'Coaching and Mentorships')
+               .order('fromdate', { ascending: false, nullsLast: true })
+               .limit(3);
+
+            if (error) {
+               throw error;
+            }
+
+            if (!dbEvents || dbEvents.length === 0) {
+               grid.innerHTML = '<div class="col-12"><p class="mb-0">No Coaching and Mentorship events available right now. Please check back soon.</p></div>';
+               return;
+            }
+
+            const fragment = document.createDocumentFragment();
+
+            dbEvents.forEach((dbEvent, index) => {
+               const dateString = formatEventDate(dbEvent.fromdate, null);
+               const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
+               const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+
+               const column = document.createElement('div');
+               column.className = 'col-lg-4 col-md-4';
+               column.innerHTML = `
+                  <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".${index + 3}s">
+                     <div class="tp-event-4-thumb-wrap text-center">
+                        <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
+                           <a href="${eventUrl}">
+                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                                 style="height: 100%; width: 100%; object-fit: cover;">
+                           </a>
+                        </div>
+                     </div>
+                     <div class="tp-event-4-box">
+                        <div class="tp-event-4-content">
+                           <p>${dateString || ''}</p>
+                           <h4 class="tp-event-4-title">
+                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                           </h4>
+                        </div>
+                        <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
+                     </div>
+                  </div>
+               `;
+
+               fragment.appendChild(column);
+            });
+
+            grid.innerHTML = '';
+            grid.appendChild(fragment);
+         } catch (error) {
+            console.error('Error loading homepage Coaching and Mentorship events:', error);
+            grid.innerHTML = '<div class="col-12"><p class="mb-0">Error loading Coaching and Mentorship events. Please refresh the page.</p></div>';
+         }
+      }
+
+      // Map pin and link interactivity
+      document.addEventListener('DOMContentLoaded', function () {
+         // Load homepage events from database
+         loadHomeEvents();
+         loadHomeCoachingEvents();
+
+         const cityPins = document.querySelectorAll('.city-pin');
+         const chapterLinks = document.querySelectorAll('.tp-chapter-link');
+
+         // Highlight pin when link is hovered
+         chapterLinks.forEach(link => {
+            link.addEventListener('mouseenter', function () {
+               const city = this.getAttribute('data-city');
+               const pin = document.querySelector(`.city-pin[data-city="${city}"]`);
+               if (pin) {
+                  pin.style.transform = 'scale(1.3)';
+                  const circle = pin.querySelector('circle');
+                  if (circle) {
+                     circle.setAttribute('fill', '#8a0a25');
+                     circle.setAttribute('r', '10');
+                  }
+               }
+            });
+
+            link.addEventListener('mouseleave', function () {
+               const city = this.getAttribute('data-city');
+               const pin = document.querySelector(`.city-pin[data-city="${city}"]`);
+               if (pin) {
+                  pin.style.transform = 'scale(1)';
+                  const circle = pin.querySelector('circle');
+                  if (circle) {
+                     circle.setAttribute('fill', '#AB0C2F');
+                     circle.setAttribute('r', '8');
+                  }
+               }
+            });
+         });
+
+         // Highlight link when pin is hovered
+         cityPins.forEach(pin => {
+            pin.addEventListener('mouseenter', function () {
+               const city = this.getAttribute('data-city');
+               const link = document.querySelector(`.tp-chapter-link[data-city="${city}"]`);
+               if (link) {
+                  link.style.background = 'var(--tp-theme-primary)';
+                  link.style.color = 'white';
+                  link.style.transform = 'translateX(5px)';
+                  const icon = link.querySelector('i');
+                  if (icon) icon.style.color = 'white';
+               }
+            });
+
+            pin.addEventListener('mouseleave', function () {
+               const city = this.getAttribute('data-city');
+               const link = document.querySelector(`.tp-chapter-link[data-city="${city}"]`);
+               if (link) {
+                  link.style.background = 'white';
+                  link.style.color = 'var(--tp-heading-primary)';
+                  link.style.transform = 'translateX(0)';
+                  const icon = link.querySelector('i');
+                  if (icon) icon.style.color = 'var(--tp-theme-primary)';
+               }
+            });
+         });
+
+         // Wrap remaining flag SVGs in clickable links
+         const internationalSection = document.querySelector('.tp-chapter-international');
+         if (internationalSection) {
+            const flagSvgs = internationalSection.querySelectorAll('svg:not(.tp-chapter-flag-link svg)');
+            const countryMap = {
+               'pakistan': { name: 'Pakistan', slug: 'pakistan' },
+               'usa': { name: 'United States', slug: 'usa' },
+               'canada': { name: 'Canada', slug: 'canada' },
+               'uae': { name: 'United Arab Emirates', slug: 'uae' },
+               'saudi-arabia': { name: 'Saudi Arabia', slug: 'saudi-arabia' },
+               'turkey': { name: 'Turkey', slug: 'turkey' },
+               'france': { name: 'France', slug: 'france' },
+               'germany': { name: 'Germany', slug: 'germany' },
+               'italy': { name: 'Italy', slug: 'italy' },
+               'spain': { name: 'Spain', slug: 'spain' },
+               'netherlands': { name: 'Netherlands', slug: 'netherlands' },
+               'belgium': { name: 'Belgium', slug: 'belgium' },
+               'switzerland': { name: 'Switzerland', slug: 'switzerland' },
+               'norway': { name: 'Norway', slug: 'norway' },
+               'denmark': { name: 'Denmark', slug: 'denmark' },
+               'finland': { name: 'Finland', slug: 'finland' },
+               'qatar': { name: 'Qatar', slug: 'qatar' },
+               'kuwait': { name: 'Kuwait', slug: 'kuwait' },
+               'oman': { name: 'Oman', slug: 'oman' },
+               'bahrain': { name: 'Bahrain', slug: 'bahrain' },
+               'singapore': { name: 'Singapore', slug: 'singapore' },
+               'malaysia': { name: 'Malaysia', slug: 'malaysia' },
+               'indonesia': { name: 'Indonesia', slug: 'indonesia' },
+               'thailand': { name: 'Thailand', slug: 'thailand' },
+               'china': { name: 'China', slug: 'china' },
+               'japan': { name: 'Japan', slug: 'japan' },
+               'south-korea': { name: 'South Korea', slug: 'south-korea' },
+               'india': { name: 'India', slug: 'india' },
+               'bangladesh': { name: 'Bangladesh', slug: 'bangladesh' },
+               'sri-lanka': { name: 'Sri Lanka', slug: 'sri-lanka' },
+               'south-africa': { name: 'South Africa', slug: 'south-africa' },
+               'egypt': { name: 'Egypt', slug: 'egypt' },
+               'brazil': { name: 'Brazil', slug: 'brazil' },
+               'argentina': { name: 'Argentina', slug: 'argentina' },
+               'mexico': { name: 'Mexico', slug: 'mexico' },
+               'new-zealand': { name: 'New Zealand', slug: 'new-zealand' }
+            };
+
+            flagSvgs.forEach((svg, index) => {
+               // Skip if already wrapped
+               if (svg.parentElement.classList.contains('tp-chapter-flag-link')) {
+                  return;
+               }
+
+               // Determine country based on SVG characteristics or use index
+               const countries = Object.keys(countryMap);
+               const countryKey = countries[index % countries.length] || 'other';
+               const country = countryMap[countryKey] || { name: 'International Chapter', slug: 'other' };
+
+               // Create link wrapper
+               const link = document.createElement('a');
+               // Map country slugs to chapter IDs
+               const countryIdMap = {
+                  'kuwait': 16,
+                  'qatar': 22,
+                  'bahrain': 19,
+                  'uk': 18,
+                  'germany': 23,
+                  'usa': 21,
+                  'saudi-arabia': 15,
+                  'uae': 17,
+                  'canada': 20,
+                  'ireland': 28,
+                  'china': 24,
+                  'italy': 25,
+                  'oman': 26,
+                  'australia': 27
+               };
+               const chapterId = countryIdMap[country.slug] || null;
+               link.href = chapterId ? `/chapters/detail.html?id=${chapterId}` : `/chapters/detail.html?country=${country.slug}`;
+               link.className = 'tp-chapter-flag-link';
+               link.title = `${country.name} Chapter`;
+
+               // Wrap SVG
+               svg.parentNode.insertBefore(link, svg);
+               link.appendChild(svg);
+            });
+         }
+      });
+
+      // Upcoming Engagements Slider
+      var engagementsSwiper = new Swiper('.tp-engagements-active', {
+         slidesPerView: 3,
+         spaceBetween: 30,
+         loop: true,
+         autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+         },
+         pagination: {
+            el: '.tp-engagements-pagination',
+            clickable: true,
+         },
+         breakpoints: {
+            '1200': {
+               slidesPerView: 3,
+            },
+            '992': {
+               slidesPerView: 2,
+            },
+            '768': {
+               slidesPerView: 2,
+            },
+            '576': {
+               slidesPerView: 1,
+            },
+            '0': {
+               slidesPerView: 1,
+            },
+         },
+      });
+
+      // Load Distinguished Alumni Slider - Run after page load to avoid blocking preloader
+      window.addEventListener('load', function () {
+         setTimeout(function () {
+            const wrapper = document.getElementById('distinguished-alumni-wrapper');
+            const sliderEl = document.getElementById('distinguished-alumni-slider');
+            if (!wrapper || !sliderEl) return;
+
+            fetch('/assets/data/alumni-stories.json')
+               .then(response => {
+                  if (!response.ok) throw new Error('Failed to fetch alumni stories');
+                  return response.json();
+               })
+               .then(stories => {
+                  if (!Array.isArray(stories) || stories.length === 0) {
+                     wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">No alumni stories available.</p></div>';
+                     initializeSlider();
+                     return;
+                  }
+
+                  // Render all alumni in the slider
+                  wrapper.innerHTML = stories.map(story => {
+                     // Extract role from story data
+                     let role = 'Alumnus';
+                     if (story.role) {
+                        // Extract role title (before "at" or comma)
+                        role = story.role.split(' at ')[0].split(',')[0].trim();
+                     } else if (story.summary) {
+                        const parts = story.summary.split('<br>');
+                        // Try to extract from summary (usually second to last part)
+                        if (parts.length > 3) {
+                           const potentialRole = parts[parts.length - 2].trim();
+                           if (potentialRole && !potentialRole.includes('@') && potentialRole.length < 50) {
+                              role = potentialRole;
+                           }
+                        }
+                     }
+
+                     const image = story.image || '/assets/img/about/about-1.jpg';
+                     const slug = story.slug || story.name.toLowerCase().replace(/\s+/g, '-');
+
+                     return `
+                        <div class="swiper-slide">
+                           <div class="tp-alumni-profile-card">
+                              <div class="tp-alumni-profile-avatar">
+                                 <a href="/stories/detail.html?slug=${slug}">
+                                    <img src="${image}" alt="${story.name}" class="w-100 h-100" onerror="this.src='/assets/img/about/about-1.jpg'">
+                                 </a>
+                              </div>
+                              <div class="tp-alumni-profile-info">
+                                 <h4 class="tp-alumni-profile-name">
+                                    <a href="/stories/detail.html?slug=${slug}">${story.name}</a><a href="/stories/detail.html?slug=${slug}" class="tp-alumni-profile-link">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                 </a>
+                                 </h4>
+                                 <p class="tp-alumni-profile-role">${role}</p>
+                              </div>
+                           </div>
+                        </div>
+                     `;
+                  }).join('');
+
+                  // Initialize the slider after content is loaded
+                  initializeSlider();
+               })
+               .catch(error => {
+                  console.error('Error loading alumni stories:', error);
+                  wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">Unable to load alumni stories.</p></div>';
+                  initializeSlider();
+               });
+
+            function initializeSlider() {
+               // Wait for Swiper to be available
+               if (typeof Swiper === 'undefined') {
+                  setTimeout(initializeSlider, 100);
+                  return;
+               }
+
+               // Destroy existing slider if it exists
+               if (window.distinguishedAlumniSlider) {
+                  try {
+                     window.distinguishedAlumniSlider.destroy(true, true);
+                  } catch (e) {
+                     console.warn('Error destroying existing slider:', e);
+                  }
+               }
+
+               // Initialize the slider
+               try {
+                  window.distinguishedAlumniSlider = new Swiper('.tp-distinguished-alumni-active', {
+                     slidesPerView: 6,
+                     spaceBetween: 20,
+                     loop: true,
+                     speed: 800,
+                     autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: false,
+                     },
+                     navigation: {
+                        nextEl: ".tp-distinguished-alumni-next",
+                        prevEl: ".tp-distinguished-alumni-prev",
+                     },
+                     pagination: {
+                        el: ".tp-distinguished-alumni-pagination",
+                        clickable: true,
+                     },
+                     breakpoints: {
+                        '1400': {
+                           slidesPerView: 6,
+                        },
+                        '1200': {
+                           slidesPerView: 5,
+                        },
+                        '992': {
+                           slidesPerView: 4,
+                        },
+                        '768': {
+                           slidesPerView: 3,
+                        },
+                        '576': {
+                           slidesPerView: 2,
+                        },
+                        '0': {
+                           slidesPerView: 1,
+                        },
+                     },
+                  });
+               } catch (e) {
+                  console.error('Error initializing slider:', e);
+               }
+            }
+         }, 100);
+      });
+
+      // Load Associations with Faculty Names
+      (function () {
+         const wrapper = document.getElementById('associations-logos-wrapper');
+         if (!wrapper) return;
+
+         fetch('/assets/data/associations.json')
+            .then(response => {
+               if (!response.ok) throw new Error('Failed to fetch associations');
+               return response.json();
+            })
+            .then(associations => {
+               if (!Array.isArray(associations) || associations.length === 0) {
+                  wrapper.innerHTML = '<p style="text-align: center; color: #666;">No associations available.</p>';
+                  return;
+               }
+
+               // Render associations with faculty names
+               wrapper.innerHTML = associations.map(association => {
+                  const logo = association.logo || '/assets/img/faculties/default.png';
+                  const name = association.name || 'Faculty';
+                  const id = association.id || '';
+
+                  return `
+                     <div class="tp-association-item">
+                        <a href="/associations/detail.html?id=${association.id}">
+                           <img src="${logo}" alt="${name}" onerror="this.src='/assets/img/faculties/default.png'">
+                           <div class="tp-association-name">${name}</div>
+                        </a>
+                     </div>
+                  `;
+               }).join('');
+            })
+            .catch(error => {
+               console.error('Error loading associations:', error);
+               wrapper.innerHTML = '<p style="text-align: center; color: #666;">Unable to load associations.</p>';
+            });
+      })();
+   </script>
+
+</body>
+
+</html>
+
+</html>

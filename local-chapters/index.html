@@ -1,0 +1,583 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Local Chapters | UOL Alumni</title>
+   <meta name="description" content="Connect with UOL Alumni Local Chapters across Pakistan">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .chapter-card {
+         background: #ffffff;
+         border-radius: 16px;
+         padding: 32px;
+         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+         transition: all 0.3s ease;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         position: relative;
+         overflow: hidden;
+         cursor: pointer;
+         text-decoration: none;
+         color: inherit;
+      }
+
+      .chapter-card a {
+         text-decoration: none;
+         color: inherit;
+      }
+
+      .chapter-card::before {
+         content: "";
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         height: 4px;
+         background: linear-gradient(90deg, #B70A14 0%, #e63946 100%);
+         transform: scaleX(0);
+         transition: transform 0.3s ease;
+      }
+
+      .chapter-card:hover {
+         transform: translateY(-8px);
+         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .chapter-card:hover::before {
+         transform: scaleX(1);
+      }
+
+      .chapter-number {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         width: 48px;
+         height: 48px;
+         background: linear-gradient(135deg, #B70A14 0%, #e63946 100%);
+         color: white;
+         border-radius: 12px;
+         font-weight: 700;
+         font-size: 20px;
+         margin-bottom: 20px;
+         box-shadow: 0 4px 12px rgba(183, 10, 20, 0.3);
+      }
+
+      .chapter-title {
+         font-size: 22px;
+         font-weight: 700;
+         color: #0f172a;
+         margin-bottom: 16px;
+         line-height: 1.3;
+      }
+
+      .chapter-description {
+         color: rgba(15, 23, 42, 0.7);
+         line-height: 1.7;
+         font-size: 15px;
+         flex-grow: 1;
+         margin-bottom: 20px;
+      }
+
+      .chapter-regions {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 8px;
+         margin-top: 16px;
+      }
+
+      .chapter-region-tag {
+         display: inline-block;
+         padding: 6px 12px;
+         background: rgba(183, 10, 20, 0.1);
+         color: #B70A14;
+         border-radius: 20px;
+         font-size: 13px;
+         font-weight: 600;
+      }
+
+      .chapters-intro {
+         max-width: 800px;
+         margin: 0 auto 60px;
+         text-align: center;
+      }
+
+      .chapters-intro p {
+         font-size: 17px;
+         color: rgba(15, 23, 42, 0.7);
+         line-height: 1.8;
+      }
+
+      .tp-chapter-map-wrapper {
+         background: white;
+         border-radius: 16px;
+         padding: 20px;
+         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+         margin-bottom: 40px;
+      }
+
+      #map {
+         width: 100%;
+         height: 500px;
+         border-radius: 12px;
+         overflow: hidden;
+      }
+
+      @media (max-width: 767px) {
+         #map {
+            height: 400px;
+         }
+      }
+
+      @media (max-width: 991px) {
+         .chapter-card {
+            padding: 28px 24px;
+         }
+
+         .chapter-title {
+            font-size: 20px;
+         }
+
+         .chapter-description {
+            font-size: 14px;
+         }
+      }
+
+      @media (max-width: 767px) {
+         .chapter-card {
+            padding: 24px 20px;
+         }
+
+         .chapter-number {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+         }
+
+         .chapter-title {
+            font-size: 18px;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li><a href="/chapters/">Chapters</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+
+   <main>
+      <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix">
+         <div class="tp-breadcrumb__bg overlay" data-background="/assets/img/breadcrumb/about-breadcrumb.jpg"></div>
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-12">
+                  <div class="tp-breadcrumb__content">
+                     <div class="tp-breadcrumb__list inner-after">
+                        <span class="white"><a href="/"><svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z"
+                                    fill="currentColor" />
+                              </svg></a></span>
+                        <span class="white">Local Chapters</span>
+                     </div>
+                     <h3 class="tp-breadcrumb__title color">Local Chapters</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="program-area pt-120 pb-120 grey-bg">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-section text-center mb-60">
+                     <h3 class="tp-section-title">UOL Alumni <span>Local Chapters</span></h3>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="chapters-intro">
+                     <p>Our local chapters bring together UOL alumni from regions across Pakistan, creating vibrant communities that foster learning, collaboration, and professional growth. Each chapter serves as a platform for networking, mentorship, and continuous development while strengthening the bonds between alumni and their alma mater.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="row mb-60">
+               <div class="col-lg-12">
+                  <div class="tp-chapter-map-wrapper">
+                     <div id="map"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=lahore-surrounding" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">1</div>
+                     <h4 class="chapter-title">Lahore & Surrounding Chapter</h4>
+                     <p class="chapter-description">This chapter includes alumni from Lahore, Kasur, Kot Radha Kishen, Sharaqpur Sharif, Muridke, Narang Mandi, Sheikhupura, Chunian, Pattoki, Renala Khurd, Okara, Depalpur, Haveli Lakha, Hujra Shah Muqeem, and Manwala. Together, this diverse and vibrant region forms a strong alumni network that fosters learning, collaboration, and professional growth through shared experiences and opportunities.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Lahore</span>
+                        <span class="chapter-region-tag">Kasur</span>
+                        <span class="chapter-region-tag">Sheikhupura</span>
+                        <span class="chapter-region-tag">Okara</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=lahore-surrounding" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">1</div>
+                     <h4 class="chapter-title">Lahore & Surrounding Chapter</h4>
+                     <p class="chapter-description">This chapter includes alumni from Lahore, Kasur, Kot Radha Kishen, Sharaqpur Sharif, Muridke, Narang Mandi, Sheikhupura, Chunian, Pattoki, Renala Khurd, Okara, Depalpur, Haveli Lakha, Hujra Shah Muqeem, and Manwala. Together, this diverse and vibrant region forms a strong alumni network that fosters learning, collaboration, and professional growth through shared experiences and opportunities.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Lahore</span>
+                        <span class="chapter-region-tag">Kasur</span>
+                        <span class="chapter-region-tag">Sheikhupura</span>
+                        <span class="chapter-region-tag">Okara</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=gujranwala-gujrat-sialkot" class="chapter-card wow fadeInUp" data-wow-delay=".2s">
+                     <div class="chapter-number">2</div>
+                     <h4 class="chapter-title">Gujranwala–Gujrat–Sialkot Chapter</h4>
+                     <p class="chapter-description">This chapter brings together alumni from Gujranwala, Gujrat, Sialkot, Daska, Wazirabad, Kamoke, Hafizabad, Alipur Chattha, Lala Musa, and Kharian. Representing an important industrial and commercial belt, this chapter provides valuable networking, mentorship, and development opportunities for alumni.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Gujranwala</span>
+                        <span class="chapter-region-tag">Gujrat</span>
+                        <span class="chapter-region-tag">Sialkot</span>
+                        <span class="chapter-region-tag">Wazirabad</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=faisalabad" class="chapter-card wow fadeInUp" data-wow-delay=".3s">
+                     <div class="chapter-number">3</div>
+                     <h4 class="chapter-title">Faisalabad Chapter</h4>
+                     <p class="chapter-description">The Faisalabad chapter includes alumni from Faisalabad, Jaranwala, Samundri, Gojra, Toba Tek Singh, Chiniot, and Jhang. With representation from one of Pakistan's major economic hubs, this chapter facilitates rich learning experiences, professional collaboration, and continuous growth for its members.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Faisalabad</span>
+                        <span class="chapter-region-tag">Jhang</span>
+                        <span class="chapter-region-tag">Toba Tek Singh</span>
+                        <span class="chapter-region-tag">Chiniot</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=sargodha-khushab" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">4</div>
+                     <h4 class="chapter-title">Sargodha–Khushab Chapter</h4>
+                     <p class="chapter-description">This chapter consists of alumni from Sargodha, Khushab, Jauharabad, Bhalwal, and Mianwali. These interconnected cities form a cohesive alumni community that supports peer learning, career development, and collective progress through regular engagement and knowledge-sharing.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Sargodha</span>
+                        <span class="chapter-region-tag">Khushab</span>
+                        <span class="chapter-region-tag">Mianwali</span>
+                        <span class="chapter-region-tag">Bhalwal</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=multan" class="chapter-card wow fadeInUp" data-wow-delay=".2s">
+                     <div class="chapter-number">5</div>
+                     <h4 class="chapter-title">Multan Chapter</h4>
+                     <p class="chapter-description">The Multan chapter covers alumni living in Multan, Khanewal, Lodhran, Vehari, and nearby areas such as Jahanian. This chapter represents a dynamic blend of professional fields and offers alumni meaningful opportunities for growth, leadership building, and networking.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Multan</span>
+                        <span class="chapter-region-tag">Khanewal</span>
+                        <span class="chapter-region-tag">Lodhran</span>
+                        <span class="chapter-region-tag">Vehari</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=bahawalpur-bahawalnagar" class="chapter-card wow fadeInUp" data-wow-delay=".3s">
+                     <div class="chapter-number">6</div>
+                     <h4 class="chapter-title">Bahawalpur–Bahawalnagar Chapter</h4>
+                     <p class="chapter-description">This chapter includes alumni from Bahawalpur, Bahawalnagar, Chishtian, Haroonabad, Hasilpur, and surrounding towns such as Fatehpur. It serves as a strong platform for alumni to connect, learn, and advance professionally while contributing to community development in the region.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Bahawalpur</span>
+                        <span class="chapter-region-tag">Bahawalnagar</span>
+                        <span class="chapter-region-tag">Chishtian</span>
+                        <span class="chapter-region-tag">Hasilpur</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=sahiwal-pakpattan" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">7</div>
+                     <h4 class="chapter-title">Sahiwal–Pakpattan Chapter</h4>
+                     <p class="chapter-description">The Sahiwal chapter brings together alumni from Sahiwal, Pakpattan, Arifwala, Chichawatni, and Shorkot. This chapter fosters collaboration across education, business, and social sectors while promoting continuous learning and mutual growth among its members.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Sahiwal</span>
+                        <span class="chapter-region-tag">Pakpattan</span>
+                        <span class="chapter-region-tag">Arifwala</span>
+                        <span class="chapter-region-tag">Chichawatni</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=southern-punjab" class="chapter-card wow fadeInUp" data-wow-delay=".2s">
+                     <div class="chapter-number">8</div>
+                     <h4 class="chapter-title">Southern Punjab Chapter</h4>
+                     <p class="chapter-description">This chapter comprises alumni from Dera Ghazi Khan, Jampur, Rajanpur, Kot Addu, Layyah, Muzaffargarh, Jatoi, Liaqatpur, Rahim Yar Khan, and Sadiqabad. Spanning a broad yet connected region, it empowers alumni by building networks that encourage personal development, knowledge exchange, and career enhancement.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Dera Ghazi Khan</span>
+                        <span class="chapter-region-tag">Rahim Yar Khan</span>
+                        <span class="chapter-region-tag">Muzaffargarh</span>
+                        <span class="chapter-region-tag">Layyah</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=islamabad-rawalpindi" class="chapter-card wow fadeInUp" data-wow-delay=".3s">
+                     <div class="chapter-number">9</div>
+                     <h4 class="chapter-title">Islamabad–Rawalpindi Chapter</h4>
+                     <p class="chapter-description">The Islamabad–Rawalpindi chapter consists of alumni from Islamabad, Rawalpindi, Wah Cantt, Tarbela Ghazi, Attock, Chakwal, Dina, and Jhelum. Located at the center of national activity, this chapter provides strong opportunities for professional advancement through interaction, mentorship, and innovative learning.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Islamabad</span>
+                        <span class="chapter-region-tag">Rawalpindi</span>
+                        <span class="chapter-region-tag">Attock</span>
+                        <span class="chapter-region-tag">Jhelum</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=peshawar-northern-kp" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">10</div>
+                     <h4 class="chapter-title">Peshawar & Northern KP Chapter</h4>
+                     <p class="chapter-description">This chapter includes alumni from Peshawar, Kohat, Bannu, Batkhela, Buner, Parachinar, Abbottabad, and Mansehra. Bringing together graduates across northern Khyber Pakhtunkhwa, this chapter promotes academic enrichment, leadership growth, and meaningful professional connections.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Peshawar</span>
+                        <span class="chapter-region-tag">Abbottabad</span>
+                        <span class="chapter-region-tag">Kohat</span>
+                        <span class="chapter-region-tag">Bannu</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=kashmir" class="chapter-card wow fadeInUp" data-wow-delay=".2s">
+                     <div class="chapter-number">11</div>
+                     <h4 class="chapter-title">Kashmir Chapter</h4>
+                     <p class="chapter-description">The Kashmir chapter includes alumni from Azad Jammu Kashmir, Bhimber, Kotli, and Poonch. With strong ties to the region's educational and social landscape, this chapter supports its members through collaborative learning, community engagement, and skill-building opportunities.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Azad Jammu Kashmir</span>
+                        <span class="chapter-region-tag">Bhimber</span>
+                        <span class="chapter-region-tag">Kotli</span>
+                        <span class="chapter-region-tag">Poonch</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=sindh" class="chapter-card wow fadeInUp" data-wow-delay=".3s">
+                     <div class="chapter-number">12</div>
+                     <h4 class="chapter-title">Sindh Chapter</h4>
+                     <p class="chapter-description">This chapter comprises alumni from Karachi and Ghotki, representing both the metropolitan center and upper Sindh. It serves as a bridge for alumni across diverse industries, offering opportunities for career growth, networking, and continuous professional development.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Karachi</span>
+                        <span class="chapter-region-tag">Ghotki</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=balochistan" class="chapter-card wow fadeInUp" data-wow-delay=".1s">
+                     <div class="chapter-number">13</div>
+                     <h4 class="chapter-title">Balochistan Chapter</h4>
+                     <p class="chapter-description">The Balochistan chapter consists of alumni from Quetta and Dalbandin. United by regional pride and professional ambition, this chapter enables alumni to collaborate, learn, and grow through shared experiences and development-focused activities.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Quetta</span>
+                        <span class="chapter-region-tag">Dalbandin</span>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-30">
+                  <a href="/local-chapters/detail.html?chapter=northern-pakistan" class="chapter-card wow fadeInUp" data-wow-delay=".2s">
+                     <div class="chapter-number">14</div>
+                     <h4 class="chapter-title">Northern Pakistan Chapter</h4>
+                     <p class="chapter-description">This chapter includes alumni from Gilgit and Skardu, representing the northernmost regions of Pakistan. Through this chapter, alumni benefit from a supportive community that encourages personal enrichment, learning opportunities, and professional networking despite geographical distances.</p>
+                     <div class="chapter-regions">
+                        <span class="chapter-region-tag">Gilgit</span>
+                        <span class="chapter-region-tag">Skardu</span>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/jobs/">Career Opportunities</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Benefits</a></li>
+ <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+   <script type="text/javascript" src="/assets/map/mapdata.js"></script>
+   <script type="text/javascript" src="/assets/map/countrymap.js"></script>
+
+</body>
+
+</html>
+
