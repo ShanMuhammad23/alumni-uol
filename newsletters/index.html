@@ -405,98 +405,177 @@
    <script src="/assets/js/wow.js"></script>
    <script src="/assets/js/isotope-pkgd.js"></script>
    <script src="/assets/js/main.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
    <script>
-      const gridEl = document.getElementById('newsletters-grid');
-      const filterEl = document.getElementById('newsletter-filter');
-      const featuredWrap = document.getElementById('featured-newsletter');
+      (function () {
+         const gridEl = document.getElementById('newsletters-grid');
+         const filterEl = document.getElementById('newsletter-filter');
+         const featuredWrap = document.getElementById('featured-newsletter');
 
-      fetch('/assets/data/newsletters.json')
-         .then(res => res.json())
-         .then(items => {
-            if (!Array.isArray(items) || !items.length) {
-               gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Newsletters will be published soon. Stay tuned!</p></div>';
+         // Supabase configuration (same project as events)
+         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+         const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+         if (!supabase) {
+            console.error('Failed to initialize Supabase client for newsletters');
+         }
+
+         function buildImagePath(imageName) {
+            if (!imageName) return null;
+            if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+               return imageName;
+            }
+            const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+            return `${BASE_IMAGE_URL}/${imageName}`;
+         }
+
+         function transformNewsletter(row) {
+            const dateValue = row.date;
+            const jsDate = dateValue ? new Date(dateValue) : null;
+            const year = jsDate && !isNaN(jsDate.getTime()) ? jsDate.getFullYear() : null;
+
+            return {
+               id: row.id,
+               title: row.title || 'Newsletter',
+               issue: jsDate && !isNaN(jsDate.getTime())
+                  ? jsDate.toLocaleString('en-US', { month: 'long', year: 'numeric' })
+                  : (dateValue || 'Digital Issue'),
+               releaseDate: dateValue || null,
+               cover: buildImagePath(row.image) || '/assets/img/banner/newsletter.jpg',
+               pdf: row.link || '#',
+               summary: '',
+               year,
+               categories: []
+            };
+         }
+
+         async function loadNewsletters() {
+            if (!gridEl) {
+               console.error('Missing newsletters grid element');
                return;
             }
 
-            // Sort latest first
-            const sorted = items.slice().sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-            renderFeatured(sorted[0]);
-            renderFilter(sorted);
-            renderGrid(sorted);
+            try {
+               if (!supabase) {
+                  throw new Error('Supabase client not initialized');
+               }
 
-            filterEl.addEventListener('click', (event) => {
-               if (event.target.tagName !== 'BUTTON') return;
-               const year = event.target.dataset.year || 'all';
-               [...filterEl.children].forEach(btn => btn.classList.toggle('active', btn === event.target));
-               const filtered = year === 'all' ? sorted : sorted.filter(item => String(item.year) === year);
-               renderGrid(filtered);
-            });
-         })
-         .catch(error => {
-            console.error('Error loading newsletters:', error);
-            gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Unable to load newsletters right now. Please try again later.</p></div>';
-         });
+               const { data, error } = await supabase
+                  .from('newsletters')
+                  .select('*')
+                  .order('date', { ascending: false, nullsLast: true });
 
-      function renderFeatured(issue) {
-         if (!issue) return;
-         featuredWrap.classList.remove('d-none');
-         document.getElementById('featured-cover').src = issue.cover || '/assets/img/banner/newsletter.jpg';
-         document.getElementById('featured-issue').textContent = `${issue.issue || 'Latest Issue'} • ${formatDate(issue.releaseDate)}`;
-         document.getElementById('featured-title').textContent = issue.title;
-         document.getElementById('featured-summary').textContent = issue.summary || '';
+               if (error) {
+                  throw error;
+               }
 
-         const tagsEl = document.getElementById('featured-tags');
-         tagsEl.innerHTML = (issue.categories || []).map(tag => `<span class="tp-newsletter-card__tag">${tag}</span>`).join('');
+               if (!data || data.length === 0) {
+                  gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Newsletters will be published soon. Stay tuned!</p></div>';
+                  return;
+               }
 
-         document.getElementById('featured-download').href = issue.pdf || '#';
-         document.getElementById('featured-share').href = issue.pdf || '#';
-      }
+               const items = data.map(transformNewsletter);
+               const sorted = items.slice().sort((a, b) => new Date(b.releaseDate || 0) - new Date(a.releaseDate || 0));
 
-      function renderFilter(list) {
-         const years = Array.from(new Set(list.map(item => item.year))).sort((a, b) => b - a);
-         const buttons = [`<button class="active" data-year="all">All Issues</button>`]
-            .concat(years.map(year => `<button data-year="${year}">${year}</button>`));
-         filterEl.innerHTML = buttons.join('');
-      }
+               renderFeatured(sorted[0]);
 
-      function renderGrid(items) {
-         if (!items.length) {
-            gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">No newsletters available for the selected year.</p></div>';
-            return;
+               if (filterEl) {
+                  renderFilter(sorted);
+                  filterEl.addEventListener('click', (event) => {
+                     if (event.target.tagName !== 'BUTTON') return;
+                     const year = event.target.dataset.year || 'all';
+                     [...filterEl.children].forEach(btn => btn.classList.toggle('active', btn === event.target));
+                     const filtered = year === 'all' ? sorted : sorted.filter(item => String(item.year) === year);
+                     renderGrid(filtered);
+                  });
+               }
+
+               renderGrid(sorted);
+            } catch (error) {
+               console.error('Error loading newsletters from Supabase:', error);
+               gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Unable to load newsletters right now. Please try again later.</p></div>';
+            }
          }
 
-         const cards = items.map(item => `
-            <div class="col-xl-4 col-lg-6">
-               <article class="tp-newsletter-card">
-                  <div class="tp-newsletter-card__media">
-                     <img src="${item.cover || '/assets/img/banner/newsletter.jpg'}" alt="${item.title}">
-                  </div>
-                  <div class="tp-newsletter-card__body">
-                     <div class="tp-newsletter-card__meta">${item.issue || 'Digital Issue'} · ${formatDate(item.releaseDate)}</div>
-                     <h3 class="tp-newsletter-card__title">${item.title}</h3>
-                     <p class="tp-newsletter-card__summary">${item.summary || ''}</p>
-                     <div class="tp-newsletter-card__tags">
-                        ${(item.categories || []).map(tag => `<span class="tp-newsletter-card__tag">${tag}</span>`).join('')}
-                     </div>
-                     <div class="tp-newsletter-card__actions">
-                        <a class="tp-btn" href="${item.pdf || '#'}" target="_blank" rel="noopener">Read More</a>
-                        <a class="tp-btn-border" href="${item.pdf || '#'}" target="_blank" rel="noopener">Share</a>
-                     </div>
-                  </div>
-               </article>
-            </div>
-         `).join('');
+         function renderFeatured(issue) {
+            if (!issue || !featuredWrap) return;
+            featuredWrap.classList.remove('d-none');
+            const coverEl = document.getElementById('featured-cover');
+            const issueEl = document.getElementById('featured-issue');
+            const titleEl = document.getElementById('featured-title');
+            const summaryEl = document.getElementById('featured-summary');
+            const downloadEl = document.getElementById('featured-download');
 
-         gridEl.innerHTML = cards;
-      }
+            if (coverEl) coverEl.src = issue.cover || '/assets/img/banner/newsletter.jpg';
+            if (issueEl) issueEl.textContent = `${issue.issue || 'Latest Issue'} • ${formatDate(issue.releaseDate)}`;
+            if (titleEl) titleEl.textContent = issue.title;
+            if (summaryEl) summaryEl.textContent = issue.summary || '';
+            if (downloadEl) downloadEl.href = issue.pdf || '#';
 
-      function formatDate(value) {
-         if (!value) return 'Date TBA';
-         const date = new Date(value);
-         if (isNaN(date.getTime())) return value;
-         return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
-      }
+            const tagsEl = document.getElementById('featured-tags');
+            if (tagsEl) {
+               tagsEl.innerHTML = (issue.categories || []).map(tag => `<span class="tp-newsletter-card__tag">${tag}</span>`).join('');
+            }
+
+            const shareEl = document.getElementById('featured-share');
+            if (shareEl) shareEl.href = issue.pdf || '#';
+         }
+
+         function renderFilter(list) {
+            if (!filterEl) return;
+            const years = Array.from(new Set(list.map(item => item.year).filter(Boolean))).sort((a, b) => b - a);
+            const buttons = [`<button class="active" data-year="all">All Issues</button>`]
+               .concat(years.map(year => `<button data-year="${year}">${year}</button>`));
+            filterEl.innerHTML = buttons.join('');
+         }
+
+         function renderGrid(items) {
+            if (!items.length) {
+               gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">No newsletters available for the selected year.</p></div>';
+               return;
+            }
+
+            const cards = items.map(item => `
+               <div class="col-xl-4 col-lg-6">
+                  <article class="tp-newsletter-card">
+                     <div class="tp-newsletter-card__media">
+                        <img src="${item.cover || '/assets/img/banner/newsletter.jpg'}" alt="${item.title}">
+                     </div>
+                     <div class="tp-newsletter-card__body">
+                        <div class="tp-newsletter-card__meta">${item.issue || 'Digital Issue'} · ${formatDate(item.releaseDate)}</div>
+                        <h3 class="tp-newsletter-card__title">${item.title}</h3>
+                        <p class="tp-newsletter-card__summary">${item.summary || ''}</p>
+                        <div class="tp-newsletter-card__actions">
+                           <a class="tp-btn" href="${item.pdf || '#'}" target="_blank" rel="noopener">Read More</a>
+                        </div>
+                     </div>
+                  </article>
+               </div>
+            `).join('');
+
+            gridEl.innerHTML = cards;
+         }
+
+         function formatDate(value) {
+            if (!value) return 'Date TBA';
+            const date = new Date(value);
+            if (isNaN(date.getTime())) return value;
+            return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+         }
+
+         function initNewsletters() {
+            loadNewsletters();
+         }
+
+         if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initNewsletters);
+         } else {
+            initNewsletters();
+         }
+      })();
    </script>
 </body>
 
