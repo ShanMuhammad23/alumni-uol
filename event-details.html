@@ -1,0 +1,683 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>UOL Alumni - Event Details</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/favicon.png">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      /* Event banner on left side */
+      #event-banner-container {
+         position: sticky;
+         top: 100px;
+      }
+      #event-banner {
+         width: 100%;
+         max-height: 600px;
+         height: auto;
+         object-fit: cover;
+         border-radius: 16px;
+         display: block;
+      }
+      
+      /* Featured image on right side */
+      #event-featured-image-container {
+         padding-left: 30px;
+         position: relative;
+      }
+      #event-featured-image-container:empty {
+         display: none;
+      }
+      #event-featured-image-container img {
+         width: 100%;
+         max-height: 500px;
+         height: auto;
+         object-fit: cover;
+         border-radius: 16px;
+         display: block;
+      }
+      
+      /* Remaining images gallery - now inside content column */
+      #event-content-images-container {
+         margin-top: 30px;
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+         gap: 24px;
+      }
+      #event-content-images-container:empty {
+         display: none;
+      }
+      #event-content-images-container img {
+         width: 100%;
+         height: auto;
+         max-height: 420px;
+         object-fit: cover;
+         display: block;
+         border-radius: 16px;
+      }
+      
+      /* Responsive adjustments */
+      @media only screen and (max-width: 991px) {
+         #event-banner-container {
+            position: relative;
+            top: 0;
+            margin-bottom: 40px;
+         }
+         #event-featured-image-container {
+            padding-left: 0;
+            padding-right: 0;
+            margin-bottom: 40px;
+         }
+      }
+      
+      @media only screen and (max-width: 767px) {
+         #event-banner {
+            max-height: 400px;
+         }
+         #event-featured-image-container img {
+            max-height: 400px;
+         }
+      }
+      
+      /* Remove dropcap styling - make first letter normal */
+      .tp-postbox-details-text p.tp-dropcap::first-letter {
+         font-size: inherit !important;
+         font-weight: inherit !important;
+         line-height: inherit !important;
+         margin-right: 0 !important;
+         float: none !important;
+         text-transform: none !important;
+      }
+      
+      /* Make header visible - add white background since there's no hero section */
+      .header-area.tp-header-transparent {
+         position: relative !important;
+         background-color: #ffffff !important;
+         box-shadow: 0px 1px 1px 0px rgba(3, 11, 30, 0.1), 0px 1px 2px 1px rgba(3, 11, 30, 0.06);
+      }
+      .header-area.tp-header-transparent .tp-header-logo-1 .logo-1 {
+         display: none !important;
+      }
+      .header-area.tp-header-transparent .tp-header-logo-1 .logo-2 {
+         display: block !important;
+      }
+      .header-area.tp-header-transparent .main-menu nav>ul>li>a {
+         color: var(--tp-common-black) !important;
+      }
+      .header-area.tp-header-transparent .main-menu nav>ul>li.has-dropdown>a::after {
+         color: var(--tp-common-black) !important;
+      }
+      .header-area.tp-header-transparent #header-sticky.tp-header-sticky {
+         background-color: #ffffff !important;
+         box-shadow: 0px 1px 1px 0px rgba(3, 11, 30, 0.1), 0px 1px 2px 1px rgba(3, 11, 30, 0.06);
+      }
+      
+      /* Adjust main section padding since header is no longer absolute */
+      .tp-blog-details-p {
+         padding-top: 40px !important;
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                        </circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/logo/preloader/preloader-icon.png" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+               stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class=" tp-static">
+                              <a class="tp-static" href="/">Home</a>
+                           </li>
+                           <li class="">
+                              <a href="/about/">About</a>
+                           </li>
+                           <li class="">
+                              <a href="/jobs/">Jobs</a>
+                           </li>
+                           <li class=" tp-static">
+                              <a class="tp-static" href="/events/">Events</a>
+                           </li>
+                           <li class="">
+                              <a href="/benefits/">Perks & Benefits</a>
+                           </li>
+                           <li class="">
+                              <a href="/give-back/">Give Back</a>
+                           </li>
+                           <li class="">
+                              <a href="/contact/">Contact</a>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login </a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+   <main>
+      <!-- event breadcrumb start -->
+      <!-- <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix">
+         <div class="tp-breadcrumb__bg overlay" data-background="/assets/img/breadcrumb/about-breadcrumb.jpg"></div>
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-12">
+                  <div class="tp-breadcrumb__content">
+                     <div class="tp-breadcrumb__list inner-after">
+                        <span class="white"><a href="/"><svg width="17" height="14" viewBox="0 0 17 14"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z"
+                                    fill="currentColor" />
+                              </svg></a></span>
+                        <span class="white"><a href="/events/">Events</a></span>
+                        <span class="white" id="breadcrumb-event-title">Event Details</span>
+                     </div>
+                     <h3 class="tp-breadcrumb__title color" id="breadcrumb-title">Event Details</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> -->
+      <!-- event breadcrumb end -->
+
+      <!-- event details area -->
+      <section class="tp-blog-details-p p-relative pt-80 pb-120">
+         <div class="container">
+            <div class="row">
+               <!-- Left side: Banner -->
+               <div class="col-lg-4 col-md-5 mb-4 mb-lg-0">
+                  <div class="tp-blog-details-thumb mb-80" id="event-banner-container">
+                     <img id="event-banner" src="/assets/img/event/event-01.jpg" alt="Event banner">
+                  </div>
+               </div>
+
+               <!-- Right side: Event header info -->
+               <div class="col-lg-8 col-md-7">
+                  <div class="tp-blog-details-wrap" id="event-details-container">
+                     <div class="tp-blog-stories-tag-wrap">
+                        <a href="/events/" id="event-category">Event</a>
+                     </div>
+                     <h3 class="tp-blog-details-title" id="event-title">Loading event...</h3>
+                     <div class="tp-blog-details-user d-flex justify-content-between">
+                        <div class="tp-blog-details-user-box">
+                           <span id="event-date">Loading...</span>
+                        </div>
+                        <div class="tp-blog-details-user-social">
+                           <div class="tp-postbox-details-social text-end">
+                              <a href="#" id="share-facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="#" id="share-twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                              <a href="#" id="share-linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Two column layout: Content and Featured Image -->
+            <div class="row">
+               <!-- Left column: Event content -->
+               <div class="col-lg-7 col-md-12 order-2 order-lg-1">
+                  <div class="tp-postbox-wrapper">
+                     <div class="tp-postbox-details-text">
+                        <p class="tp-dropcap text-1" id="event-content">Loading event content...</p>
+                     </div>
+
+                     <!-- Remaining images right after content -->
+                     <div class="tp-postbox-details-thumb pb-60 mt-40" id="event-content-images-container">
+                        <!-- Remaining images will be inserted here -->
+                     </div>
+
+                     <div class="tp-postbox-details-share mb-50 mt-50">
+                        <div class="row align-items-center">
+                           <div class="col-md-8">
+                              <div class="tagcloud tp-postbox-details-tag">
+                                 <a href="/events/" id="event-category-tag">Event</a>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="tp-postbox-details-social text-start text-md-end">
+                                 <a href="#" id="share-facebook-bottom" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                 <a href="#" id="share-twitter-bottom" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                 <a href="#" id="share-linkedin-bottom" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="tp-postbox-details-navigation mb-60">
+                        <div class="row align-items-center">
+                           <div class="col-xl-12">
+                              <div class="tp-postbox-details-navigation-content text-center">
+                                 <a class="tp-btn" href="/events/">
+                                    <span><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 1.5L1 5.5L5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                  </svg></span>Back to Events</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Right column: Featured image -->
+               <div class="col-lg-5 col-md-12 order-1 order-lg-2">
+                  <div id="event-featured-image-container">
+                     <!-- First image will be inserted here -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main  pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/about/">Introduction</a></li>
+                           <li><a href="/about/">Chairman Message</a></li>
+                           <li><a href="/about/">Rector Message</a></li>
+                           <li><a href="/about/">Our Team</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Benefits</a></li>
+                           <li><a href="/chapters/">Alumni Chapters</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations"
+                              target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations"
+                              target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i
+                                 class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- Supabase Client Library -->
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+   <script>
+      (function () {
+         // Supabase Configuration
+         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+         // Initialize Supabase client
+         const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+         
+         if (!supabase) {
+            console.error('Failed to initialize Supabase client');
+         }
+
+         // Helper function to format date
+         function formatDate(dateString, timeString) {
+            if (!dateString) return '';
+            
+            try {
+               const date = new Date(dateString);
+               if (isNaN(date.getTime())) return dateString;
+               
+               const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+               const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+               
+               if (timeString) {
+                  return `${formattedDate} ${timeString}`;
+               }
+               return formattedDate;
+            } catch (error) {
+               return dateString;
+            }
+         }
+
+         // Helper function to build image path
+         function buildImagePath(imageName) {
+            if (!imageName) return null;
+            // If image is already an absolute URL, return as is
+            if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+               return imageName;
+            }
+            // Otherwise, fetch from remote images base URL followed by the filename from the database
+            const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+            return `${BASE_IMAGE_URL}/${imageName}`;
+         }
+
+         // Transform database event to UI format
+         function transformEvent(dbEvent) {
+            const contentImages = [];
+            
+            // Add image2-image5 to contentImages array if they exist
+            if (dbEvent.image2) contentImages.push(buildImagePath(dbEvent.image2));
+            if (dbEvent.image3) contentImages.push(buildImagePath(dbEvent.image3));
+            if (dbEvent.image4) contentImages.push(buildImagePath(dbEvent.image4));
+            if (dbEvent.image5) contentImages.push(buildImagePath(dbEvent.image5));
+
+            // Format date - use fromdate as primary, append todate if different
+            let dateString = formatDate(dbEvent.fromdate, dbEvent.eventtime);
+            if (dbEvent.todate && dbEvent.todate !== dbEvent.fromdate) {
+               const toDateString = formatDate(dbEvent.todate, null);
+               dateString = `${dateString} - ${toDateString}`;
+            }
+
+            return {
+               id: dbEvent.id,
+               title: dbEvent.title || 'Untitled Event',
+               date: dateString,
+               bannerImage: buildImagePath(dbEvent.image1) || '/assets/img/event/event-01.jpg',
+               contentImages: contentImages,
+               content: dbEvent.longdescription || dbEvent.shortdescription || '',
+               category: dbEvent.category || 'Event',
+               parentType: dbEvent.parent_type || null,
+               parentId: dbEvent.parent_id || null
+            };
+         }
+
+         async function initEventDetails() {
+            // Get event ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('id');
+
+            if (!eventId) {
+               const eventTitleEl = document.getElementById('event-title');
+               const eventContentEl = document.getElementById('event-content');
+               if (eventTitleEl) eventTitleEl.textContent = 'Event ID required';
+               if (eventContentEl) eventContentEl.textContent = 'Please provide an event ID in the URL.';
+               return;
+            }
+
+            let event = null;
+
+            try {
+               if (!supabase) {
+                  throw new Error('Supabase client not initialized');
+               }
+
+               // Fetch event by ID from database
+               const { data: dbEvent, error } = await supabase
+                  .from('tbl_events')
+                  .select('*')
+                  .eq('id', parseInt(eventId, 10))
+                  .single();
+
+               if (error) {
+                  throw error;
+               }
+
+               if (!dbEvent) {
+                  throw new Error('Event not found');
+               }
+
+               // Transform database event to UI format
+               event = transformEvent(dbEvent);
+            } catch (error) {
+               console.error('Error loading event:', error);
+               const eventTitleEl = document.getElementById('event-title');
+               const eventContentEl = document.getElementById('event-content');
+               if (eventTitleEl) eventTitleEl.textContent = 'Error loading event';
+               if (eventContentEl) eventContentEl.textContent = 'There was an error loading the event data. Please try refreshing the page or return to the events page.';
+               return;
+            }
+
+            if (!event) {
+               document.getElementById('event-title').textContent = 'Event not found';
+               document.getElementById('event-content').textContent = 'The requested event could not be found. Please return to the events page.';
+               return;
+            }
+
+            // Update page title
+            document.title = `${event.title} - UOL Alumni`;
+
+            // Update breadcrumb
+            const breadcrumbTitle = document.getElementById('breadcrumb-event-title');
+            const breadcrumbMainTitle = document.getElementById('breadcrumb-title');
+            if (breadcrumbTitle) breadcrumbTitle.textContent = event.title;
+            if (breadcrumbMainTitle) breadcrumbMainTitle.textContent = event.title;
+
+            // Update event details
+            const eventTitleEl = document.getElementById('event-title');
+            const eventDateEl = document.getElementById('event-date');
+            const eventCategoryEl = document.getElementById('event-category');
+            const eventCategoryTagEl = document.getElementById('event-category-tag');
+            const eventBannerEl = document.getElementById('event-banner');
+            const eventContentEl = document.getElementById('event-content');
+            const eventContentImagesContainer = document.getElementById('event-content-images-container');
+
+            if (eventTitleEl) eventTitleEl.textContent = event.title;
+            if (eventDateEl) eventDateEl.textContent = event.date || '';
+            if (eventCategoryEl) {
+               eventCategoryEl.textContent = event.category || 'Event';
+               eventCategoryEl.href = `/events/#${encodeURIComponent(event.category || '')}`;
+            }
+            if (eventCategoryTagEl) {
+               eventCategoryTagEl.textContent = event.category || 'Event';
+               eventCategoryTagEl.href = `/events/#${encodeURIComponent(event.category || '')}`;
+            }
+            if (eventBannerEl) {
+               eventBannerEl.src = event.bannerImage || '/assets/img/event/event-01.jpg';
+               eventBannerEl.alt = event.title;
+            }
+            if (eventContentEl) {
+               eventContentEl.textContent = event.content || 'No content available for this event.';
+            }
+
+            // Display parent information (chapter or association)
+            if (event.parentType && event.parentId) {
+               const parentLink = event.parentType === 'chapter' 
+                  ? `/chapters/detail.html?id=${event.parentId}`
+                  : `/associations/detail.html?id=${event.parentId}`;
+               const parentLabel = event.parentType === 'chapter' ? 'Chapter' : 'Association';
+               
+               // Add parent info after the date
+               if (eventDateEl && eventDateEl.parentElement) {
+                  const parentInfo = document.createElement('div');
+                  parentInfo.className = 'tp-blog-details-user-box';
+                  parentInfo.style.marginTop = '10px';
+                  parentInfo.innerHTML = `
+                     <a href="${parentLink}" style="color: var(--tp-theme-primary); text-decoration: none; font-weight: 500;">
+                        <i class="fa-solid fa-${event.parentType === 'chapter' ? 'map-marker-alt' : 'users'}"></i>
+                        View ${parentLabel}
+                     </a>
+                  `;
+                  eventDateEl.parentElement.appendChild(parentInfo);
+               }
+            }
+
+            // Render featured image (first image) on the right side
+            const featuredImageContainer = document.getElementById('event-featured-image-container');
+            if (event.contentImages && event.contentImages.length > 0) {
+               const firstImage = event.contentImages[0];
+               if (featuredImageContainer) {
+                  featuredImageContainer.innerHTML = `<img src="${firstImage}" alt="${event.title} - Featured Image">`;
+               }
+               
+               // Render remaining images at the bottom
+               const remainingImages = event.contentImages.slice(1);
+               if (eventContentImagesContainer && remainingImages.length > 0) {
+                  eventContentImagesContainer.innerHTML = '';
+                  remainingImages.forEach((imgSrc, index) => {
+                     const imgWrapper = document.createElement('div');
+                     imgWrapper.innerHTML = `<img src="${imgSrc}" alt="${event.title} - Image ${index + 2}">`;
+                     eventContentImagesContainer.appendChild(imgWrapper);
+                  });
+               } else if (eventContentImagesContainer) {
+                  eventContentImagesContainer.style.display = 'none';
+               }
+            } else {
+               // No images, hide both containers
+               if (featuredImageContainer) {
+                  featuredImageContainer.style.display = 'none';
+               }
+               if (eventContentImagesContainer) {
+                  eventContentImagesContainer.style.display = 'none';
+               }
+            }
+
+            // Update social sharing links
+            const currentUrl = encodeURIComponent(window.location.href);
+            const shareTitle = encodeURIComponent(event.title);
+            const shareText = encodeURIComponent(event.content ? event.content.substring(0, 200) : event.title);
+
+            const facebookLinks = document.querySelectorAll('#share-facebook, #share-facebook-bottom');
+            const twitterLinks = document.querySelectorAll('#share-twitter, #share-twitter-bottom');
+            const linkedinLinks = document.querySelectorAll('#share-linkedin, #share-linkedin-bottom');
+
+            facebookLinks.forEach(link => {
+               link.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+            });
+
+            twitterLinks.forEach(link => {
+               link.href = `https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareTitle}`;
+            });
+
+            linkedinLinks.forEach(link => {
+               link.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+            });
+         }
+
+         if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initEventDetails);
+         } else {
+            initEventDetails();
+         }
+      })();
+   </script>
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

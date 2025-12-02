@@ -1,0 +1,280 @@
+[
+  {
+    "id": 1,
+    "slug": "medicine",
+    "name": "College of Medicine & Dentistry (UCMD)",
+    "logo": "/assets/img/faculties/medicine.jpeg",
+    "description": "Supporting doctors and dental professionals, this association encourages continued mentoring, professional growth, and participation in medical workshops, alumni reunions, and healthcare-focused events",
+    "mission": "To unite medical professionals, support continuing medical education, and promote excellence in healthcare delivery.",
+    "vision": "To be the leading network for medical alumni, advancing healthcare excellence and improving patient outcomes.",
+    "members": 1800,
+    "established": 2003,
+    "dean": {
+      "name": "Prof. Dr. Mahwish Arooj",
+      "image": "/assets/img/deans/Prof. Dr. moghees Baig-UCMD.jpg"
+    },
+    "deanMessage": "At UCMD, we shape healthcare professionals whose journey of purpose continues long after graduation. Our alumni proudly carry the excellence of UCMD into hospitals, research institutions, and communities across the globe — leading with compassion, innovation, and unwavering professional integrity.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Medical Conference & CME",
+      "Medical Research Symposium",
+      "Community Health Camps",
+      "Medical Student Mentorship"
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "allied-health-sciences",
+    "name": "Allied Health Sciences",
+    "logo": "/assets/img/faculties/ahs.png",
+    "description": "This association connects graduates from Allied Health programs, helping them stay engaged with fellow professionals, strengthen their network, and remain informed about upcoming meetups, conferences, and career opportunities in the healthcare field.",
+    "mission": "To unite and empower Allied Health Sciences alumni, promoting excellence in healthcare practice, continuous learning, and professional networking.",
+    "vision": "To be the leading platform for Allied Health Sciences alumni, creating opportunities for career advancement, mentorship, and community service.",
+    "members": 1250,
+    "established": 2010,
+    "dean": {
+      "name": "Prof. Dr. Ashfaq Ahmad",
+      "image": "/assets/img/deans/Prof.-Dr.-Ashfaq-Ahmad-Dean-Allied-Health-Sciences.png"
+    },
+    "deanMessage": "FAHS stands as a hallmark of excellence at The University of Lahore, not only elevating the quality of healthcare education but also upholding our mission of empowering the nation through rigorous academics, impactful research, and practice-based learning. Our graduates — the proud alumni of FAHS — continue to lead, innovate, and contribute across diverse healthcare and technology arenas. Their success is a testament to the limitless career opportunities that begin right here at FAHS.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Annual Health Sciences Conference",
+      "Mentorship Program for New Graduates",
+      "Continuing Education Workshops",
+      "Community Health Outreach Programs"
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "arts-architecture",
+    "name": "Arts & Architecture",
+    "logo": "/assets/img/faculties/art-architect.png",
+    "description": "Connecting creative minds, this association fosters interaction among artists and architects while offering access to exhibitions, design workshops, and professional gatherings within the creative industry.",
+    "mission": "To foster a vibrant community of creative professionals, supporting artistic expression, architectural innovation, and design excellence.",
+    "vision": "To create a global network of Arts & Architecture alumni who inspire and shape the future of creative industries.",
+    "members": 890,
+    "established": 2008,
+    "dean": {
+      "name": "Dr. Farasat Rasool",
+      "image": "/assets/img/deans/Dr.-Farasat-Rasool-A&A.png"
+    },
+    "deanMessage": "The Faculty of Arts and Architecture at UOL nurtures creative talent into professionals who shape modern living environments with innovation and responsibility. Our alumni are now contributing to leading design studios, architectural firms, and urban development projects — applying their skills to improve the aesthetic and functional quality of spaces worldwide. We take great pride in the success of our graduates, who continue to serve society as visionary designers and responsible contributors to the built environment.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Annual Architecture Exhibition",
+      "Design Competition for Students",
+      "Professional Portfolio Reviews",
+      "Collaborative Art Projects"
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "engineering-technology",
+    "name": "Engineering & Technology",
+    "logo": "/assets/img/faculties/engineering-tech.png",
+    "description": "A vibrant platform for engineers and technologists to collaborate, expand their professional network, and stay updated on seminars, innovation summits, and industry-focused events tailored to their field.",
+    "mission": "To connect engineering professionals, facilitate knowledge exchange, and support technological innovation and professional growth.",
+    "vision": "To be the premier network for engineering alumni, driving innovation and excellence in technology and engineering practices.",
+    "members": 3200,
+    "established": 2005,
+    "dean": {
+      "name": "Prof. Dr. Habib Ur Rehman Mughal",
+      "image": "/assets/img/deans/Prof.-Dr.-Habib-Ur-Rehman-Mughal- ENG & Tech.png"
+    },
+    "deanMessage": "Faculty of Engineering and Technology (FET) is where curiosity transforms into innovation and students grow into professionals who drive real-world progress. Our alumni are contributing to advanced engineering solutions, leading global projects, and strengthening industries with skill and integrity. At FET, we prepare graduates to meet emerging market needs, engineer technologies that benefit society, and excel in competitive global environments — proudly representing the legacy of excellence built here.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Engineering Innovation Summit",
+      "Technical Workshops and Seminars",
+      "Industry-Academia Collaboration",
+      "Startup Incubation Program"
+    ]
+  },
+
+  {
+    "id": 5,
+    "slug": "information-technology",
+    "name": "Information Technology",
+    "logo": "/assets/img/faculties/it.png",
+    "description": "This association brings IT professionals together to collaborate, share advancements, and remain informed about tech meetups, innovation events, and professional development opportunities.",
+    "mission": "To connect IT professionals, promote technological innovation, and support career growth in the rapidly evolving tech industry.",
+    "vision": "To be the leading IT alumni network, driving digital transformation and technological excellence.",
+    "members": 2800,
+    "established": 2006,
+    "dean": {
+      "name": "Prof. Dr. Ibrar Hussain",
+      "image": "/assets/img/deans/Dr-ibrar-Hussain-DEAN-IT.png"
+    },
+    "deanMessage": "We empower students to become innovators and entrepreneurs who shape the future of technology with purpose and expertise. Our alumni continue to make their mark in leading IT companies, start-ups, and research environments — driving digital transformation across industries. With an accredited curriculum, strong industry linkages, and state-of-the-art facilities, we ensure that every graduate gains the skills, confidence, and professional readiness to thrive in the evolving world of information technology.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Tech Innovation Conference",
+      "Coding Bootcamps",
+      "Startup Pitch Competitions",
+      "Industry Mentorship Program"
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "languages",
+    "name": "Languages & Literature",
+    "logo": "/assets/img/faculties/language.png",
+    "description": "A cultural and academic bridge for language alumni to engage with peers, share linguistic interests, and stay informed about literary festivals, educational seminars, and global language-related events.",
+    "mission": "To unite language professionals, promote multilingualism, and support careers in translation, interpretation, and language education.",
+    "vision": "To create a vibrant community of language professionals who bridge cultures and facilitate global communication.",
+    "members": 420,
+    "established": 2011,
+    "dean": {
+      "name": "Prof. Dr. Asghar Nadeem Syed",
+      "image": "/assets/img/deans/Asghar-Nadeem-Dean- Lang and Lit.png"
+    },
+    "deanMessage": "Our alumni distinguish themselves in diverse creative and academic fields, using their analytical abilities and expressive talent to influence public thought and strengthen cultural discourse. By nurturing critical insight, articulate communication, and intellectual confidence, we prepare graduates who engage with the world thoughtfully and contribute meaningfully to its evolving narrative.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Language Exchange Programs",
+      "Translation Workshops",
+      "Cultural Events",
+      "Language Teaching Certification"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "law",
+    "name": "Law",
+    "logo": "/assets/img/faculties/law.png",
+    "description": "Designed to keep law graduates connected, this association encourages professional interaction, legal discourse, and participation in workshops, conferences, and networking events relevant to the legal community.",
+    "mission": "To unite legal professionals, support career development, and promote justice and legal excellence in society.",
+    "vision": "To be the premier network for law alumni, fostering legal excellence and contributing to a just society.",
+    "members": 1100,
+    "established": 2009,
+    "dean": {
+      "name": "Sundus Rauf",
+      "image": "/assets/img/deans/Ms.-Sundus-Rauf-Law.png"
+    },
+    "deanMessage": "Our alumni stand as powerful advocates, respected scholars, and influential leaders, shaping legal progress both nationally and globally. With a learning environment that enhances advocacy, analytical reasoning, and research excellence, we equip future graduates with the knowledge, skills, and confidence to uphold the highest standards of justice — continuing the legacy our alumni proudly represent today.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Legal Aid Clinics",
+      "Moot Court Competitions",
+      "Continuing Legal Education",
+      "Pro Bono Services Program"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "management-sciences",
+    "name": "Management Sciences",
+    "logo": "/assets/img/faculties/management-sciences.png",
+    "description": "A hub for business graduates to broaden their professional circle, stay in touch with industry trends, and participate in professional meetups, leadership forums, and business networking events.",
+    "mission": "To unite management professionals, promote leadership development, and support entrepreneurial ventures and business growth.",
+    "vision": "To be the leading network for management alumni, creating opportunities for leadership and business excellence.",
+    "members": 4500,
+    "established": 2004,
+    "dean": {
+      "name": "Prof. Dr. Rabeeya Raoof",
+      "image": "/assets/img/deans/Prof._Dr._Dr._Rabeeya_Raoof_-_Dean__Faculty_of_Management_Sciences.png"
+    },
+    "deanMessage": "I proudly welcome you to a faculty dedicated to shaping strategic thinkers, innovators, and leaders who redefine the future of business. Our alumni continue to excel as corporate professionals, entrepreneurs, and policy drivers — advancing industries with integrity and a forward-looking mindset. With cutting-edge facilities, rich research resources, and globally aligned academic standards, we empower our students to thrive in dynamic business environments.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Business Leadership Summit",
+      "Entrepreneurship Bootcamp",
+      "Executive Networking Events",
+      "Business Case Study Competitions"
+    ]
+  },
+  
+  {
+    "id": 9,
+    "slug": "pharmacy",
+    "name": "Pharmacy",
+    "logo": "/assets/img/faculties/pharmacy.png",
+    "description": "A dedicated space for pharmacy graduates to connect, collaborate, and stay informed about pharmaceutical advancements, professional sessions, and industry networking events.",
+    "mission": "To unite pharmacy professionals, support pharmaceutical research, and promote excellence in pharmaceutical practice.",
+    "vision": "To be the premier network for pharmacy alumni, advancing pharmaceutical sciences and improving healthcare outcomes.",
+    "members": 950,
+    "established": 2007,
+    "dean": {
+      "name": "Prof. Dr. Khalid Hussain",
+      "image": "/assets/img/deans/Prof.-Dr.-Khalid-Hussain-Pharm.png"
+    },
+    "deanMessage": "Our alumni continue to excel as innovators, researchers, and industry leaders, contributing to advancements that improve patient outcomes worldwide. Through collaborative research, expert mentorship, and world-class facilities, we provide a dynamic and supportive environment that builds strong scientific capability and shapes future-ready professionals — proudly carrying forward the legacy of excellence established by our graduates.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Pharmaceutical Research Forum",
+      "Continuing Pharmacy Education",
+      "Drug Safety Awareness Campaigns",
+      "Pharmacy Practice Workshops"
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "sciences",
+    "name": "Sciences",
+    "logo": "/assets/img/faculties/sciences.png",
+    "description": "A platform for science graduates to maintain strong academic and professional ties, broaden their network, and stay up-to-date with research expos, scientific conferences, and related gatherings.",
+    "mission": "To unite science professionals, support scientific research, and promote innovation and discovery in various scientific fields.",
+    "vision": "To be the leading network for science alumni, driving scientific excellence and contributing to global knowledge.",
+    "members": 1350,
+    "established": 2006,
+    "dean": {
+      "name": "Prof. Dr. Ahmed Bilal Waqar",
+      "image": "/assets/img/deans/Prof.-Dr.-Ahmed-Bilal-Waqar- Sciences.png"
+    },
+    "deanMessage": "Our alumni continue to excel as scientists, researchers, academicians, and industry leaders — advancing scientific discovery and technological progress in Pakistan and beyond. Guided by a highly qualified and dedicated faculty, our students gain the professional competence, curiosity, and leadership skills needed to shape the future of science and technology with impact and integrity.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Science Research Symposium",
+      "Student Research Grants",
+      "Science Outreach Programs",
+      "Collaborative Research Projects"
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "social-sciences",
+    "name": "Social Sciences",
+    "logo": "/assets/img/faculties/social.png",
+    "description": "This association enhances collaboration among social science graduates, supporting professional networking, research exchange, and ongoing updates about conferences and activities in the social sciences domain.",
+    "mission": "To unite social science professionals, support research in social issues, and promote social development and policy making.",
+    "vision": "To be the premier network for social science alumni, contributing to social development and policy excellence.",
+    "members": 780,
+    "established": 2008,
+    "dean": {
+      "name": "Prof. Dr. Rabia Akhtar",
+      "image": "/assets/img/deans/Prof.-Dr.-Rabia-Akhtar-Social Sciences.png"
+    },
+    "deanMessage": "At the Faculty of Social Sciences, The University of Lahore, Our alumni stand as powerful contributors to social progress — driving change in policy-making, research, advocacy, and community development across the globe. We believe every student who joins us has the potential to influence the world with understanding, compassion, and resilience, continuing the legacy of excellence and service demonstrated by our graduates.",
+    "president": null,
+    "vicePresident": null,
+    "coordinator": null,
+    "keyInitiatives": [
+      "Social Research Conference",
+      "Community Development Projects",
+      "Policy Research Workshops",
+      "Mental Health Awareness Programs"
+    ]
+  }
+]
+

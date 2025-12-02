@@ -1,0 +1,1352 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title id="page-title">Alumni Association | UOL Alumni</title>
+   <meta name="description" content="" id="page-description">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .tp-association-hero {
+         background: linear-gradient(135deg, rgba(16, 24, 40, 0.85), rgba(16, 24, 40, 0.65)), url("/assets/img/breadcrumb/about-breadcrumb.jpg");
+         background-size: cover;
+         background-position: center;
+         padding: 100px 0;
+      }
+      .tp-association-detail {
+         background: var(--tp-common-white);
+         border-radius: 20px;
+         box-shadow: 0px 20px 60px rgba(15, 18, 38, 0.08);
+         overflow: hidden;
+         margin-top: -60px;
+         position: relative;
+         z-index: 2;
+      }
+      .tp-association-header {
+         padding: 50px;
+         background: linear-gradient(135deg, rgba(13, 25, 47, 0.05), rgba(171, 12, 47, 0.08));
+         display: flex;
+         align-items: center;
+         gap: 40px;
+      }
+      .tp-association-logo {
+         flex-shrink: 0;
+         width: 200px;
+         height: 200px;
+         background: white;
+         border-radius: 16px;
+         padding: 20px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .tp-association-logo img {
+         max-width: 100%;
+         max-height: 100%;
+         object-fit: contain;
+      }
+      .tp-dean-picture {
+         flex-shrink: 0;
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         overflow: hidden;
+         border: 4px solid white;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+         background: white;
+         margin-right: 30px;
+      }
+      .tp-dean-picture img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+      .tp-dean-message-wrapper {
+         display: flex;
+         align-items: flex-start;
+         gap: 30px;
+         margin-top: 20px;
+      }
+      .tp-dean-message-content {
+         flex: 1;
+      }
+      .tp-association-header-content {
+         display: flex;
+         align-items: center;
+         gap: 40px;
+         flex: 1;
+      }
+      .tp-association-info h1 {
+         font-size: 42px;
+         font-weight: 600;
+         margin-bottom: 15px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-association-stats {
+         display: flex;
+         gap: 30px;
+         margin-top: 20px;
+         flex-wrap: wrap;
+      }
+      .tp-association-stat {
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-association-stat-value {
+         font-size: 32px;
+         font-weight: 600;
+         color: var(--tp-theme-primary);
+      }
+      .tp-association-stat-label {
+         font-size: 14px;
+         color: #666;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+      }
+      .tp-association-content {
+         padding: 50px;
+      }
+      .tp-association-section {
+         margin-bottom: 40px;
+      }
+      .tp-association-section h3 {
+         font-size: 28px;
+         font-weight: 600;
+         margin-bottom: 20px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-association-section p {
+         font-size: 16px;
+         line-height: 1.8;
+         color: #555;
+         margin-bottom: 15px;
+      }
+      .tp-president-card {
+         background: linear-gradient(135deg, rgba(171, 12, 47, 0.05), rgba(171, 12, 47, 0.02));
+         padding: 30px;
+         border-radius: 16px;
+         border: 1px solid rgba(171, 12, 47, 0.1);
+      }
+      .tp-president-card h4 {
+         font-size: 20px;
+         font-weight: 600;
+         margin-bottom: 10px;
+         color: var(--tp-heading-primary);
+      }
+      .tp-president-card p {
+         margin-bottom: 5px;
+         color: #666;
+      }
+      .tp-contact-info {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+      }
+      .tp-contact-item {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+      }
+      .tp-contact-item i {
+         width: 40px;
+         height: 40px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background: rgba(171, 12, 47, 0.1);
+         border-radius: 8px;
+         color: var(--tp-theme-primary);
+      }
+      .tp-users-section {
+         margin-top: 40px;
+      }
+      .tp-users-list {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 15px;
+         margin-top: 20px;
+      }
+      .tp-user-item {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         padding: 10px 0;
+      }
+      .tp-event-card {
+         background: white;
+         border-radius: 12px;
+         overflow: hidden;
+         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+         transition: transform 0.3s ease, box-shadow 0.3s ease;
+         cursor: pointer;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-event-card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+      }
+      .tp-event-card-thumb {
+         width: 100%;
+         height: 200px;
+         overflow: hidden;
+         position: relative;
+      }
+      .tp-event-card-thumb img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         transition: transform 0.3s ease;
+      }
+      .tp-event-card:hover .tp-event-card-thumb img {
+         transform: scale(1.05);
+      }
+      .tp-event-card-content {
+         padding: 20px;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+      .tp-event-card-tag {
+         display: inline-block;
+         background: rgba(171, 12, 47, 0.1);
+         color: var(--tp-theme-primary);
+         padding: 4px 12px;
+         border-radius: 4px;
+         font-size: 12px;
+         font-weight: 600;
+         margin-bottom: 10px;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+      }
+      .tp-event-card-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: var(--tp-heading-primary);
+         margin-bottom: 8px;
+         line-height: 1.4;
+      }
+      .tp-event-card-date {
+         font-size: 14px;
+         color: #666;
+         margin-top: auto;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+      }
+      .tp-event-card-date i {
+         color: var(--tp-theme-primary);
+      }
+      .tp-events-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+         gap: 25px;
+         margin-top: 20px;
+      }
+      .tp-members-pagination {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top: 30px;
+         padding-top: 20px;
+         border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .tp-pagination-info {
+         color: #666;
+         font-size: 14px;
+      }
+      .tp-pagination-buttons {
+         display: flex;
+         gap: 10px;
+      }
+      .tp-pagination-btn {
+         padding: 10px 20px;
+         border: 1px solid rgba(0, 0, 0, 0.1);
+         background: white;
+         border-radius: 6px;
+         cursor: pointer;
+         font-size: 14px;
+         font-weight: 500;
+         color: var(--tp-heading-primary);
+         transition: all 0.3s ease;
+      }
+      .tp-pagination-btn:hover:not(:disabled) {
+         background: var(--tp-theme-primary);
+         color: white;
+         border-color: var(--tp-theme-primary);
+      }
+      .tp-pagination-btn:disabled {
+         opacity: 0.5;
+         cursor: not-allowed;
+      }
+      .tp-user-avatar {
+         width: 70px;
+         height: 90px;
+         border-radius: 16px;
+         background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7));
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 18px;
+         font-weight: 600;
+         flex-shrink: 0;
+         overflow: hidden;
+      }
+      .tp-user-avatar-initials {
+         width: 100%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 18px;
+         font-weight: 600;
+      }
+      @keyframes tp-spin {
+         from {
+            transform: rotate(0deg);
+         }
+         to {
+            transform: rotate(360deg);
+         }
+      }
+      .tp-user-name {
+         font-size: 15px;
+         font-weight: 500;
+         color: var(--tp-heading-primary);
+         margin: 0;
+      }
+      .tp-user-degree {
+         font-size: 13px;
+         color: #666;
+         margin-top: 4px;
+      }
+      @media (max-width: 768px) {
+         .tp-association-header {
+            flex-direction: column;
+            text-align: center;
+         }
+         .tp-association-header-content {
+            flex-direction: column;
+            gap: 20px;
+         }
+         .tp-association-logo {
+            width: 150px;
+            height: 150px;
+         }
+         .tp-dean-picture {
+            width: 120px;
+            height: 120px;
+         }
+         .tp-dean-message-wrapper {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+         }
+         .tp-dean-picture {
+            margin-right: 0;
+            margin-bottom: 20px;
+         }
+         .tp-users-list {
+            grid-template-columns: 1fr;
+         }
+         .tp-events-grid {
+            grid-template-columns: repeat(3,1fr);
+         }
+         .tp-association-info h1 {
+            font-size: 32px;
+         }
+         .tp-members-pagination {
+            flex-direction: column;
+            gap: 15px;
+            align-items: stretch;
+         }
+         .tp-pagination-buttons {
+            width: 100%;
+            justify-content: space-between;
+         }
+         .tp-pagination-btn {
+            flex: 1;
+         }
+         .tp-pagination-info {
+            text-align: center;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li><a href="/get-involved/">Get Involved</a></li>
+                           <li class="tp-static"><a class="tp-static" href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                          
+                           <li><a href="/chapters/">Chapters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+   <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/">
+                     <img src="/assets/img/logo/logo-black.png" alt="logo">
+                  </a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+   <main>
+      <section class="tp-association-hero" id="association-hero">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-breadcrumb text-center">
+                     <div class="tp-breadcrumb-list">
+                        <span><a href="/">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span><a href="/associations/">Associations</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span id="breadcrumb-name">Loading...</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="pt-0 pb-120">
+         <div class="container">
+            <div class="tp-association-detail" id="association-detail">
+               <div class="tp-association-loader" style="text-align: center; padding: 80px 20px;">
+                  <div class="tp-loader-spinner" style="width: 42px; height: 42px; border-radius: 50%; border: 3px solid rgba(171, 12, 47, 0.2); border-top-color: var(--tp-theme-primary); display: inline-block; animation: tp-spin 1s linear infinite; margin-bottom: 20px;"></div>
+                  <p>Loading association information...</p>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+ <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/hover-reveal.js"></script>
+   <script src="/assets/js/tween-max.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+
+   <!-- Supabase Client Library -->
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+   <script>
+      // Supabase Configuration
+      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+      // Initialize Supabase client
+      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      
+      if (!supabase) {
+         console.error('Failed to initialize Supabase client');
+      }
+
+      // Helper to build remote image path (shared with events & members)
+      function buildRemoteImagePath(imageName) {
+         if (!imageName) return null;
+         // If already absolute URL, keep as is
+         if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+            return imageName;
+         }
+         const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+         return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      // Get association ID from URL query parameter
+      function getAssociationIdFromURL() {
+         const urlParams = new URLSearchParams(window.location.search);
+         const associationId = urlParams.get('id') || urlParams.get('associationId') || urlParams.get('association_id');
+         return associationId ? parseInt(associationId, 10) : null;
+      }
+
+      // Fetch association details from database by ID
+      async function fetchAssociationById(associationId) {
+         if (!supabase || !associationId) return null;
+
+         try {
+            const { data: association, error } = await supabase
+               .from('tbl_associations')
+               .select('*')
+               .eq('id', associationId)
+               .maybeSingle();
+
+            if (error) {
+               console.error('Error fetching association:', error);
+               return null;
+            }
+
+            return association;
+         } catch (error) {
+            console.error('Error fetching association:', error);
+            return null;
+         }
+      }
+
+      // Fetch association meta (dean, logo, etc.) from JSON by ID
+      async function fetchAssociationFromJSON(associationId) {
+         try {
+            const response = await fetch('/assets/data/associations.json');
+            if (!response.ok) {
+               return null;
+            }
+
+            const data = await response.json();
+            if (!Array.isArray(data)) return null;
+
+            const idNum = Number(associationId);
+            if (isNaN(idNum)) return null;
+
+            const jsonAssociation = data.find(a => a.id === idNum);
+            return jsonAssociation || null;
+         } catch (error) {
+            console.error('Error fetching association from JSON:', error);
+            return null;
+         }
+      }
+
+      // Fetch association members (only verified members)
+      async function fetchAssociationMembers(associationId) {
+         if (!supabase || !associationId) return { count: 0, members: [] };
+
+         const associationIdNum = Number(associationId);
+         if (isNaN(associationIdNum)) {
+            console.error('Invalid association ID:', associationId);
+            return { count: 0, members: [] };
+         }
+
+         try {
+            // Fetch verified alumni members for this association
+            const { data: members, error: membersError, count } = await supabase
+               .from('tbl_alumni')
+               .select('alumniid, alumniname, degreetitle, yearofending, image1', { count: 'exact' })
+               .eq('association_id', associationIdNum)
+               .eq('verify', 'true')
+               .order('yearofending', { ascending: false });
+
+            if (membersError) {
+               console.error('Error fetching association members:', membersError);
+               return { count: 0, members: [] };
+            }
+
+            const memberCount = count !== null ? count : (members?.length || 0);
+            console.log(`Successfully fetched ${memberCount} verified members for association ${associationIdNum}`);
+
+            return {
+               count: memberCount,
+               members: members || []
+            };
+         } catch (error) {
+            console.error('Unexpected error fetching association members:', error);
+            return { count: 0, members: [] };
+         }
+      }
+
+      // Format member name for display
+      function getMemberInitials(name) {
+         if (!name) return '??';
+         const parts = name.trim().split(' ');
+         if (parts.length >= 2) {
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+         }
+         return name.substring(0, 2).toUpperCase();
+      }
+
+      // Format degree for display
+      function formatDegree(degreeTitle, yearOfEnding) {
+         if (!degreeTitle) return 'N/A';
+         if (yearOfEnding) {
+            return `${degreeTitle}, ${yearOfEnding}`;
+         }
+         return degreeTitle;
+      }
+
+      // Members pagination and search functionality
+      let allMembers = [];
+      let filteredMembers = [];
+      let currentPage = 1;
+      let sortOrder = 'desc'; // 'asc' or 'desc'
+      const membersPerPage = 30;
+      const membersPerRow = 3;
+
+      function initializeMembersPagination(members) {
+         allMembers = members || [];
+         sortOrder = 'desc'; // Reset to default
+         applySortAndFilter();
+         currentPage = 1;
+         
+         // Setup search input
+         const searchInput = document.getElementById('members-search-input');
+         if (searchInput) {
+            searchInput.addEventListener('input', handleMembersSearch);
+         }
+         
+         // Setup sort select
+         const sortSelect = document.getElementById('members-sort-select');
+         if (sortSelect) {
+            sortSelect.value = sortOrder;
+            sortSelect.addEventListener('change', handleSortChange);
+         }
+         
+         // Setup pagination buttons
+         const prevBtn = document.getElementById('prev-btn');
+         const nextBtn = document.getElementById('next-btn');
+         if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+               if (currentPage > 1) {
+                  currentPage--;
+                  renderMembers();
+               }
+            });
+         }
+         if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+               const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+               if (currentPage < totalPages) {
+                  currentPage++;
+                  renderMembers();
+               }
+            });
+         }
+         
+         // Initial render
+         renderMembers();
+      }
+
+      function handleSortChange(e) {
+         sortOrder = e.target.value;
+         currentPage = 1; // Reset to first page on sort change
+         applySortAndFilter();
+         renderMembers();
+      }
+
+      function applySortAndFilter() {
+         // First, apply sorting
+         const sorted = [...allMembers].sort((a, b) => {
+            const yearA = a.yearofending || 0;
+            const yearB = b.yearofending || 0;
+            
+            if (sortOrder === 'asc') {
+               return yearA - yearB; // Ascending: oldest first
+            } else {
+               return yearB - yearA; // Descending: newest first
+            }
+         });
+         
+         // Then apply search filter if there's a search term
+         const searchInput = document.getElementById('members-search-input');
+         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+         
+         if (searchTerm === '') {
+            filteredMembers = sorted;
+         } else {
+            filteredMembers = sorted.filter(member => {
+               const name = (member.alumniname || 'Unknown').toLowerCase();
+               return name.includes(searchTerm);
+            });
+         }
+      }
+
+      function handleMembersSearch(e) {
+         currentPage = 1; // Reset to first page on search
+         applySortAndFilter();
+         renderMembers();
+      }
+
+      function renderMembers() {
+         const container = document.getElementById('members-list-container');
+         const paginationContainer = document.getElementById('members-pagination');
+         const paginationInfo = document.getElementById('pagination-info');
+         const prevBtn = document.getElementById('prev-btn');
+         const nextBtn = document.getElementById('next-btn');
+         
+         if (!container) return;
+         
+         if (filteredMembers.length === 0) {
+            container.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No verified members found.</p>';
+            if (paginationContainer) paginationContainer.style.display = 'none';
+            return;
+         }
+         
+         // Calculate pagination
+         const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+         const startIndex = (currentPage - 1) * membersPerPage;
+         const endIndex = Math.min(startIndex + membersPerPage, filteredMembers.length);
+         const currentMembers = filteredMembers.slice(startIndex, endIndex);
+         
+         // Detect if mobile (1 column) or desktop (3 columns)
+         const isMobile = window.innerWidth <= 768;
+         const itemsPerRow = isMobile ? 1 : membersPerRow;
+         
+         // Render members
+         let membersHTML = '';
+         currentMembers.forEach((member) => {
+            const name = member.alumniname || 'Unknown';
+            const initials = getMemberInitials(name);
+            const degree = formatDegree(member.degreetitle, member.yearofending);
+            const avatarUrl = member.image1 ? buildRemoteImagePath(member.image1) : null;
+
+            membersHTML += `
+               <div class="tp-user-item">
+                  <div class="tp-user-avatar">
+                     ${
+                        avatarUrl
+                           ? `<img src="${avatarUrl}" alt="${name}" style="width:100%;height:100%;object-fit:cover;"
+                                   onerror="this.style.display='none'; this.parentElement.querySelector('.tp-user-avatar-initials').style.display='flex';">`
+                           : ''
+                     }
+                     <div class="tp-user-avatar-initials" style="display:${avatarUrl ? 'none' : 'flex'};">
+                        ${initials}
+                     </div>
+                  </div>
+                  <div>
+                     <h4 class="tp-user-name">${name}</h4>
+                     <p class="tp-user-degree">${degree}</p>
+                  </div>
+               </div>
+            `;
+         });
+         
+         container.innerHTML = membersHTML;
+         
+         // Update pagination controls
+         if (paginationContainer) {
+            if (filteredMembers.length > membersPerPage) {
+               paginationContainer.style.display = 'flex';
+               
+               if (paginationInfo) {
+                  paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredMembers.length} members`;
+               }
+               
+               if (prevBtn) {
+                  prevBtn.disabled = currentPage === 1;
+               }
+               
+               if (nextBtn) {
+                  nextBtn.disabled = currentPage >= totalPages;
+               }
+            } else {
+               paginationContainer.style.display = 'none';
+            }
+         }
+      }
+
+      // Render association detail page
+      function renderAssociationDetail(association, jsonAssociation, membersData, associationId) {
+         const memberCount = membersData.count || 0;
+         const members = membersData.members || [];
+
+         // Prefer title from DB, fall back to JSON
+         const associationTitle = association.title || jsonAssociation?.name || 'Association';
+         document.getElementById('page-title').textContent = `${associationTitle} Alumni Association | UOL Alumni`;
+         document.getElementById('page-description').content = association.description || jsonAssociation?.description || '';
+         document.getElementById('breadcrumb-name').textContent = associationTitle;
+
+         // Get faculty logo / image (prefer JSON logo, then DB image)
+         const associationImage = jsonAssociation?.logo || association.image || null;
+
+         // Dean details: prefer JSON, then DB
+         const deanName = jsonAssociation?.dean?.name || association.dean || null;
+         const deanImage = jsonAssociation?.dean?.image || association.dean_image || null;
+         const deanMessage = jsonAssociation?.deanMessage || association.dean_message || null;
+
+         // Render association detail
+         const detailHTML = `
+            <div class="tp-association-header">
+               <div class="tp-association-logo">
+                  ${associationImage ? `<img src="${associationImage}" alt="${associationTitle}">` : `
+                     <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7)); border-radius: 16px;">
+                        <i class="fa-solid fa-users" style="font-size: 80px; color: white;"></i>
+                     </div>
+                  `}
+               </div>
+               <div class="tp-association-info">
+                  <h1>${associationTitle}</h1>
+                  
+                  <p style="font-size: 18px; color: #666; margin-bottom: 20px;">${association.description || 'No description available.'}</p>
+                  <div class="tp-association-stats">
+                     <div class="tp-association-stat">
+                        <span class="tp-association-stat-value">${memberCount.toLocaleString()}</span>
+                        <span class="tp-association-stat-label">Members</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tp-association-content">
+               <div class="row">
+                  <div class="col-lg-8">
+                     <div class="tp-association-section">
+                        <h3>Dean's Message</h3>
+                        ${deanName ? `
+                           <p style="font-size: 18px; color: #666; margin-bottom: 15px; font-weight: 500;">
+                              ${deanName}
+                           </p>
+                        ` : ''}
+                        <div class="tp-dean-message-wrapper">
+                           ${deanImage ? `
+                              <div class="tp-dean-picture">
+                                 <img src="${deanImage}" alt="${deanName || associationTitle}">
+                              </div>
+                           ` : ''}
+                           <div class="tp-dean-message-content">
+                              <div class="tp-dean-message" style="background: linear-gradient(135deg, rgba(171, 12, 47, 0.05), rgba(171, 12, 47, 0.02)); padding: 30px; border-radius: 16px; border-left: 4px solid var(--tp-theme-primary);">
+                                 <p style="font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 0;">
+                                    ${deanMessage || `On behalf of the ${associationTitle} faculty, I extend a warm welcome to all our alumni. Your continued engagement and success inspire our current students and strengthen our academic community. Together, we are building a legacy of excellence and innovation that extends far beyond our campus walls.`}
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <h3>Past Events</h3>
+                        <div class="tp-events-grid" id="past-events-container">
+                           <!-- Past events will be loaded here -->
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <h3>Upcoming Events</h3>
+                        <div class="tp-events-grid" id="upcoming-events-container">
+                           <!-- Upcoming events will be loaded here -->
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4">
+                     <div class="tp-association-section">
+                        <h3>Leadership</h3>
+                        <div class="tp-president-card">
+                           <h4>President</h4>
+                           <p style="color: #999; font-style: italic;">Vacant</p>
+                        </div>
+                        <div class="tp-president-card" style="margin-top: 20px;">
+                           <h4>Vice President</h4>
+                           <p style="color: #999; font-style: italic;">Vacant</p>
+                        </div>
+                        <div class="tp-president-card" style="margin-top: 20px;">
+                           <h4>Coordinator</h4>
+                           <p style="color: #999; font-style: italic;">Vacant</p>
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <h3>Contact Information</h3>
+                        <div class="tp-contact-info">
+                           ${association.address ? `
+                              <div class="tp-contact-item">
+                                 <i class="fa-solid fa-building"></i>
+                                 <div>
+                                    <strong>Address</strong><br>
+                                    <span style="color: #333; font-weight: 500;">${association.address}</span>
+                                 </div>
+                              </div>
+                           ` : ''}
+                           ${association.email ? `
+                              <div class="tp-contact-item">
+                                 <i class="fa-solid fa-envelope"></i>
+                                 <div>
+                                    <strong>Email</strong><br>
+                                    <a href="mailto:${association.email}">${association.email}</a>
+                                 </div>
+                              </div>
+                           ` : ''}
+                           ${association.phone ? `
+                              <div class="tp-contact-item">
+                                 <i class="fa-solid fa-phone"></i>
+                                 <div>
+                                    <strong>Phone</strong><br>
+                                    <a href="tel:${association.phone}">${association.phone}</a>
+                                 </div>
+                              </div>
+                           ` : ''}
+                          
+                        </div>
+                     </div>
+                     <div class="tp-association-section">
+                        <a href="/associations/" class="tp-btn w-100 text-center">View All Associations</a>
+                     </div>
+                  </div>
+               </div>
+            <div class="tp-association-section tp-users-section">
+               <div class="d-flex justify-content-between align-items-center mb-20" style="flex-wrap: wrap; gap: 15px;">
+                  <h3 style="margin: 0;">Members (${memberCount})</h3>
+                  <div class="tp-members-sort" style="display: flex; align-items: center; gap: 10px;">
+                     <label for="members-sort-select" style="margin: 0; font-size: 14px; color: #666;">Sort by Year:</label>
+                     <select id="members-sort-select" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                        <option value="desc">Newest First (Descending)</option>
+                        <option value="asc">Oldest First (Ascending)</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="tp-members-search">
+                  <input type="text" id="members-search-input" placeholder="Search members by name..." autocomplete="off">
+               </div>
+               <div class="tp-users-list" id="members-list-container">
+                  <!-- Members will be rendered here -->
+               </div>
+               <div class="tp-members-pagination" id="members-pagination" style="display: none;">
+                  <div class="tp-pagination-info" id="pagination-info"></div>
+                  <div class="tp-pagination-buttons">
+                     <button class="tp-pagination-btn" id="prev-btn">Previous</button>
+                     <button class="tp-pagination-btn" id="next-btn">Next</button>
+                  </div>
+               </div>
+            </div>
+            </div>
+         `;
+         
+         document.getElementById('association-detail').innerHTML = detailHTML;
+         
+         // Initialize members pagination and search
+         initializeMembersPagination(members);
+         
+         // Load and display events
+         loadAssociationEvents(associationId);
+      }
+
+      // Main function to load association data
+      async function loadAssociationData() {
+         const associationId = getAssociationIdFromURL();
+         
+         if (!associationId) {
+            document.getElementById('association-detail').innerHTML = `
+               <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
+                  <h3>Association ID Required</h3>
+                  <p>Please provide a valid association ID in the URL.</p>
+                  <a href="/associations/" class="tp-btn mt-3">Back to Associations</a>
+               </div>
+            `;
+            return;
+         }
+
+         // Fetch association details from DB and JSON in parallel
+         const [association, jsonAssociation] = await Promise.all([
+            fetchAssociationById(associationId),
+            fetchAssociationFromJSON(associationId)
+         ]);
+
+         if (!association) {
+            document.getElementById('association-detail').innerHTML = `
+               <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
+                  <h3>Association Not Found</h3>
+                  <p>The association you're looking for doesn't exist in the database.</p>
+                  <a href="/associations/" class="tp-btn mt-3">Back to Associations</a>
+               </div>
+            `;
+            document.getElementById('breadcrumb-name').textContent = 'Not Found';
+            return;
+         }
+
+         // Fetch members for this association (only verified members)
+         const membersData = await fetchAssociationMembers(associationId);
+         
+         // Render the page
+         renderAssociationDetail(association, jsonAssociation, membersData, associationId);
+      }
+
+      // Initialize page load
+      loadAssociationData();
+
+      // Helper function to format date
+      function formatDate(dateString, timeString) {
+         if (!dateString) return '';
+         
+         try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+            
+            if (timeString) {
+               return `${formattedDate} ${timeString}`;
+            }
+            return formattedDate;
+         } catch (error) {
+            return dateString;
+         }
+      }
+
+      // Helper function to build event image path
+      function buildImagePath(imageName) {
+         return buildRemoteImagePath(imageName);
+      }
+
+      // Transform database event to UI format
+      function transformEvent(dbEvent) {
+         const contentImages = [];
+         
+         if (dbEvent.image2) contentImages.push(buildImagePath(dbEvent.image2));
+         if (dbEvent.image3) contentImages.push(buildImagePath(dbEvent.image3));
+         if (dbEvent.image4) contentImages.push(buildImagePath(dbEvent.image4));
+         if (dbEvent.image5) contentImages.push(buildImagePath(dbEvent.image5));
+
+         let dateString = formatDate(dbEvent.fromdate, dbEvent.eventtime);
+         if (dbEvent.todate && dbEvent.todate !== dbEvent.fromdate) {
+            const toDateString = formatDate(dbEvent.todate, null);
+            dateString = `${dateString} - ${toDateString}`;
+         }
+
+         return {
+            id: dbEvent.id,
+            title: dbEvent.title || 'Untitled Event',
+            date: dateString,
+            bannerImage: buildImagePath(dbEvent.image1) || '/assets/img/event/event-01.jpg',
+            contentImages: contentImages,
+            content: dbEvent.longdescription || dbEvent.shortdescription || '',
+            category: dbEvent.category || 'Event',
+            fromdate: dbEvent.fromdate
+         };
+      }
+
+      // Function to load and filter events for the association
+      async function loadAssociationEvents(associationId) {
+         if (!supabase || !associationId) {
+            console.log('loadAssociationEvents: Missing supabase or associationId', { supabase: !!supabase, associationId });
+            showNoEventsMessage();
+            return;
+         }
+
+         // Ensure associationId is a number
+         const associationIdNum = typeof associationId === 'number' ? associationId : parseInt(associationId, 10);
+         
+         if (isNaN(associationIdNum)) {
+            console.error('loadAssociationEvents: Invalid associationId', associationId);
+            showNoEventsMessage();
+            return;
+         }
+
+         console.log('loadAssociationEvents: Fetching events for association', associationIdNum);
+
+         try {
+            // Fetch events for this association using parent_type and parent_id
+            const { data: dbEvents, error } = await supabase
+               .from('tbl_events')
+               .select('*')
+               .eq('parent_type', 'association')
+               .eq('parent_id', associationIdNum)
+               .order('fromdate', { ascending: false, nullsLast: true });
+
+            if (error) {
+               console.error('loadAssociationEvents: Supabase error', error);
+               throw error;
+            }
+
+            console.log('loadAssociationEvents: Fetched events', dbEvents?.length || 0, dbEvents);
+
+            if (!dbEvents || dbEvents.length === 0) {
+               console.log('loadAssociationEvents: No events found for association', associationIdNum);
+               showNoEventsMessage();
+               return;
+            }
+
+            // Transform database events to UI format
+            const events = dbEvents.map(transformEvent);
+
+            // Separate past and upcoming events based on date
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            today.setMinutes(0, 0);
+            today.setSeconds(0, 0);
+            today.setMilliseconds(0);
+
+            const pastEvents = [];
+            const upcomingEvents = [];
+
+            events.forEach((event) => {
+               if (!event.fromdate) {
+                  // If no date, consider it as past event
+                  pastEvents.push({ event });
+                  return;
+               }
+
+               try {
+                  // Parse date string (format: 'YYYY-MM-DD' or ISO string)
+                  let eventDate;
+                  if (typeof event.fromdate === 'string') {
+                     // Handle date string like '2024-11-25'
+                     const dateParts = event.fromdate.split('T')[0].split('-');
+                     eventDate = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+                  } else {
+                     eventDate = new Date(event.fromdate);
+                  }
+                  
+                  eventDate.setHours(0, 0, 0, 0);
+                  eventDate.setMinutes(0, 0);
+                  eventDate.setSeconds(0, 0);
+                  eventDate.setMilliseconds(0);
+                  
+                  // Compare dates - if event date is before today, it's past
+                  if (eventDate < today) {
+                     pastEvents.push({ event });
+                  } else {
+                     upcomingEvents.push({ event });
+                  }
+               } catch (error) {
+                  console.error('Error parsing event date:', event.fromdate, error);
+                  // If date parsing fails, treat as past event
+                  pastEvents.push({ event });
+               }
+            });
+
+            // Sort past events by date (newest first)
+            pastEvents.sort((a, b) => {
+               const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(0);
+               const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(0);
+               return dateB - dateA;
+            });
+
+            // Sort upcoming events by date (soonest first)
+            upcomingEvents.sort((a, b) => {
+               const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(9999999999999);
+               const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(9999999999999);
+               return dateA - dateB;
+            });
+
+            // Render events
+            renderEvents(pastEvents, 'past-events-container');
+            renderEvents(upcomingEvents, 'upcoming-events-container');
+         } catch (error) {
+            console.error('Error loading association events:', error);
+            showNoEventsMessage();
+         }
+      }
+
+      // Function to show no events message
+      function showNoEventsMessage() {
+         const pastContainer = document.getElementById('past-events-container');
+         const upcomingContainer = document.getElementById('upcoming-events-container');
+         
+         if (pastContainer) {
+            pastContainer.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No past events available at this time.</p>';
+         }
+         if (upcomingContainer) {
+            upcomingContainer.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No upcoming events scheduled at this time.</p>';
+         }
+      }
+
+
+      // Function to render event cards
+      function renderEvents(events, containerId) {
+         const container = document.getElementById(containerId);
+         if (!container) return;
+
+         if (events.length === 0) {
+            container.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No events available at this time.</p>';
+            return;
+         }
+
+         const eventsHTML = events.map(({ event }) => {
+            const eventUrl = `/event-details.html?id=${event.id}`;
+            const truncate = (text, length = 100) => {
+               if (!text) return '';
+               return text.length > length ? text.slice(0, length).trim() + '...' : text;
+            };
+
+            return `
+               <div class="tp-event-card" onclick="window.location.href='${eventUrl}'">
+                  <div class="tp-event-card-thumb">
+                     <img src="${event.bannerImage || '/assets/img/event/event-default.jpg'}" alt="${event.title}">
+                  </div>
+                  <div class="tp-event-card-content">
+                     <span class="tp-event-card-tag">${event.category || 'Event'}</span>
+                     <h4 class="tp-event-card-title">${event.title}</h4>
+                     ${event.date ? `
+                        <div class="tp-event-card-date">
+                           <i class="fa-solid fa-calendar"></i>
+                           <span>${event.date}</span>
+                        </div>
+                     ` : ''}
+                  </div>
+               </div>
+            `;
+         }).join('');
+
+         container.innerHTML = eventsHTML;
+      }
+   </script>
+
+</body>
+
+</html>
+

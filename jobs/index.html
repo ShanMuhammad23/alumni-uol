@@ -1,0 +1,972 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Job Listings | UOL Alumni</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .jobs-listing-area {
+         padding-top: 80px;
+         padding-bottom: 120px;
+      }
+
+      .jobs-search-bar {
+         margin-bottom: 40px;
+         max-width: 800px;
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+      .jobs-search-wrapper {
+         position: relative;
+      }
+
+      .jobs-search-input {
+         width: 100%;
+         padding: 16px 50px 16px 20px;
+         font-size: 16px;
+         border: 2px solid rgba(0, 0, 0, 0.1);
+         border-radius: 12px;
+         transition: all 0.3s ease;
+         background: #fff;
+      }
+
+      .jobs-search-input:focus {
+         outline: none;
+         border-color: var(--tp-theme-primary, #AB0C2F);
+         box-shadow: 0 0 0 3px rgba(171, 12, 47, 0.1);
+      }
+
+      .jobs-search-icon {
+         position: absolute;
+         right: 20px;
+         top: 50%;
+         transform: translateY(-50%);
+         color: var(--tp-theme-primary, #AB0C2F);
+         font-size: 18px;
+         pointer-events: none;
+      }
+
+      .jobs-split-container {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 40px;
+         margin-top: 40px;
+      }
+
+      .jobs-section {
+         margin-bottom: 0;
+      }
+
+      .jobs-section-title {
+         font-size: 36px;
+         font-weight: 700;
+         color: var(--tp-heading-primary, #161613);
+         margin-bottom: 15px;
+         padding-bottom: 20px;
+         border-bottom: 3px solid var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .jobs-section-subtitle {
+         font-size: 16px;
+         color: #666;
+         margin-bottom: 40px;
+      }
+
+      .jobs-list {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+         gap: 24px;
+         align-items: stretch;
+      }
+
+      .job-card {
+         background: #fff;
+         border-radius: 12px;
+         padding: 20px 22px;
+         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+         transition: all 0.3s ease;
+         border: 1px solid rgba(0, 0, 0, 0.05);
+         display: flex;
+         flex-direction: column;
+         gap: 16px;
+         height: 100%;
+      }
+
+      .job-card:hover {
+         transform: translateY(-3px);
+         box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+         border-color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .job-card-content {
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+      }
+
+      .job-card-header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         gap: 16px;
+         flex-wrap: wrap;
+      }
+
+      .job-card-heading {
+         display: flex;
+         flex-direction: column;
+         gap: 6px;
+         flex: 1;
+      }
+
+      .job-title {
+         font-size: 20px;
+         font-weight: 600;
+         margin: 0;
+         line-height: 1.3;
+         flex: 1;
+      }
+
+      .job-title a {
+         color: var(--tp-heading-primary, #161613);
+         transition: color 0.3s ease;
+         text-decoration: none;
+      }
+
+      .job-title a:hover {
+         color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .job-status-badge {
+         display: inline-block;
+         padding: 6px 14px;
+         border-radius: 20px;
+         font-size: 12px;
+         font-weight: 600;
+         text-transform: uppercase;
+         white-space: nowrap;
+      }
+
+      .job-status-active {
+         background: rgba(34, 197, 94, 0.1);
+         color: #22c55e;
+      }
+
+      .job-status-expired {
+         background: rgba(239, 68, 68, 0.1);
+         color: #ef4444;
+      }
+
+      .job-meta {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 18px;
+         font-size: 14px;
+         color: #666;
+      }
+
+      .job-meta-item {
+         display: flex;
+         align-items: center;
+         gap: 8px;
+      }
+
+      .job-meta-item i {
+         color: var(--tp-theme-primary, #AB0C2F);
+         font-size: 14px;
+      }
+
+      .job-deadline {
+         display: flex;
+         align-items: center;
+         gap: 8px;
+         font-size: 13px;
+         color: #666;
+      }
+
+      .job-deadline i {
+         color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .job-deadline.expired {
+         color: #ef4444;
+      }
+
+      .job-deadline.expired i {
+         color: #ef4444;
+      }
+
+      .job-type-badge {
+         display: inline-block;
+         padding: 6px 12px;
+         background: rgba(171, 12, 47, 0.1);
+         color: var(--tp-theme-primary, #AB0C2F);
+         border-radius: 6px;
+         font-size: 12px;
+         font-weight: 500;
+         text-transform: uppercase;
+         margin-right: 10px;
+      }
+
+      .job-type-badge-external {
+         background: rgba(22, 22, 19, 0.1);
+         color: var(--tp-heading-primary, #161613);
+      }
+
+      .job-card-header-actions {
+         display: flex;
+         align-items: center;
+         gap: 12px;
+         flex-shrink: 0;
+      }
+
+      .job-link-icon {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         width: 38px;
+         height: 38px;
+         background: rgba(171, 12, 47, 0.1);
+         color: var(--tp-theme-primary, #AB0C2F);
+         border-radius: 50%;
+         font-size: 16px;
+         transition: all 0.3s ease;
+         text-decoration: none;
+      }
+
+      .job-link-icon:hover {
+         background: var(--tp-theme-primary, #AB0C2F);
+         color: #fff;
+         transform: translateY(-2px);
+      }
+
+      .job-link-icon.disabled {
+         opacity: 0.5;
+         cursor: not-allowed;
+         pointer-events: none;
+      }
+
+      .jobs-expired-fullwidth {
+         width: 100%;
+         margin: auto;
+   
+         background: transparent;
+      }
+
+      .jobs-expired-section {
+         margin-top: 80px;
+         padding: 50px;
+        
+         border-radius: 16px;
+         box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.08);
+         max-width: 1200px;
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+      .jobs-expired-section .jobs-section-title {
+         border-bottom: none;
+         margin-bottom: 10px;
+      }
+
+      .jobs-expired-section .jobs-section-subtitle {
+         margin-bottom: 30px;
+      }
+
+      .jobs-expired-list {
+         grid-template-columns: repeat(2, minmax(0, 1fr));
+         gap: 32px;
+      }
+
+      .job-origin-badge {
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         font-size: 12px;
+         font-weight: 600;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+         padding: 6px 12px;
+         border-radius: 999px;
+         background: rgba(0, 0, 0, 0.05);
+         color: #555;
+         width: fit-content;
+      }
+
+      .job-origin-badge i {
+         color: inherit;
+      }
+
+      .job-origin-badge--uol {
+         background: rgba(171, 12, 47, 0.12);
+         color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .job-origin-badge--partner {
+         background: rgba(34, 197, 94, 0.12);
+         color: #15803d;
+      }
+
+      .job-card.job-card-expired {
+         opacity: 0.85;
+      }
+
+      .job-card.job-card-expired .job-title a,
+      .job-card.job-card-expired .job-meta,
+      .job-card.job-card-expired .job-deadline {
+         color: #777;
+      }
+
+      .job-card.job-card-expired .job-title a {
+         pointer-events: none;
+      }
+
+      @media (max-width: 991px) {
+         .jobs-listing-area {
+            padding-top: 60px;
+            padding-bottom: 80px;
+         }
+
+         .jobs-section-title {
+            font-size: 30px;
+         }
+
+         .jobs-split-container {
+            grid-template-columns: 1fr;
+            gap: 60px;
+         }
+
+         .jobs-section {
+            margin-bottom: 0;
+         }
+      }
+
+      @media (max-width: 768px) {
+         .job-card {
+            flex-direction: column;
+            padding: 20px;
+         }
+
+         .job-card-header {
+            flex-direction: column;
+            align-items: flex-start;
+         }
+
+         .job-title {
+            font-size: 20px;
+         }
+
+         .job-meta {
+            gap: 15px;
+            font-size: 13px;
+         }
+
+         .job-card-header-actions {
+            width: 100%;
+            justify-content: flex-start;
+         }
+
+         .jobs-expired-section {
+            padding: 30px 20px;
+         }
+
+         .jobs-list {
+            grid-template-columns: 1fr;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/icon/favicon.ico" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-end">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li><a href="/chapters/">Chapters</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                     <div class="tp-header-btn d-none d-md-block ml-30">
+                        <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none ml-30">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+   <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/">
+                     <img src="/assets/img/brand/logo-black.png" alt="logo">
+                  </a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+   <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix red-shadow">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-sm-12">
+               <div class="tp-breadcrumb__content">
+                  <div class="tp-breadcrumb__list inner-after">
+                     <span class="white"><a href="/"><svg width="17" height="14" viewBox="0 0 17 14" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z"
+                                    fill="currentColor" />
+                              </svg></a></span>
+                     <span class="white">Career Opportunities</span>
+                  </div>
+                  <h3 class="tp-breadcrumb__title color">Career Opportunities</h3>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <main>
+      <section class="jobs-listing-area grey-bg">
+         <div class="container">
+            <!-- Search Bar -->
+            <div class="jobs-search-bar">
+               <div class="jobs-search-wrapper">
+                  <input type="text" id="jobsSearchInput" class="jobs-search-input" placeholder="Search jobs by title, location, or company...">
+                  <i class="fa-solid fa-magnifying-glass jobs-search-icon"></i>
+               </div>
+            </div>
+
+            <!-- Split Display Container -->
+            <div class="jobs-split-container">
+               <!-- UoL Job Listings -->
+               <div class="jobs-section" data-job-type="uol">
+                  <h2 class="jobs-section-title">The University of Lahore Jobs</h2>
+                  <p class="jobs-section-subtitle">Explore career opportunities at The University of Lahore</p>
+                  <div class="jobs-list" id="uolJobsList">
+                     <!-- Jobs will be loaded dynamically from database -->
+                  </div>
+               </div>
+
+               <!-- Other Employers -->
+               <div class="jobs-section" data-job-type="other">
+                  <h2 class="jobs-section-title">Other Employers Jobs</h2>
+                  <p class="jobs-section-subtitle">Career opportunities from partner organizations</p>
+                  <div class="jobs-list" id="otherJobsList">
+                     <!-- Jobs will be loaded dynamically from database -->
+                  </div>
+               </div>
+            </div>
+
+            <!-- Expired Opportunities -->
+           
+         </div>
+         <div class="jobs-expired-fullwidth">
+            <div class="jobs-expired-section">
+               <h2 class="jobs-section-title">Expired Opportunities</h2>
+               <p class="jobs-section-subtitle">Closed postings are archived here for reference. Keep an eye on our channels for their next intake.</p>
+               <div class="jobs-list jobs-expired-list" id="expiredJobsList">
+                  <!-- Expired jobs will be loaded dynamically from database -->
+               </div>
+            </div>
+            </div>
+      </section>
+      
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/jobs/">Career Opportunities</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                          
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <!-- JS here -->
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/isotope-pkgd.js"></script>
+   <script src="/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/assets/js/flatpickr.js"></script>
+   <script src="/assets/js/ajax-form.js"></script>
+   <script src="/assets/js/main.js"></script>
+   <!-- Supabase Client Library -->
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script>
+      (function () {
+         // Supabase Configuration
+         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+
+         // Initialize Supabase client
+         const { createClient } = supabase;
+         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+         
+         if (!supabaseClient) {
+            console.error('Failed to initialize Supabase client');
+         }
+
+         // Helper function to format date
+         function formatDate(dateString) {
+            if (!dateString) return '';
+            
+            try {
+               const date = new Date(dateString);
+               if (isNaN(date.getTime())) return dateString;
+               
+               const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                             'July', 'August', 'September', 'October', 'November', 'December'];
+               return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+            } catch (error) {
+               return dateString;
+            }
+         }
+
+         // Helper function to format date for posted date
+         function formatPostedDate(dateString) {
+            if (!dateString) return '';
+            return formatDate(dateString);
+         }
+
+         // Check if job is expired (deadline < today)
+         function isJobExpired(deadline) {
+            if (!deadline) return false;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const deadlineDate = new Date(deadline);
+            deadlineDate.setHours(0, 0, 0, 0);
+            return deadlineDate < today;
+         }
+
+         // Check if job is UoL job based on category
+         function isUolJob(category) {
+            if (!category) return false;
+            const uolCategories = ['uol', 'the university of lahore', 'university of lahore', 'uol jobs'];
+            return uolCategories.includes(category.toLowerCase());
+         }
+
+         // Create job card HTML
+         function createJobCard(job, isExpired = false) {
+            const isUol = isUolJob(job.category);
+            const expiredClass = isExpired ? 'job-card-expired' : '';
+            const statusBadge = isExpired 
+               ? '<span class="job-status-badge job-status-expired">Expired</span>'
+               : '<span class="job-status-badge job-status-active">Active</span>';
+            
+            const linkHref = job.job_link || '#';
+            const linkClass = isExpired ? 'job-link-icon disabled' : 'job-link-icon';
+            const linkTitle = isExpired ? 'Expired' : 'View Details';
+            const linkOnClick = isExpired ? '' : '';
+
+            const deadlineClass = isExpired ? 'expired' : '';
+            const deadlineText = job.deadline ? formatDate(job.deadline) : 'No deadline';
+            
+            const postedDate = job.created_at ? formatPostedDate(job.created_at) : '';
+
+            // Origin badge for expired jobs
+            const originBadge = isExpired 
+               ? `<span class="job-origin-badge ${isUol ? 'job-origin-badge--uol' : 'job-origin-badge--partner'}">
+                     <i class="fa-solid ${isUol ? 'fa-building-columns' : 'fa-handshake'}"></i>
+                     ${isUol ? 'UoL Careers' : 'Partner Employer'}
+                  </span>`
+               : '';
+
+            return `
+               <div class="job-card ${expiredClass}">
+                  <div class="job-card-content">
+                     <div class="job-card-header">
+                        <div class="job-card-heading">
+                           ${originBadge}
+                           <h3 class="job-title">
+                              ${isExpired 
+                                 ? `<a>${job.title || 'Untitled Job'}</a>`
+                                 : `<a href="${linkHref}" ${job.job_link ? 'target="_blank" rel="noopener noreferrer"' : ''}>${job.title || 'Untitled Job'}</a>`
+                              }
+                           </h3>
+                        </div>
+                        <div class="job-card-header-actions">
+                           ${statusBadge}
+                           <a href="${linkHref}" class="${linkClass}" title="${linkTitle}" ${isExpired ? 'onclick="return false;"' : (job.job_link ? 'target="_blank" rel="noopener noreferrer"' : '')}>
+                              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <div class="job-meta">
+                        ${job.company ? `
+                           <div class="job-meta-item">
+                              <i class="fa-solid fa-building"></i>
+                              <span>${job.company}</span>
+                           </div>
+                        ` : ''}
+                        ${job.location ? `
+                           <div class="job-meta-item">
+                              <i class="fa-solid fa-location-dot"></i>
+                              <span>${job.location}</span>
+                           </div>
+                        ` : ''}
+                        ${postedDate ? `
+                           <div class="job-meta-item">
+                              <i class="fa-solid fa-calendar"></i>
+                              <span>Posted: ${postedDate}</span>
+                           </div>
+                        ` : ''}
+                     </div>
+                     ${job.deadline ? `
+                        <div class="job-deadline ${deadlineClass}">
+                           <i class="fa-solid fa-clock"></i>
+                           <span>Deadline: ${deadlineText}</span>
+                        </div>
+                     ` : ''}
+                  </div>
+               </div>
+            `;
+         }
+
+         // Load and render jobs from database
+         async function loadJobs() {
+            const uolJobsList = document.getElementById('uolJobsList');
+            const otherJobsList = document.getElementById('otherJobsList');
+            const expiredJobsList = document.getElementById('expiredJobsList');
+
+            if (!uolJobsList || !otherJobsList || !expiredJobsList) {
+               console.error('Missing required job list containers');
+               return;
+            }
+
+            try {
+               if (!supabaseClient) {
+                  throw new Error('Supabase client not initialized');
+               }
+
+               // Fetch all jobs from database
+               const { data: jobs, error } = await supabaseClient
+                  .from('tbljobs')
+                  .select('*')
+                  .order('created_at', { ascending: false });
+
+               if (error) {
+                  throw error;
+               }
+
+               if (!jobs || jobs.length === 0) {
+                  uolJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #666;">No jobs available at the moment. Please check back soon.</p>';
+                  otherJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #666;">No jobs available at the moment. Please check back soon.</p>';
+                  expiredJobsList.innerHTML = '';
+                  return;
+               }
+
+               // Get today's date for comparison
+               const today = new Date();
+               today.setHours(0, 0, 0, 0);
+
+               // Separate jobs into active and expired
+               const activeJobs = [];
+               const expiredJobs = [];
+
+               jobs.forEach(job => {
+                  if (isJobExpired(job.deadline)) {
+                     expiredJobs.push(job);
+                  } else {
+                     activeJobs.push(job);
+                  }
+               });
+
+               // Sort active jobs by deadline (ascending - earliest deadline first)
+               activeJobs.sort((a, b) => {
+                  if (!a.deadline && !b.deadline) return 0;
+                  if (!a.deadline) return 1;
+                  if (!b.deadline) return -1;
+                  return new Date(a.deadline) - new Date(b.deadline);
+               });
+
+               // Sort expired jobs by deadline (descending - most recently expired first)
+               expiredJobs.sort((a, b) => {
+                  if (!a.deadline && !b.deadline) return 0;
+                  if (!a.deadline) return 1;
+                  if (!b.deadline) return -1;
+                  return new Date(b.deadline) - new Date(a.deadline);
+               });
+
+               // Categorize active jobs
+               const uolActiveJobs = activeJobs.filter(job => isUolJob(job.category));
+               const otherActiveJobs = activeJobs.filter(job => !isUolJob(job.category));
+
+               // Render UoL jobs
+               if (uolActiveJobs.length > 0) {
+                  uolJobsList.innerHTML = uolActiveJobs.map(job => createJobCard(job, false)).join('');
+               } else {
+                  uolJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #666;">No UoL jobs available at the moment. Please check back soon.</p>';
+               }
+
+               // Render Other Employer jobs
+               if (otherActiveJobs.length > 0) {
+                  otherJobsList.innerHTML = otherActiveJobs.map(job => createJobCard(job, false)).join('');
+               } else {
+                  otherJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #666;">No other employer jobs available at the moment. Please check back soon.</p>';
+               }
+
+               // Render expired jobs
+               if (expiredJobs.length > 0) {
+                  expiredJobsList.innerHTML = expiredJobs.map(job => createJobCard(job, true)).join('');
+               } else {
+                  expiredJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #666;">No expired jobs to display.</p>';
+               }
+
+               // Initialize search functionality after jobs are loaded
+               initializeSearch();
+
+            } catch (error) {
+               console.error('Error loading jobs:', error);
+               uolJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #ef4444;">Error loading jobs. Please refresh the page.</p>';
+               otherJobsList.innerHTML = '<p class="text-center" style="padding: 40px 20px; color: #ef4444;">Error loading jobs. Please refresh the page.</p>';
+               expiredJobsList.innerHTML = '';
+            }
+         }
+
+         // Search functionality
+         function initializeSearch() {
+            const searchInput = document.getElementById('jobsSearchInput');
+            const uolJobsList = document.getElementById('uolJobsList');
+            const otherJobsList = document.getElementById('otherJobsList');
+            const expiredJobsList = document.getElementById('expiredJobsList');
+
+            if (!searchInput) return;
+
+            function filterJobs(searchTerm) {
+               const term = searchTerm.toLowerCase().trim();
+
+               // Filter UoL jobs
+               const uolJobs = uolJobsList.querySelectorAll('.job-card');
+               uolJobs.forEach(job => {
+                  const jobText = job.textContent.toLowerCase();
+                  const matches = term === '' || jobText.includes(term);
+                  job.style.display = matches ? '' : 'none';
+               });
+
+               // Filter Other jobs
+               const otherJobs = otherJobsList.querySelectorAll('.job-card');
+               otherJobs.forEach(job => {
+                  const jobText = job.textContent.toLowerCase();
+                  const matches = term === '' || jobText.includes(term);
+                  job.style.display = matches ? '' : 'none';
+               });
+
+               // Filter expired jobs
+               const expiredJobs = expiredJobsList.querySelectorAll('.job-card');
+               expiredJobs.forEach(job => {
+                  const jobText = job.textContent.toLowerCase();
+                  const matches = term === '' || jobText.includes(term);
+                  job.style.display = matches ? '' : 'none';
+               });
+
+               // Show "No results" messages if needed
+               showNoResultsMessage(uolJobsList, uolJobs, term);
+               showNoResultsMessage(otherJobsList, otherJobs, term);
+               showNoResultsMessage(expiredJobsList, expiredJobs, term);
+            }
+
+            function showNoResultsMessage(container, jobs, term) {
+               if (!container) return;
+               
+               const visibleJobs = Array.from(jobs).filter(job => {
+                  if (term === '') return job.style.display !== 'none';
+                  return job.style.display !== 'none' && job.textContent.toLowerCase().includes(term);
+               });
+
+               let noResultsMsg = container.querySelector('.no-results-message');
+               
+               if (visibleJobs.length === 0 && term !== '') {
+                  if (!noResultsMsg) {
+                     noResultsMsg = document.createElement('div');
+                     noResultsMsg.className = 'no-results-message';
+                     noResultsMsg.style.cssText = 'text-align: center; padding: 40px 20px; color: #666; font-size: 16px; grid-column: 1 / -1;';
+                     noResultsMsg.innerHTML = '<i class="fa-solid fa-search" style="font-size: 48px; color: #ddd; margin-bottom: 15px; display: block;"></i><p>No jobs found matching your search.</p>';
+                     container.appendChild(noResultsMsg);
+                  }
+               } else {
+                  if (noResultsMsg) {
+                     noResultsMsg.remove();
+                  }
+               }
+            }
+
+            // Add event listener for search input
+            searchInput.addEventListener('input', function() {
+               filterJobs(this.value);
+            });
+
+            // Initial filter (in case of page load with search params)
+            filterJobs(searchInput.value);
+         }
+
+         // Load jobs when page is ready
+         document.addEventListener('DOMContentLoaded', function() {
+            loadJobs();
+         });
+      })();
+   </script>
+
+</body>
+
+</html>
+

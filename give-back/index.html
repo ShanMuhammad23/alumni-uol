@@ -1,0 +1,508 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>UOL Alumni - Give Back</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Place favicon.ico in the root directory -->
+      <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+      <!-- CSS here -->
+      <link rel="stylesheet" href="/assets/css/bootstrap.css">
+      <link rel="stylesheet" href="/assets/css/animate.css">
+      <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+      <link rel="stylesheet" href="/assets/css/slick.css">
+      <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+      <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+      <link rel="stylesheet" href="/assets/css/spacing.css">
+      <link rel="stylesheet" href="/assets/css/main.css">
+      <style>
+         .tp-contact-info-area {
+            padding: 0px 50px;
+         }
+         @media (max-width: 768px) {
+            .tp-contact-info-area {
+               padding: 50px 0;
+            }
+         }
+         .contact-card {
+            --contact-accent: #6366f1;
+            position: relative;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            background:
+               linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 60%),
+               #ffffff;
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+            text-align: left;
+         
+            overflow: hidden;
+            min-height: 300px;
+         }
+         .contact-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+         }
+         .contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 32px 70px rgba(15, 23, 42, 0.12);
+         }
+         .contact-card:hover::after {
+            opacity: 1;
+         }
+         .contact-card__icon {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--contact-accent);
+            font-size: 24px;
+            transition: transform 0.35s ease, background 0.35s ease;
+            z-index: 1;
+         }
+         .contact-card:hover .contact-card__icon {
+            transform: scale(1.05);
+            background: rgba(99, 102, 241, 0.18);
+         }
+         .contact-card__icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            fill: none;
+         }
+         .contact-card__content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+         }
+         .contact-card__label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            color: rgba(15, 23, 42, 0.55);
+         }
+         .contact-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+         }
+         .contact-card__description {
+            margin: 0;
+            color: rgba(15, 23, 42, 0.7);
+            line-height: 1.6;
+         }
+         .contact-card__meta {
+            font-size: 14px;
+            color: rgba(15, 23, 42, 0.5);
+         }
+         .contact-card__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--contact-accent);
+            text-decoration: none;
+            transition: gap 0.35s ease, color 0.35s ease;
+            font-size: 15px;
+         }
+         .contact-card__cta-icon {
+            font-size: 20px;
+            line-height: 1;
+            transition: transform 0.35s ease;
+         }
+         .contact-card__cta:hover {
+            color: #111827;
+            gap: 14px;
+         }
+         .contact-card__cta:hover .contact-card__cta-icon {
+            transform: translateX(4px);
+         }
+         .contact-card--phone {
+            --contact-accent: #0ea5e9;
+            background:
+               linear-gradient(135deg, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0) 60%),
+               #ffffff;
+         }
+         .contact-card--phone:hover .contact-card__icon {
+            background: rgba(14, 165, 233, 0.18);
+         }
+         .contact-card--visit {
+            --contact-accent: #f97316;
+            background:
+               linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0) 60%),
+               #ffffff;
+         }
+         .contact-card--visit:hover .contact-card__icon {
+            background: rgba(249, 115, 22, 0.18);
+         }
+         .contact-card__cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+         }
+         .contact-card__badge {
+            align-self: flex-start;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            background: rgba(15, 23, 42, 0.05);
+            color: rgba(15, 23, 42, 0.6);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+         }
+         @media (max-width: 575px) {
+            .contact-card {
+               flex-direction: column;
+               padding: 28px 24px;
+            }
+            .contact-card__icon {
+               width: 56px;
+               height: 56px;
+               border-radius: 18px;
+            }
+         }
+         
+         /* Make all tp-financial-item equal height */
+         .row .tp-financial-item {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+         }
+         
+         .row .tp-financial-item .tp-financial-thumb {
+            flex-shrink: 0;
+         }
+         
+         .row .tp-financial-item .tp-financial-content {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+         }
+         
+         @media (min-width: 768px) {
+            .row:has(.tp-financial-item) {
+               display: flex;
+               flex-wrap: wrap;
+            }
+            
+            .row:has(.tp-financial-item) > [class*="col-"] {
+               display: flex;
+            }
+         }
+      </style>
+   </head>
+
+   <body>
+
+      <!-- pre loader area start -->
+      <div id="loading">
+         <div id="loading-center">
+            <div id="loading-center-absolute">
+               <!-- loading content here -->
+               <div class="tp-preloader-content">
+                  <div class="tp-preloader-logo">
+                     <div class="tp-preloader-circle">
+                        <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                           </circle>
+                           <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        </svg>
+                     </div>
+                     <img src="/assets/img/icon/favicon.ico" alt="">
+                  </div>
+                  <p class="tp-preloader-subtitle">Loading...</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- pre loader area end -->
+
+      <!-- back to top start -->
+      <div class="back-to-top-wrapper">
+         <button id="back_to_top" type="button" class="back-to-top-btn">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+            </svg>
+         </button>
+      </div>
+      <!-- back to top end -->
+
+     <!-- search area start -->
+
+     <!-- search area end -->
+
+      
+
+      <div class="body-overlay"></div>
+      <!-- cart mini area end -->
+
+
+      <header class="header-area tp-header-transparent p-relative">
+         <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+            <div class="pl-40 pr-40">
+               <div class="row align-items-center">
+                  <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-6 col-6">
+                     <div class="tp-header-logo-1 tp-header-logo">
+                        <a href="/">
+                           <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                           <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                     <div class="main-menu text-end">
+                        <nav class="tp-main-menu-content">
+                           <ul>
+                              <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                              <li><a href="/about/">About</a></li>
+                              <li><a href="/events/">Events</a></li>
+                              <li><a href="/benefits/">Perks & Benefits</a></li>
+                              <li><a href="/give-back/">Give Back</a></li>
+                              <li><a href="/associations/">Associations</a></li>
+                              <li><a href="/chapters/">Chapters</a></li>
+                              <li><a href="/newsletters/">Newsletters</a></li>
+                              <li><a href="/contact/">Contact</a></li>
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+                  <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
+                     <div class="tp-header-contact d-flex align-items-center justify-content-end">
+                        <div class="tp-header-btn d-none d-md-block ml-30">
+                           <a href="https://alumni-portal-uol.vercel.app/signin" target="_blank">Login</a>
+                        </div>
+                        <div class="tp-header-bar d-xl-none ml-30">
+                           <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+         <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/">
+                     <img src="/assets/img/brand/logo-black.png" alt="logo">
+                  </a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+      <!-- header-area-end -->
+      <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix red-shadow">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-12">
+                  <div class="tp-breadcrumb__content">
+                     <div class="tp-breadcrumb__list inner-after">
+                        <span class="white"><a href="/"><svg width="17" height="14" viewBox="0 0 17 14"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z"
+                                    fill="currentColor" />
+                              </svg></a></span>
+                        <span class="white">Give Back</span>
+                     </div>
+                     <h3 class="tp-breadcrumb__title color">Give Back</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- offcanvas area start -->
+   
+      <div class="body-overlay"></div>
+      <!-- offcanvas area end -->
+
+      <main>
+  
+          <!-- ====== Cards Section End -->
+          <section class="tp-financial-area tp-financial-bg pt-90 pb-90">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="tp-financial-heading">
+                        <h3 class="tp-financial-title">Types of Contributions</h3>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-financial-item mb-30">
+                        <div class="tp-financial-thumb">
+                           <img src="/assets/img/banner/give-back-1.jpg" alt="">
+                        </div>
+                        <div class="tp-financial-content">
+                           <h4 class="tp-financial-content-title">UoL Relief</h4>
+                            <p>
+                                <span class="fst-italic italic mb-10">Empower Tomorrow, Give Today—Your Contribution, Their Future.</span><br><p>
+                                The Alumni Fund provides an essential resource to support various initiatives that foster growth and development at The University of Lahore, from scholarships to campus improvements. By contributing to this fund, alumni can help create a lasting impact on future generations of students, ensuring they receive the same opportunities that helped shape their own success.</p></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-financial-item mb-30">
+                        <div class="tp-financial-thumb">
+                           <img src="/assets/img/banner/give-back-2.jpg" alt="">
+                        </div>
+                        <div class="tp-financial-content">
+                           <h4 class="tp-financial-content-title">Name a Scholarship</h4>
+                           <p>
+                            <span class="fst-italic italic mb-20">Leave a Legacy—Shape the Future.
+                            </span><p>
+                            Honor your legacy by naming a scholarship at The University of Lahore. This is a meaningful way to support talented students who need financial assistance, while also leaving a lasting imprint on the university’s future. Whether you want to focus on a specific field of study or help a deserving student, your scholarship will make a difference for years to come.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-financial-item mb-30">
+                        <div class="tp-financial-thumb">
+                           <img src="/assets/img/banner/give-back-3.jpg" alt="">
+                        </div>
+                        <div class="tp-financial-content">
+                           <h4 class="tp-financial-content-title">Corporate Partnerships</h4>
+                            <p>
+                            <span class="fst-italic italic mb-10">Collaborate, Innovate, Grow—Together, We Shape Tomorrow.</span><br><p>
+                            Partnerships provide a unique opportunity for alumni to collaborate with The University of Lahore to create impactful and long-term relationships. From internships to collaborative research, foster innovation, offer professional opportunities for students and strengthen the university’s global presence, all while supporting your company’s community engagement goals.</p>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+  
+         <!-- map area end -->
+          
+      </main>
+
+      <!-- footer-area-start -->
+      <footer>
+         <div class="tp-footer-main  pt-80 pb-55" style="background-color: #f5f5f5;">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-4 col-lg-3 col-sm-6">
+                     <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                        <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                           <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                        </div>
+                       
+                        
+                     </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-3 col-sm-6">
+                     <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                        <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                        <div class="tp-footer-widget-link">
+                           <ul>
+                              <li><a href="/about/">About Us</a></li>
+                              <li><a href="/events/">Events</a></li>
+                              <li><a href="/contact/">Contact Us</a></li>
+                              <li><a href="/newsletters/">Newsletters</a></li>
+                              <li><a href="/jobs/">Career Opportunities</a></li>  
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-sm-4">
+                     <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                        <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                        <div class="tp-footer-widget-link">
+                           <ul>
+                              <li><a href="/associations/">Alumni Associations</a></li>
+                              <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-sm-8">
+                     <div class="p-footer-widget tp-footer-col-4 mb-30">
+                        <div class="tp-footer-newsletter-wrap">
+                           
+                           <div class="tp-footer-newsletter-social">
+                              <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                              <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="tp-footer-bottom">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="tp-footer-copyright text-center">
+                        <span>© 2025 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- footer-area-end -->
+
+      <!-- JS here -->
+      <script src="/assets/js/vendor/jquery.js"></script>
+      <script src="/assets/js/vendor/waypoints.js"></script>
+      <script src="/assets/js/bootstrap-bundle.js"></script>
+      <script src="/assets/js/swiper-bundle.js"></script>
+      <script src="/assets/js/slick.js"></script>
+      <script src="/assets/js/range-slider.js"></script>
+      <script src="/assets/js/magnific-popup.js"></script>
+      <script src="/assets/js/nice-select.js"></script>
+      <script src="/assets/js/select2.min.js"></script>
+      <script src="/assets/js/purecounter.js"></script>
+      <script src="/assets/js/countdown.js"></script>
+      <script src="/assets/js/wow.js"></script>
+      <script src="/assets/js/isotope-pkgd.js"></script>
+      <script src="/assets/js/imagesloaded-pkgd.js"></script>
+      <script src="/assets/js/flatpickr.js"></script>      
+      <script src="/assets/js/ajax-form.js"></script>
+      <script src="/assets/js/main.js"></script>
+
+   </body>
+
+</html>

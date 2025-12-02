@@ -1,0 +1,265 @@
+{
+  "local": [
+    {
+      "id": 1,
+      "slug": "lahore-surrounding",
+      "name": "Lahore  Chapter",
+      "image":"/assets/img/chapters/national/lahore.jpg",
+      "description": "This chapter includes alumni from Lahore, Kasur, Kot Radha Kishen, Sharaqpur Sharif, Muridke, Narang Mandi, Sheikhupura, Chunian, Pattoki, Renala Khurd, Okara, Depalpur, Haveli Lakha, Hujra Shah Muqeem, and Manwala. Together, this diverse and vibrant region forms a strong alumni network that fosters learning, collaboration, and professional growth through shared experiences and opportunities.",
+      "regions": ["Lahore", "Kasur", "Sheikhupura", "Okara"],
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "slug": "gujranwala-gujrat-sialkot",
+      "name": "Gujranwala–Gujrat–Sialkot Chapter",
+      "image":"/assets/img/chapters/national/Gujranwala.jpg",
+      "description": "This chapter brings together alumni from Gujranwala, Gujrat, Sialkot, Daska, Wazirabad, Kamoke, Hafizabad, Alipur Chattha, Lala Musa, and Kharian. Representing an important industrial and commercial belt, this chapter provides valuable networking, mentorship, and development opportunities for alumni.",
+      "regions": ["Gujranwala", "Gujrat", "Sialkot", "Wazirabad"],
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "slug": "faisalabad",
+      "name": "Faisalabad Chapter",
+      "image":"/assets/img/chapters/national/Faisalabad.jpg",
+      "description": "The Faisalabad chapter includes alumni from Faisalabad, Jaranwala, Samundri, Gojra, Toba Tek Singh, Chiniot, and Jhang. With representation from one of Pakistan's major economic hubs, this chapter facilitates rich learning experiences, professional collaboration, and continuous growth for its members.",
+      "regions": ["Faisalabad", "Jhang", "Toba Tek Singh", "Chiniot"],
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "slug": "sargodha-khushab",
+      "name": "Sargodha Chapter",
+      "image":"/assets/img/chapters/national/Sargodha.jpg",
+      "description": "This chapter consists of alumni from Sargodha, Khushab, Jauharabad, Bhalwal, and Mianwali. These interconnected cities form a cohesive alumni community that supports peer learning, career development, and collective progress through regular engagement and knowledge-sharing.",
+      "regions": ["Sargodha", "Khushab", "Mianwali", "Bhalwal"],
+      "status": "active"
+    },
+    {
+      "id": 5,
+      "slug": "multan",
+      "name": "Multan Chapter",
+      "image":"/assets/img/chapters/national/multan.jpg",
+      "description": "The Multan chapter covers alumni living in Multan, Khanewal, Lodhran, Vehari, and nearby areas such as Jahanian. This chapter represents a dynamic blend of professional fields and offers alumni meaningful opportunities for growth, leadership building, and networking.",
+      "regions": ["Multan", "Khanewal", "Lodhran", "Vehari"],
+      "status": "active"
+    },
+    {
+      "id": 6,
+      "slug": "bahawalpur-bahawalnagar",
+      "name": "Bahawalpur–Bahawalnagar Chapter",
+      "image":"/assets/img/chapters/national/Bahawalpur.jpg",
+      "description": "This chapter includes alumni from Bahawalpur, Bahawalnagar, Chishtian, Haroonabad, Hasilpur, and surrounding towns such as Fatehpur. It serves as a strong platform for alumni to connect, learn, and advance professionally while contributing to community development in the region.",
+      "regions": ["Bahawalpur", "Bahawalnagar", "Chishtian", "Hasilpur"],
+      "status": "active"
+    },
+    {
+      "id": 7,
+      "slug": "sahiwal-pakpattan",
+      "name": "Sahiwal Chapter",
+      "image":"/assets/img/chapters/national/Sahiwal.jpg",
+      "description": "The Sahiwal chapter brings together alumni from Sahiwal, Pakpattan, Arifwala, Chichawatni, and Shorkot. This chapter fosters collaboration across education, business, and social sectors while promoting continuous learning and mutual growth among its members.",
+      "regions": ["Sahiwal", "Pakpattan", "Arifwala", "Chichawatni"],
+      "status": "active"
+    },
+    {
+      "id": 8,
+      "slug": "southern-punjab",
+      "name": "Southern Punjab Chapter",
+      "image":"/assets/img/chapters/national/south punjab.jpg",
+      "description": "This chapter comprises alumni from Dera Ghazi Khan, Jampur, Rajanpur, Kot Addu, Layyah, Muzaffargarh, Jatoi, Liaqatpur, Rahim Yar Khan, and Sadiqabad. Spanning a broad yet connected region, it empowers alumni by building networks that encourage personal development, knowledge exchange, and career enhancement.",
+      "regions": ["Dera Ghazi Khan", "Rahim Yar Khan", "Muzaffargarh", "Layyah"],
+      "status": "active"
+    },
+    {
+      "id": 9,
+      "slug": "islamabad-rawalpindi",
+      "name": "Islamabad Chapter",
+      "image":"/assets/img/chapters/national/Islamabad.jpg",
+      "description": "The Islamabad–Rawalpindi chapter consists of alumni from Islamabad, Rawalpindi, Wah Cantt, Tarbela Ghazi, Attock, Chakwal, Dina, and Jhelum. Located at the center of national activity, this chapter provides strong opportunities for professional advancement through interaction, mentorship, and innovative learning.",
+      "regions": ["Islamabad", "Rawalpindi", "Attock", "Jhelum"],
+      "status": "active"
+    },
+    {
+      "id": 10,
+      "slug": "peshawar-northern-kp",
+      "name": "KPK Chapter",
+      "image":"/assets/img/chapters/national/Peshawar.jpg",
+      "description": "This chapter includes alumni from Peshawar, Kohat, Bannu, Batkhela, Buner, Parachinar, Abbottabad, and Mansehra. Bringing together graduates across northern Khyber Pakhtunkhwa, this chapter promotes academic enrichment, leadership growth, and meaningful professional connections.",
+      "regions": ["Peshawar", "Abbottabad", "Kohat", "Bannu"],
+      "status": "active"
+    },
+    {
+      "id": 11,
+      "slug": "kashmir",
+      "name": "Kashmir Chapter",
+      "image":"/assets/img/chapters/national/Kashmir.jpg",
+      "description": "The Kashmir chapter includes alumni from Azad Jammu Kashmir, Bhimber, Kotli, and Poonch. With strong ties to the region's educational and social landscape, this chapter supports its members through collaborative learning, community engagement, and skill-building opportunities.",
+      "regions": ["Azad Jammu Kashmir", "Bhimber", "Kotli", "Poonch"],
+      "status": "active"
+    },
+    {
+      "id": 12,
+        "slug": "sindh",
+      "name": "Sindh Chapter",
+      "image":"/assets/img/chapters/national/sindh.jpg",
+      "description": "This chapter comprises alumni from Karachi and Ghotki, representing both the metropolitan center and upper Sindh. It serves as a bridge for alumni across diverse industries, offering opportunities for career growth, networking, and continuous professional development.",
+      "regions": ["Karachi", "Ghotki"],
+      "status": "active"
+    },
+    {
+      "id": 13,
+      "slug": "balochistan",
+      "name": "Balochistan Chapter",
+      "image":"/assets/img/chapters/national/Balochistan.jpg",
+      "description": "The Balochistan chapter consists of alumni from Quetta and Dalbandin. United by regional pride and professional ambition, this chapter enables alumni to collaborate, learn, and grow through shared experiences and development-focused activities.",
+      "regions": ["Quetta", "Dalbandin"],
+      "status": "active"
+    },
+    {
+      "id": 14,
+      "slug": "northern-pakistan",
+      "name": "Northern Pakistan Chapter",
+      "image":"/assets/img/chapters/national/Northen Pakistan.jpg",
+      "description": "This chapter includes alumni from Gilgit and Skardu, representing the northernmost regions of Pakistan. Through this chapter, alumni benefit from a supportive community that encourages personal enrichment, learning opportunities, and professional networking despite geographical distances.",
+      "regions": ["Gilgit", "Skardu"],
+      "status": "active"
+    }
+  ],
+  "international": [
+    {
+      "id": 25,
+      "slug": "kuwait",
+      "name": "Kuwait Chapter",
+      "image":"/assets/img/chapters/international/Kuwai.jpg",
+      "country": "Kuwait",
+      "description": "Connect with UOL alumni in Kuwait. Join networking events and community gatherings.",
+      "status": "active"
+    },
+    {
+      "id": 22,
+      "slug": "qatar",
+      "name": "Qatar Chapter",
+      "image":"/assets/img/chapters/international/Qatar.jpg",
+      "country": "Qatar",
+      "description": "Join UOL alumni in Qatar. Connect with professionals, attend events, and build your network in Doha and across Qatar.",
+      "status": "active"
+    },
+    {
+      "id": 23,
+      "slug": "bahrain",
+      "name": "Bahrain Chapter",
+      "image":"/assets/img/chapters/international/Bahrain.jpg",
+      "country": "Bahrain",
+      "description": "Connect with UOL alumni in Bahrain. Join networking events and community activities to strengthen professional connections.",
+      "status": "active"
+    },
+    {
+      "id": 19,
+      "slug": "uk",
+      "name": "United Kingdom Chapter",
+      "image":"/assets/img/chapters/international/UK.jpg",
+      "country": "United Kingdom",
+      "description": "Connect with UOL alumni across the UK. Join networking events, professional development sessions, and community activities in London and beyond.",
+      "status": "active"
+    },
+    {
+      "id": 18,
+      "slug": "germany",
+      "name": "Germany-Austria Chapter",
+      "image":"/assets/img/chapters/international/germany.jpg",
+      "country": "Germany & Austria",
+      "description": "Join UOL alumni in Germany and Austria. Connect with professionals, attend cultural events, and build lasting relationships in Europe.",
+      "status": "active"
+    },
+    {
+      "id": 16,
+      "slug": "usa",
+      "name": "United States Chapter",
+      "image":"/assets/img/chapters/international/USA.jpg",
+      "country": "United States",
+      "description": "Join the vibrant UOL alumni community in the United States. Connect with fellow graduates, attend events, and expand your professional network.",
+      "status": "active"
+    },
+    {
+      "id": 15,
+      "slug": "saudi-arabia",
+      "name": "Saudi Arabia Chapter",
+      "image":"/assets/img/chapters/international/Saudia.jpg",
+      "country": "Saudi Arabia",
+      "description": "Connect with UOL alumni living and working in Saudi Arabia. Join networking events, professional development sessions, and community gatherings.",
+      "status": "active"
+    },
+   
+    {
+      "id": 17,
+      "slug": "uae",
+      "name": "United Arab Emirates Chapter",
+      "image":"/assets/img/chapters/international/uae.jpg",
+      "country": "United Arab Emirates",
+      "description": "Connect with UOL alumni in the UAE. Participate in networking events, professional workshops, and social gatherings across Dubai, Abu Dhabi, and other Emirates.",
+      "status": "active"
+    },
+   
+   
+    {
+      "id": 20,
+      "slug": "canada",
+      "name": "Canada Chapter",
+      "image":"/assets/img/chapters/international/canada.jpg",
+      "country": "Canada",
+      "description": "Join the UOL alumni network in Canada. Connect with fellow graduates, attend events, and build your professional network across Canadian cities.",
+      "status": "active"
+    },
+    {
+      "id": 21,
+      "slug": "ireland",
+      "name": "Ireland Chapter",
+      "image":"/assets/img/chapters/international/Ireland.jpg",
+      "country": "Ireland",
+      "description": "Connect with UOL alumni in Ireland. Join networking events and community gatherings to strengthen professional and social connections.",
+      "status": "active"
+    },
+    
+    
+    {
+      "id": 24,
+      "slug": "china",
+      "name": "China Chapter",
+      "image":"/assets/img/chapters/international/china.jpg",
+      "country": "China",
+      "description": "Join UOL alumni in China. Connect with fellow graduates and build your professional network across Chinese cities.",
+      "status": "coming-soon"
+    },
+   
+    {
+      "id": 26,
+      "slug": "italy",
+      "name": "Italy Chapter",
+      "image":"/assets/img/chapters/international/Italy.jpg",
+      "country": "Italy",
+      "description": "Join UOL alumni in Italy. Connect with professionals and attend cultural and networking events.",
+      "status": "coming-soon"
+    },
+    {
+      "id": 27,
+      "slug": "oman",
+      "name": "Oman Chapter",
+      "image":"/assets/img/chapters/international/Oman.jpg",
+      "country": "Oman",
+      "description": "Connect with UOL alumni in Oman. Join networking events and community activities.",
+      "status": "coming-soon"
+    },
+    {
+      "id": 28,
+      "slug": "australia",
+      "name": "Australia Chapter",
+      "image":"/assets/img/chapters/international/Austrailia.jpg",
+      "country": "Australia",
+      "description": "Join UOL alumni in Australia. Connect with fellow graduates across Australian cities and build your professional network.",
+      "status": "coming-soon"
+    }
+  ]
+}
+
