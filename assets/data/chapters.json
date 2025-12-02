@@ -129,7 +129,7 @@
   ],
   "international": [
     {
-      "id": 25,
+      "id": 16,
       "slug": "kuwait",
       "name": "Kuwait Chapter",
       "image":"/assets/img/chapters/international/Kuwai.jpg",
@@ -147,7 +147,7 @@
       "status": "active"
     },
     {
-      "id": 23,
+      "id": 19,
       "slug": "bahrain",
       "name": "Bahrain Chapter",
       "image":"/assets/img/chapters/international/Bahrain.jpg",
@@ -156,7 +156,7 @@
       "status": "active"
     },
     {
-      "id": 19,
+      "id": 18,
       "slug": "uk",
       "name": "United Kingdom Chapter",
       "image":"/assets/img/chapters/international/UK.jpg",
@@ -165,7 +165,7 @@
       "status": "active"
     },
     {
-      "id": 18,
+      "id": 23,
       "slug": "germany",
       "name": "Germany-Austria Chapter",
       "image":"/assets/img/chapters/international/germany.jpg",
@@ -174,7 +174,7 @@
       "status": "active"
     },
     {
-      "id": 16,
+      "id": 21,
       "slug": "usa",
       "name": "United States Chapter",
       "image":"/assets/img/chapters/international/USA.jpg",
@@ -213,7 +213,7 @@
       "status": "active"
     },
     {
-      "id": 21,
+      "id": 28,
       "slug": "ireland",
       "name": "Ireland Chapter",
       "image":"/assets/img/chapters/international/Ireland.jpg",
@@ -234,7 +234,7 @@
     },
    
     {
-      "id": 26,
+      "id": 25,
       "slug": "italy",
       "name": "Italy Chapter",
       "image":"/assets/img/chapters/international/Italy.jpg",
@@ -243,7 +243,7 @@
       "status": "coming-soon"
     },
     {
-      "id": 27,
+      "id": 26,
       "slug": "oman",
       "name": "Oman Chapter",
       "image":"/assets/img/chapters/international/Oman.jpg",
@@ -252,7 +252,7 @@
       "status": "coming-soon"
     },
     {
-      "id": 28,
+      "id": 27,
       "slug": "australia",
       "name": "Australia Chapter",
       "image":"/assets/img/chapters/international/Austrailia.jpg",
