@@ -1353,7 +1353,8 @@
             contentImages: contentImages,
             content: dbEvent.longdescription || dbEvent.shortdescription || '',
             category: dbEvent.category || 'Event',
-            fromdate: dbEvent.fromdate
+            fromdate: dbEvent.fromdate,
+            type: dbEvent.type || null
          };
       }
 
@@ -1377,12 +1378,11 @@
          console.log('loadChapterEvents: Fetching events for chapter', chapterIdNum);
 
          try {
-            // Fetch events for this chapter using parent_type and parent_id
+            // Fetch events for this chapter using chapter_id
             const { data: dbEvents, error } = await supabase
                .from('tbl_events')
                .select('*')
-               .eq('parent_type', 'chapter')
-               .eq('parent_id', chapterIdNum)
+               .eq('chapter_id', chapterIdNum)
                .order('fromdate', { ascending: false, nullsLast: true });
 
             if (error) {
@@ -1401,65 +1401,38 @@
             // Transform database events to UI format
             const events = dbEvents.map(transformEvent);
 
-               // Separate past and upcoming events based on date
-               const today = new Date();
-               today.setHours(0, 0, 0, 0);
-            today.setMinutes(0, 0);
-            today.setSeconds(0, 0);
-            today.setMilliseconds(0);
-
-               const pastEvents = [];
-               const upcomingEvents = [];
+            // Separate past and upcoming events based on type column
+            const pastEvents = [];
+            const upcomingEvents = [];
 
             events.forEach((event) => {
-               if (!event.fromdate) {
-                     // If no date, consider it as past event
+               const eventType = (event.type || '').toLowerCase().trim();
+               
+               if (eventType === 'past') {
                   pastEvents.push({ event });
-                     return;
-                  }
-
-               try {
-                  // Parse date string (format: 'YYYY-MM-DD' or ISO string)
-                  let eventDate;
-                  if (typeof event.fromdate === 'string') {
-                     // Handle date string like '2024-11-25'
-                     const dateParts = event.fromdate.split('T')[0].split('-');
-                     eventDate = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
-                  } else {
-                     eventDate = new Date(event.fromdate);
-                  }
-                  
-                  eventDate.setHours(0, 0, 0, 0);
-                  eventDate.setMinutes(0, 0);
-                  eventDate.setSeconds(0, 0);
-                  eventDate.setMilliseconds(0);
-                  
-                  // Compare dates - if event date is before today, it's past
-                  if (eventDate < today) {
-                     pastEvents.push({ event });
-                  } else {
-                     upcomingEvents.push({ event });
-                  }
-               } catch (error) {
-                  console.error('Error parsing event date:', event.fromdate, error);
-                  // If date parsing fails, treat as past event
+               } else if (eventType === 'upcoming' || eventType === 'uocoming') {
+                  // Handle both 'upcoming' and 'uocoming' (typo) for backward compatibility
+                  upcomingEvents.push({ event });
+               } else {
+                  // If type is not set or invalid, default to past event
+                  console.warn(`Event ${event.id} has invalid or missing type: "${event.type}". Defaulting to past.`);
                   pastEvents.push({ event });
-                  }
-               });
+               }
+            });
 
-               // Sort past events by date (newest first)
-               pastEvents.sort((a, b) => {
+            // Sort past events by date (newest first)
+            pastEvents.sort((a, b) => {
                const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(0);
                const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(0);
-                  return dateB - dateA;
-               });
+               return dateB - dateA;
+            });
 
-               // Sort upcoming events by date (soonest first)
-               upcomingEvents.sort((a, b) => {
+            // Sort upcoming events by date (soonest first)
+            upcomingEvents.sort((a, b) => {
                const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(9999999999999);
                const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(9999999999999);
-                  return dateA - dateB;
-               });
+               return dateA - dateB;
+            });
 
                // Render events
                renderEvents(pastEvents, 'past-events-container');

@@ -580,7 +580,7 @@
                eventBannerEl.alt = event.title;
             }
             if (eventContentEl) {
-               eventContentEl.textContent = event.content || 'No content available for this event.';
+               eventContentEl.innerHTML = event.content || 'No content available for this event.';
             }
 
             // Display parent information (chapter or association)
