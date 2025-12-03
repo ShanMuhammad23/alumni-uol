@@ -99,6 +99,48 @@
             color: #1b1d22;
             margin: 0;
          }
+         .tp-alumni-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+         }
+         .tp-alumni-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(171, 12, 47, 0.1);
+            color: var(--tp-theme-primary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+         }
+         .tp-alumni-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(15, 18, 38, 0.1);
+         }
+         .tp-alumni-stat {
+            text-align: left;
+         }
+         .tp-alumni-stat__value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--tp-theme-primary);
+            line-height: 1.2;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+         }
+         .tp-alumni-stat__label {
+            font-size: 14px;
+            color: #727378;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+         }
          .tp-alumni-detail__body {
             display: grid;
             grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -256,6 +298,15 @@
             .tp-alumni-detail__story p {
                font-size: 16px;
             }
+            .tp-alumni-stats {
+               grid-template-columns: repeat(2, 1fr);
+               gap: 20px;
+               margin-top: 24px;
+               padding-top: 24px;
+            }
+            .tp-alumni-stat__value {
+               font-size: 28px;
+            }
          }
       </style>
 </head>
@@ -309,7 +360,7 @@
                      </div>
                   </div>
                   <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
-                     <div class="main-menu text-end">
+                     <div class="main-menu text-center">
                         <nav class="tp-main-menu-content">
                            <ul>
                               <li class="tp-static">
@@ -325,11 +376,11 @@
                                  <a class="tp-static" href="/events/">Events</a>
                               </li>
                               <li>
-                                 <a href="/benefits/">Benefits</a>
+                                 <a href="/benefits/">Perks & Benefits</a>
                               </li>
-                              <li>
-                                 <a href="/stories/">Stories</a>
-                              </li>
+                              <li><a href="/associations/">Associations</a></li>
+                              <li><a href="/chapters/">Chapters</a></li>
+                              <li><a href="/newsletters/">Newsletters</a></li>
                               <li>
                                  <a href="/contact/">Contact</a>
                               </li>
