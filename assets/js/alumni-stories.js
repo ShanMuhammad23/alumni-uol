@@ -87,6 +87,23 @@
         ${story.quoteBy ? `<span class="tp-alumni-quote__by">${story.quoteBy}</span>` : ""}
       </div>`;
     },
+    renderTags(tags = []) {
+      if (!tags.length) return "";
+      return `<div class="tp-alumni-tags">
+        ${tags.map((tag) => `<span class="tp-alumni-tag">${tag}</span>`).join("")}
+      </div>`;
+    },
+    renderStats(stats = []) {
+      if (!stats.length) return "";
+      return `<div class="tp-alumni-stats">
+        ${stats.map((stat) => `
+          <div class="tp-alumni-stat">
+            <div class="tp-alumni-stat__value">${stat.value}</div>
+            <div class="tp-alumni-stat__label">${stat.label}</div>
+          </div>
+        `).join("")}
+      </div>`;
+    },
     renderListCards(stories) {
       return `<div class="tp-alumni-card-grid">
         ${stories
@@ -178,6 +195,8 @@
             <h1>${story.name}</h1>
             <p class="tp-alumni-detail__role">${story.role || ""}</p>
             <p class="tp-alumni-detail__headline">${story.headline || ""}</p>
+            ${utils.renderTags(story.tags)}
+            ${utils.renderStats(story.stats)}
           </div>
         </header>
         <div class="tp-alumni-detail__body">
