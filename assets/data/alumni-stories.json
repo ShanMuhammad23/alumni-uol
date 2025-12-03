@@ -22,21 +22,8 @@
     "role": "Director Cloud Services <br> NetSol Technologies Inc. <br> Pakistan",
     "headline": "Leading cloud transformation and delivering secure, scalable IT solutions to global clients",
     "summary": "Kashif Javed<br>BS Computer Science. 2006<br>FACULTY OF COMPUTER SCIENCE<br><br>NetSol Technologies Inc.<br>Director Cloud Services<br>Pakistan",
-    "tags": ["Computer Science", "Cloud Services", "IT Leadership", "DevOps"],
-    "stats": [
-      {
-        "value": "50+",
-        "label": "IT Projects"
-      },
-      {
-        "value": "30%",
-        "label": "Cost Reduction"
-      },
-      {
-        "value": "60%",
-        "label": "Efficiency Gain"
-      }
-    ],
+    
+    
     "achievements": [
       "Delivered over 50 successful IT projects",
       "Reduced cloud costs by 30%",
@@ -65,21 +52,8 @@
     "role": "Fellow in Hepatobiliary and Surgical Oncology Anaesthesia <br> McMaster University <br> Canada",
     "headline": "From UOL medical graduate to anaesthetist at McMaster University, overcoming challenges through clinical excellence and research",
     "summary": "Dr Ahmed Bilal Akhtar<br>MBBS. UCMD, UOL<br>FACULTY OF MEDICINE<br><br>McMaster University<br>Fellow in Hepatobiliary and Surgical Oncology Anaesthesia<br>Canada",
-    "tags": ["Medicine", "Anaesthesia", "Research", "Fellowship"],
-    "stats": [
-      {
-        "value": "10",
-        "label": "Publications"
-      },
-      {
-        "value": "5",
-        "label": "Research Projects"
-      },
-      {
-        "value": "3",
-        "label": "Awards"
-      }
-    ],
+    
+   
     "achievements": [
       "Completed FCPS Part II in Anaesthesia (2022)",
       "Published 10 research papers",
@@ -108,17 +82,7 @@
     "role": "Manager of Operations <br> Robust MD <br> United States",
     "headline": "Chemistry alumnus shares how education at UOL laid the foundation for his global success in US healthcare",
     "summary": "Mohsin Saleem<br>Department of Chemistry<br>FACULTY OF SCIENCES<br><br>Robust MD<br>Manager of Operations<br>United States",
-    "tags": ["Chemistry", "Healthcare Operations", "Leadership", "US Healthcare"],
-    "stats": [
-      {
-        "value": "30%",
-        "label": "Claim Reduction"
-      },
-      {
-        "value": "2.5",
-        "label": "Years to Manager"
-      }
-    ],
+  
     "achievements": [
       "Led team that reduced claim rejections by over 30%",
       "Rapidly progressed from resource level to manager in 2.5 years",
@@ -145,17 +109,8 @@
     "role": "Head of Quality Assurance <br> Integrated Medical Care (IMC) Hospital <br>  Pakistan",
     "headline": "Pharmacy alumna successfully serves at the forefront of healthcare QA leadership",
     "summary": "Dr Sara Sattar<br>PhD Pharmacology<br>FACULTY OF PHARMACY<br><br>IMC Hospital<br>Head of Quality Assurance<br>Lahore, Pakistan",
-    "tags": ["Pharmacy", "Quality Assurance", "Healthcare Leadership", "Patient Safety"],
-    "stats": [
-      {
-        "value": "PhD",
-        "label": "Pharmacology"
-      },
-      {
-        "value": "IMC",
-        "label": "Hospital QA"
-      }
-    ],
+ 
+   
     "achievements": [
       "Head of QA at IMC Hospital, Lahore",
       "Develops and enforces QA policies aligned with global standards",
@@ -183,25 +138,8 @@
     "role": "Founder of The IMAQ Network  <br> Canada",
     "headline": "Multi-award-winning researcher, author, and founder of a Canada-based international startup network",
     "summary": "Dr Muhammad Irfan Maqsood<br>MSc Molecular Biology and Biotechnology<br>INSTITUTE OF MOLECULAR BIOLOGY AND BIOTECHNOLOGY (IMBB)<br><br>The IMAQ Network<br>Founder & CEO<br>Canada",
-    "tags": ["Molecular Biology", "Research", "Entrepreneurship", "Publishing"],
-    "stats": [
-      {
-        "value": "30+",
-        "label": "Publications"
-      },
-      {
-        "value": "656",
-        "label": "Citations"
-      },
-      {
-        "value": "12",
-        "label": "Books"
-      },
-      {
-        "value": "10",
-        "label": "H-index"
-      }
-    ],
+
+    
     "achievements": [
       "Authored over 30 peer-reviewed research papers",
       "Published 12 books",
@@ -232,17 +170,8 @@
     "role": "CEO <br> Psynergy Lounge <br> Pakistan",
     "headline": "LSBS's alumna advances therapeutic care and psychological well-being with innovative practices",
     "summary": "Hafsa Farrukh<br>MS Clinical Psychology<br>Lahore School of Behavioural Sciences (LSBS)<br><br>Psynergy Lounge<br>CEO<br>Faisalabad, Pakistan",
-    "tags": ["Clinical Psychology", "Mental Health", "Well-Being", "Education"],
-    "stats": [
-      {
-        "value": "20",
-        "label": "Years Experience"
-      },
-      {
-        "value": "Gold",
-        "label": "Medal Winner"
-      }
-    ],
+
+    
     "achievements": [
       "Gold Medal for academic excellence in MS Clinical Psychology",
       "First clinical psychologist in Faisalabad to establish Well-Being Centre at National Textile University",
@@ -272,17 +201,8 @@
     "role": "Researcher and Educator in Pharmaceutical Technology <br> University of Szeged <br> Hungary",
     "headline": "Makes impactful pharmaceutical contributions through research and teaching",
     "summary": "Dr Mahwash Mukhtar<br>Pharm D, MPhil, PhD Pharmaceutical Technology<br>FACULTY OF PHARMACY<br><br>University of Szeged<br>Researcher & Educator<br>Hungary",
-    "tags": ["Pharmacy", "Nanotechnology", "Research", "Drug Delivery"],
-    "stats": [
-      {
-        "value": "PhD",
-        "label": "2022"
-      },
-      {
-        "value": "Multiple",
-        "label": "Awards"
-      }
-    ],
+
+   
     "achievements": [
       "Completed PhD in Pharmaceutical Technology at University of Szeged, Hungary (2022)",
       "Research focus on nanotechnology-based drug delivery systems",

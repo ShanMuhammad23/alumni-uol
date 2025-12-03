@@ -257,6 +257,81 @@
          gap: 25px;
          margin-top: 20px;
       }
+      /* Horizontal upcoming events cards */
+      .tp-upcoming-events-list {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+         margin-top: 20px;
+      }
+      .tp-upcoming-event-card {
+         display: flex;
+         align-items: center;
+         gap: 20px;
+         padding: 20px;
+         background: white;
+         border-radius: 12px;
+         border: 1px solid rgba(0, 0, 0, 0.08);
+         transition: all 0.3s ease;
+         cursor: pointer;
+      }
+      .tp-upcoming-event-card:hover {
+         transform: translateX(5px);
+         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+         border-color: var(--tp-theme-primary);
+      }
+      .tp-upcoming-event-avatar {
+         width: 80px;
+         height: 80px;
+         min-width: 80px;
+         border-radius: 12px;
+         background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.8));
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-weight: 600;
+         text-align: center;
+         padding: 8px;
+         box-shadow: 0px 4px 12px rgba(171, 12, 47, 0.2);
+      }
+      .tp-upcoming-event-avatar-day {
+         font-size: 28px;
+         line-height: 1;
+         font-weight: 700;
+      }
+      .tp-upcoming-event-avatar-month {
+         font-size: 12px;
+         line-height: 1.2;
+         text-transform: uppercase;
+         opacity: 0.9;
+         margin-top: 4px;
+      }
+      .tp-upcoming-event-content {
+         flex: 1;
+      }
+      .tp-upcoming-event-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: var(--tp-heading-primary);
+         margin: 0;
+         line-height: 1.4;
+      }
+      @media (max-width: 768px) {
+         .tp-upcoming-event-card {
+            flex-direction: column;
+            text-align: center;
+         }
+         .tp-upcoming-event-avatar {
+            width: 70px;
+            height: 70px;
+            min-width: 70px;
+         }
+         .tp-upcoming-event-title {
+            font-size: 16px;
+         }
+      }
       .tp-members-pagination {
          display: flex;
          justify-content: space-between;
@@ -404,7 +479,7 @@
                         <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
                      </svg>
                   </div>
-                  <img src="/assets/img/icon/favicon.ico" alt="">
+                  <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
                <p class="tp-preloader-subtitle">Loading...</p>
             </div>
@@ -459,7 +534,7 @@
                <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
                   <div class="tp-header-contact d-flex align-items-center justify-content-end">
                      <div class="tp-header-btn d-none d-md-block ml-30">
-                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Login</a>
+                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
                      </div>
                      <div class="tp-header-bar d-xl-none ml-30">
                         <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
@@ -557,9 +632,10 @@
                      <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
-                           <li><a href="/associations/">Alumni Associations</a></li>
                            <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
- <li><a href="/chapters/">Alumni Chapters</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/chapters/">Alumni Chapters</a></li>
                            
                         </ul>
                      </div>
@@ -987,10 +1063,11 @@
                            <!-- Past events will be loaded here -->
                         </div>
                      </div>
-                     <div class="tp-association-section">
-                        <h3>Upcoming Events</h3>
-                        <div class="tp-events-grid" id="upcoming-events-container">
-                           <!-- Upcoming events will be loaded here -->
+                   
+                     <div class="tp-association-section" style="margin-top: 40px;">
+                        <h3>Upcoming Events </h3>
+                        <div class="tp-upcoming-events-list" id="ucoming-events-container">
+                           <!-- Upcoming events from ucoming_events table will be loaded here -->
                         </div>
                      </div>
                   </div>
@@ -1036,7 +1113,7 @@
                                  <i class="fa-solid fa-phone"></i>
                                  <div>
                                     <strong>Phone</strong><br>
-                                    <a href="tel:${association.phone}">${association.phone}</a>
+                                    <a href="tel:${association.phone}">${association.phone} <br> <b>Ext. 4409</b></a>
                                  </div>
                               </div>
                            ` : ''}
@@ -1083,6 +1160,9 @@
          
          // Load and display events
          loadAssociationEvents(associationId);
+         
+         // Load upcoming events from ucoming_events table
+         loadUcomingEvents(associationId);
       }
 
       // Main function to load association data
@@ -1279,6 +1359,103 @@
          }
       }
 
+
+      // Function to load upcoming events from ucoming_events table
+      async function loadUcomingEvents(associationId) {
+         if (!supabase || !associationId) {
+            const container = document.getElementById('ucoming-events-container');
+            if (container) {
+               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
+            }
+            return;
+         }
+
+         const associationIdNum = typeof associationId === 'number' ? associationId : parseInt(associationId, 10);
+         
+         if (isNaN(associationIdNum)) {
+            console.error('loadUcomingEvents: Invalid associationId', associationId);
+            const container = document.getElementById('ucoming-events-container');
+            if (container) {
+               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
+            }
+            return;
+         }
+
+         try {
+            // Fetch upcoming events from ucoming_events table matching association_id
+            const { data: ucomingEvents, error } = await supabase
+               .from('ucoming_events')
+               .select('*')
+               .eq('association_id', associationIdNum)
+               .order('date', { ascending: true });
+
+            if (error) {
+               console.error('loadUcomingEvents: Supabase error', error);
+               const container = document.getElementById('ucoming-events-container');
+               if (container) {
+                  container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
+               }
+               return;
+            }
+
+            const container = document.getElementById('ucoming-events-container');
+            if (!container) return;
+
+            if (!ucomingEvents || ucomingEvents.length === 0) {
+               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
+               return;
+            }
+
+            // Render upcoming events as horizontal cards
+            const eventsHTML = ucomingEvents.map((event) => {
+               // Parse date to extract day and month
+               let day = '';
+               let month = '';
+               
+               if (event.date) {
+                  try {
+                     // Try to parse the date string
+                     const dateObj = new Date(event.date);
+                     if (!isNaN(dateObj.getTime())) {
+                        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        day = dateObj.getDate().toString();
+                        month = months[dateObj.getMonth()];
+                     } else {
+                        // If date parsing fails, try to extract from string format
+                        const dateParts = event.date.split(/[\s,\-]+/);
+                        if (dateParts.length > 0) {
+                           day = dateParts[0];
+                           month = dateParts[1] || '';
+                        }
+                     }
+                  } catch (e) {
+                     // If all parsing fails, use first part as day
+                     day = event.date.split(/[\s,\-]+/)[0] || '';
+                  }
+               }
+
+               return `
+                  <div class="tp-upcoming-event-card">
+                     <div class="tp-upcoming-event-avatar">
+                        <div class="tp-upcoming-event-avatar-day">${day || 'TBD'}</div>
+                        ${month ? `<div class="tp-upcoming-event-avatar-month">${month}</div>` : ''}
+                     </div>
+                     <div class="tp-upcoming-event-content">
+                        <h4 class="tp-upcoming-event-title">${event.title || 'Untitled Event'}</h4>
+                     </div>
+                  </div>
+               `;
+            }).join('');
+
+            container.innerHTML = eventsHTML;
+         } catch (error) {
+            console.error('Error loading upcoming events:', error);
+            const container = document.getElementById('ucoming-events-container');
+            if (container) {
+               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
+            }
+         }
+      }
 
       // Function to render event cards
       function renderEvents(events, containerId) {

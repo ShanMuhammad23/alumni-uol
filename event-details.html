@@ -93,7 +93,7 @@
       }
       
       /* Remove dropcap styling - make first letter normal */
-      .tp-postbox-details-text p.tp-dropcap::first-letter {
+      .tp-postbox-details-text .tp-dropcap::first-letter {
          font-size: inherit !important;
          font-weight: inherit !important;
          line-height: inherit !important;
@@ -147,7 +147,7 @@
                         <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
                      </svg>
                   </div>
-                  <img src="/assets/img/logo/preloader/preloader-icon.png" alt="">
+                  <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
                <p class="tp-preloader-subtitle">Loading...</p>
             </div>
@@ -297,7 +297,7 @@
                <div class="col-lg-7 col-md-12 order-2 order-lg-1">
                   <div class="tp-postbox-wrapper">
                      <div class="tp-postbox-details-text">
-                        <p class="tp-dropcap text-1" id="event-content">Loading event content...</p>
+                        <div class="tp-dropcap text-1" id="event-content">Loading event content...</div>
                      </div>
 
                      <!-- Remaining images right after content -->
@@ -379,8 +379,9 @@
                      <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
                            <li><a href="/associations/">Alumni Associations</a></li>
-                           <li><a href="/benefits/">Alumni Benefits</a></li>
                            <li><a href="/chapters/">Alumni Chapters</a></li>
                         </ul>
                      </div>
@@ -488,7 +489,7 @@
                date: dateString,
                bannerImage: buildImagePath(dbEvent.image1) || '/assets/img/event/event-01.jpg',
                contentImages: contentImages,
-               content: dbEvent.longdescription || dbEvent.shortdescription || '',
+               content: dbEvent.longdescription || '',
                category: dbEvent.category || 'Event',
                parentType: dbEvent.parent_type || null,
                parentId: dbEvent.parent_id || null

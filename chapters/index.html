@@ -34,7 +34,7 @@
                         <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
                      </svg>
                   </div>
-                  <img src="/assets/img/icon/favicon.ico" alt="">
+                  <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
                <p class="tp-preloader-subtitle">Loading...</p>
             </div>
@@ -86,7 +86,7 @@
                <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
                   <div class="tp-header-contact d-flex align-items-center justify-content-end">
                      <div class="tp-header-btn d-none d-md-block ml-30">
-                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Login</a>
+                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
                      </div>
                      <div class="tp-header-bar d-xl-none ml-30">
                         <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
@@ -148,8 +148,32 @@
          </div>
       </section>
 
-      <section class="program-area pt-120 pb-90">
+      <section class="program-area pt-10 pb-90">
          <div class="container">
+            <!-- Members Dashboard Cards -->
+            <div class="row mb-20">
+               <div class="col-lg-4 col-md-6 mb-20">
+                  <div class="dashboard-card">
+                    
+                     <div class="dashboard-card__number" id="chapters-total-members">0</div>
+                     <div class="dashboard-card__label">Total Members</div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-20">
+                  <div class="dashboard-card">
+                    
+                     <div class="dashboard-card__number" id="chapters-national-members">0</div>
+                     <div class="dashboard-card__label">National Members</div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6 mb-20">
+                  <div class="dashboard-card">
+                     
+                     <div class="dashboard-card__number" id="chapters-international-members">0</div>
+                     <div class="dashboard-card__label">International Members</div>
+                  </div>
+               </div>
+            </div>
           
             <!-- Chapters Loader -->
             <div id="chapters-loader" class="text-center py-80">
@@ -218,11 +242,11 @@
                      <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
-                           <li><a href="/about/">About Us</a></li>
+                             <li><a href="/about/">About Us</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
                            <li><a href="/events/">Events</a></li>
-                           <li><a href="/contact/">Contact Us</a></li>
                            <li><a href="/newsletters/">Newsletters</a></li>
-                           <li><a href="/jobs/">Career Opportunities</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
                         </ul>
                      </div>
                   </div>
@@ -232,9 +256,10 @@
                      <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
-                           <li><a href="/associations/">Alumni Associations</a></li>
                            <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
- <li><a href="/chapters/">Alumni Chapters</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/chapters/">Alumni Chapters</a></li>
                            
                         </ul>
                      </div>
@@ -488,6 +513,52 @@
          }
       }
 
+      /* Dashboard Card Styles */
+      .dashboard-card {
+         background: linear-gradient(135deg, rgba(171, 12, 47, 0.05) 0%, rgba(171, 12, 47, 0.02) 100%);
+         border: 1px solid rgba(171, 12, 47, 0.15);
+         border-radius: 16px;
+         padding: 30px;
+         text-align: center;
+         transition: all 0.3s ease;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .dashboard-card:hover {
+         transform: translateY(-4px);
+         box-shadow: 0 8px 24px rgba(171, 12, 47, 0.15);
+         border-color: rgba(171, 12, 47, 0.3);
+      }
+
+      .dashboard-card__icon {
+         width: 64px;
+         height: 64px;
+         margin: 0 auto 20px;
+         background: linear-gradient(135deg, var(--tp-theme-primary, #AB0C2F), rgba(171, 12, 47, 0.8));
+         border-radius: 16px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 28px;
+      }
+
+      .dashboard-card__number {
+         font-size: 42px;
+         font-weight: 700;
+         color: var(--tp-theme-primary, #AB0C2F);
+         margin-bottom: 8px;
+         line-height: 1.2;
+      }
+
+      .dashboard-card__label {
+         font-size: 16px;
+         color: #666;
+         font-weight: 500;
+         text-transform: uppercase;
+         letter-spacing: 0.5px;
+      }
+
       @media (max-width: 768px) {
          .chapter-section-header {
             flex-direction: column;
@@ -518,6 +589,21 @@
          #chapters-loader .tp-preloader-logo img {
             width: 50px;
             height: 50px;
+         }
+         .dashboard-card {
+            padding: 24px 20px;
+         }
+         .dashboard-card__icon {
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            margin-bottom: 16px;
+         }
+         .dashboard-card__number {
+            font-size: 36px;
+         }
+         .dashboard-card__label {
+            font-size: 14px;
          }
       }
    </style>
@@ -598,6 +684,10 @@
             }
 
             // Load National Chapters (local)
+            let totalMembers = 0;
+            let nationalMembers = 0;
+            let internationalMembers = 0;
+            
             if (data.local && data.local.length > 0) {
                // Fetch member counts for local chapters in parallel
                const localChaptersWithCounts = await Promise.all(
@@ -610,6 +700,13 @@
                      };
                   })
                );
+               
+               // Add local chapter members to totals
+               localChaptersWithCounts.forEach(chapter => {
+                  const count = chapter.memberCount || 0;
+                  nationalMembers += count;
+                  totalMembers += count;
+               });
 
                localChaptersWithCounts.forEach(chapter => {
                   const col = document.createElement('div');
@@ -666,6 +763,13 @@
                      };
                   })
                );
+               
+               // Add international chapter members to totals
+               internationalChaptersWithCounts.forEach(chapter => {
+                  const count = chapter.memberCount || 0;
+                  internationalMembers += count;
+                  totalMembers += count;
+               });
 
                internationalChaptersWithCounts.forEach(chapter => {
                   const col = document.createElement('div');
@@ -708,6 +812,21 @@
                });
             } else {
                internationalContainer.innerHTML = '<div class="col-12"><p class="text-center">No international chapters available.</p></div>';
+            }
+
+            // Update members display
+            const totalMembersEl = document.getElementById('chapters-total-members');
+            const nationalMembersEl = document.getElementById('chapters-national-members');
+            const internationalMembersEl = document.getElementById('chapters-international-members');
+            
+            if (totalMembersEl) {
+               totalMembersEl.textContent = totalMembers > 0 ? totalMembers.toLocaleString() : '0';
+            }
+            if (nationalMembersEl) {
+               nationalMembersEl.textContent = nationalMembers > 0 ? nationalMembers.toLocaleString() : '0';
+            }
+            if (internationalMembersEl) {
+               internationalMembersEl.textContent = internationalMembers > 0 ? internationalMembers.toLocaleString() : '0';
             }
 
             // Hide loader and show sections

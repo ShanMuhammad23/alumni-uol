@@ -185,7 +185,7 @@
                         <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
                      </svg>
                   </div>
-                  <img src="/assets/img/icon/favicon.ico" alt="">
+                  <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
                <p class="tp-preloader-subtitle">Loading...</p>
             </div>
@@ -234,7 +234,7 @@
                <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-6">
                   <div class="tp-header-contact d-flex align-items-center justify-content-end">
                      <div class="tp-header-btn d-none d-md-block ml-30">
-                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Login</a>
+                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
                      </div>
                      <div class="tp-header-bar d-xl-none ml-30">
                         <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
@@ -346,11 +346,11 @@
                      <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
-                           <li><a href="/about/">About Us</a></li>
+                             <li><a href="/about/">About Us</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
                            <li><a href="/events/">Events</a></li>
-                           <li><a href="/contact/">Contact Us</a></li>
                            <li><a href="/newsletters/">Newsletters</a></li>
-                           <li><a href="/jobs/">Career Opportunities</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
                         </ul>
                      </div>
                   </div>
@@ -360,9 +360,10 @@
                      <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
                            <li><a href="/associations/">Alumni Associations</a></li>
                            <li><a href="/chapters/">Alumni Chapters</a></li>
-                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
                         </ul>
                      </div>
                   </div>
@@ -510,7 +511,7 @@
             const downloadEl = document.getElementById('featured-download');
 
             if (coverEl) coverEl.src = issue.cover || '/assets/img/banner/newsletter.jpg';
-            if (issueEl) issueEl.textContent = `${issue.issue || 'Latest Issue'} • ${formatDate(issue.releaseDate)}`;
+            if (issueEl) issueEl.textContent = `${issue.issue || 'Latest Issue'}`;
             if (titleEl) titleEl.textContent = issue.title;
             if (summaryEl) summaryEl.textContent = issue.summary || '';
             if (downloadEl) downloadEl.href = issue.pdf || '#';
