@@ -686,7 +686,7 @@
    }
 
    .tp-chapter-map-wrapper {
-      height: 600px;
+      
       border-radius: 16px;
       padding: 30px;
       box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
@@ -1030,6 +1030,52 @@
       font-size: 15px;
       line-height: 1.6;
       margin: 0;
+   }
+
+   /* National Chapters Links - Plain Links */
+   .tp-national-chapters-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      
+      align-items: center;
+      margin-top: 20px;
+      padding: 15px 0;
+   }
+
+   .tp-national-chapter-link {
+      font-size: 13px;
+      color:var(--tp-red-1);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--tp-red-1);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+   }
+
+   .tp-national-chapter-link:hover {
+      color: var(--tp-theme-primary, #AB0C2F);
+      background: rgba(171, 12, 47, 0.1);
+      text-decoration: none;
+   }
+
+
+
+   .tp-national-chapter-link:last-child::after {
+      display: none;
+   }
+
+   @media (max-width: 768px) {
+      .tp-national-chapters-links {
+         gap: 6px 8px;
+         padding: 10px 0;
+      }
+
+      .tp-national-chapter-link {
+         font-size: 12px;
+         padding: 3px 6px;
+      }
    }
 
    @media (max-width: 991px) {
@@ -1541,7 +1587,7 @@
                         <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
                      </svg>
                   </div>
-                  <img src="/assets/img/icon/favicon.ico" alt="">
+                  <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
                <p class="tp-preloader-subtitle">Loading...</p>
             </div>
@@ -2465,19 +2511,25 @@
                <div class="tp-chapters-right">
                   <div class="tp-chapter-section chapter-area">
                      <h4 class="tp-chapter-section-title mb-40">National Chapters</h4>
-                     <div class="tp-chapter-map-wrapper position-relative">
-                        <div id="map"></div>
-                        <!-- Map Legend -->
-                        <div class="tp-map-legend">
-                           <div class="tp-map-legend-item">
-                              <div class="tp-map-legend-circle active"></div>
-                              <span class="tp-map-legend-caption">Active Chapters</span>
-                           </div>
-                           <div class="tp-map-legend-item">
-                              <div class="tp-map-legend-circle coming"></div>
-                              <span class="tp-map-legend-caption">Upcoming Chapters</span>
+                     <div class="tp-chapter-section-inner position-relative">
+                        <div class="tp-chapter-map-wrapper position-relative">
+                           <div id="map"></div>
+                           <!-- Map Legend -->
+                           <div class="tp-map-legend">
+                              <div class="tp-map-legend-item">
+                                 <div class="tp-map-legend-circle active"></div>
+                                 <span class="tp-map-legend-caption">Active Chapters</span>
+                              </div>
+                              <div class="tp-map-legend-item">
+                                 <div class="tp-map-legend-circle coming"></div>
+                                 <span class="tp-map-legend-caption">Upcoming Chapters</span>
+                              </div>
                            </div>
                         </div>
+                     </div>
+                     <!-- National Chapters Links -->
+                     <div class="tp-national-chapters-links" id="national-chapters-links">
+                        <!-- Links will be loaded dynamically -->
                      </div>
                   </div>
                </div>
@@ -2517,6 +2569,9 @@
                   </div>
                </div>
             </div>
+         </div>
+         <div class="d-flex justify-content-center mt-40">
+            <a class="tp-btn-3" href="/associations/">View All Associations</a>
          </div>
       </section>
       <hr style="margin: 0;">
@@ -3125,10 +3180,10 @@
                      <div class="tp-footer-widget-link">
                         <ul>
                            <li><a href="/about/">About Us</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
                            <li><a href="/events/">Events</a></li>
-                           <li><a href="/contact/">Contact Us</a></li>
                            <li><a href="/newsletters/">Newsletters</a></li>
-                           <li><a href="/jobs/">Career Opportunities</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
                         </ul>
                      </div>
                   </div>
@@ -3138,9 +3193,11 @@
                      <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
                      <div class="tp-footer-widget-link">
                         <ul>
-                           <li><a href="/associations/">Alumni Associations</a></li>
                            <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Alumni Associations</a></li>
                            <li><a href="/chapters/">Alumni Chapters</a></li>
+                           
 
                         </ul>
                      </div>
@@ -3715,6 +3772,45 @@
             .catch(error => {
                console.error('Error loading associations:', error);
                wrapper.innerHTML = '<p style="text-align: center; color: #666;">Unable to load associations.</p>';
+            });
+      })();
+
+      // Load National Chapters Links
+      (function () {
+         const linksContainer = document.getElementById('national-chapters-links');
+         if (!linksContainer) return;
+
+         fetch('/assets/data/chapters.json')
+            .then(response => {
+               if (!response.ok) throw new Error('Failed to fetch chapters');
+               return response.json();
+            })
+            .then(data => {
+               const nationalChapters = data.local || [];
+               if (nationalChapters.length === 0) {
+                  linksContainer.innerHTML = '<p style="text-align: center; color: #666; font-size: 13px;">No chapters available.</p>';
+                  return;
+               }
+
+               // Sort chapters by name for better organization
+               const sortedChapters = nationalChapters.sort((a, b) => {
+                  const nameA = a.name || '';
+                  const nameB = b.name || '';
+                  return nameA.localeCompare(nameB);
+               });
+
+               // Render links for all national chapters
+               linksContainer.innerHTML = sortedChapters.map(chapter => {
+                  const name = chapter.name || 'Chapter';
+                  const id = chapter.id || '';
+                  const slug = chapter.slug || '';
+
+                  return `<a href="/chapters/detail.html?id=${id}" class="tp-national-chapter-link">${name}</a>`;
+               }).join('');
+            })
+            .catch(error => {
+               console.error('Error loading national chapters:', error);
+               linksContainer.innerHTML = '<p style="text-align: center; color: #666; font-size: 13px;">Unable to load chapters.</p>';
             });
       })();
    </script>

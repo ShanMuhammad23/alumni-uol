@@ -66,31 +66,7 @@
       const breadcrumbTitle = document.querySelector(".tp-breadcrumb__title");
       if (breadcrumbTitle) breadcrumbTitle.textContent = story.name;
     },
-    renderTags(tags = []) {
-      if (!tags.length) return "";
-      return `<div class="tp-alumni-tags">
-        ${tags
-          .map(
-            (tag) => `<span class="tp-alumni-tag">
-            <i class="fa-regular fa-hashtag"></i>${tag}
-          </span>`
-          )
-          .join("")}
-      </div>`;
-    },
-    renderStats(stats = []) {
-      if (!stats.length) return "";
-      return `<div class="tp-alumni-stats">
-        ${stats
-          .map(
-            (stat) => `<div class="tp-alumni-stat">
-              <span class="tp-alumni-stat__value">${stat.value}</span>
-              <span class="tp-alumni-stat__label">${stat.label}</span>
-            </div>`
-          )
-          .join("")}
-      </div>`;
-    },
+
     renderAchievements(achievements = []) {
       if (!achievements.length) return "";
       return `<div class="tp-alumni-achievements">
@@ -120,7 +96,6 @@
                
               </div>
               <div class="tp-alumni-card__body">
-                ${utils.renderTags(story.tags)}
                 <h3 class="tp-alumni-card__name">${story.name}</h3>
                 <p class="tp-alumni-card__role">${story.role || ""}</p>
                 <p class="tp-alumni-card__headline">${story.headline || ""}</p>
@@ -203,8 +178,6 @@
             <h1>${story.name}</h1>
             <p class="tp-alumni-detail__role">${story.role || ""}</p>
             <p class="tp-alumni-detail__headline">${story.headline || ""}</p>
-            ${utils.renderTags(story.tags)}
-            ${utils.renderStats(story.stats)}
           </div>
         </header>
         <div class="tp-alumni-detail__body">
