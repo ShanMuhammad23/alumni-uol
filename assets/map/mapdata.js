@@ -145,7 +145,7 @@ var simplemaps_countrymap_mapdata={
       lng: "74.075005",
       color: "blue",
       name: "Gujranwala",
-      description: "Gujranwala/Sialkot Chapter",
+      description: "Gujranwala–Gujrat–Sialkot Chapter",
       url: "/chapters/detail.html?id=2",
       type: "circle"
     },
@@ -170,16 +170,16 @@ var simplemaps_countrymap_mapdata={
     "7": {
       lat: "35.920834",
       lng: "74.308334",
-      name: "Gilgit",
+      name: "Northern Pakistan",
       color: "blue",
-      description: "Gilgit Chapter",
+      description: "Northern Pakistan Chapter",
       url: "/chapters/detail.html?id=14",
       type: "circle"
     },
     "8": {
       lat: "34.025917",
       lng: "71.560135",
-      name: "Peshawar",
+      name: "KPK",
       color: "#e20000",
       description: "KPK Chapter",
       url: "/chapters/detail.html?id=10",
@@ -188,9 +188,9 @@ var simplemaps_countrymap_mapdata={
     "9": {
       lat: "29.418068",
       lng: "71.670685",
-      name: "Bahawalpur",
+      name: "Bahawalpur-Bahawalnagar",
       color: "blue",
-      description: "Bahawalpur Chapter",
+      description: "Bahawalpur–Bahawalnagar Chapter",
       url: "/chapters/detail.html?id=6",
       type: "circle"
     },
@@ -225,9 +225,9 @@ var simplemaps_countrymap_mapdata={
     "13": {
       lat: "30.032486",
       lng: "70.640244",
-      name: "Dera Ghazi Khan",
+      name: "Southern Punjab",
       color: "blue",
-      description: "Dera Ghazi Khan Chapter",
+      description: "Southern Punjab Chapter",
       url: "/chapters/detail.html?id=8",
       type: "circle"
     }
