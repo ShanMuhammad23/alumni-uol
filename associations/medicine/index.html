@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title id="page-title">Alumni Association | UOL Alumni</title>
+   <title id="page-title">College of Medicine & Dentistry (UCMD) | UOL Alumni</title>
    <meta name="description" content="" id="page-description">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,30 +58,66 @@
          max-height: 100%;
          object-fit: contain;
       }
+      /* Two Deans Layout Styles */
+      .tp-deans-container {
+         display: flex;
+         gap: 40px;
+         margin-top: 30px;
+         margin-bottom: 30px;
+         flex-wrap: wrap;
+         justify-content: center;
+      }
+      .tp-dean-card {
+         flex: 1;
+         min-width: 250px;
+         max-width: 350px;
+         text-align: center;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
       .tp-dean-picture {
-         flex-shrink: 0;
-         width: 150px;
-         height: 150px;
+         width: 180px;
+         height: 180px;
          border-radius: 50%;
          overflow: hidden;
          border: 4px solid white;
          box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
          background: white;
-         margin-right: 30px;
+         margin-bottom: 20px;
       }
       .tp-dean-picture img {
          width: 100%;
          height: 100%;
          object-fit: cover;
       }
+      .tp-dean-name {
+         font-size: 20px;
+         font-weight: 600;
+         color: var(--tp-heading-primary);
+         margin-bottom: 8px;
+      }
+      .tp-dean-school {
+         font-size: 16px;
+         color: var(--tp-theme-primary);
+         font-weight: 500;
+         margin-bottom: 15px;
+      }
       .tp-dean-message-wrapper {
-         display: flex;
-         align-items: flex-start;
-         gap: 30px;
-         margin-top: 20px;
+         margin-top: 30px;
+         width: 100%;
       }
       .tp-dean-message-content {
-         flex: 1;
+         background: linear-gradient(135deg, rgba(171, 12, 47, 0.05), rgba(171, 12, 47, 0.02));
+         padding: 30px;
+         border-radius: 16px;
+         border-left: 4px solid var(--tp-theme-primary);
+      }
+      .tp-dean-message-content p {
+         font-size: 16px;
+         line-height: 1.8;
+         color: #555;
+         margin-bottom: 0;
       }
       .tp-association-header-content {
          display: flex;
@@ -257,7 +293,6 @@
          gap: 25px;
          margin-top: 20px;
       }
-      /* Horizontal upcoming events cards */
       .tp-upcoming-events-list {
          display: flex;
          flex-direction: column;
@@ -317,20 +352,6 @@
          color: var(--tp-heading-primary);
          margin: 0;
          line-height: 1.4;
-      }
-      @media (max-width: 768px) {
-         .tp-upcoming-event-card {
-            flex-direction: column;
-            text-align: center;
-         }
-         .tp-upcoming-event-avatar {
-            width: 70px;
-            height: 70px;
-            min-width: 70px;
-         }
-         .tp-upcoming-event-title {
-            font-size: 16px;
-         }
       }
       .tp-members-pagination {
          display: flex;
@@ -424,18 +445,16 @@
             width: 150px;
             height: 150px;
          }
-         .tp-dean-picture {
-            width: 120px;
-            height: 120px;
-         }
-         .tp-dean-message-wrapper {
+         .tp-deans-container {
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            gap: 30px;
+         }
+         .tp-dean-card {
+            max-width: 100%;
          }
          .tp-dean-picture {
-            margin-right: 0;
-            margin-bottom: 20px;
+            width: 150px;
+            height: 150px;
          }
          .tp-users-list {
             grid-template-columns: 1fr;
@@ -561,7 +580,7 @@
             <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
                <div class="offcanvas__logo tp-header-logo">
                   <a href="/">
-                     <img src="/assets/img/brand/logo-black.png" alt="logo">
+                     <img src="/assets/img/logo/logo-black.png" alt="logo">
                   </a>
                </div>
             </div>
@@ -584,7 +603,7 @@
                         <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
                         <span><a href="/associations/">Associations</a></span>
                         <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
-                        <span id="breadcrumb-name">Loading...</span>
+                        <span id="breadcrumb-name">College of Medicine & Dentistry</span>
                      </div>
                   </div>
                </div>
@@ -702,22 +721,14 @@
          console.error('Failed to initialize Supabase client');
       }
 
-      // Helper to build remote image path (shared with events & members)
+      // Helper to build remote image path
       function buildRemoteImagePath(imageName) {
          if (!imageName) return null;
-         // If already absolute URL, keep as is
          if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
             return imageName;
          }
          const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
          return `${BASE_IMAGE_URL}/${imageName}`;
-      }
-
-      // Get association ID from URL query parameter
-      function getAssociationIdFromURL() {
-         const urlParams = new URLSearchParams(window.location.search);
-         const associationId = urlParams.get('id') || urlParams.get('associationId') || urlParams.get('association_id');
-         return associationId ? parseInt(associationId, 10) : null;
       }
 
       // Fetch association details from database by ID
@@ -776,7 +787,6 @@
          }
 
          try {
-            // Fetch verified alumni members for this association
             const { data: members, error: membersError, count } = await supabase
                .from('tbl_alumni')
                .select('alumniid, alumniname, degreetitle, yearofending, image1', { count: 'exact' })
@@ -825,30 +835,27 @@
       let allMembers = [];
       let filteredMembers = [];
       let currentPage = 1;
-      let sortOrder = 'desc'; // 'asc' or 'desc'
+      let sortOrder = 'desc';
       const membersPerPage = 30;
       const membersPerRow = 3;
 
       function initializeMembersPagination(members) {
          allMembers = members || [];
-         sortOrder = 'desc'; // Reset to default
+         sortOrder = 'desc';
          applySortAndFilter();
          currentPage = 1;
          
-         // Setup search input
          const searchInput = document.getElementById('members-search-input');
          if (searchInput) {
             searchInput.addEventListener('input', handleMembersSearch);
          }
          
-         // Setup sort select
          const sortSelect = document.getElementById('members-sort-select');
          if (sortSelect) {
             sortSelect.value = sortOrder;
             sortSelect.addEventListener('change', handleSortChange);
          }
          
-         // Setup pagination buttons
          const prevBtn = document.getElementById('prev-btn');
          const nextBtn = document.getElementById('next-btn');
          if (prevBtn) {
@@ -869,31 +876,28 @@
             });
          }
          
-         // Initial render
          renderMembers();
       }
 
       function handleSortChange(e) {
          sortOrder = e.target.value;
-         currentPage = 1; // Reset to first page on sort change
+         currentPage = 1;
          applySortAndFilter();
          renderMembers();
       }
 
       function applySortAndFilter() {
-         // First, apply sorting
          const sorted = [...allMembers].sort((a, b) => {
             const yearA = a.yearofending || 0;
             const yearB = b.yearofending || 0;
             
             if (sortOrder === 'asc') {
-               return yearA - yearB; // Ascending: oldest first
+               return yearA - yearB;
             } else {
-               return yearB - yearA; // Descending: newest first
+               return yearB - yearA;
             }
          });
          
-         // Then apply search filter if there's a search term
          const searchInput = document.getElementById('members-search-input');
          const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
          
@@ -908,7 +912,7 @@
       }
 
       function handleMembersSearch(e) {
-         currentPage = 1; // Reset to first page on search
+         currentPage = 1;
          applySortAndFilter();
          renderMembers();
       }
@@ -928,17 +932,14 @@
             return;
          }
          
-         // Calculate pagination
          const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
          const startIndex = (currentPage - 1) * membersPerPage;
          const endIndex = Math.min(startIndex + membersPerPage, filteredMembers.length);
          const currentMembers = filteredMembers.slice(startIndex, endIndex);
          
-         // Detect if mobile (1 column) or desktop (3 columns)
          const isMobile = window.innerWidth <= 768;
          const itemsPerRow = isMobile ? 1 : membersPerRow;
          
-         // Render members
          let membersHTML = '';
          currentMembers.forEach((member) => {
             const name = member.alumniname || 'Unknown';
@@ -969,7 +970,6 @@
          
          container.innerHTML = membersHTML;
          
-         // Update pagination controls
          if (paginationContainer) {
             if (filteredMembers.length > membersPerPage) {
                paginationContainer.style.display = 'flex';
@@ -991,26 +991,23 @@
          }
       }
 
-      // Render association detail page
+      // Render UCMD association detail page with two deans
       function renderAssociationDetail(association, jsonAssociation, membersData, associationId) {
          const memberCount = membersData.count || 0;
          const members = membersData.members || [];
 
-         // Prefer title from DB, fall back to JSON
-         const associationTitle = association.title || jsonAssociation?.name || 'Association';
+         const associationTitle = association.title || jsonAssociation?.name || 'College of Medicine & Dentistry (UCMD)';
          document.getElementById('page-title').textContent = `${associationTitle} Alumni Association | UOL Alumni`;
          document.getElementById('page-description').content = association.description || jsonAssociation?.description || '';
          document.getElementById('breadcrumb-name').textContent = associationTitle;
 
-         // Get faculty logo / image (prefer JSON logo, then DB image)
          const associationImage = jsonAssociation?.logo || association.image || null;
 
-         // Dean details: prefer JSON, then DB
-         const deanName = jsonAssociation?.dean?.name || association.dean || null;
-         const deanImage = jsonAssociation?.dean?.image || association.dean_image || null;
+         // Get two deans from JSON
+         const deans = jsonAssociation?.deans || [];
          const deanMessage = jsonAssociation?.deanMessage || association.dean_message || null;
 
-         // Render association detail
+         // Render association detail with two deans layout
          const detailHTML = `
             <div class="tp-association-header">
                <div class="tp-association-logo">
@@ -1023,7 +1020,7 @@
                <div class="tp-association-info">
                   <h1>${associationTitle}</h1>
                   
-                  <p style="font-size: 18px; color: #666; margin-bottom: 20px;">${association.description || 'No description available.'}</p>
+                  <p style="font-size: 18px; color: #666; margin-bottom: 20px;">${association.description || jsonAssociation?.description || 'No description available.'}</p>
                   <div class="tp-association-stats">
                      <div class="tp-association-stat">
                         <span class="tp-association-stat-value">${memberCount.toLocaleString()}</span>
@@ -1036,24 +1033,27 @@
                <div class="row">
                   <div class="col-lg-8">
                      <div class="tp-association-section">
-                        <h3>Dean's Message</h3>
-                        ${deanName ? `
-                           <p style="font-size: 18px; color: #666; margin-bottom: 15px; font-weight: 500;">
-                              ${deanName}
-                           </p>
-                        ` : ''}
+                        <h3>Deans' Message</h3>
+                        <div class="tp-deans-container">
+                           ${deans.map(dean => `
+                              <div class="tp-dean-card">
+                                 <div class="tp-dean-picture">
+                                    ${dean.image ? `<img src="${dean.image}" alt="${dean.name || 'Dean'}">` : `
+                                       <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7)); color: white; font-size: 48px;">
+                                          <i class="fa-solid fa-user"></i>
+                                       </div>
+                                    `}
+                                 </div>
+                                 <div class="tp-dean-name">${dean.name || 'Dean'}</div>
+                                 <div class="tp-dean-school">${dean.school || ''}</div>
+                              </div>
+                           `).join('')}
+                        </div>
                         <div class="tp-dean-message-wrapper">
-                           ${deanImage ? `
-                              <div class="tp-dean-picture">
-                                 <img src="${deanImage}" alt="${deanName || associationTitle}">
-                              </div>
-                           ` : ''}
                            <div class="tp-dean-message-content">
-                              <div class="tp-dean-message" style="background: linear-gradient(135deg, rgba(171, 12, 47, 0.05), rgba(171, 12, 47, 0.02)); padding: 30px; border-radius: 16px; border-left: 4px solid var(--tp-theme-primary);">
-                                 <p style="font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 0;">
-                                    ${deanMessage || `On behalf of the ${associationTitle} faculty, I extend a warm welcome to all our alumni. Your continued engagement and success inspire our current students and strengthen our academic community. Together, we are building a legacy of excellence and innovation that extends far beyond our campus walls.`}
-                                 </p>
-                              </div>
+                              <p>
+                                 ${deanMessage || `On behalf of the ${associationTitle} faculty, we extend a warm welcome to all our alumni. Your continued engagement and success inspire our current students and strengthen our academic community. Together, we are building a legacy of excellence and innovation that extends far beyond our campus walls.`}
+                              </p>
                            </div>
                         </div>
                      </div>
@@ -1167,18 +1167,8 @@
 
       // Main function to load association data
       async function loadAssociationData() {
-         const associationId = getAssociationIdFromURL();
-         
-         if (!associationId) {
-            document.getElementById('association-detail').innerHTML = `
-               <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
-                  <h3>Association ID Required</h3>
-                  <p>Please provide a valid association ID in the URL.</p>
-                  <a href="/associations/" class="tp-btn mt-3">Back to Associations</a>
-               </div>
-            `;
-            return;
-         }
+         // UCMD association ID is 1
+         const associationId = 1;
 
          // Fetch association details from DB and JSON in parallel
          const [association, jsonAssociation] = await Promise.all([
@@ -1186,11 +1176,11 @@
             fetchAssociationFromJSON(associationId)
          ]);
 
-         if (!association) {
+         if (!association && !jsonAssociation) {
             document.getElementById('association-detail').innerHTML = `
                <div class="tp-association-error" style="text-align: center; padding: 80px 20px;">
                   <h3>Association Not Found</h3>
-                  <p>The association you're looking for doesn't exist in the database.</p>
+                  <p>The association you're looking for doesn't exist.</p>
                   <a href="/associations/" class="tp-btn mt-3">Back to Associations</a>
                </div>
             `;
@@ -1202,7 +1192,7 @@
          const membersData = await fetchAssociationMembers(associationId);
          
          // Render the page
-         renderAssociationDetail(association, jsonAssociation, membersData, associationId);
+         renderAssociationDetail(association || {}, jsonAssociation || {}, membersData, associationId);
       }
 
       // Initialize page load
@@ -1269,7 +1259,6 @@
             return;
          }
 
-         // Ensure associationId is a number
          const associationIdNum = typeof associationId === 'number' ? associationId : parseInt(associationId, 10);
          
          if (isNaN(associationIdNum)) {
@@ -1281,7 +1270,6 @@
          console.log('loadAssociationEvents: Fetching events for association', associationIdNum);
 
          try {
-            // Fetch events for this association using association_id
             const { data: dbEvents, error } = await supabase
                .from('tbl_events')
                .select('*')
@@ -1301,10 +1289,8 @@
                return;
             }
 
-            // Transform database events to UI format
             const events = dbEvents.map(transformEvent);
 
-            // Separate past and upcoming events based on type column
             const pastEvents = [];
             const upcomingEvents = [];
 
@@ -1314,30 +1300,25 @@
                if (eventType === 'past') {
                   pastEvents.push({ event });
                } else if (eventType === 'upcoming' || eventType === 'uocoming') {
-                  // Handle both 'upcoming' and 'uocoming' (typo) for backward compatibility
                   upcomingEvents.push({ event });
                } else {
-                  // If type is not set or invalid, default to past event
                   console.warn(`Event ${event.id} has invalid or missing type: "${event.type}". Defaulting to past.`);
                   pastEvents.push({ event });
                }
             });
 
-            // Sort past events by date (newest first)
             pastEvents.sort((a, b) => {
                const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(0);
                const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(0);
                return dateB - dateA;
             });
 
-            // Sort upcoming events by date (soonest first)
             upcomingEvents.sort((a, b) => {
                const dateA = a.event.fromdate ? new Date(a.event.fromdate) : new Date(9999999999999);
                const dateB = b.event.fromdate ? new Date(b.event.fromdate) : new Date(9999999999999);
                return dateA - dateB;
             });
 
-            // Render events
             renderEvents(pastEvents, 'past-events-container');
             renderEvents(upcomingEvents, 'upcoming-events-container');
          } catch (error) {
@@ -1358,7 +1339,6 @@
             upcomingContainer.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No upcoming events scheduled at this time.</p>';
          }
       }
-
 
       // Function to load upcoming events from ucoming_events table
       async function loadUcomingEvents(associationId) {
@@ -1382,7 +1362,6 @@
          }
 
          try {
-            // Fetch upcoming events from ucoming_events table matching association_id
             const { data: ucomingEvents, error } = await supabase
                .from('ucoming_events')
                .select('*')
@@ -1406,22 +1385,18 @@
                return;
             }
 
-            // Render upcoming events as horizontal cards
             const eventsHTML = ucomingEvents.map((event) => {
-               // Parse date to extract day and month
                let day = '';
                let month = '';
                
                if (event.date) {
                   try {
-                     // Try to parse the date string
                      const dateObj = new Date(event.date);
                      if (!isNaN(dateObj.getTime())) {
                         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                         day = dateObj.getDate().toString();
                         month = months[dateObj.getMonth()];
                      } else {
-                        // If date parsing fails, try to extract from string format
                         const dateParts = event.date.split(/[\s,\-]+/);
                         if (dateParts.length > 0) {
                            day = dateParts[0];
@@ -1429,7 +1404,6 @@
                         }
                      }
                   } catch (e) {
-                     // If all parsing fails, use first part as day
                      day = event.date.split(/[\s,\-]+/)[0] || '';
                   }
                }

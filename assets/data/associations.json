@@ -13,6 +13,18 @@
       "name": "Prof. Dr. Mahwish Arooj",
       "image": "/assets/img/deans/Prof. Dr. moghees Baig-UCMD.jpg"
     },
+    "deans": [
+      {
+        "name": "Prof. Dr. Mahwish Arooj",
+        "image": "/assets/img/deans/Prof. Dr. moghees Baig-UCMD.jpg",
+        "school": "School of Medicine"
+      },
+      {
+        "name": "Prof. Dr. Moghees Baig",
+        "image": "/assets/img/deans/Prof. Dr. moghees Baig-UCMD.jpg",
+        "school": "School of Dentistry"
+      }
+    ],
     "deanMessage": "At UCMD, we shape healthcare professionals whose journey of purpose continues long after graduation. Our alumni proudly carry the excellence of UCMD into hospitals, research institutions, and communities across the globe — leading with compassion, innovation, and unwavering professional integrity.",
     "president": null,
     "vicePresident": null,

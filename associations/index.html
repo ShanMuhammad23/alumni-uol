@@ -124,6 +124,25 @@
          letter-spacing: 0.5px;
       }
 
+      /* Hero banner total members card positioning */
+      .tp-breadcrumb__area .dashboard-card {
+         position: absolute;
+         bottom: 30px;
+         right: 30px;
+         max-width: 200px;
+         background: rgba(255, 255, 255, 0.95);
+         backdrop-filter: blur(10px);
+         z-index: 10;
+      }
+
+      .tp-breadcrumb__area .dashboard-card__number {
+         color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .tp-breadcrumb__area .dashboard-card__label {
+         color: #333;
+      }
+
       @media (max-width: 768px) {
          .dashboard-card {
             padding: 24px 20px;
@@ -139,6 +158,18 @@
          }
          .dashboard-card__label {
             font-size: 14px;
+         }
+         .tp-breadcrumb__area .dashboard-card {
+            bottom: 20px;
+            right: 20px;
+            max-width: 160px;
+            padding: 10px 16px;
+         }
+         .tp-breadcrumb__area .dashboard-card__number {
+            font-size: 32px;
+         }
+         .tp-breadcrumb__area .dashboard-card__label {
+            font-size: 13px;
          }
       }
    </style>
@@ -270,25 +301,16 @@
                   </div>
                </div>
             </div>
+            <div class="dashboard-card">
+               <div class="dashboard-card__number" id="associations-total-members">0</div>
+               <div class="dashboard-card__label">Members</div>
+            </div>
+           
          </div>
       </section>
 
-      <section class="program-area  pb-90 pt-10">
+      <section class="program-area  pb-90 pt-40">
          <div class="container">
-            <div class="row">
-               <div class="col-lg-12">
-                  
-                  <div class="row mb-20">
-                     <div class="col-lg-4 col-md-6 ">
-                        <div class="dashboard-card">
-                       
-                           <div class="dashboard-card__number" id="associations-total-members">0</div>
-                           <div class="dashboard-card__label">Total Members</div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
             <div class="row" id="associations-list">
             </div>
          </div>
@@ -483,6 +505,11 @@
                const associationDescription = association.description || '';
                const associationLogo = association.logo || null;
                
+               // Use special page for UCMD (id: 1), otherwise use detail.html
+               const detailUrl = association.id === 1 
+                  ? '/associations/medicine/' 
+                  : `/associations/detail.html?id=${association.id}`;
+               
                col.innerHTML = `
                   <div class="tp-financial-item h-100">
                      <div class="tp-financial-thumb">
@@ -494,13 +521,13 @@
                         }
                      </div>
                      <div class="tp-financial-content">
-                        <h4 class="tp-financial-content-title"><a href="/associations/detail.html?id=${association.id}">${associationName}</a></h4>
+                        <h4 class="tp-financial-content-title"><a href="${detailUrl}">${associationName}</a></h4>
                         <p>${associationDescription}</p>
                         <div class="tp-financial-members d-flex align-items-center">
                            <span><i class="fa-solid fa-users"></i> ${association.memberCount.toLocaleString()} Members</span>
                         </div>
                         <div class="tp-about-btn">
-                           <a class="tp-btn tp-btn-sm" href="/associations/detail.html?id=${association.id}">Learn More</a>
+                           <a class="tp-btn tp-btn-sm" href="${detailUrl}">Learn More</a>
                         </div>
                      </div>
                   </div>
