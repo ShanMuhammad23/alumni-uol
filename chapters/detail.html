@@ -320,7 +320,7 @@
          width: 70px;
          height: 90px;
          border-radius: 16px;
-         background: linear-gradient(135deg, var(--tp-theme-primary), rgba(171, 12, 47, 0.7));
+         background: var(--tp-theme-primary);
          display: flex;
          align-items: center;
          justify-content: center;
@@ -780,7 +780,7 @@
             const { data: chapterMembers, error: chapterError } = await supabase
                .from('alumni_chapter')
                .select('id')
-               .eq('chapter1', chapterIdNum);
+               .or(`chapter1.eq.${chapterIdNum},chapter2.eq.${chapterIdNum},chapter3.eq.${chapterIdNum}`);
                console.log(chapterMembers);
 
             if (chapterError) {
@@ -789,7 +789,7 @@
             }
 
             if (!chapterMembers || chapterMembers.length === 0) {
-               console.log(`No members found for chapter1 = ${chapterIdNum}`);
+               console.log(`No members found for chapter ${chapterIdNum} in chapter1, chapter2, or chapter3`);
                return { count: 0, members: [] };
             }
 
