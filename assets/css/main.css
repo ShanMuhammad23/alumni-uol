@@ -1021,8 +1021,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 .tp-btn:hover {
   box-shadow: 0 10px 15px -5px rgba(21, 36, 34, 0.1);
   color: var(--tp-common-white);
-  background-color: #880824;
-  border-color: #880824;
+
 }
 
 .tp-btn span {
@@ -7727,10 +7726,7 @@ only screen and (max-width: 767px) {
   transition: all 0.3s 0s ease-out;
 }
 
-.tp-header-btn a:hover {
-  background-color: var(--tp-common-white);
-  color: var(--tp-theme-primary);
-}
+
 
 @media only screen and (min-width: 992px) and (max-width: 1199px),
 only screen and (min-width: 768px) and (max-width: 991px),
@@ -7764,22 +7760,11 @@ only screen and (max-width: 767px) {
   background-color: var(--tp-theme-primary);
 }
 
-.tp-header-1.tp-header-sticky .tp-header-btn a:hover {
-  color: var(--tp-common-white);
-  background-color: #880824;
-  border-color: #880824;
-  box-shadow: 0 10px 15px -5px rgba(21, 36, 34, 0.1);
-}
 
 .tp-header-1.tp-header-sticky .offcanvas-open-btn {
   background-color: var(--tp-theme-primary);
 }
 
-.tp-header-1.tp-header-sticky .offcanvas-open-btn:hover {
-  background-color: #880824;
-  border-color: #880824;
-  box-shadow: 0 10px 15px -5px rgba(21, 36, 34, 0.1);
-}
 
 .tp-header-1.tp-header-sticky .offcanvas-open-btn:hover i {
   color: var(--tp-common-white);
