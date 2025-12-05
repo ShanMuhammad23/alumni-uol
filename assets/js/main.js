@@ -38,9 +38,36 @@
 
 	////////////////////////////////////////////////////
 	// 01. PreLoader Js
-	windowOn.on('load', function () {
-		$("#loading").fadeOut(500);
-	});
+	var hidePreloader = function() {
+		var loader = document.getElementById('loading');
+		if (loader && loader.style.display !== 'none') {
+			if (typeof $ !== 'undefined' && $.fn && $.fn.fadeOut) {
+				$("#loading").fadeOut(500);
+			} else {
+				// Fallback: vanilla JS fade out
+				loader.style.transition = 'opacity 0.5s ease-out';
+				loader.style.opacity = '0';
+				setTimeout(function() {
+					loader.style.display = 'none';
+				}, 500);
+			}
+		}
+	};
+
+	// Try multiple methods to ensure loader is hidden
+	if (document.readyState === 'complete') {
+		// Page already loaded
+		setTimeout(hidePreloader, 100);
+	} else {
+		// Wait for load event (use both jQuery and vanilla JS for reliability)
+		if (windowOn && windowOn.on) {
+			windowOn.on('load', hidePreloader);
+		}
+		window.addEventListener('load', hidePreloader);
+	}
+
+	// Safety timeout: hide loader after max 3 seconds regardless
+	setTimeout(hidePreloader, 3000);
 
 
 	////////////////////////////////////////////////////
