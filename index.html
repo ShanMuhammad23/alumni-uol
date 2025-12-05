@@ -3293,6 +3293,40 @@
    <script src="assets/js/flatpickr.js"></script>
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
+   <!-- Preloader fallback - ensures loader always hides even if jQuery/main.js fails -->
+   <script>
+      (function() {
+         var hidePreloader = function() {
+            var loader = document.getElementById('loading');
+            if (loader && loader.style.display !== 'none') {
+               loader.style.transition = 'opacity 0.5s ease-out';
+               loader.style.opacity = '0';
+               setTimeout(function() {
+                  loader.style.display = 'none';
+               }, 500);
+            }
+         };
+
+         // Try to hide on DOMContentLoaded
+         if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+               setTimeout(hidePreloader, 500);
+            });
+         }
+
+         // Try to hide on window load
+         if (document.readyState === 'complete') {
+            setTimeout(hidePreloader, 100);
+         } else {
+            window.addEventListener('load', function() {
+               setTimeout(hidePreloader, 100);
+            });
+         }
+
+         // Safety timeout: hide loader after max 3 seconds regardless
+         setTimeout(hidePreloader, 3000);
+      })();
+   </script>
    <script type="text/javascript" src="/assets/map/mapdata.js"></script>
    <script type="text/javascript" src="/assets/map/countrymap.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
