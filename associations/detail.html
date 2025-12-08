@@ -1411,37 +1411,13 @@
 
             // Render upcoming events as horizontal cards
             const eventsHTML = ucomingEvents.map((event) => {
-               // Parse date to extract day and month
-               let day = '';
-               let month = '';
-               
-               if (event.date) {
-                  try {
-                     // Try to parse the date string
-                     const dateObj = new Date(event.date);
-                     if (!isNaN(dateObj.getTime())) {
-                        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                        day = dateObj.getDate().toString();
-                        month = months[dateObj.getMonth()];
-                     } else {
-                        // If date parsing fails, try to extract from string format
-                        const dateParts = event.date.split(/[\s,\-]+/);
-                        if (dateParts.length > 0) {
-                           day = dateParts[0];
-                           month = dateParts[1] || '';
-                        }
-                     }
-                  } catch (e) {
-                     // If all parsing fails, use first part as day
-                     day = event.date.split(/[\s,\-]+/)[0] || '';
-                  }
-               }
+               // Display date value directly as string from date column
+               const dateValue = event.date ? String(event.date) : '';
 
                return `
                   <div class="tp-upcoming-event-card">
                      <div class="tp-upcoming-event-avatar">
-                        <div class="tp-upcoming-event-avatar-day">${day || 'TBD'}</div>
-                        ${month ? `<div class="tp-upcoming-event-avatar-month">${month}</div>` : ''}
+                        <div class="tp-upcoming-event-avatar-day">${dateValue}</div>
                      </div>
                      <div class="tp-upcoming-event-content">
                         <h4 class="tp-upcoming-event-title">${event.title || 'Untitled Event'}</h4>
