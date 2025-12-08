@@ -7736,6 +7736,15 @@ only screen and (max-width: 767px) {
   }
 }
 
+/* Remove pl-40 and pr-40 padding on mobile in header area */
+@media only screen and (max-width: 991px) {
+  .tp-header-1 .pl-40,
+  .tp-header-1 .pr-40 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 .tp-header-1.tp-header-sticky .tp-header-logo-1 .logo-1 {
   display: none;
   
