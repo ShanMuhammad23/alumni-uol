@@ -533,7 +533,13 @@
                            <li><a href="/benefits/">Perks & Benefits</a></li>
                            <li><a href="/give-back/">Give Back</a></li>
                            <li><a href="/associations/">Associations</a></li>
-                           <li><a href="/chapters/">Chapters</a></li>
+                           <li class="has-dropdown">
+                              <a href="/chapters/">Chapters</a>
+                              <ul class="tp-submenu">
+                                 <li><a href="/chapters/national/">National Chapters</a></li>
+                                 <li><a href="/chapters/international/">International Chapters</a></li>
+                              </ul>
+                           </li>
                            <li><a href="/newsletters/">Newsletters</a></li>
                            <li><a href="/contact/">Contact</a></li>
                         </ul>
@@ -779,7 +785,7 @@
          }
 
          try {
-          
+            // Step 1: Get alumni_chapter records for this chapter
             const { data: chapterMembers, error: chapterError } = await supabase
                .from('alumni_chapter')
                .select('id')
@@ -806,7 +812,8 @@
 
             console.log(`Found ${alumniIds.length} alumni IDs for chapter ${chapterIdNum}`);
 
-            // Step 2: Fetch alumni details from tbl_alumni
+            // Step 2: Fetch ONLY verified alumni details from tbl_alumni
+            // Matching SQL: SELECT * FROM tbl_alumni WHERE verify = 'true' AND alumniid IN (alumniIds)
             // Supabase PostgREST has a limit on .in() queries (around 100-200 items)
             // So we need to batch the queries if there are many IDs
             const batchSize = 100;
@@ -818,10 +825,11 @@
                const { data: members, error: membersError } = await supabase
                   .from('tbl_alumni')
                   .select('alumniid, alumniname, degreetitle, yearofending, image1')
+                  .eq('verify', 'true')
                   .in('alumniid', batch);
 
                if (membersError) {
-                  console.error(`Error fetching alumni details for batch ${i / batchSize + 1}:`, membersError);
+                  console.error(`Error fetching verified alumni details for batch ${i / batchSize + 1}:`, membersError);
                   // Continue with other batches even if one fails
                   continue;
                }
@@ -834,10 +842,10 @@
             // Don't sort here - let the user control sorting via the UI
             // Initial sort will be applied in initializeMembersPagination
 
-            console.log(`Successfully fetched ${allMembers.length} member details out of ${alumniIds.length} alumni IDs`);
+            console.log(`Successfully fetched ${allMembers.length} verified member details out of ${alumniIds.length} alumni IDs`);
 
-            // Use actual members length for count, not alumniIds.length
-            // This ensures count matches the actual members we can display
+            // Use actual verified members length for count
+            // This ensures count matches the SQL query: COUNT(*) WHERE verify = 'true'
             return {
                count: allMembers.length,
                members: allMembers
