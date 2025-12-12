@@ -268,7 +268,8 @@
                            <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
                            <li><a href="/give-back/">Give Back</a></li>
                            <li><a href="/associations/">Alumni Associations</a></li>
-                           <li><a href="/chapters/">Alumni Chapters</a></li>
+                           <li><a href="/chapters/national/">National Chapters</a></li>
+ <li><a href="/chapters/international/">International Chapters</a></li>
                            
                         </ul>
                      </div>
@@ -710,40 +711,110 @@
          }
       }
 
+      // Get national chapter IDs from tblchapters table
+      async function getNationalChapterIds() {
+         if (!supabase) return [];
+         
+         try {
+            const { data, error } = await supabase
+               .from('tblchapters')
+               .select('id')
+               .not('national_chapter', 'is', null);
+            
+            if (error) {
+               console.error('Error fetching national chapter IDs:', error);
+               return [];
+            }
+            
+            return data ? data.map(ch => ch.id) : [];
+         } catch (error) {
+            console.error('Unexpected error fetching national chapter IDs:', error);
+            return [];
+         }
+      }
+
+      // Get international chapter IDs from tblchapters table
+      async function getInternationalChapterIds() {
+         if (!supabase) return [];
+         
+         try {
+            const { data, error } = await supabase
+               .from('tblchapters')
+               .select('id')
+               .not('international_chapter', 'is', null);
+            
+            if (error) {
+               console.error('Error fetching international chapter IDs:', error);
+               return [];
+            }
+            
+            return data ? data.map(ch => ch.id) : [];
+         } catch (error) {
+            console.error('Unexpected error fetching international chapter IDs:', error);
+            return [];
+         }
+      }
+
       // Fetch member count for a chapter using alumni_chapter table
       async function getChapterMemberCount(chapterId) {
          if (!supabase || !chapterId) return 0;
 
          try {
-            // Count verified alumni for this specific chapter
-            const { data, error } = await supabase
-               .from('alumni_chapter')
-               .select('id')
-               .or(`chapter1.eq.${chapterId},chapter2.eq.${chapterId},chapter3.eq.${chapterId}`);
+            // Use pagination to get all records (same approach as getTotalVerifiedAlumniWithChapters)
+            let allData = [];
+            let from = 0;
+            const pageSize = 1000;
+            let hasMore = true;
 
-            if (error) {
-               console.error('Error fetching chapter member count:', error);
-               return 0;
+            while (hasMore) {
+               const { data, error } = await supabase
+                  .from('alumni_chapter')
+                  .select('id, chapter1, chapter2, chapter3')
+                  .or(`chapter1.eq.${chapterId},chapter2.eq.${chapterId},chapter3.eq.${chapterId}`)
+                  .range(from, from + pageSize - 1);
+
+               if (error) {
+                  console.error('Error fetching chapter member count:', error);
+                  break;
+               }
+
+               if (data && data.length > 0) {
+                  allData = allData.concat(data);
+                  from += pageSize;
+                  hasMore = data.length === pageSize;
+               } else {
+                  hasMore = false;
+               }
             }
 
-            if (!data || data.length === 0) return 0;
+            if (allData.length === 0) return 0;
 
             // Get unique alumni IDs for this chapter
-            const alumniIds = [...new Set(data.map(row => row.id))];
+            const alumniIds = [...new Set(allData.map(row => row.id))];
 
-            // Count verified alumni
-            const { count, error: countError } = await supabase
-               .from('tbl_alumni')
-               .select('*', { count: 'exact', head: true })
-               .eq('verify', 'true')
-               .in('alumniid', alumniIds);
+            if (alumniIds.length === 0) return 0;
 
-            if (countError) {
-               console.error('Error counting verified alumni for chapter:', countError);
-               return 0;
+            // Count verified alumni - handle batching for large arrays
+            let totalCount = 0;
+            const batchSize = 1000;
+            
+            for (let i = 0; i < alumniIds.length; i += batchSize) {
+               const batch = alumniIds.slice(i, i + batchSize);
+               const { count, error: countError } = await supabase
+                  .from('tbl_alumni')
+                  .select('*', { count: 'exact', head: true })
+                  .eq('verify', 'true')
+                  .in('alumniid', batch);
+
+               if (countError) {
+                  console.error('Error counting verified alumni for chapter:', countError);
+                  continue;
+               }
+
+               totalCount += (count || 0);
             }
 
-            return count || 0;
+            return totalCount;
          } catch (error) {
             console.error('Unexpected error fetching chapter member count:', error);
             return 0;
@@ -796,9 +867,13 @@
             }
 
             // Load National Chapters (local)
-            // National chapter IDs: 1-14
-            const nationalChapterIds = data.local ? data.local.map(ch => ch.id) : [];
-            // Get total count of verified alumni with national chapters only
+            // Get national chapter IDs from database (tblchapters table)
+            const dbNationalChapterIds = await getNationalChapterIds();
+            // Fallback to JSON if database query fails
+            const jsonNationalChapterIds = data.local ? data.local.map(ch => ch.id) : [];
+            const nationalChapterIds = dbNationalChapterIds.length > 0 ? dbNationalChapterIds : jsonNationalChapterIds;
+            
+            // Get unique count of verified alumni with national chapters
             let nationalMembers = await getTotalVerifiedAlumniWithChapters(nationalChapterIds);
             
             if (data.local && data.local.length > 0) {
@@ -857,9 +932,13 @@
             }
 
             // Load International Chapters
-            // International chapter IDs: 15-28 (from chapters.json)
-            const internationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
-            // Get total count of verified alumni with international chapters only
+            // Get international chapter IDs from database (tblchapters table)
+            const dbInternationalChapterIds = await getInternationalChapterIds();
+            // Fallback to JSON if database query fails
+            const jsonInternationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
+            const internationalChapterIds = dbInternationalChapterIds.length > 0 ? dbInternationalChapterIds : jsonInternationalChapterIds;
+            
+            // Get unique count of verified alumni with international chapters
             let internationalMembers = await getTotalVerifiedAlumniWithChapters(internationalChapterIds);
             
             if (data.international && data.international.length > 0) {

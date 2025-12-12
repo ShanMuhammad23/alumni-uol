@@ -183,6 +183,59 @@
         b {
             color: var(--tp-red-1);
         }
+
+        /* Compact benefits grid styles - smaller tiles */
+        .tp-benefits-grid-compact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+          
+            margin: 0;
+        }
+
+        .tp-benefits-grid-compact .tp-service-wrap {
+            padding: 25px 20px;
+            min-height: 180px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .tp-benefits-grid-compact .tp-service-title {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-top: 15px;
+        }
+
+        .tp-benefits-grid-compact .tp-service-icon {
+            margin-bottom: 10px;
+        }
+
+        .tp-benefits-grid-compact .benefits-icon {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .tp-benefits-grid-compact {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .tp-benefits-grid-compact .tp-service-wrap {
+                padding: 20px 15px;
+                min-height: 160px;
+            }
+
+            .tp-benefits-grid-compact .tp-service-title {
+                font-size: 14px;
+            }
+
+            .tp-benefits-grid-compact .benefits-icon {
+                max-width: 40px;
+                max-height: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -258,7 +311,13 @@
                              <li><a href="/benefits/">Perks & Benefits</a></li>
                              <li><a href="/give-back/">Give Back</a></li>
                              <li><a href="/associations/">Associations</a></li>
-                             <li><a href="/chapters/">Chapters</a></li>
+                             <li class="has-dropdown">
+                                <a href="/chapters/">Chapters</a>
+                                <ul class="tp-submenu">
+                                   <li><a href="/chapters/national/">National Chapters</a></li>
+                                   <li><a href="/chapters/international/">International Chapters</a></li>
+                                </ul>
+                             </li>
                              <li><a href="/newsletters/">Newsletters</a></li>
                              <li><a href="/contact/">Contact</a></li>
                           </ul>
@@ -335,7 +394,7 @@
 
     <!-- Alumni Honor Card Banner -->
     <div style="background: var(--tp-red-1);">
-        <div class="" style=" padding: 16px 20px; margin-bottom: 0;">
+        <div class="" style=" padding: 16px 20px; margin-bottom: 0;border-bottom: 1px solid gray;">
             <div class="d-flex align-items-center justify-content-center">
 
                 <p class="mb-0"
@@ -347,6 +406,91 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Perks and Benefits Grid Section -->
+    <section class="tp-our-mission-area pt-50 pb-50"
+        style="background: var(--tp-red-1); color: var(--tp-common-white);">
+        <div class="pl-40 pr-40">
+            <div class="row">
+                <div class="">
+                    <div class="tp-our-mission-wrapper wow fadeInUp" data-wow-delay=".5s">
+                        <div class="tp-our-mission-heading">
+                            <h3 class="" style="color: var(--tp-common-white);text-align: center;font-size: 3rem;">Perks &
+                                Benefits</h3>
+                        </div>
+                        <div class="tp-benefits-grid tp-benefits-grid-compact">
+                            <a href="#academic-benefits" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/reading.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Academic Benefits</h4>
+                                </div>
+                            </a>
+                            <a href="#healthcare-benefits" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/healthcare.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Healthcare Benefits</h4>
+                                </div>
+                            </a>
+
+                            <a href="#campus-facilities-and-memberships" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/amenities.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Campus Facilities and Memberships</h4>
+                                </div>
+                            </a>
+                            <a href="#merchant-promotions" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/employee.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Merchant and Business Promotions</h4>
+                                </div>
+                            </a>
+                            <a href="#career-mentorship" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/career.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Career and Mentorship</h4>
+                                </div>
+                            </a>
+                            <a href="#networking" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/graduate.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Chapters & Engagement Events</h4>
+                                </div>
+                            </a>
+                            <a href="#recognition" class="tp-service-link">
+                                <div class="tp-service-wrap">
+                                    <div class="tp-service-icon">
+                                        <span><img src="/assets/img/benefits/ribbon-badge.png" alt="service-icon"
+                                                class="benefits-icon"></span>
+                                    </div>
+                                    <h4 class="tp-service-title">Identity, Inclusion & Recognition</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Perks and Benefits Grid Section End -->
 
     <main>
 
@@ -579,7 +723,7 @@
                 </div>
 
                 <!-- Healthcare Benefits & Merchant Promotions -->
-                <div class="container-xl py-4" style="max-width: 1280px;" id="healthcare-merchant">
+                <div class="container-xl py-4" style="max-width: 1280px;" id="healthcare-benefits">
                     <div class="row align-items-start g-4 g-lg-5">
                         <div class="col-lg-6 pt-20 pb-20" style="border-right: 1px dotted #cbd5e1;">
                             <div class="d-lg-block text-center text-lg-start">
@@ -704,7 +848,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 pt-20 pb-20" id="campus-facilities">
+                        <div class="col-lg-6 pt-20 pb-20" id="campus-facilities-and-memberships">
                             <div class="d-lg-block text-center text-lg-start">
                                 <h2 style="color: #0f172a; font-size:2rem; font-weight:700;" class="fw-bold mb-0">Campus
                                     Facilities and Memberships</h2>
@@ -813,7 +957,8 @@
                                     <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
                                     <li><a href="/give-back/">Give Back</a></li>
                                     <li><a href="/associations/">Alumni Associations</a></li>
-                                    <li><a href="/chapters/">Alumni Chapters</a></li>
+                                    <li><a href="/chapters/national/">National Chapters</a></li>
+ <li><a href="/chapters/international/">International Chapters</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -108,7 +108,10 @@
 
 	// Ensure Newsletters link exists across nav variants
 	function appendNewslettersLink(listEl) {
-		if (!listEl || listEl.querySelector('a[href="/newsletters/"]')) return;
+		// Skip submenus - only process main menu lists
+		if (!listEl || listEl.classList.contains('tp-submenu') || listEl.closest('.tp-submenu')) return;
+		
+		if (listEl.querySelector('a[href="/newsletters/"]')) return;
 
 		const li = document.createElement('li');
 		const link = document.createElement('a');
@@ -124,7 +127,7 @@
 		}
 	}
 
-	const navSelectors = ['.tp-main-menu-content ul', '.tp-main-menu-mobile ul', '.tp-offcanvas-menu ul'];
+	const navSelectors = ['.tp-main-menu-content > ul', '.tp-main-menu-mobile > ul', '.tp-offcanvas-menu > ul'];
 	navSelectors.forEach(selector => {
 		document.querySelectorAll(selector).forEach(appendNewslettersLink);
 	});

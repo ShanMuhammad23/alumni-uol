@@ -14502,6 +14502,36 @@ only screen and (max-width: 767px) {
   line-height: 20px;
 }
 
+.tp-about-list-item {
+  padding: 30px 25px;
+  min-height: 140px;
+}
+
+.tp-about-list-item .tp-about-list-icon {
+  margin-right: 30px;
+}
+
+.tp-about-list-item .tp-about-list-icon span {
+  height: 90px;
+  width: 90px;
+  line-height: 90px;
+}
+
+.tp-about-list-item .tp-about-list-icon img {
+  max-height: 85px !important;
+  max-width: 85px !important;
+}
+
+.tp-about-list-item .tp-about-list-title {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.tp-about-list-item .tp-about-list-content p {
+  font-size: 18px;
+  line-height: 26px;
+}
+
 .tp-about-exprience {
   display: inline-block;
   position: absolute;
@@ -17330,18 +17360,24 @@ only screen and (max-width: 767px) {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-around;
   width: 100%;
   gap: 20px;
   cursor: pointer;
-  min-height: 160px;
+  min-height: 250px;
 }
 .tp-benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+}
+.tp-benefits-grid .tp-service-wrap {
+  padding: 25px 20px;
+  min-height: 180px;
+  width: 100%;
+  max-width: 200px;
 }
 .tp-benefits-grid .tp-service-item {
   height: 100%;
@@ -17376,9 +17412,11 @@ only screen and (max-width: 767px) {
 }
 
 .tp-service-item {
-  margin-top: -70px;
+  margin-top: -80px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
