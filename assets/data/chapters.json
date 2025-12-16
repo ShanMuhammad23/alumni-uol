@@ -259,6 +259,15 @@
       "country": "Australia",
       "description": "Join UOL alumni in Australia. Connect with fellow graduates across Australian cities and build your professional network.",
       "status": "coming-soon"
+    },
+    {
+      "id":31,
+      "slug": "afghanistan",
+      "name": "Afghanistan Chapter",
+      "image":"/assets/img/chapters/international/Afghanistan.jpeg",
+      "country": "Afghanistan",
+      "description": "Connect with UOL alumni in Afghanistan. Join networking events and community gatherings.",
+      "status": "coming-soon"
     }
   ]
 }
