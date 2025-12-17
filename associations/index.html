@@ -423,14 +423,14 @@
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
 
       // Initialize Supabase client
-      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
       // Fetch member count for an association (verified members only)
       async function getAssociationMemberCount(associationId) {
-         if (!supabase || !associationId) return 0;
+         if (!supabaseClient || !associationId) return 0;
 
          try {
-            const { count, error } = await supabase
+            const { count, error } = await supabaseClient
                .from('tbl_alumni')
                .select('*', { count: 'exact', head: true })
                .eq('association_id', associationId)
