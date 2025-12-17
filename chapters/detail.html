@@ -719,9 +719,9 @@
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
 
       // Initialize Supabase client
-      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       
-      if (!supabase) {
+      if (!supabaseClient) {
          console.error('Failed to initialize Supabase client');
       }
 
@@ -734,11 +734,11 @@
 
       // Fetch chapter details from database by ID
       async function fetchChapterById(chapterId) {
-         if (!supabase || !chapterId) return null;
+         if (!supabaseClient || !chapterId) return null;
 
          try {
             // Try tblchapters first
-            const { data: chapter, error } = await supabase
+            const { data: chapter, error } = await supabaseClient
                .from('tblchapters')
                .select('*')
                .eq('id', chapterId)
@@ -750,7 +750,7 @@
             }
 
             // Try alumnichapterslocation as fallback
-            const { data: locationChapter, error: locationError } = await supabase
+            const { data: locationChapter, error: locationError } = await supabaseClient
                .from('alumnichapterslocation')
                .select('*')
                .eq('chapterid', chapterId)
@@ -776,7 +776,7 @@
       }
 
       async function fetchChapterMembers(chapterId) {
-         if (!supabase || !chapterId) return { count: 0, members: [] };
+         if (!supabaseClient || !chapterId) return { count: 0, members: [] };
 
          const chapterIdNum = Number(chapterId);
          console.log(chapterIdNum);
@@ -787,7 +787,7 @@
 
          try {
             // Step 1: Get alumni_chapter records for this chapter
-            const { data: chapterMembers, error: chapterError } = await supabase
+            const { data: chapterMembers, error: chapterError } = await supabaseClient
                .from('alumni_chapter')
                .select('id')
                .or(`chapter1.eq.${chapterIdNum},chapter2.eq.${chapterIdNum},chapter3.eq.${chapterIdNum}`);
@@ -823,7 +823,7 @@
             for (let i = 0; i < alumniIds.length; i += batchSize) {
                const batch = alumniIds.slice(i, i + batchSize);
                
-               const { data: members, error: membersError } = await supabase
+               const { data: members, error: membersError } = await supabaseClient
                   .from('tbl_alumni')
                   .select('alumniid, alumniname, degreetitle, yearofending, image1')
                   .eq('verify', 'true')
@@ -1373,8 +1373,8 @@
 
       // Function to load and filter events for the chapter
       async function loadChapterEvents(chapterId) {
-         if (!supabase || !chapterId) {
-            console.log('loadChapterEvents: Missing supabase or chapterId', { supabase: !!supabase, chapterId });
+         if (!supabaseClient || !chapterId) {
+            console.log('loadChapterEvents: Missing supabaseClient or chapterId', { supabaseClient: !!supabaseClient, chapterId });
                      showNoEventsMessage();
                      return;
                   }
@@ -1392,7 +1392,7 @@
 
          try {
             // Fetch events for this chapter using chapter_id
-            const { data: dbEvents, error } = await supabase
+            const { data: dbEvents, error } = await supabaseClient
                .from('tbl_events')
                .select('*')
                .eq('chapter_id', chapterIdNum)

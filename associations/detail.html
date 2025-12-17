@@ -706,9 +706,9 @@
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
 
       // Initialize Supabase client
-      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       
-      if (!supabase) {
+      if (!supabaseClient) {
          console.error('Failed to initialize Supabase client');
       }
 
@@ -732,10 +732,10 @@
 
       // Fetch association details from database by ID
       async function fetchAssociationById(associationId) {
-         if (!supabase || !associationId) return null;
+         if (!supabaseClient || !associationId) return null;
 
          try {
-            const { data: association, error } = await supabase
+            const { data: association, error } = await supabaseClient
                .from('tbl_associations')
                .select('*')
                .eq('id', associationId)
@@ -777,7 +777,7 @@
 
       // Fetch association members (only verified members)
       async function fetchAssociationMembers(associationId) {
-         if (!supabase || !associationId) return { count: 0, members: [] };
+         if (!supabaseClient || !associationId) return { count: 0, members: [] };
 
          const associationIdNum = Number(associationId);
          if (isNaN(associationIdNum)) {
@@ -787,7 +787,7 @@
 
          try {
             // Fetch verified alumni members for this association
-            const { data: members, error: membersError, count } = await supabase
+            const { data: members, error: membersError, count } = await supabaseClient
                .from('tbl_alumni')
                .select('alumniid, alumniname, degreetitle, yearofending, image1', { count: 'exact' })
                .eq('association_id', associationIdNum)
@@ -1273,8 +1273,8 @@
 
       // Function to load and filter events for the association
       async function loadAssociationEvents(associationId) {
-         if (!supabase || !associationId) {
-            console.log('loadAssociationEvents: Missing supabase or associationId', { supabase: !!supabase, associationId });
+         if (!supabaseClient || !associationId) {
+            console.log('loadAssociationEvents: Missing supabaseClient or associationId', { supabaseClient: !!supabaseClient, associationId });
             showNoEventsMessage();
             return;
          }
@@ -1292,7 +1292,7 @@
 
          try {
             // Fetch events for this association using association_id
-            const { data: dbEvents, error } = await supabase
+            const { data: dbEvents, error } = await supabaseClient
                .from('tbl_events')
                .select('*')
                .eq('association_id', associationIdNum)
@@ -1372,7 +1372,7 @@
 
       // Function to load upcoming events from ucoming_events table
       async function loadUcomingEvents(associationId) {
-         if (!supabase || !associationId) {
+         if (!supabaseClient || !associationId) {
             const container = document.getElementById('ucoming-events-container');
             if (container) {
                container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
@@ -1393,7 +1393,7 @@
 
          try {
             // Fetch upcoming events from ucoming_events table matching association_id
-            const { data: ucomingEvents, error } = await supabase
+            const { data: ucomingEvents, error } = await supabaseClient
                .from('ucoming_events')
                .select('*')
                .eq('association_id', associationIdNum)

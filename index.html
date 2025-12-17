@@ -2912,8 +2912,8 @@
       const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
 
-      const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      if (!supabase) {
+      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      if (!supabaseClient) {
          console.error('Failed to initialize Supabase client for homepage events');
       }
 
@@ -2948,10 +2948,10 @@
 
       async function loadHomeEvents() {
          const grid = document.getElementById('home-events-grid');
-         if (!grid || !supabase) return;
+         if (!grid || !supabaseClient) return;
 
          try {
-            const { data: dbEvents, error } = await supabase
+            const { data: dbEvents, error } = await supabaseClient
                .from('tbl_events')
                .select('*')
                .neq('category', 'Coaching and Mentorships')
@@ -3012,10 +3012,10 @@
 
       async function loadHomeCoachingEvents() {
          const grid = document.getElementById('home-coaching-grid');
-         if (!grid || !supabase) return;
+         if (!grid || !supabaseClient) return;
 
          try {
-            const { data: dbEvents, error } = await supabase
+            const { data: dbEvents, error } = await supabaseClient
                .from('tbl_events')
                .select('*')
                .eq('category', 'Coaching and Mentorships')
