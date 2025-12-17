@@ -1030,10 +1030,8 @@
                internationalContainer.innerHTML = '<div class="col-12"><p class="text-center">No international chapters available.</p></div>';
             }
 
-            // Calculate total: Get count of all verified alumni with any chapter
-            // Combine all chapter IDs (national + international)
-            const allChapterIds = [...nationalChapterIds, ...internationalChapterIds];
-            const totalMembers = await getTotalVerifiedAlumniWithChapters(allChapterIds);
+            // Calculate total: Sum of national and international members
+            const totalMembers = nationalMembers + internationalMembers;
 
             // Update members display
             const totalMembersEl = document.getElementById('chapters-total-members');
