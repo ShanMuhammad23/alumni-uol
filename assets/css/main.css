@@ -7716,8 +7716,8 @@ only screen and (max-width: 767px) {
   font-weight: 500;
   border-radius: 6px;
   padding: 7px 24px 9px;
-  color: black;
-  background: white;
+  color: var(--tp-common-white);
+  background: var(--tp-theme-primary);
   border: 1px solid rgba(255, 255, 255, 0.3);
   -webkit-transition: all 0.3s 0s ease-out;
   -moz-transition: all 0.3s 0s ease-out;
@@ -8460,7 +8460,10 @@ only screen and (max-width: 767px) {
   border-color: #880824;
   box-shadow: 0 10px 15px -5px rgba(21, 36, 34, 0.1);
 }
-
+.tp-header-bar {
+  background-color: var(--tp-theme-primary);
+  border-color: var(--tp-theme-primary);
+}
 .tp-header-4-main.tp-header-sticky .tp-header-bar .offcanvas-open-btn {
   background-color: var(--tp-theme-primary);
 }
@@ -9426,6 +9429,7 @@ only screen and (max-width: 767px) {
   display: inline-block;
   margin: 0px 8px;
   white-space: normal;
+  z-index: 9999;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1420px) {
   .main-menu>nav>ul>li {
@@ -17430,6 +17434,7 @@ only screen and (max-width: 767px) {
   .tp-service-wrap {
     padding: 28px 24px 24px 24px;
     min-height: 200px;
+    margin-top:20px;
   }
 }
 
