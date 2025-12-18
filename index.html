@@ -1892,7 +1892,8 @@
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/chapters/national/">National<br> Chapters</a></h4>
+                        <h4 class="tp-service-title"><a href="/chapters/national/">National Chapters <br> ( <span id="home-national-members">0</span> )</a></h4>
+                        
                         <div class="tp-service-btn">
                            <a href="/chapters/national/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1910,7 +1911,8 @@
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/chapters/international/">International<br> Chapters</a></h4>
+                        <h4 class="tp-service-title"><a href="/chapters/international/">International Chapters <br> ( <span id="home-international-members">0</span> )</a></h4>
+                       
                         <div class="tp-service-btn">
                            <a href="/chapters/international/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1928,7 +1930,7 @@
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-3.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/associations/"> Associations</a></h4>
+                        <h4 class="tp-service-title"><a href="/associations/"> Associations <br> ( <span id="home-associations-members">0</span> )</a></h4>
                         <div class="tp-service-btn">
                            <a href="/associations/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1964,7 +1966,7 @@
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-2.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/jobs/">Explore <br> Jobs</a></h4>
+                        <h4 class="tp-service-title"><a href="/jobs/">Explore  Jobs</a></h4>
                         <div class="tp-service-btn">
                            <a href="/jobs/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -2986,7 +2988,7 @@
             return imageName;
          }
          // Otherwise, fetch from remote images base URL followed by the filename from the database
-         const BASE_IMAGE_URL = 'https://alumni-portal-uol.vercel.app/images';
+         const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
          return `${BASE_IMAGE_URL}/${imageName}`;
       }
 
@@ -3304,18 +3306,36 @@
          setTimeout(function () {
             const wrapper = document.getElementById('distinguished-alumni-wrapper');
             const sliderEl = document.getElementById('distinguished-alumni-slider');
-            if (!wrapper || !sliderEl) return;
+            if (!wrapper || !sliderEl || !supabaseClient) return;
 
-            fetch('/assets/data/alumni-stories.json')
-               .then(response => {
-                  if (!response.ok) throw new Error('Failed to fetch alumni stories');
-                  return response.json();
-               })
-               .then(stories => {
+            // Fetch alumni stories from Supabase
+            (async function() {
+               try {
+                  const { data: stories, error } = await supabaseClient
+                     .from('distinguished_alumni')
+                     .select('slug, name, image, role, summary')
+                     .order('created_at', { ascending: false })
+                     .limit(20);
+
+                  if (error) {
+                     console.error('Error loading alumni stories:', error);
+                     wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">Unable to load alumni stories.</p></div>';
+                     initializeSlider();
+                     return;
+                  }
+
                   if (!Array.isArray(stories) || stories.length === 0) {
                      wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">No alumni stories available.</p></div>';
                      initializeSlider();
                      return;
+                  }
+
+                  // Helper function to extract filename from image path
+                  function getImageUrl(imagePath) {
+                     if (!imagePath) return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+                     // Extract filename from path like "/assets/img/wall/rubeel.jpg"
+                     const filename = imagePath.split('/').pop();
+                     return `https://portal-alumni.uol.edu.pk/images/${filename}`;
                   }
 
                   // Render all alumni in the slider
@@ -3323,8 +3343,9 @@
                      // Extract role from story data
                      let role = 'Alumnus';
                      if (story.role) {
-                        // Extract role title (before "at" or comma)
-                        role = story.role.split(' at ')[0].split(',')[0].trim();
+                        // Remove HTML tags and extract role title (before "at" or comma)
+                        const cleanRole = story.role.replace(/<br\s*\/?>/gi, ' ').trim();
+                        role = cleanRole.split(' at ')[0].split(',')[0].trim();
                      } else if (story.summary) {
                         const parts = story.summary.split('<br>');
                         // Try to extract from summary (usually second to last part)
@@ -3336,7 +3357,7 @@
                         }
                      }
 
-                     const image = story.image || '/assets/img/about/about-1.jpg';
+                     const imageUrl = getImageUrl(story.image);
                      const slug = story.slug || story.name.toLowerCase().replace(/\s+/g, '-');
 
                      return `
@@ -3344,7 +3365,7 @@
                            <div class="tp-alumni-profile-card">
                               <div class="tp-alumni-profile-avatar">
                                  <a href="/stories/detail.html?slug=${slug}">
-                                    <img src="${image}" alt="${story.name}" class="w-100 h-100" onerror="this.src='/assets/img/about/about-1.jpg'">
+                                    <img src="${imageUrl}" alt="${story.name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
                                  </a>
                               </div>
                               <div class="tp-alumni-profile-info">
@@ -3362,12 +3383,12 @@
 
                   // Initialize the slider after content is loaded
                   initializeSlider();
-               })
-               .catch(error => {
+               } catch (error) {
                   console.error('Error loading alumni stories:', error);
                   wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">Unable to load alumni stories.</p></div>';
                   initializeSlider();
-               });
+               }
+            })();
 
             function initializeSlider() {
                // Wait for Swiper to be available
@@ -3514,6 +3535,247 @@
                linksContainer.innerHTML = '<p style="text-align: center; color: #666; font-size: 13px;">Unable to load chapters.</p>';
             });
       })();
+
+      // Fetch total count of verified alumni with chapters filtered by chapter IDs
+      async function getTotalVerifiedAlumniWithChapters(chapterIds) {
+         if (!supabaseClient || !chapterIds || chapterIds.length === 0) return 0;
+
+         try {
+            // Step 1: Get ALL alumni_chapter records with at least one chapter
+            let allData = [];
+            let from = 0;
+            const pageSize = 1000;
+            let hasMore = true;
+
+            while (hasMore) {
+               const { data, error, count } = await supabaseClient
+                  .from('alumni_chapter')
+                  .select('id, chapter1, chapter2, chapter3', { count: 'exact' })
+                  .or('chapter1.not.is.null,chapter2.not.is.null,chapter3.not.is.null')
+                  .range(from, from + pageSize - 1);
+
+               if (error) {
+                  console.error('Error fetching alumni_chapter records:', error);
+                  break;
+               }
+
+               if (data && data.length > 0) {
+                  allData = allData.concat(data);
+                  from += pageSize;
+                  hasMore = data.length === pageSize;
+               } else {
+                  hasMore = false;
+               }
+            }
+
+            if (allData.length === 0) return 0;
+
+            // Step 2: Filter to only include records where at least one chapter is in the provided IDs
+            const filteredData = allData.filter(row => {
+               return (row.chapter1 && chapterIds.includes(row.chapter1)) || 
+                      (row.chapter2 && chapterIds.includes(row.chapter2)) || 
+                      (row.chapter3 && chapterIds.includes(row.chapter3));
+            });
+
+            if (filteredData.length === 0) return 0;
+
+            // Step 3: Get unique alumni IDs
+            const alumniIds = [...new Set(filteredData.map(row => row.id))];
+
+            if (alumniIds.length === 0) return 0;
+
+            // Step 4: Count verified alumni from tbl_alumni
+            let totalCount = 0;
+            const batchSize = 1000;
+            
+            for (let i = 0; i < alumniIds.length; i += batchSize) {
+               const batch = alumniIds.slice(i, i + batchSize);
+               const { count, error: countError } = await supabaseClient
+                  .from('tbl_alumni')
+                  .select('*', { count: 'exact', head: true })
+                  .eq('verify', 'true')
+                  .in('alumniid', batch);
+
+               if (countError) {
+                  console.error('Error counting verified alumni batch:', countError);
+                  continue;
+               }
+
+               totalCount += (count || 0);
+            }
+
+            return totalCount;
+         } catch (error) {
+            console.error('Unexpected error fetching total verified alumni count:', error);
+            return 0;
+         }
+      }
+
+      // Get national chapter IDs from tblchapters table
+      async function getNationalChapterIds() {
+         if (!supabaseClient) return [];
+         
+         try {
+            const { data, error } = await supabaseClient
+               .from('tblchapters')
+               .select('id')
+               .not('national_chapter', 'is', null);
+            
+            if (error) {
+               console.error('Error fetching national chapter IDs:', error);
+               return [];
+            }
+            
+            return data ? data.map(ch => ch.id) : [];
+         } catch (error) {
+            console.error('Unexpected error fetching national chapter IDs:', error);
+            return [];
+         }
+      }
+
+      // Get international chapter IDs from tblchapters table
+      async function getInternationalChapterIds() {
+         if (!supabaseClient) return [];
+         
+         try {
+            const { data, error } = await supabaseClient
+               .from('tblchapters')
+               .select('id')
+               .not('international_chapter', 'is', null);
+            
+            if (error) {
+               console.error('Error fetching international chapter IDs:', error);
+               return [];
+            }
+            
+            return data ? data.map(ch => ch.id) : [];
+         } catch (error) {
+            console.error('Unexpected error fetching international chapter IDs:', error);
+            return [];
+         }
+      }
+
+      // Fetch member count for an association (verified members only)
+      async function getAssociationMemberCount(associationId) {
+         if (!supabaseClient || !associationId) return 0;
+
+         try {
+            const { count, error } = await supabaseClient
+               .from('tbl_alumni')
+               .select('*', { count: 'exact', head: true })
+               .eq('association_id', associationId)
+               .eq('verify', true);
+
+            if (error) {
+               console.error('Error fetching member count:', error);
+               return 0;
+            }
+
+            return count || 0;
+         } catch (error) {
+            console.error('Unexpected error fetching member count:', error);
+            return 0;
+         }
+      }
+
+      // Load member counts for homepage CTA cards
+      async function loadHomepageMemberCounts() {
+         if (!supabaseClient) {
+            console.error('Supabase client not initialized');
+            return;
+         }
+
+         try {
+            // Fetch national chapters member count
+            const dbNationalChapterIds = await getNationalChapterIds();
+            let nationalMembers = 0;
+            if (dbNationalChapterIds.length > 0) {
+               nationalMembers = await getTotalVerifiedAlumniWithChapters(dbNationalChapterIds);
+            } else {
+               // Fallback to JSON if database query fails
+               try {
+                  const response = await fetch('/assets/data/chapters.json');
+                  if (response.ok) {
+                     const data = await response.json();
+                     const jsonNationalChapterIds = data.local ? data.local.map(ch => ch.id) : [];
+                     if (jsonNationalChapterIds.length > 0) {
+                        nationalMembers = await getTotalVerifiedAlumniWithChapters(jsonNationalChapterIds);
+                     }
+                  }
+               } catch (error) {
+                  console.error('Error fetching chapters JSON:', error);
+               }
+            }
+
+            // Fetch international chapters member count
+            const dbInternationalChapterIds = await getInternationalChapterIds();
+            let internationalMembers = 0;
+            if (dbInternationalChapterIds.length > 0) {
+               internationalMembers = await getTotalVerifiedAlumniWithChapters(dbInternationalChapterIds);
+            } else {
+               // Fallback to JSON if database query fails
+               try {
+                  const response = await fetch('/assets/data/chapters.json');
+                  if (response.ok) {
+                     const data = await response.json();
+                     const jsonInternationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
+                     if (jsonInternationalChapterIds.length > 0) {
+                        internationalMembers = await getTotalVerifiedAlumniWithChapters(jsonInternationalChapterIds);
+                     }
+                  }
+               } catch (error) {
+                  console.error('Error fetching chapters JSON:', error);
+               }
+            }
+
+            // Fetch associations member count
+            let associationsMembers = 0;
+            try {
+               const response = await fetch('/assets/data/associations.json');
+               if (response.ok) {
+                  const associations = await response.json();
+                  if (associations && associations.length > 0) {
+                     // Fetch member counts for all associations in parallel
+                     const associationsWithCounts = await Promise.all(
+                        associations.map(async (association) => {
+                           const memberCount = await getAssociationMemberCount(association.id);
+                           return memberCount > 0 ? memberCount : (association.members || 0);
+                        })
+                     );
+                     associationsMembers = associationsWithCounts.reduce((sum, count) => {
+                        return sum + (typeof count === 'number' ? count : 0);
+                     }, 0);
+                  }
+               }
+            } catch (error) {
+               console.error('Error fetching associations JSON:', error);
+            }
+
+            // Update the display elements
+            const nationalMembersEl = document.getElementById('home-national-members');
+            const internationalMembersEl = document.getElementById('home-international-members');
+            const associationsMembersEl = document.getElementById('home-associations-members');
+
+            if (nationalMembersEl) {
+               nationalMembersEl.textContent = nationalMembers > 0 ? nationalMembers.toLocaleString() : '0';
+            }
+            if (internationalMembersEl) {
+               internationalMembersEl.textContent = internationalMembers > 0 ? internationalMembers.toLocaleString() : '0';
+            }
+            if (associationsMembersEl) {
+               associationsMembersEl.textContent = associationsMembers > 0 ? associationsMembers.toLocaleString() : '0';
+            }
+         } catch (error) {
+            console.error('Error loading homepage member counts:', error);
+         }
+      }
+
+      // Load member counts on page load
+      if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', loadHomepageMemberCounts);
+      } else {
+         loadHomepageMemberCounts();
+      }
    </script>
 
 </body>

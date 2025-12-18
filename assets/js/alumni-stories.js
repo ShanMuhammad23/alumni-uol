@@ -4,6 +4,23 @@
     return;
   }
 
+  // Supabase Configuration
+  const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
+  
+  const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  if (!supabaseClient) {
+    console.error('Failed to initialize Supabase client for alumni stories');
+  }
+
+  // Helper function to extract filename from image path
+  function getImageUrl(imagePath) {
+    if (!imagePath) return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+    // Extract filename from path like "/assets/img/wall/rubeel.jpg"
+    const filename = imagePath.split('/').pop();
+    return `https://portal-alumni.uol.edu.pk/images/${filename}`;
+  }
+
   const loaders = {
     show(message = "Loading stories...") {
       root.innerHTML = `<div class="tp-alumni-loader">
@@ -62,13 +79,16 @@
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) ogDesc.setAttribute("content", story.headline || story.summary || "");
       const ogImage = document.querySelector('meta[property="og:image"]');
-      if (ogImage && story.image) ogImage.setAttribute("content", story.image);
+      if (ogImage && story.image) {
+        const imageUrl = story.image.startsWith('http') ? story.image : getImageUrl(story.image);
+        ogImage.setAttribute("content", imageUrl);
+      }
       const breadcrumbTitle = document.querySelector(".tp-breadcrumb__title");
       if (breadcrumbTitle) breadcrumbTitle.textContent = story.name;
     },
 
     renderAchievements(achievements = []) {
-      if (!achievements.length) return "";
+      if (!achievements || !Array.isArray(achievements) || achievements.length === 0) return "";
       return `<div class="tp-alumni-achievements">
         <h4>Highlights</h4>
         <ul>
@@ -88,20 +108,24 @@
       </div>`;
     },
     renderTags(tags = []) {
-      if (!tags.length) return "";
+      if (!tags || !Array.isArray(tags) || tags.length === 0) return "";
       return `<div class="tp-alumni-tags">
         ${tags.map((tag) => `<span class="tp-alumni-tag">${tag}</span>`).join("")}
       </div>`;
     },
     renderStats(stats = []) {
-      if (!stats.length) return "";
+      if (!stats || !Array.isArray(stats) || stats.length === 0) return "";
       return `<div class="tp-alumni-stats">
-        ${stats.map((stat) => `
+        ${stats.map((stat) => {
+          const value = stat && typeof stat === 'object' ? stat.value : '';
+          const label = stat && typeof stat === 'object' ? stat.label : '';
+          return `
           <div class="tp-alumni-stat">
-            <div class="tp-alumni-stat__value">${stat.value}</div>
-            <div class="tp-alumni-stat__label">${stat.label}</div>
+            <div class="tp-alumni-stat__value">${value}</div>
+            <div class="tp-alumni-stat__label">${label}</div>
           </div>
-        `).join("")}
+        `;
+        }).join("")}
       </div>`;
     },
     renderListCards(stories) {
@@ -109,12 +133,12 @@
         ${stories
           .map(
             (story) => `<article class="tp-alumni-card">
-              <div class="tp-alumni-card__banner" style="background-image: url('${story.image || "/assets/img/about/about-1.jpg"}');">
+              <div class="tp-alumni-card__banner" style="background-image: url('${story.image || "https://portal-alumni.uol.edu.pk/images/about-1.jpg"}');">
                
               </div>
               <div class="tp-alumni-card__body">
                 <h3 class="tp-alumni-card__name">${story.name}</h3>
-                <p class="tp-alumni-card__role">${story.role || ""}</p>
+                <p class="tp-alumni-card__role">${story.role ? story.role.replace(/<br\s*\/?>/gi, ' ') : ""}</p>
                 <p class="tp-alumni-card__headline">${story.headline || ""}</p>
                 <a class="tp-alumni-card__cta" href="/stories/detail.html?slug=${story.slug}">
                   Read ${story.name.split(" ")[0]}'s story
@@ -130,45 +154,130 @@
 
   loaders.show();
 
-  fetch("/assets/data/alumni-stories.json", { cache: "no-store" })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Unable to fetch alumni stories.");
-      }
-      return response.json();
-    })
-    .then((stories) => {
-      if (!Array.isArray(stories) || !stories.length) {
-        loaders.error("No alumni stories have been published yet. Please check back soon.");
-        return;
-      }
+  // Fetch alumni stories from Supabase
+  (async function() {
+    if (!supabaseClient) {
+      loaders.error("Database connection failed. Please refresh to try again.");
+      return;
+    }
 
-      const normalizedStories = stories.map((item) => ({
-        ...item,
-        slug: item.slug || utils.toSlug(item.name)
-      }));
-
+    try {
       const slugFromPath = utils.getPathSlug();
-
+      
       if (slugFromPath) {
-        const matchedStory = normalizedStories.find((story) => story.slug === slugFromPath);
-        if (matchedStory) {
-          utils.applyDocumentMeta(matchedStory);
-          renderDetailView(matchedStory, normalizedStories);
-        } else {
-          renderNotFoundView(normalizedStories);
-        }
-        return;
-      }
+        // Fetch single story by slug
+        const { data: story, error } = await supabaseClient
+          .from('distinguished_alumni')
+          .select('*')
+          .eq('slug', slugFromPath)
+          .single();
 
-      renderListingView(normalizedStories);
-    })
-    .catch((error) => {
+        if (error || !story) {
+          // If story not found, fetch all stories for "not found" view
+          const { data: allStories } = await supabaseClient
+            .from('distinguished_alumni')
+            .select('slug, name, image, role, headline')
+            .order('created_at', { ascending: false })
+            .limit(20);
+          
+          renderNotFoundView(allStories || []);
+          return;
+        }
+
+        // Normalize story data (parse JSONB fields)
+        // Helper function to safely parse JSONB fields
+        function parseJsonbField(field) {
+          if (field === null || field === undefined) return [];
+          if (Array.isArray(field)) return field;
+          if (typeof field === 'string') {
+            try {
+              const parsed = JSON.parse(field);
+              return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+              // If parsing fails, return empty array
+              return [];
+            }
+          }
+          // If it's an object but not an array, wrap it
+          if (typeof field === 'object') {
+            return Array.isArray(field) ? field : [];
+          }
+          return [];
+        }
+
+        function parseJsonbStats(field) {
+          if (field === null || field === undefined) return [];
+          if (Array.isArray(field)) return field;
+          if (typeof field === 'string') {
+            try {
+              const parsed = JSON.parse(field);
+              return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+              return [];
+            }
+          }
+          if (typeof field === 'object') {
+            return Array.isArray(field) ? field : [];
+          }
+          return [];
+        }
+
+        const normalizedStory = {
+          ...story,
+          tags: parseJsonbField(story.tags),
+          stats: parseJsonbStats(story.stats),
+          achievements: parseJsonbField(story.achievements),
+          story: parseJsonbField(story.story),
+          image: getImageUrl(story.image)
+        };
+
+        utils.applyDocumentMeta(normalizedStory);
+        
+        // Fetch other stories for "more stories" section
+        const { data: otherStories } = await supabaseClient
+          .from('distinguished_alumni')
+          .select('slug, name, image, role, headline')
+          .neq('slug', slugFromPath)
+          .order('created_at', { ascending: false })
+          .limit(20);
+
+        const normalizedOtherStories = (otherStories || []).map(item => ({
+          ...item,
+          image: getImageUrl(item.image)
+        }));
+
+        renderDetailView(normalizedStory, normalizedOtherStories);
+      } else {
+        // Fetch all stories for listing view
+        const { data: stories, error } = await supabaseClient
+          .from('distinguished_alumni')
+          .select('slug, name, image, role, headline, summary')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          throw new Error("Unable to fetch alumni stories from database.");
+        }
+
+        if (!Array.isArray(stories) || !stories.length) {
+          loaders.error("No alumni stories have been published yet. Please check back soon.");
+          return;
+        }
+
+        const normalizedStories = stories.map((item) => ({
+          ...item,
+          slug: item.slug || utils.toSlug(item.name),
+          image: getImageUrl(item.image)
+        }));
+
+        renderListingView(normalizedStories);
+      }
+    } catch (error) {
       console.error(error);
       loaders.error(
         "Please refresh to try again or contact the alumni office if this issue continues."
       );
-    });
+    }
+  })();
 
   function renderListingView(stories) {
     root.innerHTML = `
@@ -181,19 +290,19 @@
     `;
   }
 
-  function renderDetailView(story, allStories) {
-    const otherStories = allStories.filter((item) => item.slug !== story.slug).slice(0, 2);
+  function renderDetailView(story, otherStories) {
+    const moreStories = otherStories.slice(0, 2);
 
     root.innerHTML = `
       <article class="tp-alumni-detail">
         <header class="tp-alumni-detail__hero">
           <div class="tp-alumni-detail__media">
-            <img src="${story.image || "/assets/img/about/about-1.jpg"}" alt="${story.name}">
+            <img src="${story.image || "https://portal-alumni.uol.edu.pk/images/about-1.jpg"}" alt="${story.name}">
           </div>
           <div class="tp-alumni-detail__meta">
             <span class="tp-alumni-detail__eyebrow">Distinguished Alumni Story</span>
             <h1>${story.name}</h1>
-            <p class="tp-alumni-detail__role">${story.role || ""}</p>
+            <p class="tp-alumni-detail__role">${story.role ? story.role.replace(/<br\s*\/?>/gi, ' ') : ""}</p>
             <p class="tp-alumni-detail__headline">${story.headline || ""}</p>
             ${utils.renderTags(story.tags)}
             ${utils.renderStats(story.stats)}
@@ -201,13 +310,13 @@
         </header>
         <div class="tp-alumni-detail__body">
           <div class="tp-alumni-detail__story">
-            <p class="tp-alumni-detail__summary">${story.summary || ""}</p>
-            ${utils.renderStoryParagraphs(story.story)}
+            <p class="tp-alumni-detail__summary">${story.summary ? story.summary.replace(/<br\s*\/?>/gi, ' ') : ""}</p>
+            ${utils.renderStoryParagraphs(story.story || [])}
             ${utils.renderQuote(story)}
           </div>
           <aside class="tp-alumni-detail__aside">
             ${utils.renderAchievements(story.achievements)}
-            ${renderMoreStories(otherStories)}
+            ${renderMoreStories(moreStories)}
           </aside>
         </div>
       </article>
