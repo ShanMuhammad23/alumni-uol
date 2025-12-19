@@ -230,7 +230,7 @@
       "image":"/assets/img/chapters/international/china.jpg",
       "country": "China",
       "description": "Join UOL alumni in China. Connect with fellow graduates and build your professional network across Chinese cities.",
-      "status": "coming-soon"
+      "status": "active"
     },
    
     {
@@ -240,7 +240,7 @@
       "image":"/assets/img/chapters/international/Italy.jpg",
       "country": "Italy",
       "description": "Join UOL alumni in Italy. Connect with professionals and attend cultural and networking events.",
-      "status": "coming-soon"
+      "status": "active"
     },
     {
       "id": 26,
@@ -249,7 +249,7 @@
       "image":"/assets/img/chapters/international/Oman.jpg",
       "country": "Oman",
       "description": "Connect with UOL alumni in Oman. Join networking events and community activities.",
-      "status": "coming-soon"
+      "status": "active"
     },
     {
       "id": 27,
@@ -258,7 +258,7 @@
       "image":"/assets/img/chapters/international/Austrailia.jpg",
       "country": "Australia",
       "description": "Join UOL alumni in Australia. Connect with fellow graduates across Australian cities and build your professional network.",
-      "status": "coming-soon"
+      "status": "active"
     },
     {
       "id":31,
@@ -267,7 +267,7 @@
       "image":"/assets/img/chapters/international/Afghanistan.jpeg",
       "country": "Afghanistan",
       "description": "Connect with UOL alumni in Afghanistan. Join networking events and community gatherings.",
-      "status": "coming-soon"
+      "status": "active"
     }
   ]
 }
