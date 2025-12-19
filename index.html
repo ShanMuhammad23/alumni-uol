@@ -956,6 +956,118 @@
       transition: filter 0.3s ease;
    }
 
+   /* Compact CTA Cards Styles */
+   .service-area .row {
+      display: flex;
+      align-items: stretch;
+   }
+
+   .service-area .col-lg-2,
+   .service-area .col-md-6 {
+      display: flex;
+   }
+
+   .tp-service-item {
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+   }
+
+   .tp-service-wrap {
+      padding: 15px 0;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      height: 100%;
+      justify-content: space-between;
+   }
+
+   .tp-service-icon {
+     
+      flex-shrink: 0;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .tp-service-icon img {
+      width: 40px;
+      height: 40px;
+   }
+
+   .tp-service-title {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .tp-service-title a {
+      text-decoration: none;
+   }
+
+   .tp-service-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      height: 40px;
+      min-height: 40px;
+      max-height: 40px;
+   }
+
+   /* Placeholder for cards without stats to maintain equal spacing */
+   .tp-service-stats:empty {
+      height: 40px;
+      min-height: 40px;
+      max-height: 40px;
+      margin-bottom: 12px;
+      display: block;
+   }
+
+   .tp-stat-count {
+      font-weight: 600;
+      white-space: nowrap;
+   }
+
+   .tp-stat-separator {
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 300;
+   }
+
+   .tp-service-btn {
+      margin-top: auto;
+      flex-shrink: 0;
+      margin-bottom: 20;
+   }
+
+   @media only screen and (max-width: 991px) {
+      .tp-service-item {
+         padding: 18px 12px;
+      }
+
+      .tp-service-title {
+         font-size: 15px;
+         min-height: 42px;
+      }
+
+      .tp-service-stats {
+         font-size: 12px;
+         gap: 6px;
+      }
+   }
+
    .tp-chapter-flag-link:hover svg {
       filter: brightness(1.1);
    }
@@ -1887,13 +1999,17 @@
          <div class="pl-40 pr-40">
             <div class="row justify-content-center">
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/chapters/national/">National Chapters <br> ( <span id="home-national-members">0</span> )</a></h4>
-                        
+                        <h4 class="tp-service-title"><a href="/chapters/national/">National Chapters <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-national-chapters">0</span>) </span></a></h4>
+                        <div class="tp-service-stats">
+                          
+                           <span class="tp-stat-separator">•</span>
+                           <span class="tp-stat-count" style="color: var(--tp-theme-primary, #AB0C2F);"><span id="home-national-members">0</span> Members</span>
+                        </div>
                         <div class="tp-service-btn">
                            <a href="/chapters/national/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1902,17 +2018,20 @@
                            </a>
                         </div>
                      </div>
-                   
                   </div>
                </div>
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/chapters/international/">International Chapters <br> ( <span id="home-international-members">0</span> )</a></h4>
-                       
+                        <h4 class="tp-service-title"><a href="/chapters/international/">International Chapters <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-international-chapters">0</span>) </span></a></h4>
+                        <div class="tp-service-stats">
+                          
+                           <span class="tp-stat-separator">•</span>
+                           <span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-international-members">0</span> Members</span>
+                        </div>
                         <div class="tp-service-btn">
                            <a href="/chapters/international/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1921,16 +2040,20 @@
                            </a>
                         </div>
                      </div>
-                   
                   </div>
                </div>
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-3.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/associations/"> Associations <br> ( <span id="home-associations-members">0</span> )</a></h4>
+                        <h4 class="tp-service-title"><a href="/associations/">Associations <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-associations-count">0</span>) </span></a></h4>
+                        <div class="tp-service-stats">
+                          
+                           <span class="tp-stat-separator">•</span>
+                           <span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-associations-members">0</span> Members</span>
+                        </div>
                         <div class="tp-service-btn">
                            <a href="/associations/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1939,16 +2062,16 @@
                            </a>
                         </div>
                      </div>
-                  
                   </div>
                </div>
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/services-3-hover-3.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/newsletters/"> Newsletters</a></h4>
+                        <h4 class="tp-service-title"><a href="/newsletters/">Newsletters</a></h4>
+                        <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
                            <a href="/newsletters/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1957,16 +2080,16 @@
                            </a>
                         </div>
                      </div>
-                  
                   </div>
                </div>
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-2.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/jobs/">Explore  Jobs</a></h4>
+                        <h4 class="tp-service-title"><a href="/jobs/">Explore Jobs</a></h4>
+                        <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
                            <a href="/jobs/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1975,16 +2098,16 @@
                            </a>
                         </div>
                      </div>
-                   
                   </div>
                </div>
                <div class="col-lg-2 col-md-6">
-                  <div class="tp-service-item text-center mb-40 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
+                  <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
                            <span><img src="assets/img/icon/service/service-icon-2.svg" alt="service-icon"></span>
                         </div>
-                        <h4 class="tp-service-title"><a href="/benefits/">Perks & <br>Benefits</a></h4>
+                        <h4 class="tp-service-title"><a href="/benefits/">Perks & Benefits</a></h4>
+                        <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
                            <a href="/benefits/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1993,13 +2116,10 @@
                            </a>
                         </div>
                      </div>
-                   
                   </div>
                </div>
             </div>
-           
          </div>
-        
       </section>
 
       <!-- service-area-end -->
@@ -3686,6 +3806,32 @@
          }
 
          try {
+            // Load chapters count from JSON
+            let nationalChaptersCount = 0;
+            let internationalChaptersCount = 0;
+            try {
+               const chaptersResponse = await fetch('/assets/data/chapters.json');
+               if (chaptersResponse.ok) {
+                  const chaptersData = await chaptersResponse.json();
+                  nationalChaptersCount = chaptersData.local ? chaptersData.local.length : 0;
+                  internationalChaptersCount = chaptersData.international ? chaptersData.international.length : 0;
+               }
+            } catch (error) {
+               console.error('Error fetching chapters JSON:', error);
+            }
+
+            // Load associations count from JSON
+            let associationsCount = 0;
+            try {
+               const associationsResponse = await fetch('/assets/data/associations.json');
+               if (associationsResponse.ok) {
+                  const associationsData = await associationsResponse.json();
+                  associationsCount = associationsData && Array.isArray(associationsData) ? associationsData.length : 0;
+               }
+            } catch (error) {
+               console.error('Error fetching associations JSON:', error);
+            }
+
             // Fetch national chapters member count
             const dbNationalChapterIds = await getNationalChapterIds();
             let nationalMembers = 0;
@@ -3752,15 +3898,27 @@
             }
 
             // Update the display elements
+            const nationalChaptersEl = document.getElementById('home-national-chapters');
             const nationalMembersEl = document.getElementById('home-national-members');
+            const internationalChaptersEl = document.getElementById('home-international-chapters');
             const internationalMembersEl = document.getElementById('home-international-members');
+            const associationsCountEl = document.getElementById('home-associations-count');
             const associationsMembersEl = document.getElementById('home-associations-members');
 
+            if (nationalChaptersEl) {
+               nationalChaptersEl.textContent = nationalChaptersCount > 0 ? nationalChaptersCount : '0';
+            }
             if (nationalMembersEl) {
                nationalMembersEl.textContent = nationalMembers > 0 ? nationalMembers.toLocaleString() : '0';
             }
+            if (internationalChaptersEl) {
+               internationalChaptersEl.textContent = internationalChaptersCount > 0 ? internationalChaptersCount : '0';
+            }
             if (internationalMembersEl) {
                internationalMembersEl.textContent = internationalMembers > 0 ? internationalMembers.toLocaleString() : '0';
+            }
+            if (associationsCountEl) {
+               associationsCountEl.textContent = associationsCount > 0 ? associationsCount : '0';
             }
             if (associationsMembersEl) {
                associationsMembersEl.textContent = associationsMembers > 0 ? associationsMembers.toLocaleString() : '0';
