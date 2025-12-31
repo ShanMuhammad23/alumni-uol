@@ -2498,7 +2498,13 @@
                   </div>
                </div>
             </div>
-            <div class="row">
+            <div class="row" id="home-upcoming-grid">
+               <div class="col-12">
+                  <p class="mb-0">Upcoming engagements will appear here once they are available.</p>
+               </div>
+            </div>
+            <!-- Old hardcoded content removed - now loaded dynamically -->
+            <!-- <div class="row">
                <div class="col-lg-3 col-md-3">
                   <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".5s">
                      <div class="tp-event-4-thumb-wrap text-center">
@@ -2589,10 +2595,7 @@
                      </div>
                   </div>
                </div>
-
-
-
-            </div>
+            </div> -->
          </div>
       </section>
       <!-- upcoming-engagements-area-end -->
@@ -3072,16 +3075,8 @@
    </script>
    <script type="text/javascript" src="/assets/map/mapdata.js"></script>
    <script type="text/javascript" src="/assets/map/countrymap.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script src="/assets/js/api-client.js"></script>
    <script>
-      // Supabase Configuration for homepage events
-      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      if (!supabaseClient) {
-         console.error('Failed to initialize Supabase client for homepage events');
-      }
 
       function formatEventDate(dateString, timeString) {
          if (!dateString) return '';
@@ -3114,18 +3109,13 @@
 
       async function loadHomeEvents() {
          const grid = document.getElementById('home-events-grid');
-         if (!grid || !supabaseClient) return;
+         if (!grid || !window.apiClient) return;
 
          try {
-            const { data: dbEvents, error } = await supabaseClient
-               .from('tbl_events')
-               .select('*')
-               .neq('category', 'Coaching and Mentorships')
-               .order('fromdate', { ascending: false, nullsLast: true })
-               .limit(4);
+            const { data: dbEvents, error } = await window.apiClient.getHomePastEvents(4);
 
             if (error) {
-               throw error;
+               throw new Error(error);
             }
 
             if (!dbEvents || dbEvents.length === 0) {
@@ -3176,20 +3166,74 @@
          }
       }
 
-      async function loadHomeCoachingEvents() {
-         const grid = document.getElementById('home-coaching-grid');
-         if (!grid || !supabaseClient) return;
+      async function loadUpcomingEngagements() {
+         const grid = document.getElementById('home-upcoming-grid');
+         if (!grid || !window.apiClient) return;
 
          try {
-            const { data: dbEvents, error } = await supabaseClient
-               .from('tbl_events')
-               .select('*')
-               .eq('category', 'Coaching and Mentorships')
-               .order('fromdate', { ascending: false, nullsLast: true })
-               .limit(3);
+            const { data: dbEvents, error } = await window.apiClient.getHomeUpcomingEvents(4);
 
             if (error) {
-               throw error;
+               throw new Error(error);
+            }
+
+            if (!dbEvents || dbEvents.length === 0) {
+               grid.innerHTML = '<div class="col-12"><p class="mb-0">No upcoming engagements available right now. Please check back soon.</p></div>';
+               return;
+            }
+
+            const fragment = document.createDocumentFragment();
+
+            dbEvents.forEach((dbEvent, index) => {
+               // Show only the date (no time) on the homepage
+               const dateString = formatEventDate(dbEvent.fromdate, null);
+               const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
+               const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+
+               const column = document.createElement('div');
+               column.className = 'col-lg-3 col-md-3';
+               column.innerHTML = `
+                  <div class="tp-event-4-item mb-30 wow fadeInUp" data-wow-delay=".${index + 3}s">
+                     <div class="tp-event-4-thumb-wrap text-center">
+                        <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
+                           <a href="${eventUrl}">
+                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                                 style="height: 100%; width: 100%; object-fit: cover;">
+                           </a>
+                        </div>
+                     </div>
+                     <div class="tp-event-4-box">
+                        <div class="tp-event-4-content">
+                           <p>${dateString || ''}</p>
+                           <h4 class="tp-event-4-title">
+                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                           </h4>
+                        </div>
+                        <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
+                     </div>
+                  </div>
+               `;
+
+               fragment.appendChild(column);
+            });
+
+            grid.innerHTML = '';
+            grid.appendChild(fragment);
+         } catch (error) {
+            console.error('Error loading upcoming engagements:', error);
+            grid.innerHTML = '<div class="col-12"><p class="mb-0">Error loading upcoming engagements. Please refresh the page.</p></div>';
+         }
+      }
+
+      async function loadHomeCoachingEvents() {
+         const grid = document.getElementById('home-coaching-grid');
+         if (!grid || !window.apiClient) return;
+
+         try {
+            const { data: dbEvents, error } = await window.apiClient.getHomeCoachingEvents(3);
+
+            if (error) {
+               throw new Error(error);
             }
 
             if (!dbEvents || dbEvents.length === 0) {
@@ -3243,6 +3287,7 @@
       document.addEventListener('DOMContentLoaded', function () {
          // Load homepage events from database
          loadHomeEvents();
+         loadUpcomingEngagements();
          loadHomeCoachingEvents();
 
          const cityPins = document.querySelectorAll('.city-pin');
@@ -3426,16 +3471,12 @@
          setTimeout(function () {
             const wrapper = document.getElementById('distinguished-alumni-wrapper');
             const sliderEl = document.getElementById('distinguished-alumni-slider');
-            if (!wrapper || !sliderEl || !supabaseClient) return;
+            if (!wrapper || !sliderEl || !window.apiClient) return;
 
-            // Fetch alumni stories from Supabase
+            // Fetch alumni stories from API
             (async function() {
                try {
-                  const { data: stories, error } = await supabaseClient
-                     .from('distinguished_alumni')
-                     .select('slug, name, image, role, summary')
-                     .order('created_at', { ascending: false })
-                     .limit(20);
+                  const { data: stories, error } = await window.apiClient.getDistinguishedAlumni({ limit: 20 });
 
                   if (error) {
                      console.error('Error loading alumni stories:', error);
@@ -3656,119 +3697,58 @@
             });
       })();
 
-      // Fetch total count of verified alumni with chapters filtered by chapter IDs
+      // Get total count of verified alumni with chapters filtered by chapter IDs
       async function getTotalVerifiedAlumniWithChapters(chapterIds) {
-         if (!supabaseClient || !chapterIds || chapterIds.length === 0) return 0;
+         if (!window.apiClient || !chapterIds || chapterIds.length === 0) return 0;
 
          try {
-            // Step 1: Get ALL alumni_chapter records with at least one chapter
-            let allData = [];
-            let from = 0;
-            const pageSize = 1000;
-            let hasMore = true;
-
-            while (hasMore) {
-               const { data, error, count } = await supabaseClient
-                  .from('alumni_chapter')
-                  .select('id, chapter1, chapter2, chapter3', { count: 'exact' })
-                  .or('chapter1.not.is.null,chapter2.not.is.null,chapter3.not.is.null')
-                  .range(from, from + pageSize - 1);
-
-               if (error) {
-                  console.error('Error fetching alumni_chapter records:', error);
-                  break;
-               }
-
-               if (data && data.length > 0) {
-                  allData = allData.concat(data);
-                  from += pageSize;
-                  hasMore = data.length === pageSize;
-               } else {
-                  hasMore = false;
-               }
-            }
-
-            if (allData.length === 0) return 0;
-
-            // Step 2: Filter to only include records where at least one chapter is in the provided IDs
-            const filteredData = allData.filter(row => {
-               return (row.chapter1 && chapterIds.includes(row.chapter1)) || 
-                      (row.chapter2 && chapterIds.includes(row.chapter2)) || 
-                      (row.chapter3 && chapterIds.includes(row.chapter3));
-            });
-
-            if (filteredData.length === 0) return 0;
-
-            // Step 3: Get unique alumni IDs
-            const alumniIds = [...new Set(filteredData.map(row => row.id))];
-
-            if (alumniIds.length === 0) return 0;
-
-            // Step 4: Count verified alumni from tbl_alumni
-            let totalCount = 0;
-            const batchSize = 1000;
+            const { data: counts, error } = await window.apiClient.getChapterMemberCounts(chapterIds);
             
-            for (let i = 0; i < alumniIds.length; i += batchSize) {
-               const batch = alumniIds.slice(i, i + batchSize);
-               const { count, error: countError } = await supabaseClient
-                  .from('tbl_alumni')
-                  .select('*', { count: 'exact', head: true })
-                  .eq('verify', 'true')
-                  .in('alumniid', batch);
-
-               if (countError) {
-                  console.error('Error counting verified alumni batch:', countError);
-                  continue;
-               }
-
-               totalCount += (count || 0);
+            if (error) {
+               console.error('Error fetching chapter member counts:', error);
+               return 0;
             }
 
-            return totalCount;
+            // Sum all counts
+            return Object.values(counts).reduce((sum, count) => sum + (count || 0), 0);
          } catch (error) {
             console.error('Unexpected error fetching total verified alumni count:', error);
             return 0;
          }
       }
 
-      // Get national chapter IDs from tblchapters table
+      // Get national chapter IDs from API
       async function getNationalChapterIds() {
-         if (!supabaseClient) return [];
+         if (!window.apiClient) return [];
          
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('id')
-               .not('national_chapter', 'is', null);
+            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'national' });
             
             if (error) {
                console.error('Error fetching national chapter IDs:', error);
                return [];
             }
             
-            return data ? data.map(ch => ch.id) : [];
+            return chapters ? chapters.map(ch => ch.id) : [];
          } catch (error) {
             console.error('Unexpected error fetching national chapter IDs:', error);
             return [];
          }
       }
 
-      // Get international chapter IDs from tblchapters table
+      // Get international chapter IDs from API
       async function getInternationalChapterIds() {
-         if (!supabaseClient) return [];
+         if (!window.apiClient) return [];
          
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('id')
-               .not('international_chapter', 'is', null);
+            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'international' });
             
             if (error) {
                console.error('Error fetching international chapter IDs:', error);
                return [];
             }
             
-            return data ? data.map(ch => ch.id) : [];
+            return chapters ? chapters.map(ch => ch.id) : [];
          } catch (error) {
             console.error('Unexpected error fetching international chapter IDs:', error);
             return [];
@@ -3777,14 +3757,10 @@
 
       // Fetch member count for an association (verified members only)
       async function getAssociationMemberCount(associationId) {
-         if (!supabaseClient || !associationId) return 0;
+         if (!window.apiClient || !associationId) return 0;
 
          try {
-            const { count, error } = await supabaseClient
-               .from('tbl_alumni')
-               .select('*', { count: 'exact', head: true })
-               .eq('association_id', associationId)
-               .eq('verify', true);
+            const { count, error } = await window.apiClient.getAlumniCount(associationId);
 
             if (error) {
                console.error('Error fetching member count:', error);
@@ -3800,8 +3776,8 @@
 
       // Load member counts for homepage CTA cards
       async function loadHomepageMemberCounts() {
-         if (!supabaseClient) {
-            console.error('Supabase client not initialized');
+         if (!window.apiClient) {
+            console.error('API client not initialized');
             return;
          }
 

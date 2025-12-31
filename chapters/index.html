@@ -354,8 +354,8 @@
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
 
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
 
    <style>
       /* Ensure chapter cards are equal height */
@@ -657,197 +657,82 @@
    </style>
 
    <script>
-      // Supabase Configuration (for fetching chapter member counts)
-      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-      // Initialize Supabase client
-      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      // API client is loaded via script tag above
 
       // Fetch total count of verified alumni with chapters filtered by chapter IDs
       // SQL equivalent: SELECT COUNT(*) FROM tbl_alumni a JOIN alumni_chapter c ON a.alumniid = c.id
       // WHERE a.verify = 'true' AND (c.chapter1 IN (chapterIds) OR c.chapter2 IN (chapterIds) OR c.chapter3 IN (chapterIds))
       async function getTotalVerifiedAlumniWithChapters(chapterIds) {
-         if (!supabaseClient || !chapterIds || chapterIds.length === 0) return 0;
+         if (!window.apiClient || !chapterIds || chapterIds.length === 0) return 0;
 
          try {
-            // Step 1: Get ALL alumni_chapter records with at least one chapter (to avoid OR limitations)
-            // We'll filter by chapter IDs in JavaScript
-            // Handle pagination to get all records
-            let allData = [];
-            let from = 0;
-            const pageSize = 1000;
-            let hasMore = true;
-
-            while (hasMore) {
-               const { data, error, count } = await supabaseClient
-                  .from('alumni_chapter')
-                  .select('id, chapter1, chapter2, chapter3', { count: 'exact' })
-                  .or('chapter1.not.is.null,chapter2.not.is.null,chapter3.not.is.null')
-                  .range(from, from + pageSize - 1);
-
-               if (error) {
-                  console.error('Error fetching alumni_chapter records:', error);
-                  break;
-               }
-
-               if (data && data.length > 0) {
-                  allData = allData.concat(data);
-                  from += pageSize;
-                  hasMore = data.length === pageSize;
-               } else {
-                  hasMore = false;
-               }
-            }
-
-            if (allData.length === 0) return 0;
-
-            // Step 2: Filter to only include records where at least one chapter is in the provided IDs
-            const filteredData = allData.filter(row => {
-               return (row.chapter1 && chapterIds.includes(row.chapter1)) || 
-                      (row.chapter2 && chapterIds.includes(row.chapter2)) || 
-                      (row.chapter3 && chapterIds.includes(row.chapter3));
-            });
-
-            if (filteredData.length === 0) return 0;
-
-            // Step 3: Get unique alumni IDs (alumniid from alumni_chapter.id)
-            const alumniIds = [...new Set(filteredData.map(row => row.id))];
-
-            if (alumniIds.length === 0) return 0;
-
-            // Step 4: Count verified alumni from tbl_alumni
-            // Handle large arrays by batching if needed (Supabase has limits on .in() array size)
-            let totalCount = 0;
-            const batchSize = 1000;
+            const { data: counts, error } = await window.apiClient.getChapterMemberCounts(chapterIds);
             
-            for (let i = 0; i < alumniIds.length; i += batchSize) {
-               const batch = alumniIds.slice(i, i + batchSize);
-               const { count, error: countError } = await supabaseClient
-                  .from('tbl_alumni')
-                  .select('*', { count: 'exact', head: true })
-                  .eq('verify', 'true')
-                  .in('alumniid', batch);
-
-               if (countError) {
-                  console.error('Error counting verified alumni batch:', countError);
-                  continue;
-               }
-
-               totalCount += (count || 0);
+            if (error) {
+               console.error('Error fetching chapter member counts:', error);
+               return 0;
             }
 
-            return totalCount;
+            // Sum all counts
+            return Object.values(counts).reduce((sum, count) => sum + (count || 0), 0);
          } catch (error) {
             console.error('Unexpected error fetching total verified alumni count:', error);
             return 0;
          }
       }
 
-      // Get national chapter IDs from tblchapters table
+
+      // Get national chapter IDs from API
       async function getNationalChapterIds() {
-         if (!supabaseClient) return [];
+         if (!window.apiClient) return [];
          
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('id')
-               .not('national_chapter', 'is', null);
+            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'national' });
             
             if (error) {
                console.error('Error fetching national chapter IDs:', error);
                return [];
             }
             
-            return data ? data.map(ch => ch.id) : [];
+            return chapters ? chapters.map(ch => ch.id) : [];
          } catch (error) {
             console.error('Unexpected error fetching national chapter IDs:', error);
             return [];
          }
       }
 
-      // Get international chapter IDs from tblchapters table
+      // Get international chapter IDs from API
       async function getInternationalChapterIds() {
-         if (!supabaseClient) return [];
+         if (!window.apiClient) return [];
          
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('id')
-               .not('international_chapter', 'is', null);
+            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'international' });
             
             if (error) {
                console.error('Error fetching international chapter IDs:', error);
                return [];
             }
             
-            return data ? data.map(ch => ch.id) : [];
+            return chapters ? chapters.map(ch => ch.id) : [];
          } catch (error) {
             console.error('Unexpected error fetching international chapter IDs:', error);
             return [];
          }
       }
 
-      // Fetch member count for a chapter using alumni_chapter table
+      // Fetch member count for a chapter using API
       async function getChapterMemberCount(chapterId) {
-         if (!supabaseClient || !chapterId) return 0;
+         if (!window.apiClient || !chapterId) return 0;
 
          try {
-            // Use pagination to get all records (same approach as getTotalVerifiedAlumniWithChapters)
-            let allData = [];
-            let from = 0;
-            const pageSize = 1000;
-            let hasMore = true;
+            const { count, error } = await window.apiClient.getChapterMemberCount(chapterId);
 
-            while (hasMore) {
-               const { data, error } = await supabaseClient
-                  .from('alumni_chapter')
-                  .select('id, chapter1, chapter2, chapter3')
-                  .or(`chapter1.eq.${chapterId},chapter2.eq.${chapterId},chapter3.eq.${chapterId}`)
-                  .range(from, from + pageSize - 1);
-
-               if (error) {
-                  console.error('Error fetching chapter member count:', error);
-                  break;
-               }
-
-               if (data && data.length > 0) {
-                  allData = allData.concat(data);
-                  from += pageSize;
-                  hasMore = data.length === pageSize;
-               } else {
-                  hasMore = false;
-               }
+            if (error) {
+               console.error('Error fetching chapter member count:', error);
+               return 0;
             }
 
-            if (allData.length === 0) return 0;
-
-            // Get unique alumni IDs for this chapter
-            const alumniIds = [...new Set(allData.map(row => row.id))];
-
-            if (alumniIds.length === 0) return 0;
-
-            // Count verified alumni - handle batching for large arrays
-            let totalCount = 0;
-            const batchSize = 1000;
-            
-            for (let i = 0; i < alumniIds.length; i += batchSize) {
-               const batch = alumniIds.slice(i, i + batchSize);
-               const { count, error: countError } = await supabaseClient
-                  .from('tbl_alumni')
-                  .select('*', { count: 'exact', head: true })
-                  .eq('verify', 'true')
-                  .in('alumniid', batch);
-
-               if (countError) {
-                  console.error('Error counting verified alumni for chapter:', countError);
-                  continue;
-               }
-
-               totalCount += (count || 0);
-            }
-
-            return totalCount;
+            return count || 0;
          } catch (error) {
             console.error('Unexpected error fetching chapter member count:', error);
             return 0;
@@ -872,7 +757,45 @@
          'Australia Chapter': '🇦🇺'
       };
 
-      // Load chapters from JSON file
+      // Helper to build chapter image URL from database filename
+      function buildChapterImagePath(imageName) {
+         if (!imageName) return null;
+         // If already absolute URL, keep as is
+         if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+            return imageName;
+         }
+         const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
+         return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      // Fetch all chapters from API
+      async function fetchAllChapters() {
+         if (!window.apiClient) return { national: [], international: [] };
+         
+         try {
+            const { data: allChapters, error } = await window.apiClient.getChapters();
+            
+            if (error) {
+               console.error('Error fetching chapters from API:', error);
+               return { national: [], international: [] };
+            }
+            
+            if (!allChapters || allChapters.length === 0) {
+               return { national: [], international: [] };
+            }
+            
+            // Separate into national and international chapters
+            const national = allChapters.filter(ch => ch.national_chapter && ch.national_chapter.trim() !== '');
+            const international = allChapters.filter(ch => ch.international_chapter && ch.international_chapter.trim() !== '');
+            
+            return { national, international };
+         } catch (error) {
+            console.error('Unexpected error fetching chapters:', error);
+            return { national: [], international: [] };
+         }
+      }
+
+      // Load chapters from database
       async function loadChapters() {
          const localContainer = document.getElementById('local-chapters-list');
          const internationalContainer = document.getElementById('international-chapters-list');
@@ -886,38 +809,32 @@
          if (nationalSection) nationalSection.style.display = 'none';
 
          try {
-            // Fetch chapters from JSON file
-            const response = await fetch('/assets/data/chapters.json');
+            // Fetch all chapters from database
+            const { national: nationalChapters, international: internationalChapters } = await fetchAllChapters();
             
-            if (!response.ok) {
-               throw new Error('Failed to fetch chapters data');
-            }
+            // Get national chapter IDs for member count calculation
+            const nationalChapterIds = nationalChapters.map(ch => ch.id);
+            const internationalChapterIds = internationalChapters.map(ch => ch.id);
+            
+            // Get unique count of verified alumni with chapters
+            const [nationalMembers, internationalMembers] = await Promise.all([
+               getTotalVerifiedAlumniWithChapters(nationalChapterIds),
+               getTotalVerifiedAlumniWithChapters(internationalChapterIds)
+            ]);
 
-            const data = await response.json();
-            
-            if (!data || (!data.local && !data.international)) {
-               throw new Error('Invalid chapters data structure');
-            }
-
-            // Load National Chapters (local)
-            // Get national chapter IDs from database (tblchapters table)
-            const dbNationalChapterIds = await getNationalChapterIds();
-            // Fallback to JSON if database query fails
-            const jsonNationalChapterIds = data.local ? data.local.map(ch => ch.id) : [];
-            const nationalChapterIds = dbNationalChapterIds.length > 0 ? dbNationalChapterIds : jsonNationalChapterIds;
-            
-            // Get unique count of verified alumni with national chapters
-            let nationalMembers = await getTotalVerifiedAlumniWithChapters(nationalChapterIds);
-            
-            if (data.local && data.local.length > 0) {
-               // Fetch member counts for local chapters in parallel
+            // Load National Chapters
+            if (nationalChapters && nationalChapters.length > 0) {
+               // Fetch member counts for national chapters in parallel
                const localChaptersWithCounts = await Promise.all(
-                  data.local.map(async (chapter) => {
+                  nationalChapters.map(async (chapter) => {
                      const dbCount = await getChapterMemberCount(chapter.id);
-                     const memberCount = dbCount > 0 ? dbCount : (chapter.members || 0);
                      return {
-                        ...chapter,
-                        memberCount: typeof memberCount === 'number' ? memberCount : 0
+                        id: chapter.id,
+                        name: chapter.national_chapter || 'Chapter',
+                        description: chapter.description || '',
+                        image: buildChapterImagePath(chapter.chapter_image),
+                        isActive: chapter.is_active !== false, // Default to true if null
+                        memberCount: typeof dbCount === 'number' ? dbCount : 0
                      };
                   })
                );
@@ -925,16 +842,12 @@
                localChaptersWithCounts.forEach(chapter => {
                   const col = document.createElement('div');
                   col.className = 'col-lg-4 col-md-6 mb-30';
-                  const chapterName = chapter.name || 'Chapter';
-                  const chapterDescription = chapter.description || '';
-                  const isActive = chapter.status === 'active';
-                  const chapterImage = chapter.image || null;
                   
                   col.innerHTML = `
                      <div class="tp-financial-item mb-30 h-100">
                         <div class="tp-financial-thumb" style="background: #f8f9fa; padding: 0; overflow: hidden;">
-                           ${chapterImage ? 
-                              `<img src="${chapterImage}" alt="${chapterName}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                           ${chapter.image ? 
+                              `<img src="${chapter.image}" alt="${chapter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
                               `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 30px;">
                                  <i class="fa-solid fa-map-marker-alt" style="font-size: 60px; color: var(--tp-theme-primary, #AB0C2F);"></i>
                               </div>`
@@ -942,10 +855,10 @@
                         </div>
                            <div class="tp-financial-content">
                               <div>
-                                 <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapterName}</a></h4>
-                                 <p>${chapterDescription}</p>
+                                 <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapter.name}</a></h4>
+                                 <p>${chapter.description}</p>
                                  <div class="d-flex align-items-center flex-wrap gap-2">
-                                    <span class="badge ${isActive ? 'bg-success' : 'bg-secondary'}">${isActive ? 'Active' : 'Upcoming'}</span>
+                                    <span class="badge ${chapter.isActive ? 'bg-success' : 'bg-secondary'}">${chapter.isActive ? 'Active' : 'Upcoming'}</span>
                                     <span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size: 14px;">
                                        <i class="fa-solid fa-users"></i>
                                        <span>${chapter.memberCount.toLocaleString()} Members</span>
@@ -965,24 +878,21 @@
             }
 
             // Load International Chapters
-            // Get international chapter IDs from database (tblchapters table)
-            const dbInternationalChapterIds = await getInternationalChapterIds();
-            // Fallback to JSON if database query fails
-            const jsonInternationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
-            const internationalChapterIds = dbInternationalChapterIds.length > 0 ? dbInternationalChapterIds : jsonInternationalChapterIds;
-            
-            // Get unique count of verified alumni with international chapters
-            let internationalMembers = await getTotalVerifiedAlumniWithChapters(internationalChapterIds);
-            
-            if (data.international && data.international.length > 0) {
+            if (internationalChapters && internationalChapters.length > 0) {
                // Fetch member counts for international chapters in parallel
                const internationalChaptersWithCounts = await Promise.all(
-                  data.international.map(async (chapter) => {
+                  internationalChapters.map(async (chapter) => {
                      const dbCount = await getChapterMemberCount(chapter.id);
-                     const memberCount = dbCount > 0 ? dbCount : (chapter.members || 0);
+                     const chapterName = chapter.international_chapter || 'Chapter';
+                     const flagIcon = flagIcons[chapterName] || '🌍';
                      return {
-                        ...chapter,
-                        memberCount: typeof memberCount === 'number' ? memberCount : 0
+                        id: chapter.id,
+                        name: chapterName,
+                        description: chapter.description || '',
+                        image: buildChapterImagePath(chapter.chapter_image),
+                        isActive: chapter.is_active !== false, // Default to true if null
+                        memberCount: typeof dbCount === 'number' ? dbCount : 0,
+                        flagIcon: flagIcon
                      };
                   })
                );
@@ -990,28 +900,23 @@
                internationalChaptersWithCounts.forEach(chapter => {
                   const col = document.createElement('div');
                   col.className = 'col-lg-4 col-md-6 mb-30';
-                  const chapterName = chapter.name || 'Chapter';
-                  const chapterDescription = chapter.description || '';
-                  const isActive = chapter.status === 'active';
-                  const chapterImage = chapter.image || null;
-                  const flagIcon = flagIcons[chapterName] || '🌍';
                   
                   col.innerHTML = `
                      <div class="tp-financial-item mb-30 h-100">
                         <div class="tp-financial-thumb" style="background: #f8f9fa; padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                           ${chapterImage ? 
-                              `<img src="${chapterImage}" alt="${chapterName}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                           ${chapter.image ? 
+                              `<img src="${chapter.image}" alt="${chapter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
                               `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 30px;">
-                                 <span style="font-size: 80px;">${flagIcon}</span>
+                                 <span style="font-size: 80px;">${chapter.flagIcon}</span>
                               </div>`
                            }
                         </div>
                            <div class="tp-financial-content">
                               <div>
-                                 <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapterName}</a></h4>
-                                 <p>${chapterDescription}</p>
+                                 <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapter.name}</a></h4>
+                                 <p>${chapter.description}</p>
                                  <div class="d-flex align-items-center flex-wrap gap-2">
-                                    <span class="badge ${isActive ? 'bg-success' : 'bg-warning'}">${isActive ? 'Active' : 'Coming Soon'}</span>
+                                    <span class="badge ${chapter.isActive ? 'bg-success' : 'bg-warning'}">${chapter.isActive ? 'Active' : 'Coming Soon'}</span>
                                     <span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size: 14px;">
                                        <i class="fa-solid fa-users"></i>
                                        <span>${chapter.memberCount.toLocaleString()} Members</span>
@@ -1019,7 +924,7 @@
                                  </div>
                               </div>
                               <div class="tp-about-btn">
-                                 <a class="tp-btn tp-btn-sm ${!isActive ? 'disabled' : ''}" href="/chapters/detail.html?id=${chapter.id}" ${!isActive ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>Learn More</a>
+                                 <a class="tp-btn tp-btn-sm ${!chapter.isActive ? 'disabled' : ''}" href="/chapters/detail.html?id=${chapter.id}" ${!chapter.isActive ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>Learn More</a>
                               </div>
                            </div>
                      </div>
