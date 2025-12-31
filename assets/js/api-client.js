@@ -107,6 +107,14 @@ class APIClient {
     return this.request(`/alumni/count${params}`);
   }
 
+  async getAssociationMemberCounts(ids) {
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return { data: {} };
+    }
+    const idsParam = ids.join(',');
+    return this.request(`/alumni/association-counts?ids=${idsParam}`);
+  }
+
   async getAssociationAlumni(associationId, options = {}) {
     const params = new URLSearchParams();
     Object.keys(options).forEach(key => {

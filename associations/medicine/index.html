@@ -744,20 +744,11 @@
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
 
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
 
    <script>
-      // Supabase Configuration
-      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-      // Initialize Supabase client
-      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      
-      if (!supabaseClient) {
-         console.error('Failed to initialize Supabase client');
-      }
+      // API client is loaded via script tag above
 
       // Helper to build remote image path
       function buildRemoteImagePath(imageName) {
@@ -771,14 +762,10 @@
 
       // Fetch association details from database by ID
       async function fetchAssociationById(associationId) {
-         if (!supabaseClient || !associationId) return null;
+         if (!window.apiClient || !associationId) return null;
 
          try {
-            const { data: association, error } = await supabaseClient
-               .from('tbl_associations')
-               .select('*')
-               .eq('id', associationId)
-               .maybeSingle();
+            const { data: association, error } = await window.apiClient.getAssociationById(associationId);
 
             if (error) {
                console.error('Error fetching association:', error);
@@ -814,39 +801,40 @@
          }
       }
 
-      // Fetch association members (only verified members)
-      async function fetchAssociationMembers(associationId) {
-         if (!supabaseClient || !associationId) return { count: 0, members: [] };
+      // Fetch association members (only verified members) using API
+      async function fetchAssociationMembers(associationId, page = 1, limit = 30, sortBy = 'yearofending', order = 'desc') {
+         if (!window.apiClient || !associationId) return { count: 0, members: [], pagination: { page: 1, limit, total: 0, totalPages: 0 } };
 
          const associationIdNum = Number(associationId);
          if (isNaN(associationIdNum)) {
             console.error('Invalid association ID:', associationId);
-            return { count: 0, members: [] };
+            return { count: 0, members: [], pagination: { page: 1, limit, total: 0, totalPages: 0 } };
          }
 
          try {
-            const { data: members, error: membersError, count } = await supabaseClient
-               .from('tbl_alumni')
-               .select('alumniid, alumniname, degreetitle, yearofending, image1', { count: 'exact' })
-               .eq('association_id', associationIdNum)
-               .eq('verify', 'true')
-               .order('yearofending', { ascending: false });
+            const { data: members, count, pagination, error } = await window.apiClient.getAssociationAlumni(associationIdNum, {
+               page,
+               limit,
+               sortBy,
+               order,
+               verifiedOnly: true
+            });
 
-            if (membersError) {
-               console.error('Error fetching association members:', membersError);
-               return { count: 0, members: [] };
+            if (error) {
+               console.error('Error fetching association members:', error);
+               return { count: 0, members: [], pagination: { page: 1, limit, total: 0, totalPages: 0 } };
             }
 
-            const memberCount = count !== null ? count : (members?.length || 0);
-            console.log(`Successfully fetched ${memberCount} verified members for association ${associationIdNum}`);
+            console.log(`Successfully fetched ${count || 0} verified members for association ${associationIdNum}`);
 
             return {
-               count: memberCount,
-               members: members || []
+               count: count || 0,
+               members: members || [],
+               pagination: pagination || { page: 1, limit, total: count || 0, totalPages: Math.ceil((count || 0) / limit) }
             };
          } catch (error) {
             console.error('Unexpected error fetching association members:', error);
-            return { count: 0, members: [] };
+            return { count: 0, members: [], pagination: { page: 1, limit, total: 0, totalPages: 0 } };
          }
       }
 
@@ -870,89 +858,109 @@
       }
 
       // Members pagination and search functionality
-      let allMembers = [];
-      let filteredMembers = [];
+      let currentMembers = [];
       let currentPage = 1;
-      let sortOrder = 'desc';
+      let sortOrder = 'desc'; // 'asc' or 'desc'
+      let currentAssociationId = null;
+      let totalMembers = 0;
+      let totalPages = 1;
       const membersPerPage = 30;
       const membersPerRow = 3;
 
-      function initializeMembersPagination(members) {
-         allMembers = members || [];
-         sortOrder = 'desc';
-         applySortAndFilter();
-         currentPage = 1;
+      function initializeMembersPagination(members, associationId, totalCount, paginationInfo) {
+         currentAssociationId = associationId;
+         currentMembers = members || [];
+         totalMembers = totalCount || members.length;
+         totalPages = paginationInfo ? paginationInfo.totalPages : Math.ceil(totalMembers / membersPerPage);
+         sortOrder = 'desc'; // Reset to default
+         currentPage = paginationInfo ? paginationInfo.page : 1;
          
+         // Setup search input
          const searchInput = document.getElementById('members-search-input');
          if (searchInput) {
-            searchInput.addEventListener('input', handleMembersSearch);
+            // Clear previous listeners by cloning
+            const newSearchInput = searchInput.cloneNode(true);
+            searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+            newSearchInput.addEventListener('input', handleMembersSearch);
          }
          
+         // Setup sort select
          const sortSelect = document.getElementById('members-sort-select');
          if (sortSelect) {
             sortSelect.value = sortOrder;
-            sortSelect.addEventListener('change', handleSortChange);
+            // Clear previous listeners
+            const newSortSelect = sortSelect.cloneNode(true);
+            sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
+            newSortSelect.addEventListener('change', handleSortChange);
          }
          
+         // Setup pagination buttons
          const prevBtn = document.getElementById('prev-btn');
          const nextBtn = document.getElementById('next-btn');
          if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
+            // Clear previous listeners
+            const newPrevBtn = prevBtn.cloneNode(true);
+            prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+            newPrevBtn.addEventListener('click', async () => {
                if (currentPage > 1) {
                   currentPage--;
-                  renderMembers();
+                  await loadMembersPage();
                }
             });
          }
          if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-               const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+            // Clear previous listeners
+            const newNextBtn = nextBtn.cloneNode(true);
+            nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+            newNextBtn.addEventListener('click', async () => {
                if (currentPage < totalPages) {
                   currentPage++;
-                  renderMembers();
+                  await loadMembersPage();
                }
             });
          }
          
+         // Initial render
          renderMembers();
       }
 
-      function handleSortChange(e) {
-         sortOrder = e.target.value;
-         currentPage = 1;
-         applySortAndFilter();
-         renderMembers();
-      }
-
-      function applySortAndFilter() {
-         const sorted = [...allMembers].sort((a, b) => {
-            const yearA = a.yearofending || 0;
-            const yearB = b.yearofending || 0;
-            
-            if (sortOrder === 'asc') {
-               return yearA - yearB;
-            } else {
-               return yearB - yearA;
-            }
-         });
+      async function loadMembersPage() {
+         if (!currentAssociationId) return;
          
          const searchInput = document.getElementById('members-search-input');
-         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+         const searchTerm = searchInput ? searchInput.value.trim() : '';
          
-         if (searchTerm === '') {
-            filteredMembers = sorted;
-         } else {
-            filteredMembers = sorted.filter(member => {
-               const name = (member.alumniname || 'Unknown').toLowerCase();
-               return name.includes(searchTerm);
-            });
+         try {
+            const membersData = await fetchAssociationMembers(currentAssociationId, currentPage, membersPerPage, 'yearofending', sortOrder);
+            currentMembers = membersData.members || [];
+            totalMembers = membersData.count || 0;
+            totalPages = membersData.pagination ? membersData.pagination.totalPages : Math.ceil(totalMembers / membersPerPage);
+            
+            // Apply client-side search filter if there's a search term
+            if (searchTerm) {
+               const searchLower = searchTerm.toLowerCase();
+               currentMembers = currentMembers.filter(member => {
+                  const name = (member.alumniname || 'Unknown').toLowerCase();
+                  return name.includes(searchLower);
+               });
+            }
+            
+            renderMembers();
+         } catch (error) {
+            console.error('Error loading members page:', error);
          }
       }
 
-      function handleMembersSearch(e) {
-         currentPage = 1;
-         applySortAndFilter();
-         renderMembers();
+      async function handleSortChange(e) {
+         sortOrder = e.target.value;
+         currentPage = 1; // Reset to first page on sort change
+         await loadMembersPage();
+      }
+
+      async function handleMembersSearch(e) {
+         currentPage = 1; // Reset to first page on search
+         // Search is applied client-side after fetching, so just reload current page
+         await loadMembersPage();
       }
 
       function renderMembers() {
@@ -964,16 +972,15 @@
          
          if (!container) return;
          
-         if (filteredMembers.length === 0) {
+         if (currentMembers.length === 0) {
             container.innerHTML = '<p style="color: #999; font-style: italic; grid-column: 1 / -1;">No verified members found.</p>';
             if (paginationContainer) paginationContainer.style.display = 'none';
             return;
          }
          
-         const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+         // Calculate display indices
          const startIndex = (currentPage - 1) * membersPerPage;
-         const endIndex = Math.min(startIndex + membersPerPage, filteredMembers.length);
-         const currentMembers = filteredMembers.slice(startIndex, endIndex);
+         const endIndex = startIndex + currentMembers.length;
          
          const isMobile = window.innerWidth <= 768;
          const itemsPerRow = isMobile ? 1 : membersPerRow;
@@ -1008,12 +1015,13 @@
          
          container.innerHTML = membersHTML;
          
+         // Update pagination controls
          if (paginationContainer) {
-            if (filteredMembers.length > membersPerPage) {
+            if (totalMembers > membersPerPage) {
                paginationContainer.style.display = 'flex';
                
                if (paginationInfo) {
-                  paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredMembers.length} members`;
+                  paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${totalMembers} members`;
                }
                
                if (prevBtn) {
@@ -1194,7 +1202,7 @@
          document.getElementById('association-detail').innerHTML = detailHTML;
          
          // Initialize members pagination and search
-         initializeMembersPagination(members);
+         initializeMembersPagination(members, associationId, membersData.count, membersData.pagination);
          
          // Load and display events
          loadAssociationEvents(associationId);
@@ -1227,7 +1235,7 @@
          }
 
          // Fetch members for this association (only verified members)
-         const membersData = await fetchAssociationMembers(associationId);
+         const membersData = await fetchAssociationMembers(associationId, 1, 30, 'yearofending', 'desc');
          
          // Render the page
          renderAssociationDetail(association || {}, jsonAssociation || {}, membersData, associationId);
@@ -1291,8 +1299,8 @@
 
       // Function to load and filter events for the association
       async function loadAssociationEvents(associationId) {
-         if (!supabaseClient || !associationId) {
-            console.log('loadAssociationEvents: Missing supabaseClient or associationId', { supabaseClient: !!supabaseClient, associationId });
+         if (!window.apiClient || !associationId) {
+            console.log('loadAssociationEvents: Missing apiClient or associationId', { apiClient: !!window.apiClient, associationId });
             showNoEventsMessage();
             return;
          }
@@ -1308,18 +1316,24 @@
          console.log('loadAssociationEvents: Fetching events for association', associationIdNum);
 
          try {
-            const { data: dbEvents, error } = await supabaseClient
-               .from('tbl_events')
-               .select('*')
-               .eq('association_id', associationIdNum)
-               .order('fromdate', { ascending: false, nullsLast: true });
+            // Fetch all events from API
+            const { data: allEvents, error } = await window.apiClient.getEvents({
+               parent_type: 'association',
+               parent_id: associationIdNum
+            });
 
             if (error) {
-               console.error('loadAssociationEvents: Supabase error', error);
+               console.error('loadAssociationEvents: API error', error);
                throw error;
             }
 
-            console.log('loadAssociationEvents: Fetched events', dbEvents?.length || 0, dbEvents);
+            console.log('loadAssociationEvents: Fetched events', allEvents?.length || 0, allEvents);
+
+            // Filter events for this specific association
+            const dbEvents = (allEvents || []).filter(event => 
+               event.parent_type === 'association' && 
+               event.association_id === associationIdNum
+            );
 
             if (!dbEvents || dbEvents.length === 0) {
                console.log('loadAssociationEvents: No events found for association', associationIdNum);
@@ -1379,74 +1393,14 @@
       }
 
       // Function to load upcoming events from ucoming_events table
+      // NOTE: This API endpoint may not exist yet, so temporarily disabled
       async function loadUcomingEvents(associationId) {
-         if (!supabaseClient || !associationId) {
-            const container = document.getElementById('ucoming-events-container');
-            if (container) {
-               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
-            }
-            return;
+         // TODO: Implement when API endpoint is available
+         const container = document.getElementById('ucoming-events-container');
+         if (container) {
+            container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
          }
-
-         const associationIdNum = typeof associationId === 'number' ? associationId : parseInt(associationId, 10);
-         
-         if (isNaN(associationIdNum)) {
-            console.error('loadUcomingEvents: Invalid associationId', associationId);
-            const container = document.getElementById('ucoming-events-container');
-            if (container) {
-               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
-            }
-            return;
-         }
-
-         try {
-            const { data: ucomingEvents, error } = await supabaseClient
-               .from('ucoming_events')
-               .select('*')
-               .eq('association_id', associationIdNum)
-               .order('date', { ascending: true });
-
-            if (error) {
-               console.error('loadUcomingEvents: Supabase error', error);
-               const container = document.getElementById('ucoming-events-container');
-               if (container) {
-                  container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
-               }
-               return;
-            }
-
-            const container = document.getElementById('ucoming-events-container');
-            if (!container) return;
-
-            if (!ucomingEvents || ucomingEvents.length === 0) {
-               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
-               return;
-            }
-
-            const eventsHTML = ucomingEvents.map((event) => {
-               // Display date value directly as string from date column
-               const dateValue = event.date ? String(event.date) : '';
-
-               return `
-                  <div class="tp-upcoming-event-card">
-                     <div class="tp-upcoming-event-avatar">
-                        <div class="tp-upcoming-event-avatar-day">${dateValue}</div>
-                     </div>
-                     <div class="tp-upcoming-event-content">
-                        <h4 class="tp-upcoming-event-title">${event.title || 'Untitled Event'}</h4>
-                     </div>
-                  </div>
-               `;
-            }).join('');
-
-            container.innerHTML = eventsHTML;
-         } catch (error) {
-            console.error('Error loading upcoming events:', error);
-            const container = document.getElementById('ucoming-events-container');
-            if (container) {
-               container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
-            }
-         }
+         return;
       }
 
       // Function to render event cards
