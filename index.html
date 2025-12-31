@@ -3476,7 +3476,9 @@
             // Fetch alumni stories from API
             (async function() {
                try {
-                  const { data: stories, error } = await window.apiClient.getDistinguishedAlumni({ limit: 20 });
+                  const response = await window.apiClient.getDistinguishedAlumni({ limit: 20 });
+                  const stories = response.data || response; // Handle both { data: [...] } and direct array
+                  const error = response.error;
 
                   if (error) {
                      console.error('Error loading alumni stories:', error);
@@ -3490,12 +3492,28 @@
                      initializeSlider();
                      return;
                   }
+                  
+                  // Debug: Log first story to check structure
+                  if (stories.length > 0) {
+                     console.log('Sample story data:', stories[0]);
+                  }
 
                   // Helper function to extract filename from image path
                   function getImageUrl(imagePath) {
-                     if (!imagePath) return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
-                     // Extract filename from path like "/assets/img/wall/rubeel.jpg"
+                     // Handle null, undefined, or empty string
+                     if (!imagePath || imagePath.trim() === '') {
+                        return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+                     }
+                     
+                     // If already a full URL, return as is
+                     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+                        return imagePath;
+                     }
+                     
+                     // Extract filename from path like "/assets/img/wall/rubeel.jpg" or just "ahmed-bilal.PNG"
                      const filename = imagePath.split('/').pop();
+                     
+                     // Return the full URL with the filename
                      return `https://portal-alumni.uol.edu.pk/images/${filename}`;
                   }
 
@@ -3518,8 +3536,15 @@
                         }
                      }
 
-                     const imageUrl = getImageUrl(story.image);
+                     // Get image - check multiple possible field names
+                     const imageField = story.image || story.image_path || story.image_url || null;
+                     const imageUrl = getImageUrl(imageField);
                      const slug = story.slug || story.name.toLowerCase().replace(/\s+/g, '-');
+                     
+                     // Debug missing images
+                     if (!imageField && story.slug) {
+                        console.warn(`Missing image for story: ${story.slug}`, story);
+                     }
 
                      return `
                         <div class="swiper-slide">
