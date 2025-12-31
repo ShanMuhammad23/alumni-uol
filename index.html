@@ -3799,7 +3799,7 @@
          }
       }
 
-      // Load member counts for homepage CTA cards
+      // Load member counts for homepage CTA cards - OPTIMIZED VERSION
       async function loadHomepageMemberCounts() {
          if (!window.apiClient) {
             console.error('API client not initialized');
@@ -3807,96 +3807,87 @@
          }
 
          try {
-            // Load chapters count from JSON
-            let nationalChaptersCount = 0;
-            let internationalChaptersCount = 0;
-            try {
-               const chaptersResponse = await fetch('/assets/data/chapters.json');
-               if (chaptersResponse.ok) {
-                  const chaptersData = await chaptersResponse.json();
-                  nationalChaptersCount = chaptersData.local ? chaptersData.local.length : 0;
-                  internationalChaptersCount = chaptersData.international ? chaptersData.international.length : 0;
-               }
-            } catch (error) {
-               console.error('Error fetching chapters JSON:', error);
+            // Fetch all JSON files and API data in parallel
+            const [chaptersResponse, associationsResponse, dbNationalChapterIds, dbInternationalChapterIds] = await Promise.all([
+               fetch('/assets/data/chapters.json').catch(() => null),
+               fetch('/assets/data/associations.json').catch(() => null),
+               getNationalChapterIds().catch(() => []),
+               getInternationalChapterIds().catch(() => [])
+            ]);
+
+            // Parse JSON responses
+            let chaptersData = null;
+            let associationsData = null;
+            
+            if (chaptersResponse && chaptersResponse.ok) {
+               chaptersData = await chaptersResponse.json();
+            }
+            
+            if (associationsResponse && associationsResponse.ok) {
+               associationsData = await associationsResponse.json();
             }
 
-            // Load associations count from JSON
-            let associationsCount = 0;
-            try {
-               const associationsResponse = await fetch('/assets/data/associations.json');
-               if (associationsResponse.ok) {
-                  const associationsData = await associationsResponse.json();
-                  associationsCount = associationsData && Array.isArray(associationsData) ? associationsData.length : 0;
-               }
-            } catch (error) {
-               console.error('Error fetching associations JSON:', error);
-            }
+            // Get chapter counts from JSON
+            const nationalChaptersCount = chaptersData?.local?.length || 0;
+            const internationalChaptersCount = chaptersData?.international?.length || 0;
+            const associationsCount = (associationsData && Array.isArray(associationsData)) ? associationsData.length : 0;
 
-            // Fetch national chapters member count
-            const dbNationalChapterIds = await getNationalChapterIds();
-            let nationalMembers = 0;
-            if (dbNationalChapterIds.length > 0) {
-               nationalMembers = await getTotalVerifiedAlumniWithChapters(dbNationalChapterIds);
-            } else {
-               // Fallback to JSON if database query fails
-               try {
-                  const response = await fetch('/assets/data/chapters.json');
-                  if (response.ok) {
-                     const data = await response.json();
-                     const jsonNationalChapterIds = data.local ? data.local.map(ch => ch.id) : [];
-                     if (jsonNationalChapterIds.length > 0) {
-                        nationalMembers = await getTotalVerifiedAlumniWithChapters(jsonNationalChapterIds);
+            // Determine chapter IDs to use (prefer DB, fallback to JSON)
+            const nationalChapterIds = dbNationalChapterIds.length > 0 
+               ? dbNationalChapterIds 
+               : (chaptersData?.local?.map(ch => ch.id) || []);
+            
+            const internationalChapterIds = dbInternationalChapterIds.length > 0 
+               ? dbInternationalChapterIds 
+               : (chaptersData?.international?.map(ch => ch.id) || []);
+
+            // Fetch all member counts in parallel using batch APIs
+            const [nationalMembers, internationalMembers, associationsMembers] = await Promise.all([
+               // National chapters member count (batch API)
+               nationalChapterIds.length > 0 
+                  ? getTotalVerifiedAlumniWithChapters(nationalChapterIds).catch(() => 0)
+                  : Promise.resolve(0),
+               
+               // International chapters member count (batch API)
+               internationalChapterIds.length > 0 
+                  ? getTotalVerifiedAlumniWithChapters(internationalChapterIds).catch(() => 0)
+                  : Promise.resolve(0),
+               
+               // Associations member count (batch API)
+               (async () => {
+                  if (!associationsData || !Array.isArray(associationsData) || associationsData.length === 0) {
+                     return 0;
+                  }
+                  
+                  const associationIds = associationsData.map(a => a.id).filter(id => id != null);
+                  
+                  if (associationIds.length === 0) {
+                     // Fallback to JSON member counts if no IDs available
+                     return associationsData.reduce((sum, a) => sum + (a.members || 0), 0);
+                  }
+                  
+                  try {
+                     // Use batch API to fetch all association member counts in ONE call
+                     const { data: counts, error } = await window.apiClient.getAssociationMemberCounts(associationIds);
+                     
+                     if (error) {
+                        console.error('Error fetching batch association member counts:', error);
+                        // Fallback to individual counts or JSON
+                        return associationsData.reduce((sum, a) => sum + (a.members || 0), 0);
                      }
+                     
+                     // Sum all counts from batch response
+                     const totalFromAPI = Object.values(counts || {}).reduce((sum, count) => sum + (count || 0), 0);
+                     
+                     // If API returned counts, use them; otherwise fallback to JSON
+                     return totalFromAPI > 0 ? totalFromAPI : associationsData.reduce((sum, a) => sum + (a.members || 0), 0);
+                  } catch (error) {
+                     console.error('Error in batch association member counts:', error);
+                     // Fallback to JSON member counts
+                     return associationsData.reduce((sum, a) => sum + (a.members || 0), 0);
                   }
-               } catch (error) {
-                  console.error('Error fetching chapters JSON:', error);
-               }
-            }
-
-            // Fetch international chapters member count
-            const dbInternationalChapterIds = await getInternationalChapterIds();
-            let internationalMembers = 0;
-            if (dbInternationalChapterIds.length > 0) {
-               internationalMembers = await getTotalVerifiedAlumniWithChapters(dbInternationalChapterIds);
-            } else {
-               // Fallback to JSON if database query fails
-               try {
-                  const response = await fetch('/assets/data/chapters.json');
-                  if (response.ok) {
-                     const data = await response.json();
-                     const jsonInternationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
-                     if (jsonInternationalChapterIds.length > 0) {
-                        internationalMembers = await getTotalVerifiedAlumniWithChapters(jsonInternationalChapterIds);
-                     }
-                  }
-               } catch (error) {
-                  console.error('Error fetching chapters JSON:', error);
-               }
-            }
-
-            // Fetch associations member count
-            let associationsMembers = 0;
-            try {
-               const response = await fetch('/assets/data/associations.json');
-               if (response.ok) {
-                  const associations = await response.json();
-                  if (associations && associations.length > 0) {
-                     // Fetch member counts for all associations in parallel
-                     const associationsWithCounts = await Promise.all(
-                        associations.map(async (association) => {
-                           const memberCount = await getAssociationMemberCount(association.id);
-                           return memberCount > 0 ? memberCount : (association.members || 0);
-                        })
-                     );
-                     associationsMembers = associationsWithCounts.reduce((sum, count) => {
-                        return sum + (typeof count === 'number' ? count : 0);
-                     }, 0);
-                  }
-               }
-            } catch (error) {
-               console.error('Error fetching associations JSON:', error);
-            }
+               })()
+            ]);
 
             // Update the display elements
             const nationalChaptersEl = document.getElementById('home-national-chapters');
