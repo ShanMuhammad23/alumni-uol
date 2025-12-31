@@ -954,6 +954,40 @@
          }
       }
 
+      // Helper to build chapter image URL from database filename
+      function buildChapterImagePath(imageName) {
+         if (!imageName) return null;
+         // If already absolute URL, keep as is
+         if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
+            return imageName;
+         }
+         const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
+         return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      // Fetch all international chapters from database
+      async function fetchInternationalChapters() {
+         if (!supabaseClient) return [];
+         
+         try {
+            const { data, error } = await supabaseClient
+               .from('tblchapters')
+               .select('*')
+               .not('international_chapter', 'is', null)
+               .order('id', { ascending: true });
+            
+            if (error) {
+               console.error('Error fetching international chapters from database:', error);
+               return [];
+            }
+            
+            return data || [];
+         } catch (error) {
+            console.error('Unexpected error fetching international chapters:', error);
+            return [];
+         }
+      }
+
       // Flag emoji mapping for international chapters
       const flagIcons = {
          'Saudi Arabia Chapter': '🇸🇦',
@@ -972,7 +1006,7 @@
          'Australia Chapter': '🇦🇺'
       };
 
-      // Load international chapters from JSON file
+      // Load international chapters from database
       async function loadChapters() {
          const internationalContainer = document.getElementById('international-chapters-list');
          const loader = document.getElementById('chapters-loader');
@@ -983,85 +1017,74 @@
          if (internationalSection) internationalSection.style.display = 'none';
 
          try {
-            // Fetch chapters from JSON file
-            const response = await fetch('/assets/data/chapters.json');
+            // Fetch international chapters from database
+            const internationalChapters = await fetchInternationalChapters();
             
-            if (!response.ok) {
-               throw new Error('Failed to fetch chapters data');
+            if (!internationalChapters || internationalChapters.length === 0) {
+               internationalContainer.innerHTML = '<div class="col-12"><p class="text-center">No international chapters available.</p></div>';
+               if (loader) loader.style.display = 'none';
+               if (internationalSection) internationalSection.style.display = 'block';
+               return;
             }
 
-            const data = await response.json();
-            
-            if (!data || !data.international) {
-               throw new Error('Invalid chapters data structure');
-            }
-
-            // Load International Chapters only
-            // Get international chapter IDs from database (tblchapters table)
-            const dbInternationalChapterIds = await getInternationalChapterIds();
-            // Fallback to JSON if database query fails
-            const jsonInternationalChapterIds = data.international ? data.international.map(ch => ch.id) : [];
-            const internationalChapterIds = dbInternationalChapterIds.length > 0 ? dbInternationalChapterIds : jsonInternationalChapterIds;
+            // Get international chapter IDs for member count calculation
+            const internationalChapterIds = internationalChapters.map(ch => ch.id);
             
             // Get unique count of verified alumni with international chapters
-            let internationalMembers = await getTotalVerifiedAlumniWithChapters(internationalChapterIds);
-            let internationalChaptersWithCounts = [];
+            const internationalMembers = await getTotalVerifiedAlumniWithChapters(internationalChapterIds);
             
-            if (data.international && data.international.length > 0) {
-               // Fetch member counts for international chapters in parallel
-               internationalChaptersWithCounts = await Promise.all(
-                  data.international.map(async (chapter) => {
-                     const dbCount = await getChapterMemberCount(chapter.id);
-                     const memberCount = dbCount > 0 ? dbCount : (chapter.members || 0);
-                     return {
-                        ...chapter,
-                        memberCount: typeof memberCount === 'number' ? memberCount : 0
-                     };
-                  })
-               );
-
-               internationalChaptersWithCounts.forEach(chapter => {
-                  const col = document.createElement('div');
-                  col.className = 'col-lg-3 col-md-3 col-sm-6 mb-30';
-                  const chapterName = chapter.name || 'Chapter';
-                  const chapterDescription = chapter.description || '';
-                  const isActive = chapter.status === 'active';
-                  const chapterImage = chapter.image || null;
+            // Fetch member counts for international chapters in parallel
+            const internationalChaptersWithCounts = await Promise.all(
+               internationalChapters.map(async (chapter) => {
+                  const dbCount = await getChapterMemberCount(chapter.id);
+                  const chapterName = chapter.international_chapter || 'Chapter';
                   const flagIcon = flagIcons[chapterName] || '🌍';
-                  
-                  col.innerHTML = `
-                     <div class="tp-financial-item mb-30 h-100">
-                        <div class="tp-financial-thumb" style="background: #f8f9fa; padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                           ${chapterImage ? 
-                              `<img src="${chapterImage}" alt="${chapterName}" style="width: 100%; height: 100%; object-fit: cover;">` :
-                              `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 30px;">
-                                 <span style="font-size: 80px;">${flagIcon}</span>
-                              </div>`
-                           }
-                        </div>
-                           <div class="tp-financial-content">
-                              <div>
-                                 <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapterName}</a></h4>
-                                 <p>${chapterDescription}</p>
-                                 <div class="d-flex align-items-center flex-wrap gap-2">
-                                    <span class="badge ${isActive ? 'bg-success' : 'bg-warning'}">${isActive ? 'Active' : 'Coming Soon'}</span>
-                                    <span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size: 14px;">
-                                       <i class="fa-solid fa-users"></i>
-                                       <span>${chapter.memberCount.toLocaleString()} Members</span>
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="tp-about-btn">
-                                 <a class="tp-btn tp-btn-sm ${!isActive ? 'disabled' : ''}" href="/chapters/detail.html?id=${chapter.id}" ${!isActive ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>Learn More</a>
+                  return {
+                     id: chapter.id,
+                     name: chapterName,
+                     description: chapter.description || '',
+                     image: buildChapterImagePath(chapter.chapter_image),
+                     isActive: chapter.is_active !== false, // Default to true if null
+                     memberCount: typeof dbCount === 'number' ? dbCount : 0,
+                     flagIcon: flagIcon
+                  };
+               })
+            );
+
+            internationalChaptersWithCounts.forEach(chapter => {
+               const col = document.createElement('div');
+               col.className = 'col-lg-3 col-md-3 col-sm-6 mb-30';
+               
+               col.innerHTML = `
+                  <div class="tp-financial-item mb-30 h-100">
+                     <div class="tp-financial-thumb" style="background: #f8f9fa; padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        ${chapter.image ? 
+                           `<img src="${chapter.image}" alt="${chapter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                           `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 30px;">
+                              <span style="font-size: 80px;">${chapter.flagIcon}</span>
+                           </div>`
+                        }
+                     </div>
+                        <div class="tp-financial-content">
+                           <div>
+                              <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapter.name}</a></h4>
+                              <p>${chapter.description}</p>
+                              <div class="d-flex align-items-center flex-wrap gap-2">
+                                 <span class="badge ${chapter.isActive ? 'bg-success' : 'bg-warning'}">${chapter.isActive ? 'Active' : 'Coming Soon'}</span>
+                                 <span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size: 14px;">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span>${chapter.memberCount.toLocaleString()} Members</span>
+                                 </span>
                               </div>
                            </div>
-                     </div>
-                  `;
-                  internationalContainer.appendChild(col);
-               });
-            } else {
-               internationalContainer.innerHTML = '<div class="col-12"><p class="text-center">No international chapters available.</p></div>';
-            }
+                           <div class="tp-about-btn">
+                              <a class="tp-btn tp-btn-sm ${!chapter.isActive ? 'disabled' : ''}" href="/chapters/detail.html?id=${chapter.id}" ${!chapter.isActive ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>Learn More</a>
+                           </div>
+                        </div>
+                  </div>
+               `;
+               internationalContainer.appendChild(col);
+            });
 
             // Update members display in hero badge
             const internationalMembersEl = document.getElementById('chapters-international-members-hero');
@@ -1070,11 +1093,9 @@
                internationalMembersEl.textContent = internationalMembers > 0 ? internationalMembers.toLocaleString() : '0';
             }
 
-            // Load flags with chapters data (use chapters with member counts)
+            // Load flags with chapters data
             if (internationalChaptersWithCounts.length > 0) {
                loadInternationalFlags(internationalChaptersWithCounts);
-            } else if (data.international && data.international.length > 0) {
-               loadInternationalFlags(data.international);
             }
 
             // Hide loader and show section
@@ -1115,7 +1136,7 @@
 
          const flagsHTML = chapters.map(chapter => {
             const chapterName = chapter.name || 'Chapter';
-            const isActive = chapter.status === 'active';
+            const isActive = chapter.isActive !== false; // Use isActive from database
             const inactiveClass = !isActive ? 'inactive' : '';
             const flagSVG = flagSVGs[chapter.id] || `<span style="font-size: 32px;">${flagIcons[chapterName] || '🌍'}</span>`;
             const memberCount = chapter.memberCount || 0;

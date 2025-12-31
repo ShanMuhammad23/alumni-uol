@@ -344,21 +344,12 @@
    </footer>
    <!-- footer-area-end -->
    
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
    
    <script>
       (function () {
-         // Supabase Configuration
-         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-         // Initialize Supabase client
-         const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-         
-         if (!supabaseClient) {
-            console.error('Failed to initialize Supabase client');
-         }
+         // API client is loaded via script tag above
 
          // Helper function to format date
          function formatDate(dateString, timeString) {
@@ -436,8 +427,8 @@
             let events = [];
 
             try {
-               if (!supabaseClient) {
-                  throw new Error('Supabase client not initialized');
+               if (!window.apiClient) {
+                  throw new Error('API client not initialized');
                }
 
                // Get filter parameters from URL
@@ -445,24 +436,23 @@
                const parentType = urlParams.get('parent_type');
                const parentId = urlParams.get('parent_id');
 
-               // Build query
-               let query = supabaseClient
-                  .from('tbl_events')
-                  .select('*');
+               // Build filters object
+               const filters = {
+                  orderBy: 'fromdate',
+                  order: 'desc'
+               };
 
                // Apply filters if provided
                if (parentType && parentId) {
-                  query = query
-                     .eq('parent_type', parentType)
-                     .eq('parent_id', parseInt(parentId, 10));
+                  filters.parent_type = parentType;
+                  filters.parent_id = parseInt(parentId, 10);
                }
 
-               // Fetch events from database
-               const { data: dbEvents, error } = await query
-                  .order('fromdate', { ascending: false, nullsLast: true });
+               // Fetch events from API
+               const { data: dbEvents, error } = await window.apiClient.getEvents(filters);
 
                if (error) {
-                  throw error;
+                  throw new Error(error);
                }
 
                if (!dbEvents || dbEvents.length === 0) {
