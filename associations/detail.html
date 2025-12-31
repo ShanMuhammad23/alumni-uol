@@ -768,16 +768,12 @@
          return associationId ? parseInt(associationId, 10) : null;
       }
 
-      // Fetch association details from database by ID
+      // Fetch association details from API by ID
       async function fetchAssociationById(associationId) {
-         if (!supabaseClient || !associationId) return null;
+         if (!window.apiClient || !associationId) return null;
 
          try {
-            const { data: association, error } = await supabaseClient
-               .from('tbl_associations')
-               .select('*')
-               .eq('id', associationId)
-               .maybeSingle();
+            const { data: association, error } = await window.apiClient.getAssociationById(associationId);
 
             if (error) {
                console.error('Error fetching association:', error);
@@ -1333,8 +1329,8 @@
 
       // Function to load and filter events for the association
       async function loadAssociationEvents(associationId) {
-         if (!supabaseClient || !associationId) {
-            console.log('loadAssociationEvents: Missing supabaseClient or associationId', { supabaseClient: !!supabaseClient, associationId });
+         if (!window.apiClient || !associationId) {
+            console.log('loadAssociationEvents: Missing API client or associationId', { apiClient: !!window.apiClient, associationId });
             showNoEventsMessage();
             return;
          }
@@ -1348,22 +1344,81 @@
             return;
          }
 
-         console.log('loadAssociationEvents: Fetching events for association', associationIdNum);
+         console.log('loadAssociationEvents: Fetching events for association', associationIdNum, 'type:', typeof associationIdNum);
 
          try {
-            // Fetch events for this association using association_id
-            const { data: dbEvents, error } = await supabaseClient
-               .from('tbl_events')
-               .select('*')
-               .eq('association_id', associationIdNum)
-               .order('fromdate', { ascending: false, nullsLast: true });
-
-            if (error) {
-               console.error('loadAssociationEvents: Supabase error', error);
-               throw error;
+            // Fetch events for this association using API
+            // Filter by association_id - fetch all events and filter client-side since API doesn't support association_id filter yet
+            // Fetch events - need to handle pagination to get all events
+            let allEvents = [];
+            let page = 1;
+            let hasMore = true;
+            const pageSize = 100;
+            
+            while (hasMore) {
+               const response = await window.apiClient.getEvents({
+                  orderBy: 'fromdate',
+                  order: 'desc',
+                  page: page,
+                  limit: pageSize
+               });
+               
+               if (response.error) {
+                  console.error('loadAssociationEvents: API error on page', page, response.error);
+                  break;
+               }
+               
+               const events = response.data || [];
+               allEvents = allEvents.concat(events);
+               
+               // Check if there are more pages
+               const pagination = response.pagination;
+               hasMore = pagination && page < pagination.totalPages;
+               page++;
+               
+               // Safety limit to prevent infinite loops
+               if (page > 50) {
+                  console.warn('loadAssociationEvents: Reached safety limit of 50 pages');
+                  break;
+               }
             }
+            
+            console.log('loadAssociationEvents: Fetched total events:', allEvents.length, 'across', page - 1, 'pages');
 
-            console.log('loadAssociationEvents: Fetched events', dbEvents?.length || 0, dbEvents);
+            // Error handling moved inside pagination loop
+
+            // Filter events by association_id
+            // Show events where parent_type is 'association' AND association_id matches
+            console.log('loadAssociationEvents: Filtering events for association ID:', associationIdNum, 'type:', typeof associationIdNum);
+            console.log('loadAssociationEvents: Total events fetched:', allEvents?.length || 0);
+            
+            // Debug: Check events with association_id = 11
+            const eventsWithId11 = (allEvents || []).filter(e => e.association_id == 11 || e.association_id == '11');
+            console.log('loadAssociationEvents: Events with association_id 11:', eventsWithId11.length, eventsWithId11);
+            
+            const dbEvents = (allEvents || []).filter(event => {
+               const eventAssocId = event.association_id ? parseInt(event.association_id) : null;
+               const matches = event.parent_type === 'association' && 
+                              eventAssocId !== null && 
+                              eventAssocId === associationIdNum;
+               
+               if (eventAssocId === associationIdNum) {
+                  console.log('loadAssociationEvents: Event matches:', {
+                     id: event.id,
+                     title: event.title,
+                     parent_type: event.parent_type,
+                     association_id: event.association_id,
+                     eventAssocId: eventAssocId,
+                     associationIdNum: associationIdNum,
+                     matches: matches
+                  });
+               }
+               
+               return matches;
+            });
+            
+            console.log('loadAssociationEvents: Filtered events for association', associationIdNum, dbEvents?.length || 0, 'out of', allEvents?.length || 0);
+            console.log('loadAssociationEvents: Filtered event IDs:', dbEvents.map(e => e.id));
 
             if (!dbEvents || dbEvents.length === 0) {
                console.log('loadAssociationEvents: No events found for association', associationIdNum);
@@ -1432,7 +1487,16 @@
 
       // Function to load upcoming events from ucoming_events table
       async function loadUcomingEvents(associationId) {
-         if (!supabaseClient || !associationId) {
+         // Note: ucoming_events table may not have an API endpoint yet
+         // For now, we'll hide this section or show a message
+         const container = document.getElementById('ucoming-events-container');
+         if (container) {
+            container.innerHTML = '<p style="color: #999; font-style: italic;">Upcoming events feature coming soon.</p>';
+         }
+         return;
+         
+         /* TODO: Implement API endpoint for ucoming_events table
+         if (!window.apiClient || !associationId) {
             const container = document.getElementById('ucoming-events-container');
             if (container) {
                container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
@@ -1452,15 +1516,11 @@
          }
 
          try {
-            // Fetch upcoming events from ucoming_events table matching association_id
-            const { data: ucomingEvents, error } = await supabaseClient
-               .from('ucoming_events')
-               .select('*')
-               .eq('association_id', associationIdNum)
-               .order('date', { ascending: true });
+            // Fetch upcoming events from API
+            // const { data: ucomingEvents, error } = await window.apiClient.getUcomingEvents(associationIdNum);
 
             if (error) {
-               console.error('loadUcomingEvents: Supabase error', error);
+               console.error('loadUcomingEvents: API error', error);
                const container = document.getElementById('ucoming-events-container');
                if (container) {
                   container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
@@ -1501,6 +1561,7 @@
                container.innerHTML = '<p style="color: #999; font-style: italic;">No upcoming events scheduled at this time.</p>';
             }
          }
+         */
       }
 
       // Function to render event cards
