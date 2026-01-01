@@ -3123,6 +3123,21 @@
                return;
             }
 
+            // Sort events by most recent date (descending order) and take first 4
+            const sortedEvents = dbEvents
+               .filter(event => event.fromdate) // Filter out events without dates
+               .sort((a, b) => {
+                  const dateA = new Date(a.fromdate);
+                  const dateB = new Date(b.fromdate);
+                  return dateB - dateA; // Most recent first
+               })
+               .slice(0, 4); // Take only the 4 most recent
+
+            if (sortedEvents.length === 0) {
+               grid.innerHTML = '<div class="col-12"><p class="mb-0">No events available right now. Please check back soon.</p></div>';
+               return;
+            }
+
             const fragment = document.createDocumentFragment();
 
             dbEvents.forEach((dbEvent, index) => {

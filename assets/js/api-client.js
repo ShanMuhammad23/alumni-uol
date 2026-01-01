@@ -1,7 +1,7 @@
 
 
 // Change this URL for local development
-const API_BASE_URL = 'http://localhost:3001/api/external';
+const API_BASE_URL = 'https://portal-alumni.uol.edu.pk/api/external';
 // Production: 'https://portal-alumni.uol.edu.pk/api/external'
 
 class APIClient {
