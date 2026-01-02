@@ -444,39 +444,10 @@
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
 
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
 
    <script>
-      // Supabase Configuration (for fetching member counts)
-      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-      // Initialize Supabase client
-      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-      // Fetch member count for an association (verified members only)
-      async function getAssociationMemberCount(associationId) {
-         if (!supabaseClient || !associationId) return 0;
-
-         try {
-            const { count, error } = await supabaseClient
-               .from('tbl_alumni')
-               .select('*', { count: 'exact', head: true })
-               .eq('association_id', associationId)
-               .eq('verify', true);
-
-            if (error) {
-               console.error('Error fetching member count:', error);
-               return 0;
-            }
-
-            return count || 0;
-         } catch (error) {
-            console.error('Unexpected error fetching member count:', error);
-            return 0;
-         }
-      }
 
       // Load associations from JSON file
       async function loadAssociations() {
@@ -511,23 +482,64 @@
                return;
             }
 
-            // Fetch member counts for all associations in parallel
-            const associationsWithCounts = await Promise.all(
-               associations.map(async (association) => {
-                  // Use member count from database if available, otherwise use JSON value
-                  const memberCount = await getAssociationMemberCount(association.id);
-                  return { 
-                     ...association, 
-                     memberCount: memberCount > 0 ? memberCount : (association.members || 0)
-                  };
-               })
-            );
+            // Fetch member counts for all associations using batch API (same as main page)
+            let associationsWithCounts = associations;
+            let totalMembers = 0;
 
-            // Calculate and display total members across all associations
-            const totalMembers = associationsWithCounts.reduce((sum, association) => {
-               const count = typeof association.memberCount === 'number' ? association.memberCount : 0;
-               return sum + count;
-            }, 0);
+            if (window.apiClient) {
+               try {
+                  const associationIds = associations.map(a => a.id).filter(id => id != null);
+                  
+                  if (associationIds.length > 0) {
+                     // Use batch API to fetch all association member counts in ONE call (same as main page)
+                     const { data: counts, error } = await window.apiClient.getAssociationMemberCounts(associationIds);
+                     
+                     if (!error && counts) {
+                        // Map counts to associations
+                        associationsWithCounts = associations.map(association => {
+                           const memberCount = counts[association.id] || 0;
+                           return {
+                              ...association,
+                              memberCount: memberCount > 0 ? memberCount : (association.members || 0)
+                           };
+                        });
+
+                        // Calculate total from API counts
+                        totalMembers = Object.values(counts).reduce((sum, count) => sum + (count || 0), 0);
+                     } else {
+                        // Fallback to JSON member counts if API fails
+                        console.error('Error fetching batch association member counts:', error);
+                        associationsWithCounts = associations.map(association => ({
+                           ...association,
+                           memberCount: association.members || 0
+                        }));
+                        totalMembers = associations.reduce((sum, a) => sum + (a.members || 0), 0);
+                     }
+                  } else {
+                     // Fallback to JSON member counts if no IDs available
+                     associationsWithCounts = associations.map(association => ({
+                        ...association,
+                        memberCount: association.members || 0
+                     }));
+                     totalMembers = associations.reduce((sum, a) => sum + (a.members || 0), 0);
+                  }
+               } catch (error) {
+                  console.error('Error in batch association member counts:', error);
+                  // Fallback to JSON member counts
+                  associationsWithCounts = associations.map(association => ({
+                     ...association,
+                     memberCount: association.members || 0
+                  }));
+                  totalMembers = associations.reduce((sum, a) => sum + (a.members || 0), 0);
+               }
+            } else {
+               // Fallback to JSON member counts if API client not available
+               associationsWithCounts = associations.map(association => ({
+                  ...association,
+                  memberCount: association.members || 0
+               }));
+               totalMembers = associations.reduce((sum, a) => sum + (a.members || 0), 0);
+            }
 
             if (totalMembersEl) {
                totalMembersEl.textContent = totalMembers > 0
