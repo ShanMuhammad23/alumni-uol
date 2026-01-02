@@ -809,6 +809,34 @@
          }
       }
 
+      // Fetch member count for an association (verified members only) - same API as main page hero CTA
+      async function getAssociationMemberCount(associationId) {
+         if (!window.apiClient || !associationId) return 0;
+
+         const associationIdNum = Number(associationId);
+         if (isNaN(associationIdNum)) {
+            console.error('Invalid association ID:', associationId);
+            return 0;
+         }
+
+         try {
+            // Use batch API to get member count (same as main page hero CTA card)
+            const { data: counts, error } = await window.apiClient.getAssociationMemberCounts([associationIdNum]);
+
+            if (error) {
+               console.error('Error fetching association member count:', error);
+               return 0;
+            }
+
+            const count = counts && counts[associationIdNum] ? counts[associationIdNum] : 0;
+            console.log(`Successfully fetched member count ${count} for association ${associationIdNum}`);
+            return count;
+         } catch (error) {
+            console.error('Unexpected error fetching association member count:', error);
+            return 0;
+         }
+      }
+
       // Fetch association members (only verified members)
       async function fetchAssociationMembers(associationId, page = 1, limit = 30, sortBy = 'yearofending', order = 'desc') {
          if (!window.apiClient || !associationId) return { count: 0, members: [], pagination: { page: 1, limit, total: 0, totalPages: 0 } };
@@ -1049,7 +1077,9 @@
       }
 
       // Render association detail page
-      function renderAssociationDetail(association, jsonAssociation, membersData, associationId) {
+      function renderAssociationDetail(association, jsonAssociation, membersData, associationId, heroMemberCount) {
+         // Use heroMemberCount for hero section (from batch API), fallback to membersData.count
+         const heroSectionMemberCount = heroMemberCount !== undefined ? heroMemberCount : (membersData.count || 0);
          const memberCount = membersData.count || 0;
          const members = membersData.members || [];
 
@@ -1083,7 +1113,7 @@
                   <p style="font-size: 18px; color: #666; margin-bottom: 20px;">${association.description || 'No description available.'}</p>
                   <div class="tp-association-stats">
                      <div class="tp-association-stat">
-                        <span class="tp-association-stat-value">${memberCount.toLocaleString()}</span>
+                        <span class="tp-association-stat-value">${heroSectionMemberCount.toLocaleString()}</span>
                         <span class="tp-association-stat-label">Members</span>
                      </div>
                   </div>
@@ -1264,11 +1294,15 @@
             return;
          }
 
-         // Fetch members for this association (only verified members)
-         const membersData = await fetchAssociationMembers(associationId, 1, 30, 'yearofending', 'desc');
+         // Fetch member count for hero section using same API as main page hero CTA card
+         // Fetch members for this association (only verified members) in parallel
+         const [heroMemberCount, membersData] = await Promise.all([
+            getAssociationMemberCount(associationId),
+            fetchAssociationMembers(associationId, 1, 30, 'yearofending', 'desc')
+         ]);
          
          // Render the page
-         renderAssociationDetail(association, jsonAssociation, membersData, associationId);
+         renderAssociationDetail(association, jsonAssociation, membersData, associationId, heroMemberCount);
       }
 
       // Initialize page load
