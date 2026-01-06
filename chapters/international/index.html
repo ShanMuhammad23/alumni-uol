@@ -334,8 +334,8 @@
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
 
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
 
    <style>
       /* Ensure chapter cards are equal height */
@@ -779,86 +779,20 @@
    </style>
 
    <script>
-      // Supabase Configuration (for fetching chapter member counts)
-      const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-      // Initialize Supabase client
-      const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
       // Fetch total count of verified alumni with chapters filtered by chapter IDs
-      // SQL equivalent: SELECT COUNT(*) FROM tbl_alumni a JOIN alumni_chapter c ON a.alumniid = c.id
-      // WHERE a.verify = 'true' AND (c.chapter1 IN (chapterIds) OR c.chapter2 IN (chapterIds) OR c.chapter3 IN (chapterIds))
       async function getTotalVerifiedAlumniWithChapters(chapterIds) {
-         if (!supabaseClient || !chapterIds || chapterIds.length === 0) return 0;
+         if (!window.apiClient || !chapterIds || chapterIds.length === 0) return 0;
 
          try {
-            // Step 1: Get ALL alumni_chapter records with at least one chapter (to avoid OR limitations)
-            // We'll filter by chapter IDs in JavaScript
-            // Handle pagination to get all records
-            let allData = [];
-            let from = 0;
-            const pageSize = 1000;
-            let hasMore = true;
-
-            while (hasMore) {
-               const { data, error, count } = await supabaseClient
-                  .from('alumni_chapter')
-                  .select('id, chapter1, chapter2, chapter3', { count: 'exact' })
-                  .or('chapter1.not.is.null,chapter2.not.is.null,chapter3.not.is.null')
-                  .range(from, from + pageSize - 1);
-
-               if (error) {
-                  console.error('Error fetching alumni_chapter records:', error);
-                  break;
-               }
-
-               if (data && data.length > 0) {
-                  allData = allData.concat(data);
-                  from += pageSize;
-                  hasMore = data.length === pageSize;
-               } else {
-                  hasMore = false;
-               }
-            }
-
-            if (allData.length === 0) return 0;
-
-            // Step 2: Filter to only include records where at least one chapter is in the provided IDs
-            const filteredData = allData.filter(row => {
-               return (row.chapter1 && chapterIds.includes(row.chapter1)) || 
-                      (row.chapter2 && chapterIds.includes(row.chapter2)) || 
-                      (row.chapter3 && chapterIds.includes(row.chapter3));
-            });
-
-            if (filteredData.length === 0) return 0;
-
-            // Step 3: Get unique alumni IDs (alumniid from alumni_chapter.id)
-            const alumniIds = [...new Set(filteredData.map(row => row.id))];
-
-            if (alumniIds.length === 0) return 0;
-
-            // Step 4: Count verified alumni from tbl_alumni
-            // Handle large arrays by batching if needed (Supabase has limits on .in() array size)
-            let totalCount = 0;
-            const batchSize = 1000;
+            const { data: counts, error } = await window.apiClient.getChapterMemberCounts(chapterIds);
             
-            for (let i = 0; i < alumniIds.length; i += batchSize) {
-               const batch = alumniIds.slice(i, i + batchSize);
-               const { count, error: countError } = await supabaseClient
-                  .from('tbl_alumni')
-                  .select('*', { count: 'exact', head: true })
-                  .eq('verify', 'true')
-                  .in('alumniid', batch);
-
-               if (countError) {
-                  console.error('Error counting verified alumni batch:', countError);
-                  continue;
-               }
-
-               totalCount += (count || 0);
+            if (error) {
+               console.error('Error fetching chapter member counts:', error);
+               return 0;
             }
 
+            // Sum up all the counts
+            const totalCount = Object.values(counts || {}).reduce((sum, count) => sum + (count || 0), 0);
             return totalCount;
          } catch (error) {
             console.error('Unexpected error fetching total verified alumni count:', error);
@@ -866,88 +800,19 @@
          }
       }
 
-      // Get international chapter IDs from tblchapters table
-      async function getInternationalChapterIds() {
-         if (!supabaseClient) return [];
-         
+      // Fetch member count for a chapter
+      async function getChapterMemberCount(chapterId) {
+         if (!window.apiClient || !chapterId) return 0;
+
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('id')
-               .not('international_chapter', 'is', null);
+            const { count, error } = await window.apiClient.getChapterMemberCount(chapterId);
             
             if (error) {
-               console.error('Error fetching international chapter IDs:', error);
-               return [];
-            }
-            
-            return data ? data.map(ch => ch.id) : [];
-         } catch (error) {
-            console.error('Unexpected error fetching international chapter IDs:', error);
-            return [];
-         }
-      }
-
-      // Fetch member count for a chapter using alumni_chapter table
-      async function getChapterMemberCount(chapterId) {
-         if (!supabaseClient || !chapterId) return 0;
-
-         try {
-            // Use pagination to get all records (same approach as getTotalVerifiedAlumniWithChapters)
-            let allData = [];
-            let from = 0;
-            const pageSize = 1000;
-            let hasMore = true;
-
-            while (hasMore) {
-               const { data, error } = await supabaseClient
-                  .from('alumni_chapter')
-                  .select('id, chapter1, chapter2, chapter3')
-                  .or(`chapter1.eq.${chapterId},chapter2.eq.${chapterId},chapter3.eq.${chapterId}`)
-                  .range(from, from + pageSize - 1);
-
-               if (error) {
-                  console.error('Error fetching chapter member count:', error);
-                  break;
-               }
-
-               if (data && data.length > 0) {
-                  allData = allData.concat(data);
-                  from += pageSize;
-                  hasMore = data.length === pageSize;
-               } else {
-                  hasMore = false;
-               }
+               console.error('Error fetching chapter member count:', error);
+               return 0;
             }
 
-            if (allData.length === 0) return 0;
-
-            // Get unique alumni IDs for this chapter
-            const alumniIds = [...new Set(allData.map(row => row.id))];
-
-            if (alumniIds.length === 0) return 0;
-
-            // Count verified alumni - handle batching for large arrays
-            let totalCount = 0;
-            const batchSize = 1000;
-            
-            for (let i = 0; i < alumniIds.length; i += batchSize) {
-               const batch = alumniIds.slice(i, i + batchSize);
-               const { count, error: countError } = await supabaseClient
-                  .from('tbl_alumni')
-                  .select('*', { count: 'exact', head: true })
-                  .eq('verify', 'true')
-                  .in('alumniid', batch);
-
-               if (countError) {
-                  console.error('Error counting verified alumni for chapter:', countError);
-                  continue;
-               }
-
-               totalCount += (count || 0);
-            }
-
-            return totalCount;
+            return count || 0;
          } catch (error) {
             console.error('Unexpected error fetching chapter member count:', error);
             return 0;
@@ -967,21 +832,17 @@
 
       // Fetch all international chapters from database
       async function fetchInternationalChapters() {
-         if (!supabaseClient) return [];
+         if (!window.apiClient) return [];
          
          try {
-            const { data, error } = await supabaseClient
-               .from('tblchapters')
-               .select('*')
-               .not('international_chapter', 'is', null)
-               .order('id', { ascending: true });
+            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'international' });
             
             if (error) {
                console.error('Error fetching international chapters from database:', error);
                return [];
             }
             
-            return data || [];
+            return chapters || [];
          } catch (error) {
             console.error('Unexpected error fetching international chapters:', error);
             return [];
