@@ -891,26 +891,37 @@
             // Get international chapter IDs for member count calculation
             const internationalChapterIds = internationalChapters.map(ch => ch.id);
             
-            // Get unique count of verified alumni with international chapters
-            const internationalMembers = await getTotalVerifiedAlumniWithChapters(internationalChapterIds);
+            // Fetch all member counts in a single batch call
+            let memberCountsMap = {};
+            if (window.apiClient && internationalChapterIds.length > 0) {
+               try {
+                  const { data: counts, error } = await window.apiClient.getChapterMemberCounts(internationalChapterIds);
+                  if (!error && counts) {
+                     memberCountsMap = counts;
+                  }
+               } catch (error) {
+                  console.error('Error fetching chapter member counts:', error);
+               }
+            }
             
-            // Fetch member counts for international chapters in parallel
-            const internationalChaptersWithCounts = await Promise.all(
-               internationalChapters.map(async (chapter) => {
-                  const dbCount = await getChapterMemberCount(chapter.id);
-                  const chapterName = chapter.international_chapter || 'Chapter';
-                  const flagIcon = flagIcons[chapterName] || '🌍';
-                  return {
-                     id: chapter.id,
-                     name: chapterName,
-                     description: chapter.description || '',
-                     image: buildChapterImagePath(chapter.chapter_image),
-                     isActive: chapter.is_active !== false, // Default to true if null
-                     memberCount: typeof dbCount === 'number' ? dbCount : 0,
-                     flagIcon: flagIcon
-                  };
-               })
-            );
+            // Get unique count of verified alumni with international chapters (sum of all counts)
+            const internationalMembers = Object.values(memberCountsMap).reduce((sum, count) => sum + (count || 0), 0);
+            
+            // Map chapters with their member counts from the batch result
+            const internationalChaptersWithCounts = internationalChapters.map((chapter) => {
+               const dbCount = memberCountsMap[chapter.id] || 0;
+               const chapterName = chapter.international_chapter || 'Chapter';
+               const flagIcon = flagIcons[chapterName] || '🌍';
+               return {
+                  id: chapter.id,
+                  name: chapterName,
+                  description: chapter.description || '',
+                  image: buildChapterImagePath(chapter.chapter_image),
+                  isActive: chapter.is_active !== false, // Default to true if null
+                  memberCount: typeof dbCount === 'number' ? dbCount : 0,
+                  flagIcon: flagIcon
+               };
+            });
 
             internationalChaptersWithCounts.forEach(chapter => {
                const col = document.createElement('div');
