@@ -150,6 +150,22 @@ class APIClient {
   async getAssociationById(id) {
     return this.request(`/associations/${id}`);
   }
+
+  // Jobs APIs
+  async getJobs(filters = {}) {
+    const params = new URLSearchParams();
+    Object.keys(filters).forEach(key => {
+      if (filters[key] !== null && filters[key] !== undefined && filters[key] !== '') {
+        params.append(key, filters[key]);
+      }
+    });
+    const queryString = params.toString();
+    return this.request(`/jobs${queryString ? '?' + queryString : ''}`);
+  }
+
+  async getJobById(id) {
+    return this.request(`/jobs/${id}`);
+  }
 }
 
 // Export singleton instance
