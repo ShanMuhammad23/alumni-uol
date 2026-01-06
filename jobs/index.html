@@ -889,21 +889,10 @@
    <script src="/assets/js/flatpickr.js"></script>
    <script src="/assets/js/ajax-form.js"></script>
    <script src="/assets/js/main.js"></script>
-   <!-- Supabase Client Library -->
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <!-- API Client Library -->
+   <script src="/assets/js/api-client.js"></script>
    <script>
       (function () {
-         // Supabase Configuration
-         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-         // Initialize Supabase client
-         const { createClient } = supabase;
-         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-         
-         if (!supabaseClient) {
-            console.error('Failed to initialize Supabase client');
-         }
 
          // Helper function to format date
          function formatDate(dateString) {
@@ -1033,15 +1022,14 @@
             }
 
             try {
-               if (!supabaseClient) {
-                  throw new Error('Supabase client not initialized');
+               if (!window.apiClient) {
+                  throw new Error('API client not initialized');
                }
 
-               // Fetch all jobs from database
-               const { data: jobs, error } = await supabaseClient
-                  .from('tbljobs')
-                  .select('*')
-                  .order('created_at', { ascending: false });
+               // Fetch all jobs from API
+               const response = await window.apiClient.getJobs();
+               const jobs = response.data || response; // Handle both { data: [...] } and direct array
+               const error = response.error;
 
                if (error) {
                   throw error;
