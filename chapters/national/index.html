@@ -576,9 +576,9 @@
       }
 
       .tp-national-chapters-links {
-         display: flex;
-         flex-direction: column;
-         flex-wrap: wrap;
+         display: grid;
+         grid-template-columns: repeat(7, 1fr);
+   
          gap: 12px;
          padding: 20px;
          max-width: 100%;
@@ -605,7 +605,7 @@
          transition: all 0.3s ease;
          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
          width: 100%;
-         max-width: 40%;
+         max-width: 100%;
       }
 
       @media (min-width: 992px) {
