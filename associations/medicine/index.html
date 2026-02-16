@@ -936,12 +936,17 @@
             totalMembers = membersData.count || 0;
             totalPages = membersData.pagination ? membersData.pagination.totalPages : Math.ceil(totalMembers / membersPerPage);
             
-            // Apply client-side search filter if there's a search term
+            // Apply client-side search filter (name, passing year, degree title)
             if (searchTerm) {
-               const searchLower = searchTerm.toLowerCase();
+               const searchLower = searchTerm.toLowerCase().trim();
+               const searchYear = searchTerm.trim();
                currentMembers = currentMembers.filter(member => {
-                  const name = (member.alumniname || 'Unknown').toLowerCase();
-                  return name.includes(searchLower);
+                  const name = (member.alumniname || '').toLowerCase();
+                  const degreeTitle = (member.degreetitle || '').toLowerCase();
+                  const yearStr = String(member.yearofending || '');
+                  return name.includes(searchLower) ||
+                     degreeTitle.includes(searchLower) ||
+                     yearStr.includes(searchYear);
                });
             }
             
@@ -1183,7 +1188,7 @@
                   </div>
                </div>
                <div class="tp-members-search">
-                  <input type="text" id="members-search-input" placeholder="Search members by name..." autocomplete="off">
+                  <input type="text" id="members-search-input" placeholder="Search by name, year, or degree..." autocomplete="off">
                </div>
                <div class="tp-users-list" id="members-list-container">
                   <!-- Members will be rendered here -->
