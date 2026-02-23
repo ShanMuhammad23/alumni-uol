@@ -4,13 +4,15 @@
     return;
   }
 
-  // Supabase Configuration
-  const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-  
-  const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  if (!supabaseClient) {
-    console.error('Failed to initialize Supabase client for alumni stories');
+  // Next.js API (same domain as events/chapters/associations)
+  const API_BASE_URL = 'https://portal-alumni.uol.edu.pk/api/external';
+
+  async function apiGet(endpoint) {
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const json = await res.json().catch(() => ({}));
+    return { ok: res.ok, status: res.status, data: json.data, error: json.error };
   }
 
   // Helper function to extract filename from image path
@@ -152,74 +154,50 @@
     }
   };
 
+  // Safely parse JSONB-style fields from API
+  function parseJsonbField(field) {
+    if (field === null || field === undefined) return [];
+    if (Array.isArray(field)) return field;
+    if (typeof field === 'string') {
+      try {
+        const parsed = JSON.parse(field);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    if (typeof field === 'object') return Array.isArray(field) ? field : [];
+    return [];
+  }
+
+  function parseJsonbStats(field) {
+    if (field === null || field === undefined) return [];
+    if (Array.isArray(field)) return field;
+    if (typeof field === 'string') {
+      try {
+        const parsed = JSON.parse(field);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    if (typeof field === 'object') return Array.isArray(field) ? field : [];
+    return [];
+  }
+
   loaders.show();
 
-  // Fetch alumni stories from Supabase
   (async function() {
-    if (!supabaseClient) {
-      loaders.error("Database connection failed. Please refresh to try again.");
-      return;
-    }
-
     try {
       const slugFromPath = utils.getPathSlug();
-      
+
       if (slugFromPath) {
-        // Fetch single story by slug
-        const { data: story, error } = await supabaseClient
-          .from('distinguished_alumni')
-          .select('*')
-          .eq('slug', slugFromPath)
-          .single();
+        const { ok, data: story, error } = await apiGet(`/distinguished-alumni/${encodeURIComponent(slugFromPath)}`);
 
-        if (error || !story) {
-          // If story not found, fetch all stories for "not found" view
-          const { data: allStories } = await supabaseClient
-            .from('distinguished_alumni')
-            .select('slug, name, image, role, headline')
-            .order('created_at', { ascending: false })
-            .limit(20);
-          
-          renderNotFoundView(allStories || []);
+        if (!ok || !story) {
+          const { data: allStories } = await apiGet('/distinguished-alumni');
+          renderNotFoundView(Array.isArray(allStories) ? allStories : []);
           return;
-        }
-
-        // Normalize story data (parse JSONB fields)
-        // Helper function to safely parse JSONB fields
-        function parseJsonbField(field) {
-          if (field === null || field === undefined) return [];
-          if (Array.isArray(field)) return field;
-          if (typeof field === 'string') {
-            try {
-              const parsed = JSON.parse(field);
-              return Array.isArray(parsed) ? parsed : [];
-            } catch (e) {
-              // If parsing fails, return empty array
-              return [];
-            }
-          }
-          // If it's an object but not an array, wrap it
-          if (typeof field === 'object') {
-            return Array.isArray(field) ? field : [];
-          }
-          return [];
-        }
-
-        function parseJsonbStats(field) {
-          if (field === null || field === undefined) return [];
-          if (Array.isArray(field)) return field;
-          if (typeof field === 'string') {
-            try {
-              const parsed = JSON.parse(field);
-              return Array.isArray(parsed) ? parsed : [];
-            } catch (e) {
-              return [];
-            }
-          }
-          if (typeof field === 'object') {
-            return Array.isArray(field) ? field : [];
-          }
-          return [];
         }
 
         const normalizedStory = {
@@ -232,30 +210,23 @@
         };
 
         utils.applyDocumentMeta(normalizedStory);
-        
-        // Fetch other stories for "more stories" section
-        const { data: otherStories } = await supabaseClient
-          .from('distinguished_alumni')
-          .select('slug, name, image, role, headline')
-          .neq('slug', slugFromPath)
-          .order('created_at', { ascending: false })
-          .limit(20);
 
-        const normalizedOtherStories = (otherStories || []).map(item => ({
-          ...item,
-          image: getImageUrl(item.image)
-        }));
+        const { data: listData } = await apiGet('/distinguished-alumni');
+        const allStories = Array.isArray(listData) ? listData : [];
+        const normalizedOtherStories = allStories
+          .filter((item) => item.slug && item.slug !== slugFromPath)
+          .slice(0, 20)
+          .map((item) => ({
+            ...item,
+            image: getImageUrl(item.image)
+          }));
 
         renderDetailView(normalizedStory, normalizedOtherStories);
       } else {
-        // Fetch all stories for listing view
-        const { data: stories, error } = await supabaseClient
-          .from('distinguished_alumni')
-          .select('slug, name, image, role, headline, summary')
-          .order('created_at', { ascending: false });
+        const { ok, data: stories, error } = await apiGet('/distinguished-alumni');
 
-        if (error) {
-          throw new Error("Unable to fetch alumni stories from database.");
+        if (!ok || error) {
+          throw new Error(error || "Unable to fetch alumni stories.");
         }
 
         if (!Array.isArray(stories) || !stories.length) {
@@ -271,8 +242,8 @@
 
         renderListingView(normalizedStories);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       loaders.error(
         "Please refresh to try again or contact the alumni office if this issue continues."
       );
