@@ -1,0 +1,571 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Job Details | UOL Alumni</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .job-detail-area {
+         padding-top: 60px;
+         padding-bottom: 100px;
+      }
+
+      .job-detail-card {
+         background: #fff;
+         border-radius: 16px;
+         padding: 48px 40px;
+         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+         border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .job-detail-back {
+         display: inline-flex;
+         align-items: center;
+         gap: 8px;
+         color: var(--tp-theme-primary, #AB0C2F);
+         text-decoration: none;
+         font-size: 15px;
+         font-weight: 500;
+         margin-bottom: 24px;
+         transition: opacity 0.2s;
+      }
+
+      .job-detail-back:hover {
+         color: var(--tp-theme-primary, #AB0C2F);
+         opacity: 0.85;
+      }
+
+      .job-detail-header {
+         margin-bottom: 28px;
+         padding-bottom: 24px;
+         border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .job-detail-title {
+         font-size: 28px;
+         font-weight: 700;
+         color: var(--tp-heading-primary, #161613);
+         margin: 0 0 16px 0;
+         line-height: 1.35;
+      }
+
+      .job-detail-meta {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 24px;
+         font-size: 15px;
+         color: #555;
+      }
+
+      .job-detail-meta-item {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+      }
+
+      .job-detail-meta-item i {
+         color: var(--tp-theme-primary, #AB0C2F);
+         font-size: 16px;
+      }
+
+      .job-detail-status-badge {
+         display: inline-block;
+         padding: 8px 18px;
+         border-radius: 24px;
+         font-size: 13px;
+         font-weight: 600;
+         text-transform: uppercase;
+         margin-top: 12px;
+      }
+
+      .job-detail-status-active {
+         background: rgba(34, 197, 94, 0.12);
+         color: #22c55e;
+      }
+
+      .job-detail-status-expired {
+         background: rgba(239, 68, 68, 0.12);
+         color: #ef4444;
+      }
+
+      .job-detail-section {
+         margin-bottom: 28px;
+      }
+
+      .job-detail-section:last-of-type {
+         margin-bottom: 0;
+      }
+
+      .job-detail-section-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: var(--tp-heading-primary, #161613);
+         margin: 0 0 12px 0;
+         display: flex;
+         align-items: center;
+         gap: 10px;
+      }
+
+      .job-detail-section-title i {
+         color: var(--tp-theme-primary, #AB0C2F);
+      }
+
+      .job-detail-description {
+         font-size: 16px;
+         line-height: 1.7;
+         color: #444;
+         white-space: pre-wrap;
+      }
+
+      .job-detail-email {
+         display: inline-flex;
+         align-items: center;
+         gap: 10px;
+         color: var(--tp-theme-primary, #AB0C2F);
+         text-decoration: none;
+         font-size: 16px;
+         font-weight: 500;
+         transition: opacity 0.2s;
+      }
+
+      .job-detail-email:hover {
+         color: var(--tp-theme-primary, #AB0C2F);
+         opacity: 0.85;
+      }
+
+      .job-detail-actions {
+         margin-top: 32px;
+         padding-top: 24px;
+         border-top: 2px solid rgba(0, 0, 0, 0.06);
+         display: flex;
+         flex-wrap: wrap;
+         gap: 16px;
+         align-items: center;
+      }
+
+      .job-detail-apply-btn {
+         display: inline-flex;
+         align-items: center;
+         gap: 10px;
+         padding: 14px 28px;
+         background: var(--tp-theme-primary, #AB0C2F);
+         color: #fff;
+         font-size: 16px;
+         font-weight: 600;
+         border-radius: 12px;
+         text-decoration: none;
+         transition: all 0.3s ease;
+      }
+
+      .job-detail-apply-btn:hover {
+         background: #8a0a26;
+         color: #fff;
+         transform: translateY(-2px);
+      }
+
+      .job-detail-loading,
+      .job-detail-error {
+         text-align: center;
+         padding: 80px 20px;
+         color: #666;
+         font-size: 17px;
+      }
+
+      .job-detail-error {
+         color: #b91c1c;
+      }
+
+      @media (max-width: 767px) {
+         .job-detail-card {
+            padding: 28px 20px;
+         }
+         .job-detail-title {
+            font-size: 22px;
+         }
+         .job-detail-meta {
+            flex-direction: column;
+            gap: 12px;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- pre loader area start -->
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/brand/short-logo.png" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- pre loader area end -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <!-- header-area-start -->
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-4 col-4">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-center">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li class="tp-static"><a class="tp-static" href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li class="has-dropdown">
+                              <a href="/chapters/">Chapters</a>
+                              <ul class="tp-submenu">
+                                 <li><a href="/chapters/national/">National Chapters</a></li>
+                                 <li><a href="/chapters/international/">International Chapters</a></li>
+                              </ul>
+                           </li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-8">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end flex-nowrap">
+                     <div class="tp-header-btn d-block">
+                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header-area-end -->
+
+   <!-- offcanvas area start -->
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/"><img src="/assets/img/brand/logo-black.png" alt="logo"></a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+               <div class="tp-header-btn mt-30 d-md-none">
+                  <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+   <section class="tp-breadcrumb__area pt-160 pb-150 p-relative z-index-1 fix red-shadow">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-sm-12">
+               <div class="tp-breadcrumb__content">
+                  <div class="tp-breadcrumb__list inner-after">
+                     <span class="white"><a href="/"><svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.07207 0C8.19331 0 8.31107 0.0404348 8.40664 0.114882L16.1539 6.14233L15.4847 6.98713L14.5385 6.25079V12.8994C14.538 13.1843 14.4243 13.4574 14.2225 13.6589C14.0206 13.8604 13.747 13.9738 13.4616 13.9743H2.69231C2.40688 13.9737 2.13329 13.8603 1.93146 13.6588C1.72962 13.4573 1.61597 13.1843 1.61539 12.8994V6.2459L0.669148 6.98235L0 6.1376L7.7375 0.114882C7.83308 0.0404348 7.95083 0 8.07207 0ZM8.07694 1.22084L2.69231 5.40777V12.8994H13.4616V5.41341L8.07694 1.22084Z" fill="currentColor" /></svg></a></span>
+                     <span class="white"><a href="/jobs/">Jobs</a></span>
+                     <span class="white" id="breadcrumbJobTitle">Job Details</span>
+                  </div>
+                  <h3 class="tp-breadcrumb__title color" id="breadcrumbTitle">Job Details</h3>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <main>
+      <section class="job-detail-area grey-bg">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-10 col-xl-9">
+                  <div id="jobDetailContent">
+                     <div class="job-detail-loading">
+                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; margin-bottom: 16px; display: block; color: var(--tp-theme-primary, #AB0C2F);"></i>
+                        Loading job details...
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- footer-area-start -->
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/chapters/national/">National Chapters</a></li>
+                           <li><a href="/chapters/international/">International Chapters</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2026 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer-area-end -->
+
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/main.js"></script>
+   <script src="/assets/js/api-client.js"></script>
+   <script>
+      (function () {
+         function formatDate(dateString) {
+            if (!dateString) return '';
+            try {
+               var date = new Date(dateString);
+               if (isNaN(date.getTime())) return dateString;
+               var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+               return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+            } catch (e) {
+               return dateString;
+            }
+         }
+
+         function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+         }
+
+         function isJobExpired(deadline) {
+            if (!deadline) return false;
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var deadlineDate = new Date(deadline);
+            deadlineDate.setHours(0, 0, 0, 0);
+            return deadlineDate < today;
+         }
+
+         function renderJobDetail(job) {
+            var title = escapeHtml(job.title || 'Untitled Job');
+            var company = escapeHtml(job.company || '');
+            var location = escapeHtml(job.location || '');
+            var category = escapeHtml(job.category || '');
+            var deadline = job.deadline ? formatDate(job.deadline) : '';
+            var created = job.created_at ? formatDate(job.created_at) : '';
+            var jobLink = (job.job_link || '').trim();
+            var status = (job.status || '').toLowerCase();
+            var companyEmail = (job.company_email || '').trim();
+            var description = (job.job_description || '').trim();
+
+            var isExpired = isJobExpired(job.deadline);
+            var statusClass = (status === 'expired' || isExpired) ? 'job-detail-status-expired' : 'job-detail-status-active';
+            var statusLabel = (status === 'expired' || isExpired) ? 'Expired' : 'Active';
+
+            var meta = [];
+            if (company) meta.push('<div class="job-detail-meta-item"><i class="fa-solid fa-building"></i><span>' + company + '</span></div>');
+            if (location) meta.push('<div class="job-detail-meta-item"><i class="fa-solid fa-location-dot"></i><span>' + location + '</span></div>');
+            if (created) meta.push('<div class="job-detail-meta-item"><i class="fa-solid fa-calendar"></i><span>Posted: ' + created + '</span></div>');
+            if (deadline) meta.push('<div class="job-detail-meta-item"><i class="fa-solid fa-clock"></i><span>Deadline: ' + deadline + '</span></div>');
+            if (category) meta.push('<div class="job-detail-meta-item"><i class="fa-solid fa-tag"></i><span>' + category + '</span></div>');
+
+            var html = '<div class="job-detail-card">';
+            html += '<a href="/jobs/" class="job-detail-back"><i class="fa-solid fa-arrow-left"></i> Back to Jobs</a>';
+            html += '<div class="job-detail-header">';
+            html += '<h1 class="job-detail-title">' + title + '</h1>';
+            html += '<div class="job-detail-meta">' + meta.join('') + '</div>';
+            html += '<span class="job-detail-status-badge ' + statusClass + '">' + escapeHtml(statusLabel) + '</span>';
+            html += '</div>';
+
+            if (description) {
+               html += '<div class="job-detail-section">';
+               html += '<h2 class="job-detail-section-title"><i class="fa-solid fa-align-left"></i> Job Description</h2>';
+               html += '<div class="job-detail-description">' + escapeHtml(description) + '</div>';
+               html += '</div>';
+            }
+
+            if (companyEmail) {
+               html += '<div class="job-detail-section">';
+               html += '<h2 class="job-detail-section-title"><i class="fa-solid fa-envelope"></i> Contact</h2>';
+               html += '<a href="mailto:' + escapeHtml(companyEmail) + '" class="job-detail-email"><i class="fa-solid fa-envelope"></i> ' + escapeHtml(companyEmail) + '</a>';
+               html += '</div>';
+            }
+
+            html += '<div class="job-detail-actions">';
+            if (jobLink) {
+               html += '<a href="' + escapeHtml(jobLink) + '" target="_blank" rel="noopener noreferrer" class="job-detail-apply-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Apply / View on external site</a>';
+            }
+            if (companyEmail && !jobLink) {
+               html += '<a href="mailto:' + escapeHtml(companyEmail) + '" class="job-detail-apply-btn"><i class="fa-solid fa-envelope"></i> Contact to apply</a>';
+            }
+            html += '</div>';
+            html += '</div>';
+
+            return html;
+         }
+
+         function showError(message) {
+            var el = document.getElementById('jobDetailContent');
+            if (!el) return;
+            el.innerHTML = '<div class="job-detail-error"><i class="fa-solid fa-circle-exclamation" style="font-size: 40px; margin-bottom: 16px; display: block;"></i>' + escapeHtml(message) + '<p style="margin-top: 20px;"><a href="/jobs/">Back to Jobs</a></p></div>';
+         }
+
+         function loadJobDetail() {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+            var contentEl = document.getElementById('jobDetailContent');
+            var breadcrumbTitle = document.getElementById('breadcrumbJobTitle');
+            var breadcrumbTitleH3 = document.getElementById('breadcrumbTitle');
+
+            if (!id) {
+               showError('No job specified. Please select a job from the listings.');
+               if (breadcrumbTitle) breadcrumbTitle.textContent = 'Job Details';
+               if (breadcrumbTitleH3) breadcrumbTitleH3.textContent = 'Job Details';
+               return;
+            }
+
+            if (!window.apiClient) {
+               showError('Unable to load job. Please try again later.');
+               return;
+            }
+
+            window.apiClient.getJobById(id)
+               .then(function (response) {
+                  var job = response.data || response;
+                  if (!job || !job.id) {
+                     showError('Job not found.');
+                     return;
+                  }
+                  contentEl.innerHTML = renderJobDetail(job);
+                  var title = (job.title || 'Job Details').trim();
+                  if (breadcrumbTitle) breadcrumbTitle.textContent = title;
+                  if (breadcrumbTitleH3) breadcrumbTitleH3.textContent = title;
+                  document.title = (title + ' | UOL Alumni').trim();
+               })
+               .catch(function (err) {
+                  console.error('Error loading job:', err);
+                  showError(err.message || 'Failed to load job details. Please try again later.');
+               });
+         }
+
+         document.addEventListener('DOMContentLoaded', loadJobDetail);
+      })();
+   </script>
+</body>
+</html>
