@@ -941,10 +941,10 @@
                ? '<span class="job-status-badge job-status-expired">Expired</span>'
                : '<span class="job-status-badge job-status-active">Active</span>';
             
+            const detailUrl = job.id ? `/jobs/detail.html?id=${encodeURIComponent(job.id)}` : '#';
             const linkHref = job.job_link || '#';
-            const linkClass = isExpired ? 'job-link-icon disabled' : 'job-link-icon';
-            const linkTitle = isExpired ? 'Expired' : 'View Details';
-            const linkOnClick = isExpired ? '' : '';
+            const linkClass = job.id ? 'job-link-icon' : 'job-link-icon disabled';
+            const linkTitle = 'View Details';
 
             const deadlineClass = isExpired ? 'expired' : '';
             const deadlineText = job.deadline ? formatDate(job.deadline) : 'No deadline';
@@ -974,7 +974,7 @@
                         </div>
                         <div class="job-card-header-actions">
                            ${statusBadge}
-                           <a href="${linkHref}" class="${linkClass}" title="${linkTitle}" ${isExpired ? 'onclick="return false;"' : (job.job_link ? 'target="_blank" rel="noopener noreferrer"' : '')}>
+                           <a href="${detailUrl}" class="${linkClass}" title="${linkTitle}" ${!job.id ? 'onclick="return false;"' : ''}>
                               <i class="fa-solid fa-arrow-up-right-from-square"></i>
                            </a>
                         </div>
