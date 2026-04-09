@@ -282,6 +282,23 @@
                 font-size: 1.75rem !important;
             }
         }
+        .merchant-benefits-btn {
+            position: absolute;
+            right: 20px;
+           
+            background: var(--tp-common-white);
+            color: var(--tp-red-1);
+            border: 1px solid var(--tp-red-1);
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+    
+        }
+        .merchant-benefits-btn:hover {
+            background: var(--tp-red-1);
+            color: var(--tp-common-white);
+            border: 1px solid var(--tp-common-white);
+        }
     </style>
 </head>
 
@@ -469,7 +486,7 @@
     <!-- offcanvas area start -->
 
     <!-- Alumni Honor Card Banner -->
-    <div style="background: var(--tp-red-1);">
+    <div style="background: var(--tp-red-1);position: relative;">
         <div class="" style=" padding: 16px 20px; margin-bottom: 0;border-bottom: 1px solid gray;">
             <div class="d-flex align-items-center justify-content-center">
 
@@ -479,7 +496,10 @@
                     <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank"
                         style=" text-decoration: underline;">here</a>.
                 </p>
+                <a href="/benefits/merchant-benefits/" class="btn merchant-benefits-btn" target="_blank">Explore Merchant Benefits</a>
+
             </div>
+
         </div>
     </div>
 
