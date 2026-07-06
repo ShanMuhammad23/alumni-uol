@@ -1615,6 +1615,139 @@
       font-size: 12px;
    }
 
+   /* Alumni Success Stories Slider */
+   .tp-success-story-card {
+      display: block;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+   }
+
+   .tp-success-story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+      color: inherit;
+   }
+
+   .tp-success-story-thumb {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #f3f4f6;
+   }
+
+   .tp-success-story-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+   }
+
+   .tp-success-story-card:hover .tp-success-story-thumb img {
+      transform: scale(1.05);
+   }
+
+   .tp-success-story-year {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+   }
+
+   .tp-success-story-body {
+      padding: 22px;
+   }
+
+   .tp-success-story-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--tp-heading-primary, #161613);
+      margin-bottom: 6px;
+      line-height: 1.3;
+   }
+
+   .tp-success-story-program {
+      font-size: 13px;
+      color: var(--tp-theme-primary, #AB0C2F);
+      font-weight: 500;
+      margin-bottom: 10px;
+      line-height: 1.4;
+   }
+
+   .tp-success-story-excerpt {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+   }
+
+   .tp-success-stories-active .swiper-slide {
+      height: auto;
+   }
+
+   .tp-success-stories-active .swiper-button-next,
+   .tp-success-stories-active .swiper-button-prev {
+      width: 40px;
+      height: 40px;
+      background: rgba(171, 12, 47, 0.1);
+      border-radius: 50%;
+      color: var(--tp-theme-primary, #AB0C2F);
+      transition: all 0.3s ease;
+   }
+
+   .tp-success-stories-active .swiper-button-next:hover,
+   .tp-success-stories-active .swiper-button-prev:hover {
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+      transform: scale(1.1);
+   }
+
+   .tp-success-stories-active .swiper-button-next:after,
+   .tp-success-stories-active .swiper-button-prev:after {
+      font-size: 16px;
+      font-weight: 700;
+   }
+
+   .tp-success-stories-active .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: rgba(171, 12, 47, 0.3);
+      opacity: 1;
+   }
+
+   .tp-success-stories-active .swiper-pagination-bullet-active {
+      background: var(--tp-theme-primary, #AB0C2F);
+   }
+
+   @media (max-width: 767px) {
+      .tp-success-story-thumb {
+         height: 200px;
+      }
+
+      .tp-success-story-body {
+         padding: 18px;
+      }
+
+      .tp-success-story-name {
+         font-size: 16px;
+      }
+   }
+
    /* Distinguished Alumni Slider Navigation */
    .tp-distinguished-alumni-active .swiper-button-next,
    .tp-distinguished-alumni-active .swiper-button-prev {
@@ -2293,6 +2426,43 @@
          </div>
       </section>
       <!-- about-area-end -->
+
+      <!-- Alumni Success Stories Slider Section -->
+      <section class="success-stories-slider-area pt-10 pb-80 grey-bg">
+         <div class="container">
+            <div class="row justify-content-between align-items-center mb-50">
+               <div class="col-md-8 col-lg-9">
+                  <div class="tp-section text-start">
+                     <h3 class="tp-section-title" style="text-align: left; margin-bottom: 0;">Alumni Success <span>Stories
+                           <svg width="180" height="13" viewBox="0 0 180 13" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
+                                 fill="currentColor" />
+                           </svg>
+                        </span></h3>
+                  </div>
+               </div>
+               <div class="col-md-4 col-lg-3 text-md-end mt-3 mt-md-0">
+                  <a href="/success-stories/" class="tp-btn tp-btn-sm" style="white-space: nowrap;">View All</a>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="swiper tp-success-stories-active wow fadeInUp" data-wow-delay=".3s"
+                     id="success-stories-slider">
+                     <div class="swiper-wrapper" id="success-stories-wrapper">
+                        <!-- Success story slides will be loaded dynamically -->
+                     </div>
+                     <div class="swiper-button-next tp-success-stories-next"></div>
+                     <div class="swiper-button-prev tp-success-stories-prev"></div>
+                     <div class="swiper-pagination tp-success-stories-pagination"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Alumni Success Stories Slider Section End -->
 
       <!-- Distinguished Alumni Slider Section -->
       <section class="distinguished-alumni-slider-area pt-10 pb-80">
@@ -3563,6 +3733,134 @@
                slidesPerView: 1,
             },
          },
+      });
+
+      // Load Alumni Success Stories Slider
+      window.addEventListener('load', function () {
+         setTimeout(function () {
+            const wrapper = document.getElementById('success-stories-wrapper');
+            const sliderEl = document.getElementById('success-stories-slider');
+            if (!wrapper || !sliderEl || !window.apiClient) return;
+
+            (async function () {
+               function escapeHtml(text) {
+                  if (!text) return '';
+                  const div = document.createElement('div');
+                  div.textContent = text;
+                  return div.innerHTML;
+               }
+
+               function getImageUrl(imagePath) {
+                  if (!imagePath || imagePath.trim() === '') {
+                     return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+                  }
+                  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+                     return imagePath;
+                  }
+                  const filename = imagePath.split('/').pop();
+                  return `https://portal-alumni.uol.edu.pk/images/${filename}`;
+               }
+
+               function truncateText(text, maxLength) {
+                  if (!text) return '';
+                  if (text.length <= maxLength) return text;
+                  return text.slice(0, maxLength).trim() + '...';
+               }
+
+               function renderSlide(story) {
+                  const imageUrl = getImageUrl(story.imageUrl || story.image);
+                  const name = escapeHtml(story.name || 'Alumni');
+                  const program = escapeHtml(story.program || '');
+                  const excerpt = escapeHtml(truncateText(story.excerpt || '', 140));
+                  const yearBadge = story.passingYear
+                     ? `<span class="tp-success-story-year">${escapeHtml(String(story.passingYear))}</span>`
+                     : '';
+
+                  return `
+                     <div class="swiper-slide">
+                        <a href="/success-stories/detail.html?id=${story.id}" class="tp-success-story-card">
+                           <div class="tp-success-story-thumb">
+                              <img src="${imageUrl}" alt="${name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
+                              ${yearBadge}
+                           </div>
+                           <div class="tp-success-story-body">
+                              <h4 class="tp-success-story-name">${name}</h4>
+                              ${program ? `<p class="tp-success-story-program">${program}</p>` : ''}
+                              ${excerpt ? `<p class="tp-success-story-excerpt">${excerpt}</p>` : ''}
+                           </div>
+                        </a>
+                     </div>
+                  `;
+               }
+
+               function initializeSuccessStoriesSlider() {
+                  if (typeof Swiper === 'undefined') {
+                     setTimeout(initializeSuccessStoriesSlider, 100);
+                     return;
+                  }
+
+                  if (window.successStoriesSlider) {
+                     try {
+                        window.successStoriesSlider.destroy(true, true);
+                     } catch (e) {
+                        console.warn('Error destroying existing success stories slider:', e);
+                     }
+                  }
+
+                  try {
+                     window.successStoriesSlider = new Swiper('.tp-success-stories-active', {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                        loop: true,
+                        speed: 800,
+                        autoplay: {
+                           delay: 3500,
+                           disableOnInteraction: false,
+                           pauseOnMouseEnter: true,
+                        },
+                        navigation: {
+                           nextEl: '.tp-success-stories-next',
+                           prevEl: '.tp-success-stories-prev',
+                        },
+                        pagination: {
+                           el: '.tp-success-stories-pagination',
+                           clickable: true,
+                        },
+                        breakpoints: {
+                           '1400': { slidesPerView: 3 },
+                           '1200': { slidesPerView: 3 },
+                           '992': { slidesPerView: 2 },
+                           '768': { slidesPerView: 2 },
+                           '576': { slidesPerView: 1 },
+                           '0': { slidesPerView: 1 },
+                        },
+                     });
+                  } catch (e) {
+                     console.error('Error initializing success stories slider:', e);
+                  }
+               }
+
+               try {
+                  const response = await window.apiClient.getSuccessStories({ limit: 100 });
+                  const stories = Array.isArray(response)
+                     ? response
+                     : (response.data || []);
+
+                  if (!Array.isArray(stories) || stories.length === 0) {
+                     wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">No success stories available.</p></div>';
+                     initializeSuccessStoriesSlider();
+                     return;
+                  }
+
+                  wrapper.innerHTML = stories.map(renderSlide).join('');
+                  initializeSuccessStoriesSlider();
+               } catch (error) {
+                  console.error('Error loading success stories:', error);
+                  wrapper.innerHTML = '<div class="swiper-slide"><p style="text-align: center; padding: 20px;">Unable to load success stories.</p></div>';
+                  initializeSuccessStoriesSlider();
+               }
+            })();
+         }, 100);
       });
 
       // Load Distinguished Alumni Slider - Run after page load to avoid blocking preloader

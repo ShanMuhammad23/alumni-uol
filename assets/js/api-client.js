@@ -142,6 +142,22 @@ class APIClient {
     return this.request(`/distinguished-alumni/${slug}`);
   }
 
+  // Success Stories APIs
+  async getSuccessStories(options = {}) {
+    const params = new URLSearchParams();
+    Object.keys(options).forEach(key => {
+      if (options[key] !== null && options[key] !== undefined && options[key] !== '') {
+        params.append(key, options[key]);
+      }
+    });
+    const queryString = params.toString();
+    return this.request(`/success-stories${queryString ? '?' + queryString : ''}`);
+  }
+
+  async getSuccessStoryById(id) {
+    return this.request(`/success-stories/${id}`);
+  }
+
   // Associations APIs
   async getAssociations() {
     return this.request('/associations');
