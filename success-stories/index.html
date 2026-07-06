@@ -1,0 +1,429 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Alumni Success Stories | UOL Alumni</title>
+   <meta name="description" content="Read inspiring success stories from University of Lahore alumni.">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
+
+   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/assets/css/animate.css">
+   <link rel="stylesheet" href="/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/assets/css/spacing.css">
+   <link rel="stylesheet" href="/assets/css/main.css">
+   <style>
+      .success-stories-grid {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 30px;
+      }
+
+      .success-stories-card {
+         display: block;
+         background: #fff;
+         border-radius: 12px;
+         overflow: hidden;
+         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+         transition: all 0.3s ease;
+         height: 100%;
+         text-decoration: none;
+         color: inherit;
+      }
+
+      .success-stories-card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+         color: inherit;
+      }
+
+      .success-stories-card-thumb {
+         position: relative;
+         width: 100%;
+         height: 220px;
+         overflow: hidden;
+         background: #f3f4f6;
+      }
+
+      .success-stories-card-thumb img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         transition: transform 0.3s ease;
+      }
+
+      .success-stories-card:hover .success-stories-card-thumb img {
+         transform: scale(1.05);
+      }
+
+      .success-stories-card-year {
+         position: absolute;
+         top: 16px;
+         right: 16px;
+         background: var(--tp-theme-primary, #AB0C2F);
+         color: #fff;
+         padding: 6px 12px;
+         border-radius: 6px;
+         font-size: 13px;
+         font-weight: 600;
+      }
+
+      .success-stories-card-body {
+         padding: 22px;
+      }
+
+      .success-stories-card-name {
+         font-size: 18px;
+         font-weight: 600;
+         color: var(--tp-heading-primary, #161613);
+         margin-bottom: 6px;
+         line-height: 1.3;
+      }
+
+      .success-stories-card-program {
+         font-size: 13px;
+         color: var(--tp-theme-primary, #AB0C2F);
+         font-weight: 500;
+         margin-bottom: 10px;
+      }
+
+      .success-stories-card-excerpt {
+         font-size: 14px;
+         color: #666;
+         line-height: 1.6;
+         margin-bottom: 0;
+      }
+
+      .success-stories-loading,
+      .success-stories-error,
+      .success-stories-empty {
+         text-align: center;
+         padding: 80px 20px;
+         color: #666;
+         font-size: 17px;
+         background: #fff;
+         border-radius: 16px;
+         box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+      }
+
+      .success-stories-error {
+         color: #b91c1c;
+      }
+
+      @media (max-width: 991px) {
+         .success-stories-grid {
+            grid-template-columns: repeat(2, 1fr);
+         }
+      }
+
+      @media (max-width: 575px) {
+         .success-stories-grid {
+            grid-template-columns: 1fr;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <div id="loading">
+      <div id="loading-center">
+         <div id="loading-center-absolute">
+            <div class="tp-preloader-content">
+               <div class="tp-preloader-logo">
+                  <div class="tp-preloader-circle">
+                     <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle stroke="#D9D9D9" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                        <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle>
+                     </svg>
+                  </div>
+                  <img src="/assets/img/brand/short-logo.png" alt="">
+               </div>
+               <p class="tp-preloader-subtitle">Loading...</p>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+
+   <header class="header-area tp-header-transparent p-relative">
+      <div id="header-sticky" class="tp-header-mob-space tp-header-1">
+         <div class="pl-40 pr-40">
+            <div class="row align-items-center">
+               <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-4 col-4">
+                  <div class="tp-header-logo-1 tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-7 d-none d-xl-block">
+                  <div class="main-menu text-center">
+                     <nav class="tp-main-menu-content">
+                        <ul>
+                           <li class="tp-static"><a class="tp-static" href="/">Home</a></li>
+                           <li><a href="/about/">About</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li class="tp-static"><a class="tp-static" href="/events/">Events</a></li>
+                           <li><a href="/benefits/">Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Associations</a></li>
+                           <li class="has-dropdown">
+                              <a href="/chapters/">Chapters</a>
+                              <ul class="tp-submenu">
+                                 <li><a href="/chapters/national/">National Chapters</a></li>
+                                 <li><a href="/chapters/international/">International Chapters</a></li>
+                              </ul>
+                           </li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xxl-2 col-xl-3 col-lg-6 col-md-6 col-8">
+                  <div class="tp-header-contact d-flex align-items-center justify-content-end flex-nowrap">
+                     <div class="tp-header-btn d-block">
+                        <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
+                     </div>
+                     <div class="tp-header-bar d-xl-none">
+                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+
+   <div class="offcanvas__area">
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__close">
+            <button class="offcanvas__close-btn offcanvas-close-btn">
+               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+            </button>
+         </div>
+         <div class="offcanvas__content">
+            <div class="offcanvas__top mb-90 d-flex justify-content-between align-items-center">
+               <div class="offcanvas__logo tp-header-logo">
+                  <a href="/"><img src="/assets/img/brand/logo-black.png" alt="logo"></a>
+               </div>
+            </div>
+            <div class="offcanvas-main">
+               <div class="tp-main-menu-mobile d-xl-none"></div>
+               <div class="tp-header-btn mt-30 d-md-none">
+                  <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+
+   <section class="tp-breadcrumb__area tp-alumni-hero pt-160 pb-150 p-relative z-index-1 fix">
+      <div class="tp-breadcrumb__bg overlay" data-background="/assets/img/breadcrumb/about-breadcrumb.jpg"></div>
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-sm-12">
+               <div class="tp-breadcrumb__content text-center">
+                  <h3 class="tp-breadcrumb__title color">Alumni Success Stories</h3>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <main>
+      <section class="pt-50 pb-120">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-xl-11">
+                  <div id="successStoriesGrid">
+                     <div class="success-stories-loading">
+                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 32px; margin-bottom: 16px; display: block; color: var(--tp-theme-primary, #AB0C2F);"></i>
+                        Loading success stories...
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <footer>
+      <div class="tp-footer-main pt-80 pb-55" style="background-color: #f5f5f5;">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-4 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-1 mb-30">
+                     <div class="tp-footer-widget-logo mb-20 tp-header-logo">
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-sm-6">
+                  <div class="tp-footer-widget tp-footer-col-2 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Quick Links</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/about/">About Us</a></li>
+                           <li><a href="/jobs/">Jobs</a></li>
+                           <li><a href="/events/">Events</a></li>
+                           <li><a href="/newsletters/">Newsletters</a></li>
+                           <li><a href="/contact/">Contact Us</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-2 col-lg-2 col-sm-4">
+                  <div class="tp-footer-widget tp-footer-col-3 mb-30">
+                     <h4 class="tp-footer-widget-title mb-20">Alumni</h4>
+                     <div class="tp-footer-widget-link">
+                        <ul>
+                           <li><a href="/benefits/">Alumni Perks & Benefits</a></li>
+                           <li><a href="/give-back/">Give Back</a></li>
+                           <li><a href="/associations/">Alumni Associations</a></li>
+                           <li><a href="/chapters/national/">National Chapters</a></li>
+                           <li><a href="/chapters/international/">International Chapters</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4 col-sm-8">
+                  <div class="p-footer-widget tp-footer-col-4 mb-30">
+                     <div class="tp-footer-newsletter-wrap">
+                        <div class="tp-footer-newsletter-social">
+                           <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tp-footer-bottom">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="tp-footer-copyright text-center">
+                     <span>© 2026 <a href="#">UoL Alumni</a>. All rights reserved by The University of Lahore</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+
+   <script src="/assets/js/vendor/jquery.js"></script>
+   <script src="/assets/js/vendor/waypoints.js"></script>
+   <script src="/assets/js/bootstrap-bundle.js"></script>
+   <script src="/assets/js/swiper-bundle.js"></script>
+   <script src="/assets/js/slick.js"></script>
+   <script src="/assets/js/magnific-popup.js"></script>
+   <script src="/assets/js/nice-select.js"></script>
+   <script src="/assets/js/purecounter.js"></script>
+   <script src="/assets/js/wow.js"></script>
+   <script src="/assets/js/main.js"></script>
+   <script src="/assets/js/api-client.js"></script>
+   <script>
+      (function () {
+         function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+         }
+
+         function getImageUrl(imagePath) {
+            if (!imagePath || imagePath.trim() === '') {
+               return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+            }
+            if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+               return imagePath;
+            }
+            var filename = imagePath.split('/').pop();
+            return 'https://portal-alumni.uol.edu.pk/images/' + filename;
+         }
+
+         function truncateText(text, maxLength) {
+            if (!text) return '';
+            if (text.length <= maxLength) return text;
+            return text.slice(0, maxLength).trim() + '...';
+         }
+
+         function renderCard(story) {
+            var imageUrl = getImageUrl(story.imageUrl || story.image);
+            var name = escapeHtml(story.name || 'Alumni');
+            var program = escapeHtml(story.program || '');
+            var excerpt = escapeHtml(truncateText(story.excerpt || '', 160));
+            var yearBadge = story.passingYear
+               ? '<span class="success-stories-card-year">' + escapeHtml(String(story.passingYear)) + '</span>'
+               : '';
+
+            return '<a href="/success-stories/detail.html?id=' + story.id + '" class="success-stories-card">' +
+               '<div class="success-stories-card-thumb">' +
+               '<img src="' + imageUrl + '" alt="' + name + '" onerror="this.src=\'https://portal-alumni.uol.edu.pk/images/about-1.jpg\'">' +
+               yearBadge +
+               '</div>' +
+               '<div class="success-stories-card-body">' +
+               '<h4 class="success-stories-card-name">' + name + '</h4>' +
+               (program ? '<p class="success-stories-card-program">' + program + '</p>' : '') +
+               (excerpt ? '<p class="success-stories-card-excerpt">' + excerpt + '</p>' : '') +
+               '</div>' +
+               '</a>';
+         }
+
+         function showMessage(className, message) {
+            var el = document.getElementById('successStoriesGrid');
+            if (!el) return;
+            el.innerHTML = '<div class="' + className + '">' + escapeHtml(message) + '</div>';
+         }
+
+         async function loadSuccessStories() {
+            var gridEl = document.getElementById('successStoriesGrid');
+            if (!gridEl || !window.apiClient) {
+               showMessage('success-stories-error', 'Unable to load success stories. Please try again later.');
+               return;
+            }
+
+            try {
+               var response = await window.apiClient.getSuccessStories({ limit: 100 });
+               var stories = Array.isArray(response) ? response : (response.data || []);
+
+               if (!Array.isArray(stories) || stories.length === 0) {
+                  showMessage('success-stories-empty', 'No success stories available yet.');
+                  return;
+               }
+
+               gridEl.innerHTML = '<div class="success-stories-grid">' + stories.map(renderCard).join('') + '</div>';
+            } catch (error) {
+               console.error('Error loading success stories:', error);
+               showMessage('success-stories-error', error.message || 'Failed to load success stories.');
+            }
+         }
+
+         document.addEventListener('DOMContentLoaded', loadSuccessStories);
+      })();
+   </script>
+</body>
+
+</html>
