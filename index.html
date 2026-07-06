@@ -25,6 +25,7 @@
    <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
    <link rel="stylesheet" href="/assets/css/spacing.css">
    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+   <link rel="stylesheet" href="/assets/css/success-stories-cards.css">
 </head>
 <style>
    .inactive {
@@ -1634,25 +1635,6 @@
       color: inherit;
    }
 
-   .tp-success-story-thumb {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      overflow: hidden;
-      background: #f3f4f6;
-   }
-
-   .tp-success-story-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-   }
-
-   .tp-success-story-card:hover .tp-success-story-thumb img {
-      transform: scale(1.05);
-   }
-
    .tp-success-story-year {
       position: absolute;
       top: 16px;
@@ -1735,10 +1717,6 @@
    }
 
    @media (max-width: 767px) {
-      .tp-success-story-thumb {
-         height: 200px;
-      }
-
       .tp-success-story-body {
          padding: 18px;
       }
@@ -2457,7 +2435,7 @@
                      <div class="swiper-button-next tp-success-stories-next"></div>
                      <div class="swiper-button-prev tp-success-stories-prev"></div>
                      
-                     
+
                   </div>
                </div>
             </div>
@@ -3330,6 +3308,7 @@
    </script>
    <script type="text/javascript" src="/assets/map/mapdata.js"></script>
    <script type="text/javascript" src="/assets/map/countrymap.js"></script>
+   <script src="/assets/js/success-story-images.js"></script>
    <script src="/assets/js/api-client.js"></script>
    <script>
 
@@ -3780,8 +3759,8 @@
                   return `
                      <div class="swiper-slide">
                         <a href="/success-stories/detail.html?id=${story.id}" class="tp-success-story-card">
-                           <div class="tp-success-story-thumb">
-                              <img src="${imageUrl}" alt="${name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
+                           <div class="tp-success-story-thumb success-story-media">
+                              <img src="${imageUrl}" alt="${name}" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
                               ${yearBadge}
                            </div>
                            <div class="tp-success-story-body">
@@ -3854,6 +3833,9 @@
                   }
 
                   wrapper.innerHTML = stories.map(renderSlide).join('');
+                  if (window.bindSuccessStoryImages) {
+                     window.bindSuccessStoryImages(wrapper);
+                  }
                   initializeSuccessStoriesSlider();
                } catch (error) {
                   console.error('Error loading success stories:', error);
