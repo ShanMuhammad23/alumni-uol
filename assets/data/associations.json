@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 33,
     "slug": "medicine",
     "name": "College of Medicine & Dentistry (UCMD)",
     "logo": "/assets/img/faculties/medicine.jpeg",
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 27,
     "slug": "allied-health-sciences",
     "name": "Allied Health Sciences",
     "logo": "/assets/img/faculties/ahs.png",
@@ -62,7 +62,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 37,
     "slug": "arts-architecture",
     "name": "Arts & Architecture",
     "logo": "/assets/img/faculties/art-architect.png",
@@ -87,7 +87,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 29,
     "slug": "engineering-technology",
     "name": "Engineering & Technology",
     "logo": "/assets/img/faculties/engineering-tech.png",
@@ -113,7 +113,7 @@
   },
 
   {
-    "id": 5,
+    "id": 30,
     "slug": "information-technology",
     "name": "Information Technology",
     "logo": "/assets/img/faculties/it.png",
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 35,
     "slug": "languages",
     "name": "Languages & Literature",
     "logo": "/assets/img/faculties/language.png",
@@ -163,7 +163,7 @@
     ]
   },
   {
-    "id": 7,
+    "id": 36,
     "slug": "law",
     "name": "Law",
     "logo": "/assets/img/faculties/law.png",
@@ -188,7 +188,7 @@
     ]
   },
   {
-    "id": 8,
+    "id": 32,
     "slug": "management-sciences",
     "name": "Management Sciences",
     "logo": "/assets/img/faculties/management-sciences.png",
@@ -214,7 +214,7 @@
   },
   
   {
-    "id": 9,
+    "id": 34,
     "slug": "pharmacy",
     "name": "Pharmacy",
     "logo": "/assets/img/faculties/pharmacy.png",
@@ -239,7 +239,7 @@
     ]
   },
   {
-    "id": 10,
+    "id": 28,
     "slug": "sciences",
     "name": "Sciences",
     "logo": "/assets/img/faculties/sciences.png",
@@ -264,7 +264,7 @@
     ]
   },
   {
-    "id": 11,
+    "id": 31,
     "slug": "social-sciences",
     "name": "Social Sciences",
     "logo": "/assets/img/faculties/social.png",
