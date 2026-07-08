@@ -172,6 +172,13 @@
             font-size: 28px;
          }
       }
+      .success-story-detail-title {
+         font-size: 24px;
+         font-weight: 700;
+         color: var(--tp-heading-primary, #161613);
+         margin-bottom: 20px;
+         line-height: 1.2;
+      }
    </style>
 </head>
 
@@ -449,6 +456,7 @@
             var publishedAt = formatDate(story.publishedAt);
             var excerpt = escapeHtml(story.excerpt || '');
             var imageUrl = getImageUrl(story.imageUrl);
+            var storyTitle=escapeHtml(story.title || '');
             var storyContent = story.storyHtml || (story.storyText ? '<p>' + escapeHtml(story.storyText) + '</p>' : '');
 
             var facts = [];
@@ -468,7 +476,7 @@
             html += '</div></div>';
             html += '<div class="success-story-detail-body">';
             html += '<a href="/success-stories/" class="success-story-detail-back"><i class="fa-solid fa-arrow-left"></i> Back to Success Stories</a>';
-            if (excerpt) html += '<p class="success-story-detail-excerpt">' + excerpt + '</p>';
+            if (storyTitle) html += '<h2 class="success-story-detail-title">' + storyTitle + '</h2>';
             if (storyContent) html += '<div class="success-story-detail-content">' + storyContent + '</div>';
             html += '</div></div>';
 
