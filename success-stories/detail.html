@@ -101,6 +101,36 @@
          color: var(--tp-theme-primary, #AB0C2F);
       }
 
+      .success-story-detail-achievements {
+         margin-top: 4px;
+      }
+
+      .success-story-detail-achievements-label {
+         display: block;
+         font-size: 12px;
+         font-weight: 600;
+         text-transform: uppercase;
+         letter-spacing: 0.12em;
+         color: #6b6d78;
+         margin-bottom: 8px;
+      }
+
+      .success-story-detail-achievements-text {
+         display: flex;
+         align-items: flex-start;
+         gap: 10px;
+         margin: 0;
+         font-size: 15px;
+         color: #424554;
+         line-height: 1.6;
+      }
+
+      .success-story-detail-achievements-text i {
+         color: var(--tp-theme-primary, #AB0C2F);
+         margin-top: 4px;
+         flex-shrink: 0;
+      }
+
       .success-story-detail-body {
          padding: 40px 50px 50px;
       }
@@ -420,6 +450,18 @@
             return 'https://portal-alumni.uol.edu.pk/images/' + filename;
          }
 
+         function formatAchievements(achievements) {
+            if (!achievements) return '';
+            if (Array.isArray(achievements)) {
+               return achievements
+                  .filter(function (item) { return item && String(item).trim(); })
+                  .map(function (item) { return escapeHtml(String(item).trim()); })
+                  .join('<br>');
+            }
+            var text = String(achievements).trim();
+            return text ? escapeHtml(text) : '';
+         }
+
          function formatDate(dateString) {
             if (!dateString) return '';
             try {
@@ -454,7 +496,7 @@
             var department = escapeHtml(story.department || '');
             var passingYear = story.passingYear ? escapeHtml(String(story.passingYear)) : '';
             var publishedAt = formatDate(story.publishedAt);
-            var excerpt = escapeHtml(story.excerpt || '');
+            var achievements = formatAchievements(story.achievements);
             var imageUrl = getImageUrl(story.imageUrl);
             var storyTitle=escapeHtml(story.title || '');
             var storyContent = story.storyHtml || (story.storyText ? '<p>' + escapeHtml(story.storyText) + '</p>' : '');
@@ -473,6 +515,12 @@
             html += '<h1 class="success-story-detail-name">' + name + '</h1>';
             if (program) html += '<p class="success-story-detail-program">' + program + '</p>';
             if (facts.length) html += '<div class="success-story-detail-facts">' + facts.join('') + '</div>';
+            if (achievements) {
+               html += '<div class="success-story-detail-achievements">';
+               html += '<span class="success-story-detail-achievements-label">Achievements</span>';
+               html += '<p class="success-story-detail-achievements-text"><i class="fa-regular fa-star"></i><span>' + achievements + '</span></p>';
+               html += '</div>';
+            }
             html += '</div></div>';
             html += '<div class="success-story-detail-body">';
             html += '<a href="/success-stories/" class="success-story-detail-back"><i class="fa-solid fa-arrow-left"></i> Back to Success Stories</a>';
