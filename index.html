@@ -1318,6 +1318,7 @@
    .tp-about-right {
       flex: 1;
       min-width: 300px;
+      max-width: 100%;
       padding: 20px 30px;
       border-radius: 12px;
       display: flex;
@@ -1329,6 +1330,52 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      min-width: 0;
+      width: 100%;
+   }
+
+   #alumni-card-slider {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+   }
+
+   #alumni-card-slider .swiper-button-next,
+   #alumni-card-slider .swiper-button-prev {
+      width: 36px;
+      height: 36px;
+      background: rgba(171, 12, 47, 0.12);
+      border-radius: 50%;
+      color: var(--tp-theme-primary, #AB0C2F);
+      top: 45%;
+      margin-top: 0;
+      z-index: 2;
+   }
+
+   #alumni-card-slider .swiper-button-next:hover,
+   #alumni-card-slider .swiper-button-prev:hover {
+      background: var(--tp-theme-primary, #AB0C2F);
+      color: #fff;
+   }
+
+   #alumni-card-slider .swiper-button-next:after,
+   #alumni-card-slider .swiper-button-prev:after {
+      font-size: 14px;
+      font-weight: 700;
+   }
+
+   #alumni-card-slider .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      background: rgba(171, 12, 47, 0.3);
+      opacity: 1;
+   }
+
+   #alumni-card-slider .swiper-pagination-bullet-active {
+      background: var(--tp-theme-primary, #AB0C2F);
    }
 
    .tp-about-card-image {
@@ -2381,9 +2428,34 @@
                <!-- Right Side: Card Info with Picture and Button -->
                <div class="tp-about-right grey-bg wow fadeInRight" data-wow-delay=".3s">
                   <div class="tp-about-card-wrapper">
-                     <div class="tp-about-card-image">
-                        <img src="/assets/img/banner/card-picture.jpg" alt="Alumni Honor Card" class="rounded-3" />
+                     <div class="swiper tp-swiper-active" id="alumni-card-slider">
+                        <div class="swiper-wrapper tp-swiper-wrapper">
+                           <div class="swiper-slide tp-swiper-slide">
+                              <div class="tp-about-card-image">
+                                 <img src="/assets/img/banner/alumni-card.jpg" alt="Alumni Honor Card" class="rounded-3" />
+                              </div>
+                           </div>
+                           <div class="swiper-slide tp-swiper-slide">
+                              <div class="tp-about-card-image">
+                                 <img src="/assets/img/banner/gold-medalist-card.jpg" alt="Gold Medalist Card" class="rounded-3" />
+                              </div>
+                           </div>
+                           <div class="swiper-slide tp-swiper-slide">
+                              <div class="tp-about-card-image">
+                                 <img src="/assets/img/banner/bronze-medalist-card.jpg" alt="Bronze Medalist Card" class="rounded-3" />
+                              </div>
+                           </div>
+                           <div class="swiper-slide tp-swiper-slide">
+                              <div class="tp-about-card-image">
+                                 <img src="/assets/img/banner/silver-medalist-card.jpg" alt="Silver Medalist Card" class="rounded-3" />
+                              </div>
+                           </div>
+                        </div>
+                        <div class="swiper-button-next tp-swiper-next"></div>
+                        <div class="swiper-button-prev tp-swiper-prev"></div>
+                        <div class="swiper-pagination tp-swiper-pagination"></div>
                      </div>
+                     
                      <div class="tp-about-card-content">
                         <h3 class="tp-about-title mb-20">Alumni Honor Card</h3>
                         <p class="mb-30">The University of Lahore`s Alumni Honor Card offers exclusive perks and
@@ -3681,6 +3753,30 @@
             });
          }
       });
+
+      // Alumni Honor Card Slider
+      if (document.getElementById('alumni-card-slider')) {
+         new Swiper('#alumni-card-slider', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            speed: 600,
+            watchOverflow: true,
+            autoplay: {
+               delay: 3500,
+               disableOnInteraction: false,
+               pauseOnMouseEnter: true,
+            },
+            navigation: {
+               nextEl: '#alumni-card-slider .tp-swiper-next',
+               prevEl: '#alumni-card-slider .tp-swiper-prev',
+            },
+            pagination: {
+               el: '#alumni-card-slider .tp-swiper-pagination',
+               clickable: true,
+            },
+         });
+      }
 
       // Upcoming Engagements Slider
       var engagementsSwiper = new Swiper('.tp-engagements-active', {
