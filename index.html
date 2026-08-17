@@ -1629,6 +1629,19 @@
       color: #64748b;
       margin-bottom: 0;
       line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+   }
+
+   .tp-distinguished-alumni-active .swiper-slide {
+      height: auto;
+      display: flex;
+   }
+
+   .tp-distinguished-alumni-active .tp-alumni-profile-card {
+      width: 100%;
    }
 
    .tp-alumni-profile-link {
@@ -3968,41 +3981,28 @@
                      return;
                   }
                   
-                  // Debug: Log first story to check structure
-                  if (stories.length > 0) {
-                     console.log('Sample story data:', stories[0]);
+                  function escapeHtml(text) {
+                     if (!text) return '';
+                     const div = document.createElement('div');
+                     div.textContent = text;
+                     return div.innerHTML;
                   }
 
-                  // Helper function to extract filename from image path
-                  function getImageUrl(imagePath) {
-                     // Handle null, undefined, or empty string
-                     if (!imagePath || imagePath.trim() === '') {
-                        return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
-                     }
-                     
-                     // If already a full URL, return as is
-                     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-                        return imagePath;
-                     }
-                     
-                     // Extract filename from path like "/assets/img/wall/rubeel.jpg" or just "ahmed-bilal.PNG"
-                     const filename = imagePath.split('/').pop();
-                     
-                     // Return the full URL with the filename
-                     return `https://portal-alumni.uol.edu.pk/images/${filename}`;
+                  function stripHtml(html) {
+                     if (!html) return '';
+                     const div = document.createElement('div');
+                     div.innerHTML = html;
+                     return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
                   }
 
-                  // Render all alumni in the slider
-                  wrapper.innerHTML = stories.map(story => {
-                     // Extract role from story data
+                  function extractRole(story) {
                      let role = 'Alumnus';
                      if (story.role) {
-                        // Remove HTML tags and extract role title (before "at" or comma)
-                        const cleanRole = story.role.replace(/<br\s*\/?>/gi, ' ').trim();
-                        role = cleanRole.split(' at ')[0].split(',')[0].trim();
+                        const cleanRole = stripHtml(story.role);
+                        role = cleanRole.split(' at ')[0].split(',')[0].trim() || cleanRole;
                      } else if (story.summary) {
-                        const parts = story.summary.split('<br>');
-                        // Try to extract from summary (usually second to last part)
+                        const cleanSummary = stripHtml(story.summary);
+                        const parts = cleanSummary.split(/\s{2,}/);
                         if (parts.length > 3) {
                            const potentialRole = parts[parts.length - 2].trim();
                            if (potentialRole && !potentialRole.includes('@') && potentialRole.length < 50) {
@@ -4010,28 +4010,41 @@
                            }
                         }
                      }
+                     if (role.length > 90) {
+                        role = role.slice(0, 87).trim() + '...';
+                     }
+                     return role;
+                  }
 
-                     // Get image - check multiple possible field names
+                  function getImageUrl(imagePath) {
+                     if (!imagePath || imagePath.trim() === '') {
+                        return 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
+                     }
+                     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+                        return imagePath;
+                     }
+                     const filename = imagePath.split('/').pop();
+                     return `https://portal-alumni.uol.edu.pk/images/${filename}`;
+                  }
+
+                  wrapper.innerHTML = stories.map(story => {
+                     const role = escapeHtml(extractRole(story));
+                     const name = escapeHtml(story.name || 'Alumnus');
                      const imageField = story.image || story.image_path || story.image_url || null;
                      const imageUrl = getImageUrl(imageField);
-                     const slug = story.slug || story.name.toLowerCase().replace(/\s+/g, '-');
-                     
-                     // Debug missing images
-                     if (!imageField && story.slug) {
-                        console.warn(`Missing image for story: ${story.slug}`, story);
-                     }
+                     const slug = encodeURIComponent(story.slug || (story.name || '').toLowerCase().replace(/\s+/g, '-'));
 
                      return `
                         <div class="swiper-slide">
                            <div class="tp-alumni-profile-card">
                               <div class="tp-alumni-profile-avatar">
                                  <a href="/stories/detail.html?slug=${slug}">
-                                    <img src="${imageUrl}" alt="${story.name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
+                                    <img src="${imageUrl}" alt="${name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
                                  </a>
                               </div>
                               <div class="tp-alumni-profile-info">
                                  <h4 class="tp-alumni-profile-name">
-                                    <a href="/stories/detail.html?slug=${slug}">${story.name}</a><a href="/stories/detail.html?slug=${slug}" class="tp-alumni-profile-link">
+                                    <a href="/stories/detail.html?slug=${slug}">${name}</a><a href="/stories/detail.html?slug=${slug}" class="tp-alumni-profile-link">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                  </a>
                                  </h4>
