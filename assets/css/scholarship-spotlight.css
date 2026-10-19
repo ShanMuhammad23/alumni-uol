@@ -1,0 +1,761 @@
+/* ==========================================================================
+   Scholarship Recipients — Spotlight Slider (UOL Alumni)
+   All styles are scoped under the .uol-spot- prefix to avoid collisions.
+   Re-theme by editing the CSS variables on .uol-spot below.
+   ========================================================================== */
+
+.uol-spot {
+  /* --- Theme variables (edit these to re-theme) --- */
+  --uol-spot-primary: var(--tp-theme-primary, #183d32);   /* brand green   */
+  --uol-spot-primary-dark: #0c231c;                       /* band base     */
+  --uol-spot-accent: var(--tp-theme-5, #f0ec51);          /* brand yellow  */
+  --uol-spot-gold: #d4af37;                               /* 100% ring     */
+  --uol-spot-gold-dark: #8a6d1c;
+  --uol-spot-cream: #f7f4e9;                              /* text on band  */
+  --uol-spot-card-bg: #fdfcf7;                            /* ID card face  */
+  --uol-spot-ink: #171a18;                                /* card text     */
+  --uol-spot-muted: #5c665f;                              /* card subtext  */
+  --uol-spot-line: #e6e2d2;                               /* card borders  */
+  --uol-spot-ring-track: rgba(24, 61, 50, 0.14);
+
+  /* --- Type --- */
+  --uol-spot-font-head: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --uol-spot-font-body: 'Jost', 'Outfit', -apple-system, sans-serif;
+  --uol-spot-font-num: 'Outfit', 'Jost', -apple-system, sans-serif;
+  --uol-spot-font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+
+  /* --- Geometry --- */
+  --uol-spot-card-w: 296px;      /* card width                    */
+  --uol-spot-g1: 305px;          /* distance of ±1 neighbours     */
+  --uol-spot-g2: 535px;          /* distance of ±2 neighbours     */
+  --uol-spot-stage-h: 545px;     /* viewport height               */
+  --uol-spot-strap-h: 58px;      /* visible lanyard height        */
+
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 84px;
+  font-family: var(--uol-spot-font-body);
+  color: var(--uol-spot-cream);
+  background:
+    radial-gradient(1100px 480px at 50% -12%, rgba(240, 236, 81, 0.09), transparent 62%),
+    radial-gradient(900px 520px at 88% 115%, rgba(255, 255, 255, 0.055), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.022) 0 2px, transparent 2px 16px),
+    linear-gradient(180deg, var(--uol-spot-primary-dark) 0%, var(--uol-spot-primary) 52%, var(--uol-spot-primary-dark) 100%);
+}
+
+.uol-spot *,
+.uol-spot *::before,
+.uol-spot *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------------------------------------------------- heading --- */
+.uol-spot-head {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+  margin-bottom: 12px;
+}
+
+.uol-spot-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--uol-spot-accent);
+  margin-bottom: 14px;
+}
+
+.uol-spot-eyebrow::before,
+.uol-spot-eyebrow::after {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--uol-spot-accent));
+}
+
+.uol-spot-eyebrow::after {
+  background: linear-gradient(90deg, var(--uol-spot-accent), transparent);
+}
+
+.uol-spot-title {
+  font-family: var(--uol-spot-font-head);
+  font-size: clamp(34px, 4.6vw, 54px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--uol-spot-cream);
+  letter-spacing: 0.4px;
+  margin-bottom: 14px;
+}
+
+.uol-spot-sub {
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: rgba(247, 244, 233, 0.72);
+}
+
+/* ----------------------------------------------------------- stage --- */
+.uol-spot-stage {
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+}
+
+/* Soft spotlight glow behind the active card */
+.uol-spot-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 620px;
+  height: 620px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(240, 236, 81, 0.13) 0%, rgba(240, 236, 81, 0.04) 38%, transparent 68%);
+  pointer-events: none;
+}
+
+.uol-spot-viewport {
+  position: relative;
+  height: var(--uol-spot-stage-h);
+  perspective: 1400px;
+  perspective-origin: 50% 42%;
+  touch-action: pan-y;         /* allow vertical scroll, horizontal swipe */
+  outline: none;
+}
+
+.uol-spot-track {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+/* ----------------------------------------------------------- slide --- */
+.uol-spot-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--uol-spot-card-w);
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.65s cubic-bezier(0.22, 0.61, 0.30, 1),
+    opacity 0.65s ease,
+    filter 0.65s ease;
+  will-change: transform, opacity;
+}
+
+/* Centre — active card */
+.uol-spot-slide[data-pos="0"] {
+  z-index: 30;
+  opacity: 1;
+  filter: none;
+  transform: translateX(-50%) translateZ(0) scale(1);
+}
+
+/* Immediate neighbours */
+.uol-spot-slide[data-pos="-1"],
+.uol-spot-slide[data-pos="1"] {
+  z-index: 20;
+  opacity: 0.55;
+  filter: saturate(0.72) brightness(0.9);
+  cursor: pointer;
+}
+
+.uol-spot-slide[data-pos="-1"] {
+  transform: translateX(calc(-50% - var(--uol-spot-g1))) translateZ(-140px) rotateY(24deg) scale(0.8);
+}
+
+.uol-spot-slide[data-pos="1"] {
+  transform: translateX(calc(-50% + var(--uol-spot-g1))) translateZ(-140px) rotateY(-24deg) scale(0.8);
+}
+
+/* Outer neighbours (desktop only — hidden by media queries below) */
+.uol-spot-slide[data-pos="-2"],
+.uol-spot-slide[data-pos="2"] {
+  z-index: 10;
+  opacity: 0.3;
+  filter: saturate(0.55) brightness(0.8);
+  cursor: pointer;
+}
+
+.uol-spot-slide[data-pos="-2"] {
+  transform: translateX(calc(-50% - var(--uol-spot-g2))) translateZ(-260px) rotateY(34deg) scale(0.64);
+}
+
+.uol-spot-slide[data-pos="2"] {
+  transform: translateX(calc(-50% + var(--uol-spot-g2))) translateZ(-260px) rotateY(-34deg) scale(0.64);
+}
+
+/* Parked offstage (wrap-around pool) */
+.uol-spot-slide[data-pos="far-l"],
+.uol-spot-slide[data-pos="far-r"] {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.uol-spot-slide[data-pos="far-l"] {
+  transform: translateX(calc(-50% - var(--uol-spot-g2) - 160px)) translateZ(-320px) scale(0.55);
+}
+
+.uol-spot-slide[data-pos="far-r"] {
+  transform: translateX(calc(-50% + var(--uol-spot-g2) + 160px)) translateZ(-320px) scale(0.55);
+}
+
+/* ---------------------------------------------------- lanyard strap --- */
+.uol-spot-hanger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: 50% 0;   /* swings from the lanyard pin point */
+}
+
+.uol-spot-strap {
+  position: relative;
+  width: 26px;
+  height: var(--uol-spot-strap-h);
+  margin-bottom: -16px;      /* clip overlaps the card's slot */
+  z-index: 3;
+  background:
+    linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, 0.22) 48% 52%, transparent 54%),
+    linear-gradient(180deg, #2e6a54 0%, #1d4a3a 55%, #143327 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Metal clip at the end of the strap */
+.uol-spot-clip {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 34px;
+  height: 20px;
+  transform: translateX(-50%);
+  border-radius: 5px 5px 8px 8px;
+  background: linear-gradient(180deg, #dfe3e6 0%, #9aa3a8 45%, #6e777c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.uol-spot-clip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  width: 16px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background: #31383c;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Gentle pendulum swing on hover / keyboard focus of the active card */
+.uol-spot-slide[data-pos="0"]:hover .uol-spot-hanger,
+.uol-spot-slide[data-pos="0"]:focus-within .uol-spot-hanger {
+  animation: uol-spot-swing 2.4s ease-in-out infinite;
+}
+
+@keyframes uol-spot-swing {
+  0%, 100% { transform: rotate(-2.6deg); }
+  50%      { transform: rotate(2.6deg); }
+}
+
+/* --------------------------------------------------------- ID card --- */
+.uol-spot-card {
+  position: relative;
+  width: 100%;
+  padding-bottom: 20px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--uol-spot-card-bg);
+  color: var(--uol-spot-ink);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), 0 2px 6px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.uol-spot-slide[data-pos="0"] .uol-spot-card {
+  border-color: rgba(240, 236, 81, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(240, 236, 81, 0.22),
+    0 26px 60px rgba(0, 0, 0, 0.55),
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Punched lanyard slot */
+.uol-spot-slot {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  z-index: 2;
+  width: 38px;
+  height: 9px;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  background: #0a1d17;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* Card header band */
+.uol-spot-card-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 26px 18px 11px;
+  background: linear-gradient(180deg, #245545 0%, var(--uol-spot-primary) 100%);
+  border-bottom: 2px solid var(--uol-spot-gold);
+}
+
+.uol-spot-card-brand {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.45;
+  color: var(--uol-spot-cream);
+}
+
+.uol-spot-card-tag {
+  flex: none;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--uol-spot-primary-dark);
+  background: var(--uol-spot-accent);
+  border-radius: 20px;
+  padding: 3.5px 9px;
+}
+
+/* Full-scholarship cards get a gold header band */
+.uol-spot-card.is-full .uol-spot-card-top {
+  background: linear-gradient(180deg, #c9a83f 0%, #a8861f 100%);
+  border-bottom-color: #7a5f14;
+}
+
+.uol-spot-card.is-full .uol-spot-card-brand {
+  color: #2e2405;
+}
+
+/* Photo + award row */
+.uol-spot-card-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 20px 6px;
+  text-align: left;
+}
+
+.uol-spot-photo-wrap {
+  position: relative;
+  flex: none;
+  width: 118px;
+  height: 118px;
+}
+
+.uol-spot-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);   /* progress starts at 12 o'clock */
+}
+
+.uol-spot-ring circle {
+  fill: none;
+  stroke-width: 7;
+}
+
+.uol-spot-ring-bg {
+  stroke: var(--uol-spot-ring-track);
+}
+
+.uol-spot-ring-fill {
+  stroke: var(--uol-spot-primary);
+  stroke-linecap: round;
+}
+
+.uol-spot-card.is-full .uol-spot-ring-fill {
+  stroke: var(--uol-spot-gold);
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.55));
+}
+
+.uol-spot-photo,
+.uol-spot-avatar {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.uol-spot-photo {
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  object-fit: cover;
+  background: #dfe4dc;
+}
+
+/* Initials fallback avatar (no external image service needed) */
+.uol-spot-avatar {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(140deg, #2e6a54 0%, #143327 100%);
+  color: var(--uol-spot-cream);
+  font-family: var(--uol-spot-font-head);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Gold seal for 100% scholarships */
+.uol-spot-seal {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #43320a;
+  background: radial-gradient(circle at 35% 30%, #f4e2a2 0%, var(--uol-spot-gold) 62%, #a8861f 100%);
+  border: 2px solid var(--uol-spot-gold-dark);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+/* Scholarship percentage — the biggest text on the card */
+.uol-spot-award {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.uol-spot-pct {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.uol-spot-pct-num {
+  font-family: var(--uol-spot-font-num);
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--uol-spot-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.uol-spot-pct-sign {
+  font-family: var(--uol-spot-font-num);
+  font-size: 26px;
+  font-weight: 700;
+  margin-left: 2px;
+  color: var(--uol-spot-primary);
+}
+
+.uol-spot-card.is-full .uol-spot-pct-num,
+.uol-spot-card.is-full .uol-spot-pct-sign {
+  color: var(--uol-spot-gold-dark);
+}
+
+.uol-spot-pct-label {
+  margin-top: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--uol-spot-muted);
+}
+
+.uol-spot-full-note {
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--uol-spot-gold-dark);
+}
+
+/* Name / degree / ID */
+.uol-spot-name {
+  padding: 14px 18px 0;
+  font-family: var(--uol-spot-font-body);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--uol-spot-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uol-spot-degree {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+  padding: 3px 22px 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--uol-spot-muted);
+}
+
+.uol-spot-sapid {
+  margin: 12px 18px 0;
+  padding: 6px 8px;
+  font-family: var(--uol-spot-font-mono);
+  font-size: 15px;
+  letter-spacing: 3.5px;
+  color: var(--uol-spot-ink);
+  background: #f2efe1;
+  border: 1px dashed #cfc9ad;
+  border-radius: 4px;
+}
+
+.uol-spot-sapid small {
+  display: block;
+  font-family: var(--uol-spot-font-body);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  color: var(--uol-spot-muted);
+}
+
+/* Decorative barcode strip */
+.uol-spot-barcode {
+  height: 26px;
+  margin: 10px 18px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #20211d 0 1.5px, transparent 1.5px 3px,
+    #20211d 3px 5px,   transparent 5px 8.5px,
+    #20211d 8.5px 10px, transparent 10px 11.5px,
+    #20211d 11.5px 12.5px, transparent 12.5px 16px,
+    #20211d 16px 18.5px, transparent 18.5px 20px
+  );
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------- controls --- */
+.uol-spot-controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 34px;
+  padding: 0 20px;
+}
+
+.uol-spot-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 244, 233, 0.38);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--uol-spot-cream);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.uol-spot-btn:hover {
+  color: var(--uol-spot-primary-dark);
+  background: var(--uol-spot-accent);
+  border-color: var(--uol-spot-accent);
+  transform: translateY(-2px);
+}
+
+.uol-spot-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.uol-spot-btn--toggle {
+  width: 40px;
+  height: 40px;
+}
+
+.uol-spot-btn--toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Dots */
+.uol-spot-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  max-width: 320px;
+}
+
+.uol-spot-dot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 20px;
+  padding: 0;
+  background: rgba(247, 244, 233, 0.32);
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.uol-spot-dot:hover {
+  background: rgba(247, 244, 233, 0.65);
+}
+
+.uol-spot-dot[aria-current="true"] {
+  width: 28px;
+  background: var(--uol-spot-accent);
+}
+
+/* Visible focus states (WCAG) */
+.uol-spot-btn:focus-visible,
+.uol-spot-dot:focus-visible,
+.uol-spot-slide:focus-visible,
+.uol-spot-viewport:focus-visible {
+  outline: 2px solid var(--uol-spot-accent);
+  outline-offset: 3px;
+}
+
+/* Screen-reader-only live region */
+.uol-spot-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading / empty state */
+.uol-spot-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: rgba(247, 244, 233, 0.65);
+}
+
+.uol-spot-status::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(247, 244, 233, 0.25);
+  border-top-color: var(--uol-spot-accent);
+  animation: uol-spot-spin 0.9s linear infinite;
+}
+
+@keyframes uol-spot-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ------------------------------------------------------- responsive --- */
+
+/* Narrow desktop: pull the outer pair in so they aren't clipped */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .uol-spot {
+    --uol-spot-g1: 270px;
+    --uol-spot-g2: 460px;
+  }
+}
+
+/* Tablet: 3 cards visible (±2 slides are parked offscreen) */
+@media (max-width: 991px) {
+  .uol-spot {
+    --uol-spot-g1: 255px;
+    padding: 80px 0 70px;
+  }
+
+  .uol-spot-slide[data-pos="-2"],
+  .uol-spot-slide[data-pos="2"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .uol-spot-slide[data-pos="-2"] {
+    transform: translateX(calc(-50% - var(--uol-spot-g2))) translateZ(-300px) scale(0.55);
+  }
+
+  .uol-spot-slide[data-pos="2"] {
+    transform: translateX(calc(-50% + var(--uol-spot-g2))) translateZ(-300px) scale(0.55);
+  }
+}
+
+/* Mobile: 1 card centred, neighbours peek at the edges */
+@media (max-width: 575px) {
+  .uol-spot {
+    --uol-spot-card-w: 264px;
+    --uol-spot-g1: 216px;
+    --uol-spot-stage-h: 540px;
+    padding: 64px 0 58px;
+  }
+
+  .uol-spot-slide[data-pos="-1"],
+  .uol-spot-slide[data-pos="1"] {
+    opacity: 0.4;
+  }
+
+  .uol-spot-card-main {
+    gap: 14px;
+    padding: 22px 16px 6px;
+  }
+
+  .uol-spot-pct-num {
+    font-size: 46px;
+  }
+
+  .uol-spot-controls {
+    gap: 12px;
+  }
+
+  .uol-spot-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ----------------------------------------------- reduced motion (a11y) --- */
+@media (prefers-reduced-motion: reduce) {
+  .uol-spot-slide {
+    transition: none;
+  }
+
+  .uol-spot-slide[data-pos="0"]:hover .uol-spot-hanger,
+  .uol-spot-slide[data-pos="0"]:focus-within .uol-spot-hanger {
+    animation: none;
+  }
+
+  .uol-spot-status::before {
+    animation: none;
+  }
+}
