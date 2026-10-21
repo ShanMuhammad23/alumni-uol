@@ -1,0 +1,790 @@
+/* ==========================================================================
+   Campus Facilities — 50% Discount bento + roster (UOL Alumni)
+   All styles are scoped under the .uol-active- prefix.
+   Re-theme by editing the CSS variables on .uol-active below.
+   ========================================================================== */
+
+.uol-active {
+  /* --- Theme variables (edit these to re-theme) --- */
+  --uol-act-primary: var(--tp-theme-primary, #183d32);    /* brand green    */
+  --uol-act-primary-2: #0e2a21;                           /* hero depth     */
+  --uol-act-accent: var(--tp-theme-5, #f0ec51);           /* brand yellow   */
+  --uol-act-bg: var(--tp-grey-1, #f4f6ef);                /* section bg     */
+  --uol-act-tile: #ffffff;                                /* tile surface   */
+  --uol-act-ink: #1a211d;                                 /* headings/text  */
+  --uol-act-muted: #5d6862;                               /* secondary text */
+  --uol-act-line: #e3e6da;                                /* hairlines      */
+
+  /* --- Facility accents (icon, tint, badge) --- */
+  --uol-act-gym: #ff6d4d;
+  --uol-act-gym-ink: #a93414;
+  --uol-act-gym-tint: #ffe9e3;
+  --uol-act-pool: #1a73e8;
+  --uol-act-pool-ink: #0f4da8;
+  --uol-act-pool-tint: #e6effd;
+  --uol-act-cricket: #0f9f55;
+  --uol-act-cricket-ink: #0a6b39;
+  --uol-act-cricket-tint: #e2f5e9;
+
+  /* --- Type / shape / motion --- */
+  --uol-act-font-head: 'Outfit', 'Jost', -apple-system, sans-serif;
+  --uol-act-font-body: 'Jost', 'Outfit', -apple-system, sans-serif;
+  --uol-act-font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+  --uol-act-radius: 20px;
+  --uol-act-radius-sm: 12px;
+  --uol-act-gap: 18px;
+  --uol-act-shadow: 0 2px 4px rgba(24, 61, 50, 0.05), 0 14px 34px rgba(24, 61, 50, 0.07);
+  --uol-act-shadow-lg: 0 4px 10px rgba(24, 61, 50, 0.08), 0 24px 54px rgba(24, 61, 50, 0.14);
+
+  font-family: var(--uol-act-font-body);
+  color: var(--uol-act-ink);
+  background:
+    radial-gradient(700px 300px at 90% -5%, rgba(240, 236, 81, 0.16), transparent 65%),
+    var(--uol-act-bg);
+  padding: 92px 0 96px;
+}
+
+.uol-active *,
+.uol-active *::before,
+.uol-active *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.uol-active-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================================ bento ==== */
+.uol-active-bento {
+  display: grid;
+  gap: var(--uol-act-gap);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    "hero hero gym pool"
+    "hero hero cricket cta";
+  margin-bottom: 70px;
+}
+
+/* Facility tiles join the grid through this transparent wrapper;
+   on mobile it becomes a horizontally scrolling row instead */
+.uol-active-facilities {
+  display: contents;
+}
+
+/* ------------------------------------------------------------- hero --- */
+.uol-active-hero {
+  grid-area: hero;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 420px;
+  padding: 38px 36px;
+  overflow: hidden;
+  border-radius: var(--uol-act-radius);
+  color: #f6f7ec;
+  background:
+    repeating-linear-gradient(-55deg, rgba(255, 255, 255, 0.045) 0 2px, transparent 2px 20px),
+    radial-gradient(520px 340px at 110% -10%, rgba(240, 236, 81, 0.16), transparent 62%),
+    linear-gradient(150deg, #215140 0%, var(--uol-act-primary) 45%, var(--uol-act-primary-2) 100%);
+  box-shadow: var(--uol-act-shadow-lg);
+}
+
+.uol-active-hero-chip {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--uol-act-primary-2);
+  background: var(--uol-act-accent);
+  border-radius: 30px;
+  padding: 7px 14px;
+}
+
+.uol-active-hero-num-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  line-height: 0.8;
+  margin: 8px 0;
+}
+
+.uol-active-hero-num {
+  font-family: var(--uol-act-font-head);
+  font-size: clamp(96px, 11vw, 150px);
+  font-weight: 800;
+  letter-spacing: -4px;
+  color: var(--uol-act-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.uol-active-hero-sign {
+  font-size: 0.45em;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.uol-active-hero-off {
+  align-self: flex-end;
+  font-family: var(--uol-act-font-head);
+  font-size: clamp(44px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1;
+  padding-bottom: 10px;
+  color: var(--uol-act-accent);
+}
+
+@supports (-webkit-text-stroke: 1px #fff) {
+  .uol-active-hero-off {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--uol-act-accent);
+  }
+}
+
+.uol-active-hero-copy {
+  max-width: 320px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(246, 247, 236, 0.85);
+}
+
+/* ----------------------------------------------------- facility tiles --- */
+.uol-active-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 22px;
+  border-radius: var(--uol-act-radius);
+  border: 1px solid var(--uol-act-line);
+  background: var(--uol-act-tile);
+  box-shadow: var(--uol-act-shadow);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.uol-active-tile:hover,
+.uol-active-tile:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: var(--uol-act-shadow-lg);
+}
+
+.uol-active-tile--gym     { grid-area: gym; }
+.uol-active-tile--pool    { grid-area: pool; }
+.uol-active-tile--cricket { grid-area: cricket; }
+
+.uol-active-tile--gym:hover,     .uol-active-tile--gym.is-on     { border-color: var(--uol-act-gym); }
+.uol-active-tile--pool:hover,    .uol-active-tile--pool.is-on    { border-color: var(--uol-act-pool); }
+.uol-active-tile--cricket:hover, .uol-active-tile--cricket.is-on { border-color: var(--uol-act-cricket); }
+
+/* Pressed-state tint while its filter is active */
+.uol-active-tile--gym.is-on     { background: var(--uol-act-gym-tint); }
+.uol-active-tile--pool.is-on    { background: var(--uol-act-pool-tint); }
+.uol-active-tile--cricket.is-on { background: var(--uol-act-cricket-tint); }
+
+.uol-active-tile-ic {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+}
+
+.uol-active-tile--gym .uol-active-tile-ic     { background: var(--uol-act-gym-tint);     color: var(--uol-act-gym); }
+.uol-active-tile--pool .uol-active-tile-ic    { background: var(--uol-act-pool-tint);    color: var(--uol-act-pool); }
+.uol-active-tile--cricket .uol-active-tile-ic { background: var(--uol-act-cricket-tint); color: var(--uol-act-cricket); }
+
+.uol-active-ic {
+  width: 30px;
+  height: 30px;
+}
+
+.uol-active-ic *,
+.uol-active-ic {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Icon motion on tile hover/focus — dumbbell lifts, waves ripple, ball spins */
+.uol-active-tile:hover .uol-active-ic--gym,
+.uol-active-tile:focus-visible .uol-active-ic--gym {
+  animation: uol-act-lift 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+@keyframes uol-act-lift {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-5px) rotate(-9deg); }
+}
+
+.uol-active-tile:hover .uol-active-ic--pool .w1,
+.uol-active-tile:hover .uol-active-ic--pool .w2,
+.uol-active-tile:hover .uol-active-ic--pool .w3,
+.uol-active-tile:focus-visible .uol-active-ic--pool .w1,
+.uol-active-tile:focus-visible .uol-active-ic--pool .w2,
+.uol-active-tile:focus-visible .uol-active-ic--pool .w3 {
+  animation: uol-act-wave 1.4s ease-in-out infinite;
+}
+
+.uol-active-tile:hover .uol-active-ic--pool .w2,
+.uol-active-tile:focus-visible .uol-active-ic--pool .w2 { animation-delay: 0.18s; }
+.uol-active-tile:hover .uol-active-ic--pool .w3,
+.uol-active-tile:focus-visible .uol-active-ic--pool .w3 { animation-delay: 0.36s; }
+
+@keyframes uol-act-wave {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
+.uol-active-tile:hover .uol-active-ic--cricket,
+.uol-active-tile:focus-visible .uol-active-ic--cricket {
+  animation: uol-act-spin 1s linear infinite;
+}
+
+@keyframes uol-act-spin {
+  to { transform: rotate(360deg); }
+}
+
+.uol-active-tile-name {
+  font-family: var(--uol-act-font-head);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--uol-act-ink);
+}
+
+.uol-active-tile-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--uol-act-muted);
+}
+
+.uol-active-tile-hint {
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--uol-act-primary);
+}
+
+/* ------------------------------------------------------------ CTA tile --- */
+.uol-active-cta {
+  grid-area: cta;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 22px;
+  border-radius: var(--uol-act-radius);
+  border: 1.5px dashed #b9c4ae;
+  background: #fbfaf1;
+}
+
+.uol-active-cta-title {
+  font-family: var(--uol-act-font-head);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--uol-act-ink);
+}
+
+.uol-active-cta-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--uol-act-muted);
+}
+
+.uol-active-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 11px 20px;
+  border-radius: 30px;
+  font-family: var(--uol-act-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--uol-act-primary-2);
+  background: var(--uol-act-accent);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.uol-active-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24, 61, 50, 0.25);
+}
+
+.uol-active-cta-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* ============================================================ roster ==== */
+.uol-active-roster {
+  scroll-margin-top: 90px;   /* keeps the head clear of fixed headers */
+}
+
+.uol-active-roster-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.uol-active-roster-title {
+  font-family: var(--uol-act-font-head);
+  font-size: clamp(26px, 3.4vw, 34px);
+  font-weight: 800;
+  color: var(--uol-act-ink);
+  line-height: 1.15;
+}
+
+.uol-active-roster-sub {
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--uol-act-muted);
+}
+
+.uol-active-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--uol-act-primary);
+  background: #e9eee0;
+  border-radius: 30px;
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------- filters & search --- */
+.uol-active-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.uol-active-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.uol-active-chip {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--uol-act-line);
+  background: #fff;
+  color: var(--uol-act-muted);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.uol-active-chip:hover {
+  border-color: var(--uol-act-primary);
+  color: var(--uol-act-primary);
+}
+
+.uol-active-chip.is-on {
+  background: var(--uol-act-primary);
+  border-color: var(--uol-act-primary);
+  color: #f6f7ec;
+}
+
+.uol-active-search {
+  position: relative;
+  flex: 1 1 240px;
+  max-width: 340px;
+}
+
+.uol-active-search svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--uol-act-muted);
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+.uol-active-search-input {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 14px 10px 40px;
+  border-radius: 30px;
+  border: 1px solid var(--uol-act-line);
+  background: #fff;
+  color: var(--uol-act-ink);
+}
+
+.uol-active-search-input::placeholder {
+  color: var(--uol-act-muted);
+  opacity: 0.8;
+}
+
+.uol-active-search-input:focus {
+  outline: none;
+  border-color: var(--uol-act-primary);
+  box-shadow: 0 0 0 3px rgba(24, 61, 50, 0.15);
+}
+
+/* ------------------------------------------------------------ rows --- */
+.uol-active-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.uol-active-row {
+  display: grid;
+  grid-template-columns: 34px 46px minmax(0, 1fr) auto auto;
+  grid-template-areas: "rank photo main id badges";
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  border-radius: var(--uol-act-radius-sm);
+  border: 1px solid var(--uol-act-line);
+  background: #fff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.uol-active-row:hover {
+  border-color: #cdd5c0;
+  box-shadow: var(--uol-act-shadow);
+  transform: translateX(4px);
+}
+
+.uol-active-row-rank {
+  grid-area: rank;
+  font-family: var(--uol-act-font-mono);
+  font-size: 13px;
+  color: var(--uol-act-muted);
+  text-align: right;
+}
+
+.uol-active-row-photo {
+  grid-area: photo;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.uol-active-avatar,
+.uol-active-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.uol-active-avatar {
+  display: grid;
+  place-items: center;
+  font-family: var(--uol-act-font-head);
+  font-size: 16px;
+  font-weight: 700;
+  color: #f6f7ec;
+  background: linear-gradient(140deg, #2e6a54, var(--uol-act-primary-2));
+}
+
+.uol-active-photo {
+  object-fit: cover;
+  background: #dfe4dc;
+}
+
+.uol-active-row-main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.uol-active-row-name {
+  font-family: var(--uol-act-font-head);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--uol-act-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uol-active-row-degree {
+  font-size: 12.5px;
+  color: var(--uol-act-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uol-active-row-id {
+  grid-area: id;
+  font-family: var(--uol-act-font-mono);
+  font-size: 13.5px;
+  letter-spacing: 1.5px;
+  color: var(--uol-act-ink);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f1f3e8;
+  border: 1px dashed #d4d9c2;
+}
+
+.uol-active-row-badges {
+  grid-area: badges;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.uol-active-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.uol-active-badge--gym     { background: var(--uol-act-gym-tint);     color: var(--uol-act-gym-ink); }
+.uol-active-badge--pool    { background: var(--uol-act-pool-tint);    color: var(--uol-act-pool-ink); }
+.uol-active-badge--cricket { background: var(--uol-act-cricket-tint); color: var(--uol-act-cricket-ink); }
+
+.uol-active-off {
+  font-family: var(--uol-act-font-head);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--uol-act-accent);
+  color: var(--uol-act-primary-2);
+}
+
+/* Staggered row entrance */
+.uol-active-row--anim {
+  animation: uol-act-in 0.5s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+  animation-delay: var(--uol-act-d, 0ms);
+}
+
+@keyframes uol-act-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------ empty state / more --- */
+.uol-active-empty {
+  padding: 54px 20px;
+  text-align: center;
+  border: 1.5px dashed var(--uol-act-line);
+  border-radius: var(--uol-act-radius);
+  background: #fff;
+  color: var(--uol-act-muted);
+  font-size: 15px;
+}
+
+.uol-active-clear {
+  margin-top: 14px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  color: var(--uol-act-primary-2);
+  background: var(--uol-act-accent);
+}
+
+.uol-active-morewrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.uol-active-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 1px solid var(--uol-act-primary);
+  background: transparent;
+  color: var(--uol-act-primary);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.uol-active-more:hover {
+  background: var(--uol-act-primary);
+  color: #f6f7ec;
+}
+
+.uol-active-more svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+/* Focus states (WCAG) */
+.uol-active-tile:focus-visible,
+.uol-active-chip:focus-visible,
+.uol-active-cta-btn:focus-visible,
+.uol-active-more:focus-visible,
+.uol-active-clear:focus-visible {
+  outline: 2px solid var(--uol-act-primary);
+  outline-offset: 3px;
+}
+
+/* ======================================================= responsive ==== */
+
+/* Tablet — two-column bento */
+@media (max-width: 991px) {
+  .uol-active {
+    padding: 76px 0 80px;
+  }
+
+  .uol-active-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "hero hero"
+      "gym pool"
+      "cricket cta";
+    margin-bottom: 56px;
+  }
+
+  .uol-active-hero {
+    min-height: 340px;
+  }
+}
+
+/* Mobile — single column; facility tiles scroll horizontally */
+@media (max-width: 575px) {
+  .uol-active {
+    padding: 60px 0 66px;
+  }
+
+  .uol-active-bento {
+    display: block;
+    margin-bottom: 48px;
+  }
+
+  .uol-active-hero {
+    min-height: 0;
+    padding: 30px 26px;
+    margin-bottom: var(--uol-act-gap);
+  }
+
+  .uol-active-hero-num {
+    font-size: 92px;
+    letter-spacing: -3px;
+  }
+
+  .uol-active-hero-off {
+    font-size: 40px;
+  }
+
+  .uol-active-facilities {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 4px 20px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .uol-active-tile {
+    flex: 0 0 232px;
+    scroll-snap-align: start;
+  }
+
+  .uol-active-cta {
+    margin-top: var(--uol-act-gap);
+  }
+
+  /* Roster rows stack: photo + name on top, details below */
+  .uol-active-row {
+    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-areas:
+      "photo main"
+      "photo meta";
+    gap: 8px 14px;
+    padding: 14px 16px;
+  }
+
+  .uol-active-row-rank {
+    display: none;
+  }
+
+  .uol-active-row-photo {
+    grid-row: 1 / span 2;
+    align-self: start;
+    width: 52px;
+    height: 52px;
+  }
+
+  .uol-active-row-id {
+    grid-area: meta;
+    justify-self: start;
+  }
+
+  .uol-active-row-badges {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    margin-top: 4px;
+  }
+}
+
+/* ------------------------------------------- reduced motion (a11y) --- */
+@media (prefers-reduced-motion: reduce) {
+  .uol-active-row--anim {
+    animation: none;
+  }
+
+  .uol-active-tile:hover .uol-active-ic,
+  .uol-active-tile:focus-visible .uol-active-ic,
+  .uol-active-tile:hover .uol-active-ic--pool .w1,
+  .uol-active-tile:hover .uol-active-ic--pool .w2,
+  .uol-active-tile:hover .uol-active-ic--pool .w3,
+  .uol-active-tile:focus-visible .uol-active-ic--pool .w1,
+  .uol-active-tile:focus-visible .uol-active-ic--pool .w2,
+  .uol-active-tile:focus-visible .uol-active-ic--pool .w3 {
+    animation: none;
+  }
+
+  .uol-active-tile,
+  .uol-active-row,
+  .uol-active-chip,
+  .uol-active-cta-btn,
+  .uol-active-more {
+    transition: none;
+  }
+}

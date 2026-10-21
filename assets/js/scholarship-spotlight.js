@@ -15,29 +15,33 @@
   var CONFIG = {
     endpoint: 'https://portal-alumni.uol.edu.pk/api/external/scholarships',
     imageBase: 'https://portal-alumni.uol.edu.pk/images',
-    autoplayDelay: 5000,   // ms between auto-advances
-    maxStudents: 10,       // cap on slides rendered from the API
-    ringDuration: 1300     // ms for the scholarship ring + count-up
+    autoplayDelay: 5000    // ms between auto-advances
   };
 
   /* -----------------------------------------------------------------------
      Sample data — replace freely. Shape per student:
-     { photo: url|null, name: string, id: string, degree: string, percent: 0-100 }
-     photo: null renders an initials avatar (no external service needed).
+     {
+       photo: url|null,              // null renders an initials avatar
+       name: string, id: string,
+       degree: string,
+       percent: 0-100,               // total discount; 100 => gold "full" card
+       discounts: {                  // optional breakdown chips; null = hidden
+         admission: 0-100|null,
+         tuition:   0-100|null,
+         achiever:  0-100|null
+       }
+     }
      ----------------------------------------------------------------------- */
   var SAMPLE_STUDENTS = [
-    { photo: null, name: 'Areeba Amjad',   id: '70140795', degree: 'MPhil Public Health',            percent: 50  },
-    { photo: null, name: 'Bilal Hussain',  id: '70123681', degree: 'BS Computer Science',            percent: 100 },
-    { photo: null, name: 'Sana Tariq',     id: '70095512', degree: 'Doctor of Pharmacy',             percent: 75  },
-    { photo: null, name: 'Usman Khalid',   id: '70112034', degree: 'BS Electrical Engineering',      percent: 40  },
-    { photo: null, name: 'Mahnoor Fatima', id: '70138890', degree: 'BS Accounting & Finance',        percent: 65  },
-    { photo: null, name: 'Hamza Sheikh',   id: '70087145', degree: 'LLB (Hons)',                     percent: 30  },
-    { photo: null, name: 'Zainab Raza',    id: '70129907', degree: 'BS Media & Communication',       percent: 85  },
-    { photo: null, name: 'Ali Nawaz',      id: '70076430', degree: 'MBA Executive',                  percent: 55  }
+    { photo: null, name: 'Areeba Amjad',   id: '70140795', degree: 'MPhil Public Health',            percent: 50,  discounts: { admission: 75,  tuition: 50,  achiever: null } },
+    { photo: null, name: 'Bilal Hussain',  id: '70123681', degree: 'BS Computer Science',            percent: 100, discounts: { admission: 100, tuition: 100, achiever: null } },
+    { photo: null, name: 'Sana Tariq',     id: '70095512', degree: 'Doctor of Pharmacy',             percent: 75,  discounts: { admission: 100, tuition: 50,  achiever: 25   } },
+    { photo: null, name: 'Usman Khalid',   id: '70112034', degree: 'BS Electrical Engineering',      percent: 40,  discounts: { admission: 50,  tuition: 40,  achiever: null } },
+    { photo: null, name: 'Mahnoor Fatima', id: '70138890', degree: 'BS Accounting & Finance',        percent: 65,  discounts: { admission: 80,  tuition: 50,  achiever: 15   } },
+    { photo: null, name: 'Hamza Sheikh',   id: '70087145', degree: 'LLB (Hons)',                     percent: 30,  discounts: { admission: 30,  tuition: 30,  achiever: null } },
+    { photo: null, name: 'Zainab Raza',    id: '70129907', degree: 'BS Media & Communication',       percent: 85,  discounts: { admission: 100, tuition: 75,  achiever: 10   } },
+    { photo: null, name: 'Ali Nawaz',      id: '70076430', degree: 'MBA Executive',                  percent: 55,  discounts: { admission: 60,  tuition: 55,  achiever: null } }
   ];
-
-  var RING_R = 54;                                // matches the SVG circle r
-  var RING_C = 2 * Math.PI * RING_R;              // circumference
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -64,18 +68,31 @@
     return Math.max(0, Math.min(100, n));
   }
 
-  /* Map one API record -> {photo, name, id, degree, percent} */
+  /* null stays null (chip hidden); numbers are clamped to 0-100 */
+  function pctOrNull(n) {
+    return n === null || n === undefined ? null : clampPct(n);
+  }
+
+  /* Map one API record -> {photo, name, id, degree, percent, discounts} */
   function normalizeItem(item) {
     var photo = item.imageUrl || item.image_url || item.image || '';
     if (photo && !/^https?:\/\//i.test(photo)) {
       photo = CONFIG.imageBase + '/' + photo.replace(/^\/+/, '');
     }
+    var d = item.discounts || {};
+    // Headline % prefers the new totalPercent; falls back to the legacy field
+    var total = d.totalPercent != null ? d.totalPercent : item.appliedDiscountPercent;
     return {
       photo: photo || null,
       name: titleCase(item.name || 'UOL Scholar'),
       id: String(item.sapId || item.registrationNo || item.alumniId || ''),
       degree: item.degreeTitle || item.program || 'Degree Programme',
-      percent: clampPct(item.appliedDiscountPercent)
+      percent: clampPct(total),
+      discounts: {
+        admission: pctOrNull(d.admissionFeePercent),
+        tuition: pctOrNull(d.tuitionFeePercent),
+        achiever: pctOrNull(d.highAchieverPercent)
+      }
     };
   }
 
@@ -92,7 +109,6 @@
           (Array.isArray(payload) ? payload : []);
         var students = items
           .filter(function (it) { return it && (it.name || it.sapId); })
-          .slice(0, CONFIG.maxStudents)
           .map(normalizeItem);
         if (!students.length) throw new Error('Scholarships API returned no items');
         return students;
@@ -136,6 +152,25 @@
   Spotlight.prototype.renderSlides = function () {
     var html = this.students.map(function (s, i) {
       var full = s.percent >= 100;
+
+      // Discount breakdown chips — only fields the API actually returned
+      var d = s.discounts || {};
+      var chips = [
+        ['Admission', d.admission],
+        ['Tuition', d.tuition],
+        ['High Achiever', d.achiever]
+      ].filter(function (c) { return c[1] !== null && c[1] !== undefined; })
+       .map(function (c) {
+         return (
+           '<span class="uol-spot-chip">' +
+             '<span class="uol-spot-chip-val">' + esc(c[1]) + '%</span>' +
+             '<span class="uol-spot-chip-key">' + esc(c[0]) + '</span>' +
+           '</span>'
+         );
+       }).join('');
+      var breakdown = chips
+        ? '<div class="uol-spot-break" aria-label="Discount breakdown">' + chips + '</div>'
+        : '';
       var avatar =
         '<span class="uol-spot-avatar" aria-hidden="true">' + esc(initials(s.name)) + '</span>' +
         (s.photo
@@ -157,27 +192,15 @@
               '</div>' +
               '<div class="uol-spot-card-main">' +
                 '<div class="uol-spot-photo-wrap">' +
-                  '<svg class="uol-spot-ring" viewBox="0 0 120 120" aria-hidden="true">' +
-                    '<circle class="uol-spot-ring-bg" cx="60" cy="60" r="' + RING_R + '"/>' +
-                    '<circle class="uol-spot-ring-fill" cx="60" cy="60" r="' + RING_R + '" ' +
-                      'stroke-dasharray="' + RING_C.toFixed(2) + '" ' +
-                      'stroke-dashoffset="' + RING_C.toFixed(2) + '"/>' +
-                  '</svg>' + avatar +
+                  avatar +
                   (full
                     ? '<span class="uol-spot-seal" role="img" aria-label="Full scholarship">&#9733;</span>'
                     : '') +
                 '</div>' +
-                '<div class="uol-spot-award">' +
-                  '<p class="uol-spot-pct">' +
-                    '<span class="uol-spot-pct-num">0</span>' +
-                    '<span class="uol-spot-pct-sign">%</span>' +
-                  '</p>' +
-                  '<span class="uol-spot-pct-label">Scholarship</span>' +
-                  (full ? '<span class="uol-spot-full-note">Full Scholarship</span>' : '') +
-                '</div>' +
               '</div>' +
               '<h3 class="uol-spot-name">' + esc(s.name) + '</h3>' +
               '<p class="uol-spot-degree">' + esc(s.degree) + '</p>' +
+              breakdown +
               '<p class="uol-spot-sapid"><small>Student ID</small>' + esc(s.id) + '</p>' +
               '<div class="uol-spot-barcode" aria-hidden="true"></div>' +
             '</article>' +
@@ -218,13 +241,9 @@
         off === 2 ? '2' : off === -2 ? '-2' :
         off > 0 ? 'far-r' : 'far-l';
 
-      var wasActive = slide.getAttribute('data-pos') === '0';
       slide.setAttribute('data-pos', pos);
       slide.setAttribute('aria-hidden', pos.indexOf('far') === 0 ? 'true' : 'false');
       slide.tabIndex = pos === '0' ? 0 : -1;
-
-      if (pos === '0' && !wasActive) self.animateRing(slide);
-      if (pos !== '0') self.setRingStatic(slide);
     });
 
     this.dots.forEach(function (dot, i) {
@@ -241,49 +260,6 @@
     this.live.textContent =
       'Showing ' + s.name + ', ' + s.degree + ', ' + s.percent + '% scholarship' +
       ' (' + (this.active + 1) + ' of ' + this.students.length + ')';
-  };
-
-  /* Progress ring helpers ----------------------------------------------- */
-  Spotlight.prototype.setRing = function (slide, pct) {
-    var ring = slide.querySelector('.uol-spot-ring-fill');
-    var num = slide.querySelector('.uol-spot-pct-num');
-    if (ring) ring.style.strokeDashoffset = (RING_C * (1 - pct / 100)).toFixed(2);
-    if (num) num.textContent = Math.round(pct);
-  };
-
-  /* Side cards show their final value statically — only the centre card
-     performs the 0 -> percent count-up when it becomes active. */
-  Spotlight.prototype.setRingStatic = function (slide) {
-    if (slide._ringRaf) cancelAnimationFrame(slide._ringRaf);
-    slide._ringRaf = null;
-    var idx = Number(slide.getAttribute('data-index'));
-    var target = this.students[idx] ? this.students[idx].percent : 0;
-    this.setRing(slide, target);
-  };
-
-  /* Ring fills 0 -> percent and the number counts up, in sync */
-  Spotlight.prototype.animateRing = function (slide) {
-    var self = this;
-    var idx = Number(slide.getAttribute('data-index'));
-    var target = this.students[idx] ? this.students[idx].percent : 0;
-
-    if (slide._ringRaf) cancelAnimationFrame(slide._ringRaf);
-
-    if (reducedMotion.matches || target === 0) {
-      this.setRing(slide, target);
-      return;
-    }
-
-    var start = null;
-    function step(ts) {
-      if (start === null) start = ts;
-      var t = Math.min(1, (ts - start) / CONFIG.ringDuration);
-      var eased = 1 - Math.pow(1 - t, 3);        // easeOutCubic
-      self.setRing(slide, eased * target);
-      if (t < 1) slide._ringRaf = requestAnimationFrame(step);
-      else slide._ringRaf = null;
-    }
-    slide._ringRaf = requestAnimationFrame(step);
   };
 
   /* Navigation ------------------------------------------------------------ */
