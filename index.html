@@ -27,6 +27,9 @@
    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
    <link rel="stylesheet" href="/assets/css/success-stories-cards.css">
    <link rel="stylesheet" href="/assets/css/scholarship-spotlight.css">
+   <link rel="stylesheet" href="/assets/css/campus-facilities.css">
+   <link rel="stylesheet" href="/assets/css/facility-passes.css">
+   <link rel="stylesheet" href="/assets/css/facility-marquee.css">
 </head>
 <style>
    .inactive {
@@ -1632,6 +1635,7 @@
       line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
    }
@@ -1734,6 +1738,7 @@
       margin-bottom: 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
    }
@@ -2609,6 +2614,83 @@
       </section>
       <!-- Scholarship Recipients Spotlight Section End -->
 
+     
+      <!-- Campus Facilities Pass Strip Section End -->
+
+      <!-- Campus Facilities Marquee Section -->
+      <section class="uol-fac" id="uol-fac-section" aria-labelledby="uol-fac-title">
+         <div class="uol-fac-inner">
+            <header class="uol-fac-head">
+               <h2 class="uol-fac-title" id="uol-fac-title">50% Discount on Campus Facilities</h2>
+               <p class="uol-fac-sub">UOL alumni enjoy half-price access to the campus gym and
+                  swimming pool.</p>
+            </header>
+            <div class="uol-fac-grid">
+
+               <!-- Gym column (scrolls up) -->
+               <div class="uol-fac-col uol-fac-col--gym" data-facility="gym" data-dir="up">
+                  <div class="uol-fac-col-head">
+                     <span class="uol-fac-col-ic" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" fill="currentColor">
+                           <rect x="3" y="18" width="7" height="12" rx="2" />
+                           <rect x="12" y="12" width="7" height="24" rx="2" />
+                           <rect x="19" y="21" width="10" height="6" rx="3" />
+                           <rect x="29" y="12" width="7" height="24" rx="2" />
+                           <rect x="38" y="18" width="7" height="12" rx="2" />
+                        </svg>
+                     </span>
+                     <h3 class="uol-fac-col-name">Gym</h3>
+                     <span class="uol-fac-off">50% OFF</span>
+                     <button type="button" class="uol-fac-toggle" aria-label="Pause slider"
+                        aria-pressed="false">
+                        <svg class="uol-fac-ic-pause" viewBox="0 0 24 24" aria-hidden="true">
+                           <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                        </svg>
+                        <svg class="uol-fac-ic-play" viewBox="0 0 24 24" aria-hidden="true" hidden>
+                           <path d="M8 5v14l11-7z" />
+                        </svg>
+                     </button>
+                  </div>
+                  <div class="uol-fac-viewport" role="region" aria-label="Gym discount recipients"
+                     tabindex="0">
+                     <ul class="uol-fac-track"></ul>
+                  </div>
+               </div>
+
+               <!-- Pool column (scrolls down) -->
+               <div class="uol-fac-col uol-fac-col--pool" data-facility="pool" data-dir="down">
+                  <div class="uol-fac-col-head">
+                     <span class="uol-fac-col-ic" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"
+                           stroke-linecap="round">
+                           <circle cx="13" cy="13" r="4.5" fill="currentColor" stroke="none" />
+                           <path d="M4 24c4-3.5 8-3.5 12 0s8 3.5 12 0 8-3.5 12 0" />
+                           <path d="M4 34c4-3.5 8-3.5 12 0s8 3.5 12 0 8-3.5 12 0" />
+                        </svg>
+                     </span>
+                     <h3 class="uol-fac-col-name">Pool</h3>
+                     <span class="uol-fac-off">50% OFF</span>
+                     <button type="button" class="uol-fac-toggle" aria-label="Pause slider"
+                        aria-pressed="false">
+                        <svg class="uol-fac-ic-pause" viewBox="0 0 24 24" aria-hidden="true">
+                           <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                        </svg>
+                        <svg class="uol-fac-ic-play" viewBox="0 0 24 24" aria-hidden="true" hidden>
+                           <path d="M8 5v14l11-7z" />
+                        </svg>
+                     </button>
+                  </div>
+                  <div class="uol-fac-viewport" role="region" aria-label="Pool discount recipients"
+                     tabindex="0">
+                     <ul class="uol-fac-track"></ul>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </section>
+      <!-- Campus Facilities Marquee Section End -->
+
       <!-- <div class="cta-cards-wrapprer">
          <div class="cta-card">
            <div class="content">
@@ -3439,6 +3521,9 @@
    <script src="/assets/js/success-story-images.js"></script>
    <script src="/assets/js/api-client.js"></script>
    <script src="/assets/js/scholarship-spotlight.js"></script>
+   <script src="/assets/js/campus-facilities.js"></script>
+   <script src="/assets/js/facility-passes.js"></script>
+   <script src="/assets/js/facility-marquee.js"></script>
    <script>
 
       function formatEventDate(dateString, timeString) {

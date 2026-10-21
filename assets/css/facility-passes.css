@@ -1,0 +1,685 @@
+/* ==========================================================================
+   50% Off Campus Facilities — panel + pass strip (UOL Alumni)
+   All styles are scoped under the .uol-pass- prefix.
+   Re-theme by editing the CSS variables on .uol-pass below.
+   ========================================================================== */
+
+.uol-pass {
+  /* --- Theme variables (edit these to re-theme) --- */
+  --uol-pass-primary: var(--tp-theme-primary, #183d32);   /* brand green    */
+  --uol-pass-primary-2: #0e2a21;
+  --uol-pass-accent: var(--tp-theme-3, #ff7162);          /* bright coral   */
+  --uol-pass-bg: #eef1e8;                                 /* section bg     */
+  --uol-pass-tile: #ffffff;
+  --uol-pass-ink: #1a211d;
+  --uol-pass-muted: #5d6862;
+  --uol-pass-line: #dfe4d4;
+
+  /* --- Facility accents (tile tint, badge, pill) --- */
+  --uol-pass-gym: #f08c00;
+  --uol-pass-gym-ink: #7a4300;
+  --uol-pass-gym-tint: #ffeed6;
+  --uol-pass-pool: #1a73e8;
+  --uol-pass-pool-ink: #0f4da8;
+  --uol-pass-pool-tint: #e6effd;
+  --uol-pass-cricket: #0f9f55;
+  --uol-pass-cricket-ink: #0a6b39;
+  --uol-pass-cricket-tint: #e0f4e9;
+  --uol-pass-other: #6b7280;
+  --uol-pass-other-ink: #374151;
+  --uol-pass-other-tint: #eef0f2;
+
+  /* --- Type / shape / motion --- */
+  --uol-pass-font-head: 'Outfit', 'Jost', -apple-system, sans-serif;
+  --uol-pass-font-body: 'Jost', 'Outfit', -apple-system, sans-serif;
+  --uol-pass-font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+  --uol-pass-radius: 18px;
+  --uol-pass-gap: 16px;
+  --uol-pass-tile-w: 190px;    /* tile width -> ~3.5 visible on desktop */
+  --uol-pass-shadow: 0 2px 4px rgba(24, 61, 50, 0.06), 0 12px 28px rgba(24, 61, 50, 0.08);
+  --uol-pass-shadow-lg: 0 4px 10px rgba(24, 61, 50, 0.10), 0 20px 44px rgba(24, 61, 50, 0.16);
+
+  font-family: var(--uol-pass-font-body);
+  color: var(--uol-pass-ink);
+  background:
+    radial-gradient(560px 260px at -5% 0%, rgba(255, 113, 98, 0.10), transparent 60%),
+    var(--uol-pass-bg);
+  padding: 84px 0;
+}
+
+.uol-pass *,
+.uol-pass *::before,
+.uol-pass *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.uol-pass-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 34px;
+  align-items: stretch;
+}
+
+/* ========================================================= left panel ==== */
+.uol-pass-panel {
+  flex: 0 0 34%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uol-pass-eyebrow {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--uol-pass-primary);
+  background: #e2ead9;
+  border-radius: 30px;
+  padding: 6px 14px;
+}
+
+.uol-pass-num {
+  font-family: var(--uol-pass-font-head);
+  font-size: clamp(84px, 8.5vw, 120px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -4px;
+  color: var(--uol-pass-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.uol-pass-num sup {
+  font-size: 0.42em;
+  letter-spacing: 0;
+}
+
+.uol-pass-off {
+  display: inline-block;
+  margin-left: 10px;
+  font-family: var(--uol-pass-font-head);
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--uol-pass-primary);
+  vertical-align: baseline;
+}
+
+.uol-pass-sub {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--uol-pass-muted);
+  max-width: 300px;
+}
+
+/* Filter chips (All / Gym / Pool / Cricket Club) */
+.uol-pass-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.uol-pass-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: 1px solid var(--uol-pass-line);
+  background: #fff;
+  color: var(--uol-pass-muted);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.uol-pass-chip .uol-pass-ic svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.uol-pass-chip--gym .uol-pass-ic     { color: var(--uol-pass-gym); }
+.uol-pass-chip--pool .uol-pass-ic    { color: var(--uol-pass-pool); }
+.uol-pass-chip--cricket .uol-pass-ic { color: var(--uol-pass-cricket); }
+
+.uol-pass-chip:hover {
+  border-color: var(--uol-pass-primary);
+  color: var(--uol-pass-primary);
+}
+
+.uol-pass-chip.is-on {
+  background: var(--uol-pass-primary);
+  border-color: var(--uol-pass-primary);
+  color: #f6f7ec;
+}
+
+/* Chip icon motion on hover (dumbbell lifts, waves ripple, ball spins) */
+.uol-pass-chip:hover .uol-pass-ic-gym svg {
+  animation: uol-pass-lift 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+@keyframes uol-pass-lift {
+  from { transform: translateY(0) rotate(0); }
+  to   { transform: translateY(-2px) rotate(-10deg); }
+}
+
+.uol-pass-chip:hover .uol-pass-ic-pool svg path {
+  animation: uol-pass-wave 1.4s ease-in-out infinite;
+}
+
+.uol-pass-chip:hover .uol-pass-ic-pool svg path:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes uol-pass-wave {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(3px); }
+}
+
+.uol-pass-chip:hover .uol-pass-ic-cricket svg {
+  animation: uol-pass-spin 1s linear infinite;
+}
+
+@keyframes uol-pass-spin {
+  to { transform: rotate(360deg); }
+}
+
+.uol-pass-apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: var(--uol-pass-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #f6f7ec;
+  background: var(--uol-pass-primary);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.uol-pass-apply:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(24, 61, 50, 0.28);
+}
+
+.uol-pass-apply svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* ======================================================== slider half ==== */
+.uol-pass-slider {
+  flex: 1 1 65%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toolbar: caption + controls */
+.uol-pass-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.uol-pass-bar-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--uol-pass-muted);
+}
+
+.uol-pass-bar-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.uol-pass-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #c9d0ba;
+  background: #fff;
+  color: var(--uol-pass-primary);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.uol-pass-btn:hover:not(:disabled) {
+  background: var(--uol-pass-primary);
+  border-color: var(--uol-pass-primary);
+  color: #f6f7ec;
+}
+
+.uol-pass-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.uol-pass-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.uol-pass-btn--toggle {
+  width: 34px;
+  height: 34px;
+}
+
+.uol-pass-btn--toggle svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Scroll-snap track */
+.uol-pass-viewport {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* fade-out on the right hints there's more to scroll */
+  -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, #000 92%, transparent);
+}
+
+.uol-pass-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.uol-pass-track {
+  display: flex;
+  gap: var(--uol-pass-gap);
+  list-style: none;
+  transition: opacity 0.26s ease, transform 0.26s ease;
+}
+
+.uol-pass-track.is-fading {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ------------------------------------------------------------ tiles --- */
+.uol-pass-tile {
+  flex: 0 0 var(--uol-pass-tile-w);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--uol-pass-radius);
+  border: 1px solid var(--uol-pass-line);
+  background: var(--uol-pass-tile);
+  box-shadow: var(--uol-pass-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.uol-pass-tile:not(.uol-pass-tile--skel):hover {
+  transform: translateY(-4px);
+  box-shadow: var(--uol-pass-shadow-lg);
+}
+
+/* Per-facility accent vars on each tile */
+.uol-pass-tile--gym     { --fac: var(--uol-pass-gym);     --fac-ink: var(--uol-pass-gym-ink);     --fac-tint: var(--uol-pass-gym-tint); }
+.uol-pass-tile--pool    { --fac: var(--uol-pass-pool);    --fac-ink: var(--uol-pass-pool-ink);    --fac-tint: var(--uol-pass-pool-tint); }
+.uol-pass-tile--cricket { --fac: var(--uol-pass-cricket); --fac-ink: var(--uol-pass-cricket-ink); --fac-tint: var(--uol-pass-cricket-tint); }
+.uol-pass-tile--other   { --fac: var(--uol-pass-other);   --fac-ink: var(--uol-pass-other-ink);   --fac-tint: var(--uol-pass-other-tint); }
+
+/* Photo — rounded square, facility-tinted gradient at the bottom edge */
+.uol-pass-tile-photo {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--fac-tint);
+}
+
+.uol-pass-tile-photo::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 46%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--fac) 45%, transparent));
+  pointer-events: none;
+}
+
+.uol-pass-photo,
+.uol-pass-avatar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.uol-pass-photo {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.uol-pass-avatar {
+  display: grid;
+  place-items: center;
+  font-family: var(--uol-pass-font-head);
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--fac-ink);
+  background:
+    linear-gradient(150deg, var(--fac-tint), color-mix(in srgb, var(--fac) 22%, #ffffff));
+}
+
+.uol-pass-tile-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--fac);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.uol-pass-tile-badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* "New" ribbon for recently awarded items */
+.uol-pass-tile-new {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-family: var(--uol-pass-font-head);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 5px;
+  color: var(--uol-pass-primary-2);
+  background: var(--uol-pass-accent);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Tile info */
+.uol-pass-tile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.uol-pass-tile-name {
+  font-family: var(--uol-pass-font-head);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--uol-pass-ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em;
+}
+
+.uol-pass-tile-id {
+  font-family: var(--uol-pass-font-mono);
+  font-size: 12.5px;
+  letter-spacing: 1.8px;
+  color: var(--uol-pass-muted);
+}
+
+.uol-pass-tile-pill {
+  align-self: flex-start;
+  margin-top: 2px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 20px;
+  color: var(--fac-ink);
+  background: var(--fac-tint);
+}
+
+/* "View all" tile */
+.uol-pass-tile--more {
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  text-align: center;
+  color: var(--uol-pass-primary);
+  background:
+    repeating-linear-gradient(-55deg, rgba(24, 61, 50, 0.035) 0 2px, transparent 2px 14px),
+    #fff;
+}
+
+.uol-pass-tile-more-label {
+  font-family: var(--uol-pass-font-head);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.uol-pass-tile-more-arrow {
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+
+.uol-pass-tile--more:hover .uol-pass-tile-more-arrow {
+  transform: translateX(5px);
+}
+
+/* Skeleton placeholders */
+.uol-pass-tile--skel {
+  pointer-events: none;
+}
+
+.uol-pass-skel-photo {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+}
+
+.uol-pass-skel-photo,
+.uol-pass-skel-line {
+  background: linear-gradient(100deg, #e8ecdf 40%, #f5f7ee 50%, #e8ecdf 60%);
+  background-size: 220% 100%;
+  animation: uol-pass-shimmer 1.4s ease-in-out infinite;
+}
+
+.uol-pass-skel-line {
+  height: 13px;
+  border-radius: 7px;
+  margin: 2px 4px 6px;
+}
+
+.uol-pass-skel-line.w70 { width: 70%; }
+.uol-pass-skel-line.w40 { width: 40%; }
+
+@keyframes uol-pass-shimmer {
+  to { background-position: -120% 0; }
+}
+
+/* Error / empty state inside the track */
+.uol-pass-state {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 260px;
+  padding: 20px;
+  border-radius: var(--uol-pass-radius);
+  border: 1.5px dashed var(--uol-pass-line);
+  background: #fff;
+  color: var(--uol-pass-muted);
+  font-size: 14.5px;
+  text-align: center;
+}
+
+.uol-pass-retry {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 9px 22px;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  color: #f6f7ec;
+  background: var(--uol-pass-primary);
+}
+
+/* Progress bar under the track */
+.uol-pass-progress {
+  height: 4px;
+  margin-top: 16px;
+  border-radius: 4px;
+  background: #dde2d0;
+  overflow: hidden;
+}
+
+.uol-pass-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--uol-pass-primary);
+  transform-origin: left;
+  transform: scaleX(0.02);
+  transition: transform 0.25s ease;
+}
+
+/* Screen-reader-only live region */
+.uol-pass-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus states (WCAG) */
+.uol-pass-btn:focus-visible,
+.uol-pass-chip:focus-visible,
+.uol-pass-apply:focus-visible,
+.uol-pass-retry:focus-visible,
+.uol-pass-viewport:focus-visible,
+.uol-pass-tile--more:focus-visible {
+  outline: 2px solid var(--uol-pass-primary);
+  outline-offset: 3px;
+}
+
+/* ======================================================= responsive ==== */
+
+/* Tablet — panel on top, slider below (~2.5 tiles visible) */
+@media (max-width: 991px) {
+  .uol-pass {
+    --uol-pass-tile-w: 232px;
+    padding: 66px 0 72px;
+  }
+
+  .uol-pass-inner {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .uol-pass-panel {
+    flex: none;
+  }
+
+  .uol-pass-sub {
+    max-width: 520px;
+  }
+}
+
+/* Mobile — compact panel, ~1.5 tiles, arrows hidden */
+@media (max-width: 575px) {
+  .uol-pass {
+    --uol-pass-tile-w: 196px;
+    --uol-pass-gap: 12px;
+    padding: 52px 0 58px;
+  }
+
+  .uol-pass-num {
+    font-size: 80px;
+    letter-spacing: -3px;
+  }
+
+  .uol-pass-off {
+    font-size: 30px;
+  }
+
+  .uol-pass-btn--prev,
+  .uol-pass-btn--next {
+    display: none;
+  }
+
+  /* let tiles bleed to the screen edge for a nicer peek */
+  .uol-pass-viewport {
+    margin-right: -20px;
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+}
+
+/* ------------------------------------------- reduced motion (a11y) --- */
+@media (prefers-reduced-motion: reduce) {
+  .uol-pass-viewport {
+    scroll-behavior: auto;
+  }
+
+  .uol-pass-track {
+    transition: none;
+  }
+
+  .uol-pass-chip:hover .uol-pass-ic svg,
+  .uol-pass-chip:hover .uol-pass-ic svg path {
+    animation: none;
+  }
+
+  .uol-pass-skel-photo,
+  .uol-pass-skel-line {
+    animation: none;
+  }
+
+  .uol-pass-tile,
+  .uol-pass-apply,
+  .uol-pass-btn,
+  .uol-pass-chip,
+  .uol-pass-tile-more-arrow {
+    transition: none;
+  }
+}

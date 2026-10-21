@@ -9,14 +9,13 @@
   --uol-spot-primary: var(--tp-theme-primary, #183d32);   /* brand green   */
   --uol-spot-primary-dark: #0c231c;                       /* band base     */
   --uol-spot-accent: var(--tp-theme-5, #f0ec51);          /* brand yellow  */
-  --uol-spot-gold: #d4af37;                               /* 100% ring     */
+  --uol-spot-gold: #d4af37;                               /* 100% cards    */
   --uol-spot-gold-dark: #8a6d1c;
   --uol-spot-cream: #f7f4e9;                              /* text on band  */
   --uol-spot-card-bg: #fdfcf7;                            /* ID card face  */
   --uol-spot-ink: #171a18;                                /* card text     */
   --uol-spot-muted: #5c665f;                              /* card subtext  */
   --uol-spot-line: #e6e2d2;                               /* card borders  */
-  --uol-spot-ring-track: rgba(24, 61, 50, 0.14);
 
   /* --- Type --- */
   --uol-spot-font-head: 'Crimson Pro', Georgia, 'Times New Roman', serif;
@@ -28,7 +27,8 @@
   --uol-spot-card-w: 296px;      /* card width                    */
   --uol-spot-g1: 305px;          /* distance of ±1 neighbours     */
   --uol-spot-g2: 535px;          /* distance of ±2 neighbours     */
-  --uol-spot-stage-h: 545px;     /* viewport height               */
+  --uol-spot-stage-h: 610px;     /* viewport height               */
+  --uol-spot-photo-h: 190px;     /* portrait photo height         */
   --uol-spot-strap-h: 58px;      /* visible lanyard height        */
 
   position: relative;
@@ -53,7 +53,7 @@
 
 /* ---------------------------------------------------------- heading --- */
 .uol-spot-head {
-  position: relative;
+
   z-index: 2;
   text-align: center;
   padding: 0 20px;
@@ -84,14 +84,21 @@
   background: linear-gradient(90deg, var(--uol-spot-accent), transparent);
 }
 
+/* Matches the site's .tp-section-title scale: Outfit 60px -> 40px mobile */
 .uol-spot-title {
-  font-family: var(--uol-spot-font-head);
-  font-size: clamp(34px, 4.6vw, 54px);
-  font-weight: 600;
+  font-family: var(--tp-ff-heading, 'Outfit', sans-serif);
+  font-size: 60px;
+  font-weight: 500;
   line-height: 1.1;
+  letter-spacing: -1.2px;
   color: var(--uol-spot-cream);
-  letter-spacing: 0.4px;
   margin-bottom: 14px;
+}
+
+@media (max-width: 767px) {
+  .uol-spot-title {
+    font-size: 40px;
+  }
 }
 
 .uol-spot-sub {
@@ -348,61 +355,31 @@
   color: #2e2405;
 }
 
-/* Photo + award row */
+/* Photo — fills the width of the card like an ID portrait */
 .uol-spot-card-main {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 24px 20px 6px;
-  text-align: left;
+  padding: 16px 16px 4px;
 }
 
 .uol-spot-photo-wrap {
   position: relative;
-  flex: none;
-  width: 118px;
-  height: 118px;
-}
-
-.uol-spot-ring {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);   /* progress starts at 12 o'clock */
-}
-
-.uol-spot-ring circle {
-  fill: none;
-  stroke-width: 7;
-}
-
-.uol-spot-ring-bg {
-  stroke: var(--uol-spot-ring-track);
-}
-
-.uol-spot-ring-fill {
-  stroke: var(--uol-spot-primary);
-  stroke-linecap: round;
-}
-
-.uol-spot-card.is-full .uol-spot-ring-fill {
-  stroke: var(--uol-spot-gold);
-  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.55));
+  height: var(--uol-spot-photo-h);
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--uol-spot-line);
+  background: #e8ebe2;
 }
 
 .uol-spot-photo,
 .uol-spot-avatar {
   position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  overflow: hidden;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .uol-spot-photo {
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
-  object-fit: cover;
+  object-position: top center;   /* keep faces in frame on tall crops */
   background: #dfe4dc;
 }
 
@@ -413,16 +390,16 @@
   background: linear-gradient(140deg, #2e6a54 0%, #143327 100%);
   color: var(--uol-spot-cream);
   font-family: var(--uol-spot-font-head);
-  font-size: 34px;
+  font-size: 52px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 /* Gold seal for 100% scholarships */
 .uol-spot-seal {
   position: absolute;
-  right: -5px;
-  bottom: -5px;
+  right: 8px;
+  bottom: 8px;
   z-index: 2;
   width: 36px;
   height: 36px;
@@ -434,59 +411,6 @@
   background: radial-gradient(circle at 35% 30%, #f4e2a2 0%, var(--uol-spot-gold) 62%, #a8861f 100%);
   border: 2px solid var(--uol-spot-gold-dark);
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
-}
-
-/* Scholarship percentage — the biggest text on the card */
-.uol-spot-award {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.uol-spot-pct {
-  display: flex;
-  align-items: baseline;
-  line-height: 1;
-}
-
-.uol-spot-pct-num {
-  font-family: var(--uol-spot-font-num);
-  font-size: 54px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--uol-spot-primary);
-  font-variant-numeric: tabular-nums;
-}
-
-.uol-spot-pct-sign {
-  font-family: var(--uol-spot-font-num);
-  font-size: 26px;
-  font-weight: 700;
-  margin-left: 2px;
-  color: var(--uol-spot-primary);
-}
-
-.uol-spot-card.is-full .uol-spot-pct-num,
-.uol-spot-card.is-full .uol-spot-pct-sign {
-  color: var(--uol-spot-gold-dark);
-}
-
-.uol-spot-pct-label {
-  margin-top: 7px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 2.4px;
-  text-transform: uppercase;
-  color: var(--uol-spot-muted);
-}
-
-.uol-spot-full-note {
-  margin-top: 6px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  color: var(--uol-spot-gold-dark);
 }
 
 /* Name / degree / ID */
@@ -513,6 +437,50 @@
   font-size: 13.5px;
   line-height: 1.5;
   color: var(--uol-spot-muted);
+}
+
+/* Discount breakdown chips (Admission / Tuition / High Achiever) */
+.uol-spot-break {
+  display: flex;
+  gap: 6px;
+  margin: 10px 18px 0;
+}
+
+.uol-spot-chip {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 5px 4px 4px;
+  border: 1px solid var(--uol-spot-line);
+  border-radius: 6px;
+  background: #faf8ef;
+  text-align: center;
+}
+
+.uol-spot-chip-val {
+  display: block;
+  font-family: var(--uol-spot-font-num);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--uol-spot-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.uol-spot-card.is-full .uol-spot-chip-val {
+  color: var(--uol-spot-gold-dark);
+}
+
+.uol-spot-chip-key {
+  display: block;
+  margin-top: 1px;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--uol-spot-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .uol-spot-sapid {
@@ -716,7 +684,8 @@
   .uol-spot {
     --uol-spot-card-w: 264px;
     --uol-spot-g1: 216px;
-    --uol-spot-stage-h: 540px;
+    --uol-spot-stage-h: 575px;
+    --uol-spot-photo-h: 160px;
     padding: 64px 0 58px;
   }
 
@@ -726,12 +695,7 @@
   }
 
   .uol-spot-card-main {
-    gap: 14px;
-    padding: 22px 16px 6px;
-  }
-
-  .uol-spot-pct-num {
-    font-size: 46px;
+    padding: 14px 14px 4px;
   }
 
   .uol-spot-controls {
