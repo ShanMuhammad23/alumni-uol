@@ -76,7 +76,8 @@
     this.touchHold = false;
   }
 
-  /* One compact card: photo + name + SAP ID (all textContent, no innerHTML) */
+  /* One mini vertical card: photo on top, name + SAP ID below
+     (all textContent, no innerHTML) */
   Column.prototype.buildCard = function (item) {
     var li = document.createElement('li');
     li.className = 'uol-fac-card';
@@ -95,8 +96,8 @@
       img.className = 'uol-fac-photo';
       img.src = item.photo;
       img.alt = 'Photo of ' + item.name;
-      img.width = 112;
-      img.height = 112;
+      img.width = 240;
+      img.height = 120;
       img.loading = 'lazy';
       img.onerror = function () { img.remove(); };
       photoWrap.appendChild(img);
