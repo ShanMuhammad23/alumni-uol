@@ -268,6 +268,15 @@
       "country": "Afghanistan",
       "description": "Connect with UOL alumni in Afghanistan. Join networking events and community gatherings.",
       "status": "active"
+    },
+    {
+      "id": 32,
+      "slug": "turkey",
+      "name": "Turkey Chapter",
+      "image":"/assets/img/chapters/international/turkey.jpg",
+      "country": "Turkey",
+      "description": "Connect with UOL alumni in Turkey. Join networking events and community gatherings.",
+      "status": "active"
     }
   ]
 }
