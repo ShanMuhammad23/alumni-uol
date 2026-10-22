@@ -80,7 +80,8 @@
       photo = CONFIG.imageBase + '/' + photo.replace(/^\/+/, '');
     }
     var d = item.discounts || {};
-    // Headline % prefers the new totalPercent; falls back to the legacy field
+    // Total prefers the new totalPercent; falls back to the legacy field.
+    // hasTotal flags whether the API actually returned a value (null-safe).
     var total = d.totalPercent != null ? d.totalPercent : item.appliedDiscountPercent;
     return {
       photo: photo || null,
@@ -88,6 +89,7 @@
       id: String(item.sapId || item.registrationNo || item.alumniId || ''),
       degree: item.degreeTitle || item.program || 'Degree Programme',
       percent: clampPct(total),
+      hasTotal: total != null,
       discounts: {
         admission: pctOrNull(d.admissionFeePercent),
         tuition: pctOrNull(d.tuitionFeePercent),
@@ -153,7 +155,8 @@
     var html = this.students.map(function (s, i) {
       var full = s.percent >= 100;
 
-      // Discount breakdown chips — only fields the API actually returned
+      // Discount chips — only the individual fields the API actually
+      // returned; nulls are hidden, no total.
       var d = s.discounts || {};
       var chips = [
         ['Admission', d.admission],
@@ -258,7 +261,8 @@
     if (!this.live || !this.students.length) return;
     var s = this.students[this.active];
     this.live.textContent =
-      'Showing ' + s.name + ', ' + s.degree + ', ' + s.percent + '% scholarship' +
+      'Showing ' + s.name + ', ' + s.degree + ', ' +
+      (s.hasTotal !== false ? s.percent + '% scholarship' : 'scholarship recipient') +
       ' (' + (this.active + 1) + ' of ' + this.students.length + ')';
   };
 
