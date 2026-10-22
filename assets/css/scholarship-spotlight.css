@@ -23,17 +23,17 @@
   --uol-spot-font-num: 'Outfit', 'Jost', -apple-system, sans-serif;
   --uol-spot-font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
 
-  /* --- Geometry --- */
-  --uol-spot-card-w: 296px;      /* card width                    */
-  --uol-spot-g1: 305px;          /* distance of ±1 neighbours     */
-  --uol-spot-g2: 535px;          /* distance of ±2 neighbours     */
-  --uol-spot-stage-h: 610px;     /* viewport height               */
-  --uol-spot-photo-h: 190px;     /* portrait photo height         */
-  --uol-spot-strap-h: 58px;      /* visible lanyard height        */
+  /* --- Geometry (tightened for the split-layout left panel) --- */
+  --uol-spot-card-w: 252px;      /* card width                    */
+  --uol-spot-g1: 218px;          /* distance of ±1 neighbours     */
+  --uol-spot-g2: 460px;          /* distance of ±2 neighbours     */
+  --uol-spot-stage-h: clamp(430px, 52vh, 500px);  /* viewport height */
+  --uol-spot-photo-h: 150px;     /* portrait photo height         */
+  --uol-spot-strap-h: 46px;      /* visible lanyard height        */
 
   position: relative;
   overflow: hidden;
-  padding: 96px 0 84px;
+  padding: 34px 22px 26px;
   font-family: var(--uol-spot-font-body);
   color: var(--uol-spot-cream);
   background:
@@ -63,19 +63,19 @@
 .uol-spot-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  font-size: 12px;
+  gap: 12px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--uol-spot-accent);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .uol-spot-eyebrow::before,
 .uol-spot-eyebrow::after {
   content: "";
-  width: 46px;
+  width: 30px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--uol-spot-accent));
 }
@@ -84,28 +84,22 @@
   background: linear-gradient(90deg, var(--uol-spot-accent), transparent);
 }
 
-/* Matches the site's .tp-section-title scale: Outfit 60px -> 40px mobile */
+/* Panel-level heading (the split section carries the h2) */
 .uol-spot-title {
   font-family: var(--tp-ff-heading, 'Outfit', sans-serif);
-  font-size: 60px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -1.2px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
   color: var(--uol-spot-cream);
-  margin-bottom: 14px;
-}
-
-@media (max-width: 767px) {
-  .uol-spot-title {
-    font-size: 40px;
-  }
+  margin-bottom: 8px;
 }
 
 .uol-spot-sub {
-  max-width: 560px;
+  max-width: 400px;
   margin: 0 auto;
-  font-size: 16.5px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: rgba(247, 244, 233, 0.72);
 }
 
@@ -113,7 +107,7 @@
 .uol-spot-stage {
   position: relative;
   z-index: 1;
-  margin-top: 30px;
+  margin-top: 18px;
 }
 
 /* Soft spotlight glow behind the active card */
@@ -122,8 +116,8 @@
   position: absolute;
   left: 50%;
   top: 55%;
-  width: 620px;
-  height: 620px;
+  width: 480px;
+  height: 480px;
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(240, 236, 81, 0.13) 0%, rgba(240, 236, 81, 0.04) 38%, transparent 68%);
   pointer-events: none;
@@ -280,7 +274,7 @@
 .uol-spot-card {
   position: relative;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
   overflow: hidden;
   border-radius: 16px;
   background: var(--uol-spot-card-bg);
@@ -318,15 +312,15 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 10px;
-  padding: 26px 18px 11px;
+  padding: 24px 14px 10px;
   background: linear-gradient(180deg, #245545 0%, var(--uol-spot-primary) 100%);
   border-bottom: 2px solid var(--uol-spot-gold);
 }
 
 .uol-spot-card-brand {
-  font-size: 10.5px;
+  font-size: 9.5px;
   font-weight: 600;
-  letter-spacing: 1.6px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
   text-align: left;
   line-height: 1.45;
@@ -335,14 +329,14 @@
 
 .uol-spot-card-tag {
   flex: none;
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
   color: var(--uol-spot-primary-dark);
   background: var(--uol-spot-accent);
   border-radius: 20px;
-  padding: 3.5px 9px;
+  padding: 3.5px 8px;
 }
 
 /* Full-scholarship cards get a gold header band */
@@ -357,7 +351,7 @@
 
 /* Photo — fills the width of the card like an ID portrait */
 .uol-spot-card-main {
-  padding: 16px 16px 4px;
+  padding: 13px 13px 4px;
 }
 
 .uol-spot-photo-wrap {
@@ -390,7 +384,7 @@
   background: linear-gradient(140deg, #2e6a54 0%, #143327 100%);
   color: var(--uol-spot-cream);
   font-family: var(--uol-spot-font-head);
-  font-size: 52px;
+  font-size: 44px;
   font-weight: 600;
   letter-spacing: 2px;
 }
@@ -415,9 +409,9 @@
 
 /* Name / degree / ID */
 .uol-spot-name {
-  padding: 14px 18px 0;
+  padding: 12px 14px 0;
   font-family: var(--uol-spot-font-body);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.25;
   color: var(--uol-spot-ink);
@@ -432,9 +426,9 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 40px;
-  padding: 3px 22px 0;
-  font-size: 13.5px;
+  min-height: 36px;
+  padding: 3px 14px 0;
+  font-size: 12.5px;
   line-height: 1.5;
   color: var(--uol-spot-muted);
 }
@@ -443,7 +437,7 @@
 .uol-spot-break {
   display: flex;
   gap: 6px;
-  margin: 10px 18px 0;
+  margin: 9px 14px 0;
 }
 
 .uol-spot-chip {
@@ -459,7 +453,7 @@
 .uol-spot-chip-val {
   display: block;
   font-family: var(--uol-spot-font-num);
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--uol-spot-primary);
@@ -473,9 +467,9 @@
 .uol-spot-chip-key {
   display: block;
   margin-top: 1px;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--uol-spot-muted);
   white-space: nowrap;
@@ -484,11 +478,11 @@
 }
 
 .uol-spot-sapid {
-  margin: 12px 18px 0;
-  padding: 6px 8px;
+  margin: 10px 14px 0;
+  padding: 5px 8px;
   font-family: var(--uol-spot-font-mono);
-  font-size: 15px;
-  letter-spacing: 3.5px;
+  font-size: 13px;
+  letter-spacing: 2.5px;
   color: var(--uol-spot-ink);
   background: #f2efe1;
   border: 1px dashed #cfc9ad;
@@ -498,16 +492,16 @@
 .uol-spot-sapid small {
   display: block;
   font-family: var(--uol-spot-font-body);
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 2.6px;
+  letter-spacing: 2.2px;
   color: var(--uol-spot-muted);
 }
 
 /* Decorative barcode strip */
 .uol-spot-barcode {
-  height: 26px;
-  margin: 10px 18px 0;
+  height: 20px;
+  margin: 8px 14px 0;
   background: repeating-linear-gradient(
     90deg,
     #20211d 0 1.5px, transparent 1.5px 3px,
@@ -526,16 +520,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  margin-top: 34px;
+  gap: 14px;
+  margin-top: 22px;
   padding: 0 20px;
 }
 
 .uol-spot-btn {
   display: inline-grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   flex: none;
   border-radius: 50%;
   border: 1px solid rgba(247, 244, 233, 0.38);
@@ -649,19 +643,42 @@
 
 /* ------------------------------------------------------- responsive --- */
 
-/* Narrow desktop: pull the outer pair in so they aren't clipped */
-@media (min-width: 992px) and (max-width: 1199px) {
-  .uol-spot {
-    --uol-spot-g1: 270px;
-    --uol-spot-g2: 460px;
+/* Split mode (≥1100px): the panel is ~700px wide — park the ±2 pair so it
+   doesn't clip at the rounded corners */
+@media (min-width: 1100px) {
+  .uol-spot-slide[data-pos="-2"],
+  .uol-spot-slide[data-pos="2"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .uol-spot-slide[data-pos="-2"] {
+    transform: translateX(calc(-50% - var(--uol-spot-g2))) translateZ(-300px) scale(0.55);
+  }
+
+  .uol-spot-slide[data-pos="2"] {
+    transform: translateX(calc(-50% + var(--uol-spot-g2))) translateZ(-300px) scale(0.55);
   }
 }
 
-/* Tablet: 3 cards visible (±2 slides are parked offscreen) */
-@media (max-width: 991px) {
+/* Stacked layout (below the split breakpoint): the panel spans full width
+   again, so the coverflow can breathe with wider offsets */
+@media (max-width: 1099px) {
+  .uol-spot {
+    --uol-spot-card-w: 290px;
+    --uol-spot-g1: 280px;
+    --uol-spot-g2: 520px;
+    --uol-spot-stage-h: clamp(430px, 56vh, 545px);
+    --uol-spot-photo-h: 185px;
+    padding: 44px 28px 34px;
+  }
+}
+
+/* Tablet: 3 cards visible (±2 slides parked offscreen) */
+@media (max-width: 767px) {
   .uol-spot {
     --uol-spot-g1: 255px;
-    padding: 80px 0 70px;
+    --uol-spot-g2: 460px;
   }
 
   .uol-spot-slide[data-pos="-2"],
@@ -682,11 +699,11 @@
 /* Mobile: 1 card centred, neighbours peek at the edges */
 @media (max-width: 575px) {
   .uol-spot {
-    --uol-spot-card-w: 264px;
-    --uol-spot-g1: 216px;
-    --uol-spot-stage-h: 575px;
-    --uol-spot-photo-h: 160px;
-    padding: 64px 0 58px;
+    --uol-spot-card-w: 240px;
+    --uol-spot-g1: 200px;
+    --uol-spot-stage-h: clamp(430px, 60vh, 530px);
+    --uol-spot-photo-h: 165px;
+    padding: 34px 18px 28px;
   }
 
   .uol-spot-slide[data-pos="-1"],
@@ -694,17 +711,13 @@
     opacity: 0.4;
   }
 
-  .uol-spot-card-main {
-    padding: 14px 14px 4px;
-  }
-
   .uol-spot-controls {
     gap: 12px;
   }
 
   .uol-spot-btn {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 }
 
