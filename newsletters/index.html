@@ -450,50 +450,32 @@
    <script src="/assets/js/wow.js"></script>
    <script src="/assets/js/isotope-pkgd.js"></script>
    <script src="/assets/js/main.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
    <script>
       (function () {
          const gridEl = document.getElementById('newsletters-grid');
          const filterEl = document.getElementById('newsletter-filter');
          const featuredWrap = document.getElementById('featured-newsletter');
 
-         // Supabase configuration (same project as events)
-         const SUPABASE_URL = 'https://gjtcqhtwbohebbovgaou.supabase.co';
-         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqdGNxaHR3Ym9oZWJib3ZnYW91Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjU3NjYsImV4cCI6MjA3ODM0MTc2Nn0.GxU2S48TD7ZRFqzMbE5XXbkTcQKTmoccU_9e8rwmKzE';
-
-         const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-         if (!supabase) {
-            console.error('Failed to initialize Supabase client for newsletters');
-         }
-
-         function buildImagePath(imageName) {
-            if (!imageName) return null;
-            if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
-               return imageName;
-            }
-            const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
-            return `${BASE_IMAGE_URL}/${imageName}`;
-         }
+         // Newsletters are served from a local JSON file
+         const NEWSLETTERS_URL = '/assets/data/newsletters.json';
 
          function transformNewsletter(row) {
-            const dateValue = row.date;
-            const jsDate = dateValue ? new Date(dateValue) : null;
-            const year = jsDate && !isNaN(jsDate.getTime()) ? jsDate.getFullYear() : null;
+            const releaseDate = row.releaseDate || row.date || null;
+            const jsDate = releaseDate ? new Date(releaseDate) : null;
+            const year = row.year || (jsDate && !isNaN(jsDate.getTime()) ? jsDate.getFullYear() : null);
 
             return {
                id: row.id,
                title: row.title || 'Newsletter',
-               issue: jsDate && !isNaN(jsDate.getTime())
+               issue: row.issue || (jsDate && !isNaN(jsDate.getTime())
                   ? jsDate.toLocaleString('en-US', { month: 'long', year: 'numeric' })
-                  : (dateValue || 'Digital Issue'),
-               releaseDate: dateValue || null,
-               cover: buildImagePath(row.image) || '/assets/img/banner/newsletter.jpg',
-               pdf: row.link || '#',
-               summary: '',
+                  : 'Digital Issue'),
+               releaseDate,
+               cover: row.cover || '/assets/img/banner/newsletter.jpg',
+               pdf: row.pdf || row.link || '#',
+               summary: row.summary || '',
                year,
-               categories: []
+               categories: Array.isArray(row.categories) ? row.categories : []
             };
          }
 
@@ -504,20 +486,11 @@
             }
 
             try {
-               if (!supabase) {
-                  throw new Error('Supabase client not initialized');
-               }
+               const res = await fetch(NEWSLETTERS_URL, { headers: { 'Accept': 'application/json' } });
+               if (!res.ok) throw new Error('Newsletters request failed: ' + res.status);
+               const data = await res.json();
 
-               const { data, error } = await supabase
-                  .from('newsletters')
-                  .select('*')
-                  .order('date', { ascending: false, nullsLast: true });
-
-               if (error) {
-                  throw error;
-               }
-
-               if (!data || data.length === 0) {
+               if (!Array.isArray(data) || data.length === 0) {
                   gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Newsletters will be published soon. Stay tuned!</p></div>';
                   return;
                }
@@ -540,7 +513,7 @@
 
                renderGrid(sorted);
             } catch (error) {
-               console.error('Error loading newsletters from Supabase:', error);
+               console.error('Error loading newsletters:', error);
                gridEl.innerHTML = '<div class="col-12"><p class="text-center mb-0">Unable to load newsletters right now. Please try again later.</p></div>';
             }
          }
@@ -590,7 +563,7 @@
                         <img src="${item.cover || '/assets/img/banner/newsletter.jpg'}" alt="${item.title}">
                      </div>
                      <div class="tp-newsletter-card__body">
-                        <div class="tp-newsletter-card__meta">${item.issue || 'Digital Issue'} · ${formatDate(item.releaseDate)}</div>
+                        <div class="tp-newsletter-card__meta">${item.issue || 'Digital Issue'}</div>
                         <h3 class="tp-newsletter-card__title">${item.title}</h3>
                         <p class="tp-newsletter-card__summary">${item.summary || ''}</p>
                         <div class="tp-newsletter-card__actions">
