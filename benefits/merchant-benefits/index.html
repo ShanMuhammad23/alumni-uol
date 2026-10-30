@@ -35,8 +35,8 @@
         .merchant-card {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: stretch;
+            justify-content: flex-start;
             border-radius: 18px;
             overflow: hidden;
             max-width: 500px;
@@ -68,6 +68,33 @@
             color: #64748b;
             font-size: 15px;
             line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .merchant-card.is-expanded .merchant-card__desc {
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+            overflow: visible;
+        }
+
+        .merchant-card__readmore {
+            display: none;
+            margin-top: 8px;
+            padding: 0;
+            border: none;
+            background: none;
+            color: var(--tp-red-1, #ab0c2f);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .merchant-card__readmore:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 575.98px) {
@@ -233,6 +260,17 @@
                             <p class="merchant-card__desc">Flat 25% off on Dine-in</p>
                         </div>
                     </a>
+                    <a class="merchant-card popup-image" href="/assets/img/banner/yum-yard-banner.jpeg">
+                        <img class="merchant-card__image" src="/assets/img/banner/yum-yard-banner.jpeg" alt="Merchant offer card - promotional partner deal">
+                        <div class="merchant-card__content">
+                            <h4 class="merchant-card__title">Yum Yard</h4>
+                            <p class="merchant-card__desc">𝐁𝐞𝐜𝐚𝐮𝐬𝐞 𝐛𝐞𝐢𝐧𝐠 𝐩𝐚𝐫𝐭 𝐨𝐟 𝐔𝐎𝐋 𝐜𝐨𝐦𝐞𝐬 𝐰𝐢𝐭𝐡 𝐢𝐭𝐬 𝐩𝐞𝐫𝐤𝐬! 💚
+Enjoy a 𝐟𝐥𝐚𝐭 20% 𝐝𝐢𝐬𝐜𝐨𝐮𝐧𝐭  at Yum Yard Restaurant, exclusively for UOL employees, faculty, current students, and alumni.
+Whether it's a casual meal or a get-together with friends and family, enjoy your favourite food with an added benefit!
+📍 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧: Yum Yard Restaurant, Wapda Town Phase 2, Lahore
+Simply present your valid UOL ID card to avail of the discount.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -331,6 +369,25 @@
                     }
                 });
             }
+
+            // "Read more" toggle — only shown when the description is clamped
+            document.querySelectorAll(".merchant-card").forEach(function (card) {
+                var desc = card.querySelector(".merchant-card__desc");
+                if (!desc || desc.scrollHeight <= desc.clientHeight + 1) return;
+
+                var btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "merchant-card__readmore";
+                btn.textContent = "Read more";
+                btn.style.display = "inline-block";
+                btn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var expanded = card.classList.toggle("is-expanded");
+                    btn.textContent = expanded ? "Read less" : "Read more";
+                });
+                card.querySelector(".merchant-card__content").appendChild(btn);
+            });
         });
     </script>
 </body>
