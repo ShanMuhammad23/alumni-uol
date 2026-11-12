@@ -190,8 +190,7 @@
             '<article class="uol-spot-card' + (full ? ' is-full' : '') + '">' +
               '<span class="uol-spot-slot" aria-hidden="true"></span>' +
               '<div class="uol-spot-card-top">' +
-                '<span class="uol-spot-card-brand">The University<br>of Lahore</span>' +
-                '<span class="uol-spot-card-tag">' + (full ? 'Full Scholar' : 'Scholar ID') + '</span>' +
+               
               '</div>' +
               '<div class="uol-spot-card-main">' +
                 '<div class="uol-spot-photo-wrap">' +

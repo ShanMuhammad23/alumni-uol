@@ -68,6 +68,7 @@
     this.viewport = colEl.querySelector('.uol-fac-viewport');
     this.track = colEl.querySelector('.uol-fac-track');
     this.toggle = colEl.querySelector('.uol-fac-toggle');
+    this.nameEl = colEl.querySelector('.uol-fac-col-name');
     this.dir = colEl.getAttribute('data-dir') === 'down' ? 'down' : 'up';
     this.items = [];
     this.userPaused = false;
@@ -203,6 +204,18 @@
     this.updateAnimState();
   };
 
+  /* Member count shown in parentheses after the column name, e.g. "Gym (12)" */
+  Column.prototype.setCount = function (n) {
+    if (!this.nameEl) return;
+    var span = this.nameEl.querySelector('.uol-fac-count');
+    if (!span) {
+      span = document.createElement('span');
+      span.className = 'uol-fac-count';
+      this.nameEl.appendChild(span);
+    }
+    span.textContent = ' (' + n + ')';
+  };
+
   Column.prototype.isPaused = function () {
     return this.userPaused || this.hoverHold || this.focusHold || this.touchHold;
   };
@@ -307,13 +320,15 @@
           });
 
         cols.forEach(function (col) {
-          var items = (byFac[col.facility] || [])
+          var facilityItems = byFac[col.facility] || [];
+          var items = facilityItems
             .sort(function (a, b) {
               return (b.awarded ? b.awarded.getTime() : 0) -
                      (a.awarded ? a.awarded.getTime() : 0);
             })
             .slice(0, MAX_ITEMS_PER_FACILITY);
           col.items = items;
+          col.setCount(facilityItems.length);
           col.rebuild();
         });
       };

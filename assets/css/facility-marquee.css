@@ -132,6 +132,12 @@
   color: var(--uol-fac-ink);
 }
 
+.uol-fac-count {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--uol-fac-muted);
+}
+
 .uol-fac-off {
   font-family: var(--uol-fac-font-head);
   font-size: 9px;
