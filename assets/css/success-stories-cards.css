@@ -35,6 +35,157 @@
 }
 
 .tp-success-story-card:hover .success-story-media img,
-.success-stories-card:hover .success-story-media img {
+.success-stories-card:hover .success-story-media img,
+.story-slip:hover .success-story-media img {
    transform: scale(1.04);
+}
+
+/* ==========================================================================
+   Story slip — editorial pull-quote card used on the homepage slider.
+   Photo strip on the left, excerpt as a pull quote, byline + year chip.
+   ========================================================================== */
+
+.story-slip {
+   display: flex;
+   align-items: stretch;
+   width: 100%;
+   height: 100%;
+   background: #fff;
+   border-radius: 12px;
+   overflow: hidden;
+   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+   text-decoration: none;
+   color: inherit;
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-slip:hover {
+   transform: translateY(-5px);
+   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.14);
+   color: inherit;
+   text-decoration: none;
+}
+
+.story-slip:focus-visible {
+   outline: 2px solid var(--tp-theme-primary, #AB0C2F);
+   outline-offset: 3px;
+}
+
+.story-slip-media {
+   width: 38%;
+   flex-shrink: 0;
+   height: auto;
+   min-height: 190px;
+   border-radius: 0;
+}
+
+.story-slip-media img {
+   border-radius: 0;
+}
+
+.story-slip-body {
+   flex: 1;
+   min-width: 0;
+   display: flex;
+   flex-direction: column;
+   padding: 22px 22px 18px;
+}
+
+.story-slip-quote {
+   position: relative;
+   margin: 0;
+   padding-left: 34px;
+   font-size: 14.5px;
+   line-height: 1.65;
+   color: #3a3a36;
+   display: -webkit-box;
+   -webkit-line-clamp: 4;
+   line-clamp: 4;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   flex: 1;
+}
+
+.story-slip-quote::before {
+   content: "\201C";
+   position: absolute;
+   left: -2px;
+   top: -8px;
+   font-family: Georgia, 'Times New Roman', serif;
+   font-size: 52px;
+   line-height: 1;
+   color: var(--tp-theme-primary, #AB0C2F);
+   opacity: 0.85;
+}
+
+.story-slip-byline {
+   display: flex;
+   align-items: flex-end;
+   justify-content: space-between;
+   gap: 12px;
+   margin-top: 14px;
+   padding-top: 12px;
+   border-top: 1px solid rgba(22, 22, 19, 0.08);
+}
+
+.story-slip-name {
+   font-size: 15px;
+   font-weight: 600;
+   color: var(--tp-heading-primary, #161613);
+   margin: 0;
+   line-height: 1.3;
+   transition: color 0.3s ease;
+}
+
+.story-slip:hover .story-slip-name {
+   color: var(--tp-theme-primary, #AB0C2F);
+}
+
+.story-slip-program {
+   font-size: 12.5px;
+   color: #777;
+   margin: 3px 0 0;
+   line-height: 1.4;
+   display: -webkit-box;
+   -webkit-line-clamp: 1;
+   line-clamp: 1;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}
+
+.story-slip-year {
+   flex-shrink: 0;
+   font-size: 11px;
+   font-weight: 600;
+   color: var(--tp-theme-primary, #AB0C2F);
+   background: rgba(171, 12, 47, 0.1);
+   border-radius: 6px;
+   padding: 4px 9px;
+   font-variant-numeric: tabular-nums;
+   letter-spacing: 0.04em;
+}
+
+/* When a story has no excerpt, the byline becomes the body */
+.story-slip-body--no-quote {
+   justify-content: center;
+}
+
+@media (max-width: 767px) {
+   .story-slip-media {
+      width: 34%;
+      min-height: 160px;
+   }
+
+   .story-slip-body {
+      padding: 16px 16px 14px;
+   }
+
+   .story-slip-quote {
+      font-size: 13.5px;
+      padding-left: 28px;
+   }
+
+   .story-slip-quote::before {
+      font-size: 42px;
+   }
 }

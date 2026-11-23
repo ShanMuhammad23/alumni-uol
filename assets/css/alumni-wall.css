@@ -1,0 +1,69 @@
+/* Alumni Wall — mounted prints on a board
+   Square-cornered photo on a white matte, caption always visible underneath */
+
+.tp-wall-area {
+   background: #F7F6F4;
+   overflow: hidden;
+}
+
+.tp-wall-area .tp-instagram-active .swiper-slide {
+   width: 196px !important;
+   display: block;
+}
+
+.tp-wall-print {
+   margin: 0;
+   background: #fff;
+   padding: 10px 10px 0;
+   box-shadow: 0 1px 2px rgba(22, 22, 19, 0.08), 0 8px 18px rgba(22, 22, 19, 0.07);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tp-wall-print:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 2px 4px rgba(22, 22, 19, 0.1), 0 14px 26px rgba(22, 22, 19, 0.12);
+}
+
+.tp-wall-print img {
+   display: block;
+   width: 100%;
+   aspect-ratio: 4 / 5;
+   object-fit: cover;
+}
+
+.tp-wall-print figcaption {
+   padding: 9px 2px 11px;
+}
+
+.tp-wall-name {
+   display: block;
+   font-size: 14px;
+   font-weight: 600;
+   color: #161613;
+   line-height: 1.3;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.tp-wall-meta {
+   display: block;
+   font-size: 12px;
+   color: #6b6b66;
+   line-height: 1.4;
+   margin-top: 2px;
+   font-variant-numeric: tabular-nums;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .tp-wall-print {
+      transition: none;
+   }
+
+   .tp-wall-print:hover {
+      transform: none;
+   }
+}

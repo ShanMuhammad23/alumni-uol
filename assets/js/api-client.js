@@ -182,6 +182,18 @@ class APIClient {
   async getJobById(id) {
     return this.request(`/jobs/${id}`);
   }
+
+  // Birthdays API
+  async getBirthdays(options = {}) {
+    const params = new URLSearchParams();
+    Object.keys(options).forEach(key => {
+      if (options[key] !== null && options[key] !== undefined && options[key] !== '') {
+        params.append(key, options[key]);
+      }
+    });
+    const queryString = params.toString();
+    return this.request(`/birthdays${queryString ? '?' + queryString : ''}`);
+  }
 }
 
 // Export singleton instance

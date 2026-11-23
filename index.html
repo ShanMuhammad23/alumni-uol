@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 
 <head>
    <meta charset="utf-8">
@@ -7,6 +7,8 @@
    <title>UOL Alumni</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="theme-color" content="#ffffff">
+   <link rel="preconnect" href="https://portal-alumni.uol.edu.pk">
 
    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/icon/favicon.ico">
 
@@ -31,11 +33,15 @@
    <link rel="stylesheet" href="/assets/css/campus-facilities.css">
    <link rel="stylesheet" href="/assets/css/facility-passes.css">
    <link rel="stylesheet" href="/assets/css/facility-marquee.css">
+   <link rel="stylesheet" href="/assets/css/birthday-shoutouts.css">
+   <link rel="stylesheet" href="/assets/css/alumni-deck.css">
+   <link rel="stylesheet" href="/assets/css/distinguished-alumni.css">
+   <link rel="stylesheet" href="/assets/css/alumni-wall.css">
 </head>
 <style>
    .inactive {
       color: gray;
-      cursor: none;
+      cursor: not-allowed;
       pointer-events: none;
    }
 
@@ -1045,6 +1051,7 @@
    .tp-stat-count {
       font-weight: 600;
       white-space: nowrap;
+      font-variant-numeric: tabular-nums;
    }
 
    .tp-stat-separator {
@@ -1055,7 +1062,7 @@
    .tp-service-btn {
       margin-top: auto;
       flex-shrink: 0;
-      margin-bottom: 20;
+      margin-bottom: 20px;
    }
 
    @media only screen and (max-width: 991px) {
@@ -1304,445 +1311,8 @@
       }
    }
 
-   /* About Area Flexbox Layout */
-   .tp-about-flex-wrapper {
-      display: flex;
-      align-items: stretch;
-      gap: 60px;
-      flex-wrap: wrap;
-   }
-
-   .tp-about-left {
-      flex: 1;
-      min-width: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-   }
-
-   .tp-about-right {
-      flex: 1;
-      min-width: 300px;
-      max-width: 100%;
-      padding: 20px 30px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-   }
-
-   .tp-about-card-wrapper {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      min-width: 0;
-      width: 100%;
-   }
-
-   #alumni-card-slider {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 10px;
-   }
-
-   #alumni-card-slider .swiper-button-next,
-   #alumni-card-slider .swiper-button-prev {
-      width: 36px;
-      height: 36px;
-      background: rgba(171, 12, 47, 0.12);
-      border-radius: 50%;
-      color: var(--tp-theme-primary, #AB0C2F);
-      top: 45%;
-      margin-top: 0;
-      z-index: 2;
-   }
-
-   #alumni-card-slider .swiper-button-next:hover,
-   #alumni-card-slider .swiper-button-prev:hover {
-      background: var(--tp-theme-primary, #AB0C2F);
-      color: #fff;
-   }
-
-   #alumni-card-slider .swiper-button-next:after,
-   #alumni-card-slider .swiper-button-prev:after {
-      font-size: 14px;
-      font-weight: 700;
-   }
-
-   #alumni-card-slider .swiper-pagination-bullet {
-      width: 8px;
-      height: 8px;
-      background: rgba(171, 12, 47, 0.3);
-      opacity: 1;
-   }
-
-   #alumni-card-slider .swiper-pagination-bullet-active {
-      background: var(--tp-theme-primary, #AB0C2F);
-   }
-
-   .tp-about-card-image {
-      margin-bottom: 30px;
-
-   }
-
-   .tp-about-card-image img {
-      width: 100%;
-      
-      max-height: 250px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-   }
-
-   .tp-about-card-image img:hover {
-      transform: translateY(-5px);
-   }
-
-   .tp-about-card-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-   }
-
-   .tp-about-title {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--tp-heading-primary, #161613);
-      line-height: 1.3;
-   }
-
-   .tp-about-card-content p {
-      color: #666;
-      line-height: 1.7;
-      flex: 1;
-
-   }
-
-   /* About Heading - Keep on one line */
-   .tp-about-heading {
-      white-space: nowrap;
-  
-      align-items: center;
-      flex-wrap: nowrap;
-      overflow: visible;
-      width: 100%;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-   }
-
-   .tp-about-heading span {
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-   }
-
-   .tp-about-heading svg {
-      flex-shrink: 0;
-      width: clamp(140px, 12vw, 180px);
-      height: auto;
-      margin: 0 5px;
-   }
-
-   .tp-about-heading img {
-      flex-shrink: 0;
-      width: auto;
-      height: clamp(45px, 4vw, 60px);
-      margin-left: 5px;
-   }
-
-   /* Stats Card */
-   .tp-about-stats-card {
-      background: linear-gradient(135deg, var(--tp-theme-primary, #AB0C2F) 0%, rgba(171, 12, 47, 0.9) 100%);
-      border-radius: 12px;
-      padding: 30px 40px;
-      box-shadow: 0 8px 30px rgba(171, 12, 47, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      max-width: 300px;
-   }
-
-   .tp-about-stats-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(171, 12, 47, 0.3);
-   }
-
-   .tp-about-stats-content {
-      text-align: center;
-   }
-
-   .tp-about-stats-number {
-      font-size: 48px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 8px;
-   }
-
-   .tp-about-stats-label {
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.95);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-   }
-
-   @media (max-width: 991px) {
-      .tp-about-flex-wrapper {
-         flex-direction: column;
-         gap: 40px;
-      }
-
-      .tp-about-left,
-      .tp-about-right {
-         min-width: 100%;
-      }
-
-      .tp-about-right {
-         padding: 40px 30px;
-      }
-
-      .tp-about-heading {
-         font-size: clamp(1.5rem, 4vw, 2rem);
-      }
-
-      .tp-about-heading svg {
-         width: clamp(120px, 15vw, 180px);
-      }
-
-      .tp-about-heading img {
-         min-height: clamp(40px, 5vw, 60px);
-      }
-
-      .tp-about-stats-card {
-         max-width: 100%;
-         padding: 25px 30px;
-      }
-
-      .tp-about-stats-number {
-         font-size: 40px;
-      }
-
-      .tp-about-stats-label {
-         font-size: 16px;
-      }
-      .tp-about-heading {
-         white-space: wrap;
-      }
-   }
-
-   @media (max-width: 767px) {
-      .tp-about-heading {
-         font-size: clamp(1.2rem, 5vw, 1.8rem);
-      }
-
-      .tp-about-stats-card {
-         padding: 20px 25px;
-      }
-
-      .tp-about-stats-number {
-         font-size: 36px;
-      }
-
-      .tp-about-stats-label {
-         font-size: 14px;
-      }
-   }
-
-   @media (max-width: 767px) {
-      .tp-about-right {
-         padding: 30px 20px;
-      }
-
-      .tp-about-card-image img {
-         max-height: 200px;
-      }
-   }
-
-
-
-   .tp-alumni-profile-card {
-      text-align: center;
-      padding: 15px;
-      transition: all 0.3s ease;
-   }
-
-   .tp-alumni-profile-card:hover {
-      transform: translateY(-3px);
-   }
-
-   .tp-alumni-profile-avatar {
-      width: 128px;
-      height: 128px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #f3f4f6;
-      display: inline-block;
-      margin: 0 auto 15px;
-      position: relative;
-      transition: all 0.3s ease;
-   }
-
-   .tp-alumni-profile-card:hover .tp-alumni-profile-avatar {
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-   }
-
-   .tp-alumni-profile-avatar a {
-      display: block;
-      width: 100%;
-      height: 100%;
-   }
-
-   .tp-alumni-profile-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-   }
-
-   .tp-alumni-profile-card:hover .tp-alumni-profile-avatar img {
-      transform: scale(1.05);
-   }
-
-   .tp-alumni-profile-info {
-      position: relative;
-      padding-top: 10px;
-   }
-
-   .tp-alumni-profile-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 6px;
-      line-height: 1.3;
-      position: relative;
-      padding-right: 35px;
-   }
-
-   .tp-alumni-profile-name a {
-      color: #1e293b;
-      text-decoration: none;
-      transition: color 0.3s ease;
-   }
-
-   .tp-alumni-profile-name a:hover {
-      color: var(--tp-theme-primary, #AB0C2F);
-   }
-
-   .tp-alumni-profile-role {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 0;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-   }
-
-   .tp-distinguished-alumni-active .swiper-slide {
-      height: auto;
-      display: flex;
-   }
-
-   .tp-distinguished-alumni-active .tp-alumni-profile-card {
-      width: 100%;
-   }
-
-   .tp-alumni-profile-link {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--tp-theme-primary, #AB0C2F);
-      text-decoration: none;
-      opacity: 1;
-      transition: all 0.3s ease;
-      border-radius: 4px;
-      background: rgba(171, 12, 47, 0.1);
-   }
-
-   .tp-alumni-profile-card:hover .tp-alumni-profile-link {
-      opacity: 1;
-   }
-
-   .tp-alumni-profile-link a:hover {
-      background: var(--tp-theme-primary, #AB0C2F);
-      color: #fff;
-      transform: scale(1.1);
-   }
-  
-   .tp-alumni-profile-link i {
-      font-size: 12px;
-   }
 
    /* Alumni Success Stories Slider */
-   .tp-success-story-card {
-      display: block;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      height: 100%;
-      text-decoration: none;
-      color: inherit;
-   }
-
-   .tp-success-story-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
-      color: inherit;
-   }
-
-   .tp-success-story-year {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: var(--tp-theme-primary, #AB0C2F);
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
-   }
-
-   .tp-success-story-body {
-      padding: 22px;
-   }
-
-   .tp-success-story-name {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--tp-heading-primary, #161613);
-      margin-bottom: 6px;
-      line-height: 1.3;
-   }
-
-   .tp-success-story-program {
-      font-size: 13px;
-      color: var(--tp-theme-primary, #AB0C2F);
-      font-weight: 500;
-      margin-bottom: 10px;
-      line-height: 1.4;
-   }
-
-   .tp-success-story-excerpt {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-   }
 
    .tp-success-stories-active .swiper-slide {
       height: auto;
@@ -1782,15 +1352,6 @@
       background: var(--tp-theme-primary, #AB0C2F);
    }
 
-   @media (max-width: 767px) {
-      .tp-success-story-body {
-         padding: 18px;
-      }
-
-      .tp-success-story-name {
-         font-size: 16px;
-      }
-   }
 
    /* Distinguished Alumni Slider Navigation */
    .tp-distinguished-alumni-active .swiper-button-next,
@@ -1827,30 +1388,6 @@
       background: var(--tp-theme-primary, #AB0C2F);
    }
 
-   @media (max-width: 767px) {
-      .tp-alumni-profile-avatar {
-         width: 100px;
-         height: 100px;
-      }
-
-      .tp-alumni-profile-name {
-         font-size: 14px;
-      }
-
-      .tp-alumni-profile-role {
-         font-size: 12px;
-      }
-
-      .tp-alumni-profile-link {
-         opacity: 1;
-         width: 20px;
-         height: 20px;
-      }
-
-      .tp-alumni-profile-link i {
-         font-size: 10px;
-      }
-   }
 
    /* Hero Section Full Height and Width */
    .tp-hero-area {
@@ -1917,6 +1454,13 @@
    .tp-explore-tile .tp-explore-tile-inner {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
    }
+
+   .tp-hero-title,
+   .tp-section-title,
+   .tp-section-4-title,
+   .tp-cta-title {
+      text-wrap: balance;
+   }
 </style>
 
 
@@ -1938,7 +1482,7 @@
                   </div>
                   <img src="/assets/img/brand/short-logo.png" alt="">
                </div>
-               <p class="tp-preloader-subtitle">Loading...</p>
+               <p class="tp-preloader-subtitle">Loading&hellip;</p>
             </div>
          </div>
       </div>
@@ -1947,7 +1491,7 @@
 
    <!-- back to top start -->
    <div class="back-to-top-wrapper">
-      <button id="back_to_top" type="button" class="back-to-top-btn">
+      <button id="back_to_top" type="button" class="back-to-top-btn" aria-label="Back to top">
          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                stroke-linejoin="round" />
@@ -1969,8 +1513,8 @@
                <div class="col-xxl-2 col-xl-2 col-lg-6 col-md-4 col-4">
                   <div class="tp-header-logo-1 tp-header-logo">
                      <a href="/">
-                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="logo">
-                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="logo">
+                        <img class="logo-1" src="/assets/img/brand/logo-white.png" alt="UOL Alumni">
+                        <img class="logo-2" src="/assets/img/brand/logo-black.png" alt="">
                      </a>
                   </div>
                </div>
@@ -2031,7 +1575,7 @@
                         <a href="https://portal-alumni.uol.edu.pk/signin" target="_blank">Alumni Login </a>
                      </div>
                      <div class="tp-header-bar d-xl-none">
-                        <button class="offcanvas-open-btn"><i class="fa-solid fa-bars"></i></button>
+                        <button class="offcanvas-open-btn" aria-label="Open menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
                      </div>
                   </div>
                </div>
@@ -2046,7 +1590,7 @@
    <div class="offcanvas__area">
       <div class="offcanvas__wrapper">
          <div class="offcanvas__close">
-            <button class="offcanvas__close-btn offcanvas-close-btn">
+            <button class="offcanvas__close-btn offcanvas-close-btn" aria-label="Close menu">
                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M1 1L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2073,7 +1617,8 @@
    <div class="body-overlay"></div>
    <!-- offcanvas area end -->
 
-   <main>
+   <main id="main-content">
+      <h1 class="visually-hidden">UOL Alumni</h1>
 
       <section class="tp-hero-area">
          <div class="swiper tp-slider-active">
@@ -2264,7 +1809,7 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/service-icon-1.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/chapters/national/">National Chapters <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-national-chapters">0</span>) </span></a></h4>
                         <div class="tp-service-stats">
@@ -2273,7 +1818,7 @@
                            <span class="tp-stat-count" style="color: var(--tp-theme-primary, #AB0C2F);"><span id="home-national-members">0</span> Members</span>
                         </div>
                         <div class="tp-service-btn">
-                           <a href="/chapters/national/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/chapters/national/" aria-label="National Chapters"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2286,7 +1831,7 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/service-icon-1.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/service-icon-1.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/chapters/international/">International Chapters <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-international-chapters">0</span>) </span></a></h4>
                         <div class="tp-service-stats">
@@ -2295,7 +1840,7 @@
                            <span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-international-members">0</span> Members</span>
                         </div>
                         <div class="tp-service-btn">
-                           <a href="/chapters/international/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/chapters/international/" aria-label="International Chapters"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2308,7 +1853,7 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/service-icon-3.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/service-icon-3.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/associations/">Associations <br> (<span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-associations-count">0</span>) </span></a></h4>
                         <div class="tp-service-stats">
@@ -2317,7 +1862,7 @@
                            <span class="tp-stat-count" style="color: var(--tp-theme-primary);"><span id="home-associations-members">0</span> Members</span>
                         </div>
                         <div class="tp-service-btn">
-                           <a href="/associations/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/associations/" aria-label="Associations"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2330,12 +1875,12 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/services-3-hover-3.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/services-3-hover-3.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/newsletters/">Newsletters</a></h4>
                         <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
-                           <a href="/newsletters/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/newsletters/" aria-label="Newsletters"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2348,12 +1893,12 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/service-icon-2.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/service-icon-2.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/jobs/">Explore Jobs</a></h4>
                         <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
-                           <a href="/jobs/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/jobs/" aria-label="Explore Jobs"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2366,12 +1911,12 @@
                   <div class="tp-service-item text-center mb-30 wow fadeInUp" data-wow-delay=".9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
                      <div class="tp-service-wrap">
                         <div class="tp-service-icon">
-                           <span><img src="assets/img/icon/service/service-icon-2.svg" alt="service-icon"></span>
+                           <span><img src="assets/img/icon/service/service-icon-2.svg" alt=""></span>
                         </div>
                         <h4 class="tp-service-title"><a href="/benefits/">Perks & Benefits</a></h4>
                         <div class="tp-service-stats"></div>
                         <div class="tp-service-btn">
-                           <a href="/benefits/"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <a href="/benefits/" aria-label="Perks and Benefits"><span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M1 6H11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               <path d="M6 1L11 6L6 11" stroke="#161613" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
@@ -2383,119 +1928,66 @@
             </div>
          </div>
       </section>
-
       <!-- service-area-end -->
 
 
       <!-- about-area-start -->
       <section class="about-area tp-about-bg pt-105 pb-105">
          <div class="container">
-            <div class="tp-about-flex-wrapper">
+            <div class="alumni-about-grid">
                <!-- Left Side: Office of Alumni Info -->
-               <div class="tp-about-left wow fadeInLeft" data-wow-delay=".3s">
+               <div class="alumni-about-intro wow fadeInLeft" data-wow-delay=".3s">
                   <div class="tp-section">
-                     <h3 class="tp-section-title tp-about-heading mb-30">Office of Alumni <span
-                           style="margin-left: 10px;"> Relations <svg width="180" height="13" viewBox="0 0 180 13"
-                              fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <h3 class="tp-section-title alumni-about-title">Office of <span>Alumni
+                           <svg width="180" height="13" viewBox="0 0 180 13" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" clip-rule="evenodd"
                                  d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
                                  fill="currentColor" />
                            </svg>
-                           <img src="assets/img/icon/graduate.png" alt="about-icon" style="min-height: 60px;">
-                        </span>
-                     </h3>
-                     <p class="mb-40"> <b>Welcome Alumni!</b> <br>
+                        </span> Relations</h3>
+                     <p class="alumni-about-copy"><b>Welcome Alumni!</b><br>
                         As a UOL graduate, you are part of a thriving global community of alumni across the globe.
                         The Office of Alumni Relations keeps you connected to your alma mater through meaningful
                         engagement, collaboration, and opportunities for continued growth. Together, we celebrate our
                         shared journey and strengthen a vibrant network that inspires success across generations.</p>
-                     <!-- Stats Card -->
-
-                  </div>
-
-                  <div class="tp-about-list">
-                     <div class="tp-about-list-item d-flex align-items-center mb-35">
-                        <div class="tp-about-list-icon">
-                           <span><img src="assets/img/icon/graduate.png" alt="about-icon" style="max-height: 60px; max-width: 60px;"></span>
-                        </div>
-                        <div class="tp-about-list-content">
-                           <h5 class="tp-about-list-title">80000+</h5>
-                           <p>UOL Alumni Worldwide <br></p>
-                        </div>
-                      
+                     <div class="alumni-about-stat">
+                        <span class="alumni-about-stat-number">80,000+</span>
+                        <span class="alumni-about-stat-label">UOL alumni worldwide</span>
                      </div>
-                     <!-- <div class="d-flex gap-3" style="flex-wrap: wrap;">
-                        <a href="/newsletters/" class="tp-explore-tile" style="flex: 1; min-width: 200px; max-width: 250px;">
-                           <div class="tp-explore-tile-inner" style="background-image: url('assets/img/banner/newsletter.jpg'); background-size: cover; background-position: center; border-radius: 12px; padding: 30px 20px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: transform 0.3s ease;">
-                              <div style="position: relative; z-index: 2;">
-                                 <h5 class="tp-about-list-title" style="color: var(--tp-common-white); text-align: center; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Explore Newsletters</h5>
-                              </div>
-                              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(24, 61, 50, 0.7), rgba(24, 61, 50, 0.5)); z-index: 1;"></div>
-                           </div>
-                        </a>
-                        <a href="/jobs/" class="tp-explore-tile" style="flex: 1; min-width: 200px; max-width: 250px;">
-                           <div class="tp-explore-tile-inner" style="background-image: url('assets/img/banner/jobs-banner.png'); background-size: cover; background-position: center; border-radius: 12px; padding: 30px 20px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: transform 0.3s ease;">
-                              <div style="position: relative; z-index: 2;">
-                                 <h5 class="tp-about-list-title" style="color: var(--tp-common-white); text-align: center; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Explore Jobs</h5>
-                              </div>
-                              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(24, 61, 50, 0.7), rgba(24, 61, 50, 0.5)); z-index: 1;"></div>
-                           </div>
-                        </a>
-                     </div>
-                     -->
-
                   </div>
                </div>
-               <!-- Right Side: Card Info with Picture and Button -->
-               <div class="tp-about-right grey-bg wow fadeInRight" data-wow-delay=".3s">
-                  <div class="tp-about-card-wrapper">
-                     <div class="swiper tp-swiper-active" id="alumni-card-slider">
-                        <div class="swiper-wrapper tp-swiper-wrapper">
-                           <div class="swiper-slide tp-swiper-slide">
-                              <div class="tp-about-card-image">
-                                 <img src="/assets/img/banner/alumni-card.jpg" alt="Alumni Honor Card" class="rounded-3" />
-                              </div>
-                           </div>
-                           <div class="swiper-slide tp-swiper-slide">
-                              <div class="tp-about-card-image">
-                                 <img src="/assets/img/banner/gold-medalist-card.jpg" alt="Gold Medalist Card" class="rounded-3" />
-                              </div>
-                           </div>
-                           <div class="swiper-slide tp-swiper-slide">
-                              <div class="tp-about-card-image">
-                                 <img src="/assets/img/banner/bronze-medalist-card.jpg" alt="Bronze Medalist Card" class="rounded-3" />
-                              </div>
-                           </div>
-                           <div class="swiper-slide tp-swiper-slide">
-                              <div class="tp-about-card-image">
-                                 <img src="/assets/img/banner/silver-medalist-card.jpg" alt="Silver Medalist Card" class="rounded-3" />
-                              </div>
-                           </div>
-                        </div>
-                        <div class="swiper-button-next tp-swiper-next"></div>
-                        <div class="swiper-button-prev tp-swiper-prev"></div>
-                        <div class="swiper-pagination tp-swiper-pagination"></div>
-                     </div>
-                     
-                     <div class="tp-about-card-content">
-                        <h3 class="tp-about-title mb-20">Alumni Honor Card</h3>
-                        <p class="mb-30">The University of Lahore`s Alumni Honor Card offers exclusive perks and
-                           privileges to the
-                           alumni. With this card, you can access a range of benefits, including scholarships,
-                           healthcare
-                           services, upskill courses, mentorships, discounts on campus
-                           services and partner organizations</p>
-                        <div class="tp-about-btn">
-                           <a class="tp-btn tp-btn-sm swing" href="https://portal-alumni.uol.edu.pk/signin"
-                              target="_blank">Apply Now</a>
-                        </div>
-                     </div>
+               <!-- Right Side: The Alumni Card family -->
+               <div class="alumni-about-deck-col wow fadeInRight" data-wow-delay=".3s">
+                  <div class="alumni-deck" id="alumni-deck">
+                     <figure class="alumni-deck-card" data-name="Alumni Honor Card" style="--r: -2.5deg;" tabindex="0">
+                        <img src="/assets/img/banner/alumni-card.jpg" alt="Alumni Honor Card" width="615" height="390">
+                     </figure>
+                     <figure class="alumni-deck-card" data-name="Bronze Medalist Card" style="--r: 2deg;" tabindex="0">
+                        <img src="/assets/img/banner/bronze-medalist-card.jpg" alt="Bronze Medalist Card" width="611" height="389">
+                     </figure>
+                     <figure class="alumni-deck-card" data-name="Silver Medalist Card" style="--r: -2deg;" tabindex="0">
+                        <img src="/assets/img/banner/silver-medalist-card.jpg" alt="Silver Medalist Card" width="617" height="394">
+                     </figure>
+                     <figure class="alumni-deck-card" data-name="Gold Medalist Card" style="--r: 2.5deg;" tabindex="0">
+                        <img src="/assets/img/banner/gold-medalist-card.jpg" alt="Gold Medalist Card" width="615" height="394">
+                     </figure>
+                  </div>
+                  <p class="alumni-deck-caption"><span id="alumni-deck-caption">Alumni Honor Card</span></p>
+                  <p class="alumni-about-desc">The University of Lahore&rsquo;s Alumni Honor Card offers exclusive
+                     perks and privileges to the alumni. With this card, you can access a range of benefits,
+                     including scholarships, healthcare services, upskill courses, mentorships, discounts on
+                     campus services and partner organizations.</p>
+                  <div class="alumni-about-btn">
+                     <a class="tp-btn tp-btn-sm swing" href="https://portal-alumni.uol.edu.pk/signin"
+                        target="_blank" rel="noopener">Apply Now</a>
                   </div>
                </div>
             </div>
          </div>
       </section>
       <!-- about-area-end -->
+
 
       <!-- Alumni Success Stories Slider Section -->
       <section class="success-stories-slider-area pt-10 pb-80 grey-bg">
@@ -2702,6 +2194,48 @@
          </div>
       </section>
       <!-- Alumni Awards Split Section End -->
+
+      <!-- Birthday Shoutouts Slider Section -->
+      <section class="birthday-shoutouts-area pt-10 pb-80 grey-bg">
+         <div class="container">
+            <div class="row justify-content-between align-items-center mb-50">
+               <div class="col-md-8 col-lg-9">
+                  <div class="tp-section text-start">
+                     <h3 class="tp-section-title" style="text-align: left; margin-bottom: 0;">Birthday <span>Shoutouts
+                           <svg width="180" height="13" viewBox="0 0 180 13" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z"
+                                 fill="currentColor" />
+                           </svg>
+                        </span> Alumni Leadership</h3>
+                     <p class="tp-bday-sub">Birthday gifts delivered to alumni leaders, celebrated with the
+                        community on LinkedIn.</p>
+                  </div>
+               </div>
+               <div class="col-md-4 col-lg-3 text-md-end mt-3 mt-md-0">
+                  <a href="https://www.linkedin.com/company/uol-alumni-relations" target="_blank" rel="noopener"
+                     class="tp-btn tp-btn-sm" style="white-space: nowrap;">Follow on LinkedIn</a>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="swiper tp-bday-active wow fadeInUp" data-wow-delay=".3s"
+                     id="birthday-shoutouts-slider">
+                     <div class="swiper-wrapper" id="birthday-shoutouts-wrapper">
+                        <div class="swiper-slide">
+                           <p class="tp-bday-empty">Loading birthday shoutouts&hellip;</p>
+                        </div>
+                     </div>
+                     <div class="swiper-button-next tp-bday-next"></div>
+                     <div class="swiper-button-prev tp-bday-prev"></div>
+                     <div class="swiper-pagination tp-bday-pagination"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Birthday Shoutouts Slider Section End -->
 
       <!-- <div class="cta-cards-wrapprer">
          <div class="cta-card">
@@ -3058,188 +2592,166 @@
      
       <!-- jobs-area-end -->
 
-      <!-- instagram-area-start -->
-      <div class="instagram-area tp-instagram-wrapper  pt-20 pb-20" id="alumni-wall">
-         <h2 class="text-center mb-30">Alumni Wall</h2>
+      <div class="instagram-area tp-instagram-wrapper tp-wall-area pt-20 pb-20" id="alumni-wall">
+         <h2 class="tp-section-title text-center mb-30">Alumni <span>Wall <svg width="110" height="9" viewBox="0 0 180 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M173.163 12.3756C97.1838 -3.8242 30.6496 5.67799 7.32494 12.2553C5.30414 12.8252 2.43544 12.6722 0.917529 11.9135C-0.600387 11.1549 -0.192718 10.0779 1.82808 9.50807C27.5427 2.25675 98.002 -7.60121 177.683 9.38783C179.881 9.85641 180.65 10.9051 179.402 11.7301C178.154 12.5552 175.361 12.8442 173.163 12.3756Z" fill="currentColor"/></svg></span></h2>
          <div class="swiper tp-instagram-active">
             <div class="swiper-wrapper wow fadeInUp" data-wow-delay=".2s">
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/11228-02052025-155950.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">Ali Shan <br>2024 <br>DPT</span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/11228-02052025-155950.jpg" alt="Ali Shan" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Ali Shan</span>
+                        <span class="tp-wall-meta">2024 · DPT</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/11232-01052025-182524.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Hussnain <br> 2024 <br> Bhakkar
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/11232-01052025-182524.jpg" alt="Muhammad Hussnain" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Hussnain</span>
+                        <span class="tp-wall-meta">2024 · Bhakkar</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/11233-30042025-140818.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Abdul Ahad <br> 2022 <br> Lahore <br>Engineering & Technology
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/11233-30042025-140818.jpg" alt="Abdul Ahad" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Abdul Ahad</span>
+                        <span class="tp-wall-meta">2022 · Lahore · Engineering &amp; Technology</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/26855-30042025-170303.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Umar Maqsood <br> 2025 <br> Kasur <br>English Language & Literature
-
-
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/26855-30042025-170303.jpg" alt="Muhammad Umar Maqsood" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Umar Maqsood</span>
+                        <span class="tp-wall-meta">2025 · Kasur · English Language &amp; Literature</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/26862-06062025-143803.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad saad Aleem <br>2025 <br>Department of Chemistry
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/26862-06062025-143803.jpg" alt="Muhammad Saad Aleem" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Saad Aleem</span>
+                        <span class="tp-wall-meta">2025 · Department of Chemistry</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/27521-30052025-155508.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Abdullah Aziz
-                        <br> 2021 <br> Lahore <br> Software Engineering
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/27521-30052025-155508.jpg" alt="Abdullah Aziz" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Abdullah Aziz</span>
+                        <span class="tp-wall-meta">2021 · Lahore · Software Engineering</span>
+                     </figcaption>
+                  </figure>
                </div>
-
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/28784-01072025-004401.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Ashiq Hussain <br> 2025 <br> Lahore <br> School of Creative Arts
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/28784-01072025-004401.jpg" alt="Ashiq Hussain" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Ashiq Hussain</span>
+                        <span class="tp-wall-meta">2025 · Lahore · School of Creative Arts</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/29545-04072025-173240.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Muzzammil <br> 2025 <br>Civil Engineering
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/29545-04072025-173240.jpg" alt="Muhammad Muzzammil" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Muzzammil</span>
+                        <span class="tp-wall-meta">2025 · Civil Engineering</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/29549-30062025-163423.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Imran <br> 2023 <br> Lahore
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/29549-30062025-163423.jpg" alt="Muhammad Imran" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Imran</span>
+                        <span class="tp-wall-meta">2023 · Lahore</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/30612-18092025-150441.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Nadeem <br> 2025 <br> Pattoki
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30612-18092025-150441.jpg" alt="Muhammad Nadeem" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Nadeem</span>
+                        <span class="tp-wall-meta">2025 · Pattoki</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/30619-29092025-130017.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Ayesha Farooq <br> 2025 <br> Lahore
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30619-29092025-130017.jpg" alt="Ayesha Farooq" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Ayesha Farooq</span>
+                        <span class="tp-wall-meta">2025 · Lahore</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/30621-29092025-151442.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Mahmood Ebrahemi <br> 2019 <br> Peshawar
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30621-29092025-151442.jpg" alt="Mahmood Ebrahemi" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Mahmood Ebrahemi</span>
+                        <span class="tp-wall-meta">2019 · Peshawar</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="assets/img/wall/30641-06102025-204555.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Taimoor Ahmad <br>2025
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30641-06102025-204555.jpg" alt="Taimoor Ahmad" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Taimoor Ahmad</span>
+                        <span class="tp-wall-meta">2025</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="/assets/img/wall/30662-11102025-085033.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-
-                        Gulsher Amjad <br> 2025
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30662-11102025-085033.jpg" alt="Gulsher Amjad" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Gulsher Amjad</span>
+                        <span class="tp-wall-meta">2025</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="/assets/img/wall/30686-21102025-091751.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Abdul Noor Khan Waleed <br> 2021 <br> Sargodha
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/30686-21102025-091751.jpg" alt="Abdul Noor Khan Waleed" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Abdul Noor Khan Waleed</span>
+                        <span class="tp-wall-meta">2021 · Sargodha</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="/assets/img/wall/27522-29052025-165834.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Muhammad Hassam <br> 2023 <br> Bahawalnagar
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/27522-29052025-165834.jpg" alt="Muhammad Hassam" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Muhammad Hassam</span>
+                        <span class="tp-wall-meta">2023 · Bahawalnagar</span>
+                     </figcaption>
+                  </figure>
                </div>
-               <div class="swiper-slide tp-instagram-item">
-                  <div>
-                     <img src="/assets/img/wall/11231-23072025-072331.jpg" alt="">
-                  </div>
-                  <div class="tp-instagram-shape">
-                     <span class="wall-name" style="color: #f5f5f5;">
-                        Abdul Rehman Butt <br> 2024 <br> Köln
-                     </span>
-                  </div>
+               <div class="swiper-slide">
+                  <figure class="tp-wall-print">
+                     <img src="assets/img/wall/11231-23072025-072331.jpg" alt="Abdul Rehman Butt" loading="lazy">
+                     <figcaption>
+                        <span class="tp-wall-name">Abdul Rehman Butt</span>
+                        <span class="tp-wall-meta">2024 · Köln</span>
+                     </figcaption>
+                  </figure>
                </div>
             </div>
          </div>
       </div>
-      </section>
       <!-- CTA -->
       <section class="cta-area tp-cta-bg " style="background: var(--tp-red-1);">
          <div class="container">
@@ -3409,7 +2921,7 @@
                <div class="col-xl-4 col-lg-3 col-sm-6">
                   <div class="tp-footer-widget tp-footer-col-1 mb-30">
                      <div class="tp-footer-widget-logo mb-20 tp-header-logo">
-                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="" style="width: 200px;"></a>
+                        <a href="/"><img src="/assets/img/brand/logo-black.png" alt="UOL Alumni" style="width: 200px;"></a>
                      </div>
 
 
@@ -3451,11 +2963,11 @@
 
                         <div class="tp-footer-newsletter-social">
                            <a class="social-fb" href="https://www.facebook.com/Uni.Lhr.AlumniRelations"
-                              target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                              target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
                            <a class="social-lnkd" href="https://www.linkedin.com/company/uol-alumni-relations"
-                              target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"><i
-                                 class="fa-brands fa-instagram"></i></a>
+                              target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                           <a class="social-yout" href="https://www.instagram.com/oar.uol" target="_blank"
+                              aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                         </div>
                      </div>
                   </div>
@@ -3536,6 +3048,8 @@
    <script src="/assets/js/campus-facilities.js"></script>
    <script src="/assets/js/facility-passes.js"></script>
    <script src="/assets/js/facility-marquee.js"></script>
+   <script src="/assets/js/birthday-shoutouts.js"></script>
+   <script src="/assets/js/alumni-deck.js"></script>
    <script>
 
       function formatEventDate(dateString, timeString) {
@@ -3565,6 +3079,13 @@
          // Otherwise, fetch from remote images base URL followed by the filename from the database
          const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
          return `${BASE_IMAGE_URL}/${imageName}`;
+      }
+
+      function escapeHtml(text) {
+         if (!text) return '';
+         const div = document.createElement('div');
+         div.textContent = text;
+         return div.innerHTML;
       }
 
       async function loadHomeEvents() {
@@ -3600,11 +3121,12 @@
 
             const fragment = document.createDocumentFragment();
 
-            dbEvents.forEach((dbEvent, index) => {
+            sortedEvents.forEach((dbEvent, index) => {
                // Show only the date (no time) on the homepage
                const dateString = formatEventDate(dbEvent.fromdate, null);
                const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
                const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+               const eventTitle = escapeHtml(dbEvent.title || 'Untitled Event');
 
                const column = document.createElement('div');
                column.className = 'col-lg-3 col-md-3';
@@ -3613,7 +3135,7 @@
                      <div class="tp-event-4-thumb-wrap text-center">
                         <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
                            <a href="${eventUrl}">
-                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                              <img src="${bannerImage}" alt="${eventTitle}" loading="lazy"
                                  style="height: 100%; width: 100%; object-fit: cover;">
                            </a>
                         </div>
@@ -3622,7 +3144,7 @@
                         <div class="tp-event-4-content">
                            <p>${dateString || ''}</p>
                            <h4 class="tp-event-4-title">
-                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                              <a href="${eventUrl}">${eventTitle}</a>
                            </h4>
                         </div>
                         <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
@@ -3664,6 +3186,7 @@
                const dateString = formatEventDate(dbEvent.fromdate, null);
                const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
                const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+               const eventTitle = escapeHtml(dbEvent.title || 'Untitled Event');
 
                const column = document.createElement('div');
                column.className = 'col-lg-3 col-md-3';
@@ -3672,7 +3195,7 @@
                      <div class="tp-event-4-thumb-wrap text-center">
                         <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
                            <a href="${eventUrl}">
-                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                              <img src="${bannerImage}" alt="${eventTitle}" loading="lazy"
                                  style="height: 100%; width: 100%; object-fit: cover;">
                            </a>
                         </div>
@@ -3681,7 +3204,7 @@
                         <div class="tp-event-4-content">
                            <p>${dateString || ''}</p>
                            <h4 class="tp-event-4-title">
-                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                              <a href="${eventUrl}">${eventTitle}</a>
                            </h4>
                         </div>
                         <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
@@ -3722,6 +3245,7 @@
                const dateString = formatEventDate(dbEvent.fromdate, null);
                const bannerImage = buildEventImagePath(dbEvent.image1) || 'assets/img/event/event-01.jpg';
                const eventUrl = `/event-details.html?id=${dbEvent.id}`;
+               const eventTitle = escapeHtml(dbEvent.title || 'Untitled Event');
 
                const column = document.createElement('div');
                column.className = 'col-lg-4 col-md-4';
@@ -3730,7 +3254,7 @@
                      <div class="tp-event-4-thumb-wrap text-center">
                         <div class="tp-event-4-thumb fix" style="height: 200px; width: 100%; overflow: hidden;">
                            <a href="${eventUrl}">
-                              <img src="${bannerImage}" alt="${dbEvent.title || 'Event'}"
+                              <img src="${bannerImage}" alt="${eventTitle}" loading="lazy"
                                  style="height: 100%; width: 100%; object-fit: cover;">
                            </a>
                         </div>
@@ -3739,7 +3263,7 @@
                         <div class="tp-event-4-content">
                            <p>${dateString || ''}</p>
                            <h4 class="tp-event-4-title">
-                              <a href="${eventUrl}">${dbEvent.title || 'Untitled Event'}</a>
+                              <a href="${eventUrl}">${eventTitle}</a>
                            </h4>
                         </div>
                         <div class="tp-event-4-info d-flex align-items-center justify-content-between"></div>
@@ -3909,30 +3433,6 @@
          }
       });
 
-      // Alumni Honor Card Slider
-      if (document.getElementById('alumni-card-slider')) {
-         new Swiper('#alumni-card-slider', {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            loop: true,
-            speed: 600,
-            watchOverflow: true,
-            autoplay: {
-               delay: 3500,
-               disableOnInteraction: false,
-               pauseOnMouseEnter: true,
-            },
-            navigation: {
-               nextEl: '#alumni-card-slider .tp-swiper-next',
-               prevEl: '#alumni-card-slider .tp-swiper-prev',
-            },
-            pagination: {
-               el: '#alumni-card-slider .tp-swiper-pagination',
-               clickable: true,
-            },
-         });
-      }
-
       // Upcoming Engagements Slider
       var engagementsSwiper = new Swiper('.tp-engagements-active', {
          slidesPerView: 3,
@@ -3977,7 +3477,7 @@
                   if (!text) return '';
                   const div = document.createElement('div');
                   div.textContent = text;
-                  return div.innerHTML;
+                  return div.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
                }
 
                function getImageUrl(imagePath) {
@@ -3994,29 +3494,34 @@
                function truncateText(text, maxLength) {
                   if (!text) return '';
                   if (text.length <= maxLength) return text;
-                  return text.slice(0, maxLength).trim() + '...';
+                  return text.slice(0, maxLength).trim() + '…';
                }
 
                function renderSlide(story) {
                   const imageUrl = getImageUrl(story.imageUrl || story.image);
                   const name = escapeHtml(story.name || 'Alumni');
                   const program = escapeHtml(story.program || '');
-                  const excerpt = escapeHtml(truncateText(story.excerpt || '', 140));
-                  const yearBadge = story.passingYear
-                     ? `<span class="tp-success-story-year">${escapeHtml(String(story.passingYear))}</span>`
+                  const excerpt = escapeHtml(truncateText(story.excerpt || '', 160));
+                  const yearChip = story.passingYear
+                     ? `<span class="story-slip-year">${escapeHtml(String(story.passingYear))}</span>`
                      : '';
 
                   return `
                      <div class="swiper-slide">
-                        <a href="/success-stories/detail.html?id=${story.id}" class="tp-success-story-card">
-                           <div class="tp-success-story-thumb success-story-media">
-                              <img src="${imageUrl}" alt="${name}" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
-                              ${yearBadge}
+                        <a href="/success-stories/detail.html?id=${story.id}" class="story-slip">
+                           <div class="story-slip-media success-story-media">
+                              <img src="${imageUrl}" alt="${name}" loading="lazy"
+                                 onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
                            </div>
-                           <div class="tp-success-story-body">
-                              <h4 class="tp-success-story-name">${name}</h4>
-                              ${program ? `<p class="tp-success-story-program">${program}</p>` : ''}
-                              ${excerpt ? `<p class="tp-success-story-excerpt">${excerpt}</p>` : ''}
+                           <div class="story-slip-body${excerpt ? '' : ' story-slip-body--no-quote'}">
+                              ${excerpt ? `<p class="story-slip-quote">${excerpt}</p>` : ''}
+                              <div class="story-slip-byline">
+                                 <div>
+                                    <h4 class="story-slip-name">${name}</h4>
+                                    ${program ? `<p class="story-slip-program">${program}</p>` : ''}
+                                 </div>
+                                 ${yearChip}
+                              </div>
                            </div>
                         </a>
                      </div>
@@ -4039,7 +3544,7 @@
 
                   try {
                      window.successStoriesSlider = new Swiper('.tp-success-stories-active', {
-                        slidesPerView: 3,
+                        slidesPerView: 2,
                         spaceBetween: 24,
                         loop: true,
                         speed: 800,
@@ -4057,10 +3562,10 @@
                            clickable: true,
                         },
                         breakpoints: {
-                           '1400': { slidesPerView: 3 },
-                           '1200': { slidesPerView: 3 },
+                           '1400': { slidesPerView: 2 },
+                           '1200': { slidesPerView: 2 },
                            '992': { slidesPerView: 2 },
-                           '768': { slidesPerView: 2 },
+                           '768': { slidesPerView: 1 },
                            '576': { slidesPerView: 1 },
                            '0': { slidesPerView: 1 },
                         },
@@ -4071,7 +3576,7 @@
                }
 
                try {
-                  const response = await window.apiClient.getSuccessStories({ limit: 100 });
+                  const response = await window.apiClient.getSuccessStories({ limit: 12 });
                   const stories = Array.isArray(response)
                      ? response
                      : (response.data || []);
@@ -4127,7 +3632,7 @@
                      if (!text) return '';
                      const div = document.createElement('div');
                      div.textContent = text;
-                     return div.innerHTML;
+                     return div.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
                   }
 
                   function stripHtml(html) {
@@ -4137,25 +3642,33 @@
                      return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
                   }
 
-                  function extractRole(story) {
-                     let role = 'Alumnus';
-                     if (story.role) {
-                        const cleanRole = stripHtml(story.role);
-                        role = cleanRole.split(' at ')[0].split(',')[0].trim() || cleanRole;
-                     } else if (story.summary) {
-                        const cleanSummary = stripHtml(story.summary);
-                        const parts = cleanSummary.split(/\s{2,}/);
-                        if (parts.length > 3) {
-                           const potentialRole = parts[parts.length - 2].trim();
-                           if (potentialRole && !potentialRole.includes('@') && potentialRole.length < 50) {
-                              role = potentialRole;
-                           }
-                        }
+                  // "Atif Muzaffar, 2013" -> { name: 'Atif Muzaffar', year: '2013' }
+                  function splitNameYear(rawName) {
+                     const raw = (rawName || 'Alumnus').trim();
+                     const m = raw.match(/^(.*?)[,\s]+(\d{4})\s*$/);
+                     if (m && m[1].trim()) {
+                        return { name: m[1].trim().replace(/,\s*$/, ''), year: m[2] };
                      }
-                     if (role.length > 90) {
-                        role = role.slice(0, 87).trim() + '...';
+                     return { name: raw, year: '' };
+                  }
+
+                  // role HTML: first <br>-separated chunk is the headline; drop "| tagline" tails
+                  function parseInscription(story) {
+                     const rawRole = story.role || '';
+                     const headlineHtml = rawRole.split(/<br\s*\/?>/i)[0] || rawRole;
+                     let headline = stripHtml(headlineHtml).split('|')[0].replace(/\.$/, '').trim();
+                     if (!headline) return { title: 'Alumnus', org: '' };
+                     const at = headline.lastIndexOf(' at ');
+                     if (at > 0) {
+                        return {
+                           title: headline.slice(0, at).trim(),
+                           org: headline.slice(at + 4).trim(),
+                        };
                      }
-                     return role;
+                     if (headline.length > 90) {
+                        headline = headline.slice(0, 87).trim() + '…';
+                     }
+                     return { title: headline, org: '' };
                   }
 
                   function getImageUrl(imagePath) {
@@ -4170,29 +3683,30 @@
                   }
 
                   wrapper.innerHTML = stories.map(story => {
-                     const role = escapeHtml(extractRole(story));
-                     const name = escapeHtml(story.name || 'Alumnus');
-                     const imageField = story.image || story.image_path || story.image_url || null;
-                     const imageUrl = getImageUrl(imageField);
-                     const slug = encodeURIComponent(story.slug || (story.name || '').toLowerCase().replace(/\s+/g, '-'));
+                     const { name: rawName, year } = splitNameYear(story.name);
+                     const name = escapeHtml(rawName);
+                     const { title, org } = parseInscription(story);
+                     const imageUrl = getImageUrl(story.image || story.image_path || story.image_url);
+                     const slug = encodeURIComponent(story.slug || rawName.toLowerCase().replace(/\s+/g, '-'));
+                     const yearHtml = year
+                        ? `<span class="tp-honour-year">’${escapeHtml(year.slice(2))}</span>`
+                        : '';
 
                      return `
                         <div class="swiper-slide">
-                           <div class="tp-alumni-profile-card">
-                              <div class="tp-alumni-profile-avatar">
-                                 <a href="/stories/detail.html?slug=${slug}">
-                                    <img src="${imageUrl}" alt="${name}" class="w-100 h-100" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
-                                 </a>
+                           <a href="/stories/detail.html?slug=${slug}" class="tp-honour-plate">
+                              <div class="tp-honour-portrait">
+                                 <img src="${imageUrl}" alt="${name}" loading="lazy" onerror="this.src='https://portal-alumni.uol.edu.pk/images/about-1.jpg'">
                               </div>
-                              <div class="tp-alumni-profile-info">
-                                 <h4 class="tp-alumni-profile-name">
-                                    <a href="/stories/detail.html?slug=${slug}">${name}</a><a href="/stories/detail.html?slug=${slug}" class="tp-alumni-profile-link">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                 </a>
-                                 </h4>
-                                 <p class="tp-alumni-profile-role">${role}</p>
+                              <div class="tp-honour-engraving">
+                                 <div class="tp-honour-engraving-text">
+                                    <h4 class="tp-honour-name">${name}</h4>
+                                    <p class="tp-honour-title">${escapeHtml(title)}</p>
+                                    ${org ? `<p class="tp-honour-org">${escapeHtml(org)}</p>` : ''}
+                                 </div>
+                                 ${yearHtml}
                               </div>
-                           </div>
+                           </a>
                         </div>
                      `;
                   }).join('');
@@ -4225,14 +3739,14 @@
                // Initialize the slider
                try {
                   window.distinguishedAlumniSlider = new Swiper('.tp-distinguished-alumni-active', {
-                     slidesPerView: 6,
-                     spaceBetween: 20,
+                     slidesPerView: 4,
+                     spaceBetween: 24,
                      loop: true,
                      speed: 800,
                      autoplay: {
                         delay: 3000,
                         disableOnInteraction: false,
-                        pauseOnMouseEnter: false,
+                        pauseOnMouseEnter: true,
                      },
                      navigation: {
                         nextEl: ".tp-distinguished-alumni-next",
@@ -4244,19 +3758,19 @@
                      },
                      breakpoints: {
                         '1400': {
-                           slidesPerView: 6,
-                        },
-                        '1200': {
-                           slidesPerView: 5,
-                        },
-                        '992': {
                            slidesPerView: 4,
                         },
-                        '768': {
+                        '1200': {
+                           slidesPerView: 4,
+                        },
+                        '992': {
                            slidesPerView: 3,
                         },
-                        '576': {
+                        '768': {
                            slidesPerView: 2,
+                        },
+                        '576': {
+                           slidesPerView: 1,
                         },
                         '0': {
                            slidesPerView: 1,
@@ -4559,7 +4073,5 @@
    </script>
 
 </body>
-
-</html>
 
 </html>

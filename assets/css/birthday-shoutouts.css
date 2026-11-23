@@ -1,0 +1,249 @@
+/* ==========================================================================
+   Birthday Shoutouts — Alumni Leadership
+   Card concept: a gift tag. Portrait gift photo, date badge, avatar with a
+   gold ring (echoing the foil "Happy Birthday" card), dashed tear-off stub
+   holding the SAP ID and the LinkedIn post link.
+   ========================================================================== */
+
+.birthday-shoutouts-area .tp-bday-sub {
+   font-size: 15px;
+   color: #666;
+   margin: 8px 0 0;
+   max-width: 620px;
+   line-height: 1.6;
+}
+
+.tp-bday-active {
+   padding-bottom: 52px;
+}
+
+.tp-bday-active .swiper-slide {
+   height: auto;
+   display: flex;
+}
+
+.tp-bday-card {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   background: #fff;
+   border-radius: 12px;
+   overflow: hidden;
+   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+   text-decoration: none;
+   color: inherit;
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tp-bday-card:hover {
+   transform: translateY(-5px);
+   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.14);
+   color: inherit;
+   text-decoration: none;
+}
+
+.tp-bday-card:focus-visible {
+   outline: 2px solid var(--tp-theme-primary, #AB0C2F);
+   outline-offset: 3px;
+}
+
+/* Media: gift photo clipped in an inner layer so the avatar can overlap */
+.tp-bday-media {
+   position: relative;
+   aspect-ratio: 4 / 5;
+   flex-shrink: 0;
+}
+
+.tp-bday-media-clip {
+   position: absolute;
+   inset: 0;
+   overflow: hidden;
+   border-radius: 12px 12px 0 0;
+   background: #efeae4;
+}
+
+.tp-bday-gift {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   display: block;
+   transition: transform 0.4s ease;
+}
+
+.tp-bday-card:hover .tp-bday-gift {
+   transform: scale(1.05);
+}
+
+/* Date badge — same motif as the engagement cards */
+.tp-bday-date {
+   position: absolute;
+   top: 14px;
+   right: 14px;
+   background: var(--tp-theme-primary, #AB0C2F);
+   color: #fff;
+   padding: 10px 13px;
+   border-radius: 8px;
+   text-align: center;
+   line-height: 1;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+   z-index: 2;
+}
+
+.tp-bday-day {
+   display: block;
+   font-size: 20px;
+   font-weight: 700;
+   font-variant-numeric: tabular-nums;
+}
+
+.tp-bday-month {
+   display: block;
+   font-size: 11px;
+   font-weight: 500;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+   margin-top: 4px;
+   opacity: 0.9;
+}
+
+/* Avatar overlapping the media's bottom edge like a "to:" tag */
+.tp-bday-avatar {
+   position: absolute;
+   left: 18px;
+   bottom: -26px;
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   overflow: hidden;
+   border: 3px solid #fff;
+   box-shadow: 0 0 0 2px #c9a227, 0 4px 10px rgba(0, 0, 0, 0.25);
+   background: #f3f4f6;
+   z-index: 2;
+}
+
+.tp-bday-avatar img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   display: block;
+}
+
+/* Body */
+.tp-bday-body {
+   padding: 42px 20px 20px;
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+}
+
+.tp-bday-name {
+   font-size: 17px;
+   font-weight: 600;
+   color: var(--tp-heading-primary, #161613);
+   margin: 0 0 14px;
+   line-height: 1.3;
+   transition: color 0.3s ease;
+}
+
+.tp-bday-card:hover .tp-bday-name {
+   color: var(--tp-theme-primary, #AB0C2F);
+}
+
+/* Tear-off stub: dashed perforation + SAP ID + LinkedIn affordance */
+.tp-bday-foot {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 10px;
+   margin-top: auto;
+   padding-top: 14px;
+   border-top: 1.5px dashed rgba(22, 22, 19, 0.15);
+}
+
+.tp-bday-sap {
+   font-size: 12px;
+   color: #777;
+   letter-spacing: 0.08em;
+   font-variant-numeric: tabular-nums;
+   white-space: nowrap;
+}
+
+.tp-bday-sap b {
+   color: var(--tp-heading-primary, #161613);
+   font-weight: 600;
+}
+
+.tp-bday-link {
+   display: inline-flex;
+   align-items: center;
+   gap: 7px;
+   font-size: 13px;
+   font-weight: 600;
+   color: var(--tp-theme-primary, #AB0C2F);
+   white-space: nowrap;
+   transition: color 0.3s ease;
+}
+
+.tp-bday-link i {
+   font-size: 15px;
+}
+
+.tp-bday-card:hover .tp-bday-link {
+   color: var(--tp-heading-primary, #161613);
+}
+
+/* Swiper controls — match the other homepage sliders */
+.tp-bday-active .swiper-button-next,
+.tp-bday-active .swiper-button-prev {
+   width: 40px;
+   height: 40px;
+   background: rgba(171, 12, 47, 0.1);
+   border-radius: 50%;
+   color: var(--tp-theme-primary, #AB0C2F);
+   transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.tp-bday-active .swiper-button-next:hover,
+.tp-bday-active .swiper-button-prev:hover {
+   background: var(--tp-theme-primary, #AB0C2F);
+   color: #fff;
+   transform: scale(1.1);
+}
+
+.tp-bday-active .swiper-button-next::after,
+.tp-bday-active .swiper-button-prev::after {
+   font-size: 16px;
+   font-weight: 700;
+}
+
+.tp-bday-active .swiper-pagination {
+   bottom: 0 !important;
+}
+
+.tp-bday-active .swiper-pagination-bullet {
+   width: 10px;
+   height: 10px;
+   background: rgba(171, 12, 47, 0.3);
+   opacity: 1;
+}
+
+.tp-bday-active .swiper-pagination-bullet-active {
+   background: var(--tp-theme-primary, #AB0C2F);
+}
+
+.tp-bday-empty {
+   text-align: center;
+   padding: 30px 20px;
+   color: #666;
+   width: 100%;
+}
+
+@media (max-width: 767px) {
+   .tp-bday-body {
+      padding: 38px 16px 18px;
+   }
+
+   .tp-bday-name {
+      font-size: 16px;
+   }
+}
