@@ -1,0 +1,229 @@
+/* Merchant Benefits — partner offer vouchers
+   Perforated coupon: banner / offer body / discount stub */
+
+.merchant-gallery-intro {
+   max-width: 720px;
+   margin: 0 auto 48px;
+   text-align: center;
+}
+
+.merchant-gallery-intro p {
+   color: #666;
+   font-size: 16px;
+   margin: 0;
+}
+
+.tp-voucher-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+   gap: 24px;
+}
+
+/* the voucher */
+.tp-voucher {
+   display: grid;
+   grid-template-columns: 168px 1fr 128px;
+   background: #fff;
+   border: 1px solid rgba(22, 22, 19, 0.14);
+   min-height: 168px;
+   position: relative;
+   transition: border-color 0.2s ease;
+}
+
+.tp-voucher:hover {
+   border-color: rgba(22, 22, 19, 0.3);
+}
+
+.tp-voucher-banner {
+   display: block;
+   overflow: hidden;
+   background: #efefec;
+}
+
+.tp-voucher-banner img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   display: block;
+}
+
+.tp-voucher--no-banner {
+   grid-template-columns: 1fr 128px;
+}
+
+.tp-voucher--no-banner .tp-voucher-banner {
+   display: none;
+}
+
+/* offer body */
+.tp-voucher-body {
+   padding: 18px 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   min-width: 0;
+}
+
+.tp-voucher-name {
+   font-size: 17px;
+   font-weight: 700;
+   color: var(--tp-heading-primary, #161613);
+   line-height: 1.3;
+   margin: 0 0 6px;
+}
+
+.tp-voucher-meta {
+   font-size: 13px;
+   color: #666;
+   line-height: 1.5;
+   margin: 0;
+}
+
+.tp-voucher-valid {
+   font-size: 12.5px;
+   color: #8a8a84;
+   margin: 8px 0 0;
+   font-variant-numeric: tabular-nums;
+}
+
+/* perforated stub — the discount figure */
+.tp-voucher-stub {
+   border-left: 2px dashed rgba(22, 22, 19, 0.18);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 16px 10px;
+   text-align: center;
+   position: relative;
+}
+
+/* punched notches on the perforation */
+.tp-voucher-stub::before,
+.tp-voucher-stub::after {
+   content: '';
+   position: absolute;
+   left: -8px;
+   width: 14px;
+   height: 14px;
+   border-radius: 50%;
+   background: #fff;
+   border: 1px solid rgba(22, 22, 19, 0.14);
+}
+
+.tp-voucher-stub::before {
+   top: -8px;
+}
+
+.tp-voucher-stub::after {
+   bottom: -8px;
+}
+
+.tp-voucher-figure {
+   font-size: 40px;
+   font-weight: 800;
+   color: var(--tp-theme-primary, #AB0C2F);
+   line-height: 0.95;
+   font-variant-numeric: tabular-nums;
+   letter-spacing: -0.02em;
+}
+
+.tp-voucher-figure sup {
+   font-size: 0.5em;
+   font-weight: 700;
+   top: -0.6em;
+   position: relative;
+   margin-left: 1px;
+}
+
+.tp-voucher-scope {
+   font-size: 11.5px;
+   font-weight: 600;
+   color: #777;
+   margin-top: 8px;
+   line-height: 1.3;
+   max-width: 110px;
+}
+
+/* ended offers */
+.tp-voucher--ended .tp-voucher-figure,
+.tp-voucher--ended .tp-voucher-name {
+   color: #9a9a94;
+}
+
+.tp-voucher--ended .tp-voucher-scope {
+   color: var(--tp-theme-primary, #AB0C2F);
+}
+
+.tp-voucher:focus-within {
+   border-color: rgba(171, 12, 47, 0.55);
+}
+
+.tp-voucher a:focus-visible {
+   outline: 3px solid rgba(171, 12, 47, 0.55);
+   outline-offset: 2px;
+}
+
+.tp-voucher-empty {
+   grid-column: 1 / -1;
+   text-align: center;
+   padding: 56px 20px;
+   color: #777;
+   font-size: 15px;
+   background: #fff;
+   border: 1px solid rgba(22, 22, 19, 0.14);
+   margin: 0;
+}
+
+@media (max-width: 575.98px) {
+   .tp-voucher-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .tp-voucher,
+   .tp-voucher--no-banner {
+      grid-template-columns: 1fr;
+   }
+
+   .tp-voucher-banner {
+      display: block;
+      aspect-ratio: 16 / 9;
+   }
+
+   .tp-voucher-stub {
+      border-left: 0;
+      border-top: 2px dashed rgba(22, 22, 19, 0.18);
+      padding: 14px 20px 18px;
+      flex-direction: row;
+      gap: 12px;
+      justify-content: flex-start;
+   }
+
+   .tp-voucher-stub::before {
+      top: -8px;
+      left: -8px;
+   }
+
+   .tp-voucher-stub::after {
+      bottom: auto;
+      top: -8px;
+      left: auto;
+      right: -8px;
+   }
+
+   .tp-voucher-figure {
+      font-size: 32px;
+   }
+
+   .tp-voucher-scope {
+      max-width: none;
+      text-align: left;
+      margin-top: 0;
+   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .tp-voucher {
+      transition: none;
+   }
+}

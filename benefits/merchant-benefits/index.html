@@ -18,91 +18,7 @@
     <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
     <link rel="stylesheet" href="/assets/css/spacing.css">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <style>
-        
-
-        .merchant-gallery-intro {
-            max-width: 760px;
-            margin: 0 auto 40px;
-        }
-
-        .merchant-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 24px;
-        }
-
-        .merchant-card {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: flex-start;
-            border-radius: 18px;
-            overflow: hidden;
-            max-width: 500px;
-            transition: transform .3s ease, box-shadow .3s ease;
-        }
-
-        .merchant-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 42px rgba(12, 24, 52, 0.16);
-        }
-
-        .merchant-card__image {
-            width: 100%;
-
-        }
-
-        .merchant-card__content {
-            padding: 18px 20px 20px;
-        }
-
-        .merchant-card__title {
-            margin: 0 0 6px;
-            font-size: 22px;
-            color: #080d1b;
-        }
-
-        .merchant-card__desc {
-            margin: 0;
-            color: #64748b;
-            font-size: 15px;
-            line-height: 1.7;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .merchant-card.is-expanded .merchant-card__desc {
-            -webkit-line-clamp: unset;
-            line-clamp: unset;
-            overflow: visible;
-        }
-
-        .merchant-card__readmore {
-            display: none;
-            margin-top: 8px;
-            padding: 0;
-            border: none;
-            background: none;
-            color: var(--tp-red-1, #ab0c2f);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .merchant-card__readmore:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 575.98px) {
-            .merchant-card__image {
-                height: 250px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/merchant-benefits.css">
 </head>
 
 <body>
@@ -238,48 +154,12 @@
     <main>
         <section class="merchant-gallery-area pt-90 pb-100">
             <div class="container-xl" style="max-width: 1280px;">
-                <div class="text-center merchant-gallery-intro">
-                    <h2 class="mb-20">Our Partner Merchants Offers</h2>
-                 
+                <div class="merchant-gallery-intro">
+                    <h2 class="mb-15">Partner offers</h2>
+                    <p>Discounts from partner merchants for UOL students, faculty, staff, and alumni. Show your UOL ID card at the counter to redeem.</p>
                 </div>
-<hr class="my-4" style="border-color: #cbd5e1;" />
-                <div class="merchant-gallery-grid">
-                   
-
-                    <a class="merchant-card popup-image" href="/assets/img/WhatsApp Image 2026-04-09 at 9.26.22 AM.jpg">
-                        <img class="merchant-card__image" src="/assets/img/WhatsApp Image 2026-04-09 at 9.26.22 AM.jpg" alt="Merchant offer card - promotional partner deal">
-                        <div class="merchant-card__content">
-                            <h4 class="merchant-card__title">Jumbo Johar Town</h4>
-                            <p class="merchant-card__desc">15% off for all UOL students, staff and Alumni on whole menu</p>
-                        </div>
-                    </a>
-                      <a class="merchant-card popup-image" href="/assets/img/banner/saadi-di-sajji.jpg">
-                        <img class="merchant-card__image" src="/assets/img/banner/saadi-di-sajji.jpg" alt="Merchant offer card - promotional partner deal">
-                        <div class="merchant-card__content">
-                            <h4 class="merchant-card__title">Saadi Di Sajji</h4>
-                            <p class="merchant-card__desc">Flat 25% off on Dine-in</p>
-                        </div>
-                    </a>
-                    <a class="merchant-card popup-image" href="/assets/img/banner/yum-yard-banner.jpeg">
-                        <img class="merchant-card__image" src="/assets/img/banner/yum-yard-banner.jpeg" alt="Merchant offer card - promotional partner deal">
-                        <div class="merchant-card__content">
-                            <h4 class="merchant-card__title">Yum Yard</h4>
-                            <p class="merchant-card__desc">𝐁𝐞𝐜𝐚𝐮𝐬𝐞 𝐛𝐞𝐢𝐧𝐠 𝐩𝐚𝐫𝐭 𝐨𝐟 𝐔𝐎𝐋 𝐜𝐨𝐦𝐞𝐬 𝐰𝐢𝐭𝐡 𝐢𝐭𝐬 𝐩𝐞𝐫𝐤𝐬! 💚
-Enjoy a 𝐟𝐥𝐚𝐭 20% 𝐝𝐢𝐬𝐜𝐨𝐮𝐧𝐭  at Yum Yard Restaurant, exclusively for UOL employees, faculty, current students, and alumni.
-Whether it's a casual meal or a get-together with friends and family, enjoy your favourite food with an added benefit!
-📍 𝐋𝐨𝐜𝐚𝐭𝐢𝐨𝐧: Yum Yard Restaurant, Wapda Town Phase 2, Lahore
-Simply present your valid UOL ID card to avail of the discount.</p>
-                        </div>
-                    </a>
-                    <a class="merchant-card popup-image" href="/assets/img/banner/trivana x uol-01.jpeg">
-                        <img class="merchant-card__image" src="/assets/img/banner/trivana x uol-01.jpeg" alt="Merchant offer card - promotional partner deal">
-                        <div class="merchant-card__content">
-                            <h4 class="merchant-card__title">Trivana By Village Shinwari Madina x UOL</h4>
-                            <p class="merchant-card__desc">UOL faculty, staff, current students, and alumni can now enjoy an exclusive flat 10% discount on dine-in purchases.
-
-Whether you're in the mood for authentic Turkish, traditional Shinwari, or delicious Pakistani cuisine, there's something for everyone!</p>
-                        </div>
-                    </a>
+                <div class="tp-voucher-grid" id="merchantOffersGrid">
+                    <p class="tp-voucher-empty">Loading offers…</p>
                 </div>
             </div>
         </section>
@@ -368,37 +248,8 @@ Whether you're in the mood for authentic Turkish, traditional Shinwari, or delic
     <script src="/assets/js/flatpickr.js"></script>
     <script src="/assets/js/ajax-form.js"></script>
     <script src="/assets/js/main.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (typeof $ !== "undefined" && $.fn.magnificPopup) {
-                $(".popup-image").magnificPopup({
-                    type: "image",
-                    gallery: {
-                        enabled: true
-                    }
-                });
-            }
-
-            // "Read more" toggle — only shown when the description is clamped
-            document.querySelectorAll(".merchant-card").forEach(function (card) {
-                var desc = card.querySelector(".merchant-card__desc");
-                if (!desc || desc.scrollHeight <= desc.clientHeight + 1) return;
-
-                var btn = document.createElement("button");
-                btn.type = "button";
-                btn.className = "merchant-card__readmore";
-                btn.textContent = "Read more";
-                btn.style.display = "inline-block";
-                btn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    var expanded = card.classList.toggle("is-expanded");
-                    btn.textContent = expanded ? "Read less" : "Read more";
-                });
-                card.querySelector(".merchant-card__content").appendChild(btn);
-            });
-        });
-    </script>
+    <script src="/assets/js/api-client.js"></script>
+    <script src="/assets/js/merchant-benefits.js"></script>
 </body>
 
 </html>
