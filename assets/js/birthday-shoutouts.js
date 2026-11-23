@@ -8,7 +8,7 @@
    if (!wrapper || !sliderEl) return;
 
    const PLACEHOLDER_IMG = 'https://portal-alumni.uol.edu.pk/images/about-1.jpg';
-   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 
    function escapeHtml(text) {
       if (text === null || text === undefined) return '';
@@ -20,27 +20,11 @@
          .replace(/'/g, '&#39;');
    }
 
-   // createdAt looks like "Tue Nov 03 2026 10:18:53 GMT+0500 (Pakistan Standard Time)"
-   // which Date() can't parse reliably cross-browser — pull day/month with a regex.
-   function parseShoutoutDate(str) {
-      if (!str) return null;
-      const m = String(str).match(/\w{3}\s+(\w{3})\s+(\d{1,2})\s+(\d{4})/);
-      if (m) return { day: String(parseInt(m[2], 10)), month: m[1] };
-      const d = new Date(str);
-      if (isNaN(d.getTime())) return null;
-      return { day: String(d.getDate()), month: MONTHS[d.getMonth()] };
-   }
-
    function renderSlide(item) {
       const name = escapeHtml(item.name || 'Alumni');
       const sapId = escapeHtml(item.sapId || '');
       const gift = item.giftImageUrl || item.imageUrl || PLACEHOLDER_IMG;
-      const date = parseShoutoutDate(item.createdAt);
       const url = item.linkedinPostUrl || '';
-
-      const dateBadge = date
-         ? `<span class="tp-bday-date"><span class="tp-bday-day">${escapeHtml(date.day)}</span><span class="tp-bday-month">${escapeHtml(date.month)}</span></span>`
-         : '';
 
       const avatar = item.imageUrl
          ? `<span class="tp-bday-avatar"><img src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></span>`
@@ -56,7 +40,6 @@
                <img class="tp-bday-gift" src="${escapeHtml(gift)}" alt="Birthday gift for ${name}" loading="lazy"
                   onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'">
             </div>
-            ${dateBadge}
             ${avatar}
          </div>
          <div class="tp-bday-body">

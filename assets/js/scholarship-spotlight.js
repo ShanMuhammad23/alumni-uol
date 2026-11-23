@@ -15,7 +15,9 @@
   var CONFIG = {
     endpoint: 'https://portal-alumni.uol.edu.pk/api/external/scholarships',
     imageBase: 'https://portal-alumni.uol.edu.pk/images',
-    autoplayDelay: 5000    // ms between auto-advances
+    term: 'Fall',            // show only this application term
+    year: 2026,              // ...and this application year
+    autoplayDelay: 5000      // ms between auto-advances
   };
 
   /* -----------------------------------------------------------------------
@@ -110,7 +112,11 @@
           (payload && payload.items) ||
           (Array.isArray(payload) ? payload : []);
         var students = items
-          .filter(function (it) { return it && (it.name || it.sapId); })
+          .filter(function (it) {
+            return it && (it.name || it.sapId) &&
+              it.applicationTerm === CONFIG.term &&
+              it.applicationYear === CONFIG.year;
+          })
           .map(normalizeItem);
         if (!students.length) throw new Error('Scholarships API returned no items');
         return students;
@@ -404,6 +410,15 @@
     var slider = new Spotlight(root);
 
     fetchStudents()
+      .then(function (students) {
+        var badge = document.getElementById('uol-spot-term');
+        if (badge) {
+          var n = students.length;
+          badge.textContent = CONFIG.term + ' ' + CONFIG.year +
+            ' · ' + n + ' awardee' + (n === 1 ? '' : 's');
+        }
+        return students;
+      })
       .catch(function () { return SAMPLE_STUDENTS; })   // silent fallback
       .then(function (students) { slider.build(students); });
   }

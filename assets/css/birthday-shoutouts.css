@@ -1,6 +1,6 @@
 /* ==========================================================================
    Birthday Shoutouts — Alumni Leadership
-   Card concept: a gift tag. Portrait gift photo, date badge, avatar with a
+   Card concept: a gift tag. Portrait gift photo, avatar with a
    gold ring (echoing the foil "Happy Birthday" card), dashed tear-off stub
    holding the SAP ID and the LinkedIn post link.
    ========================================================================== */
@@ -72,38 +72,6 @@
 
 .tp-bday-card:hover .tp-bday-gift {
    transform: scale(1.05);
-}
-
-/* Date badge — same motif as the engagement cards */
-.tp-bday-date {
-   position: absolute;
-   top: 14px;
-   right: 14px;
-   background: var(--tp-theme-primary, #AB0C2F);
-   color: #fff;
-   padding: 10px 13px;
-   border-radius: 8px;
-   text-align: center;
-   line-height: 1;
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-   z-index: 2;
-}
-
-.tp-bday-day {
-   display: block;
-   font-size: 20px;
-   font-weight: 700;
-   font-variant-numeric: tabular-nums;
-}
-
-.tp-bday-month {
-   display: block;
-   font-size: 11px;
-   font-weight: 500;
-   text-transform: uppercase;
-   letter-spacing: 0.5px;
-   margin-top: 4px;
-   opacity: 0.9;
 }
 
 /* Avatar overlapping the media's bottom edge like a "to:" tag */
