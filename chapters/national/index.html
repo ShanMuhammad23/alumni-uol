@@ -18,6 +18,8 @@
    <link rel="stylesheet" href="/assets/css/font-awesome-pro.css">
    <link rel="stylesheet" href="/assets/css/spacing.css">
    <link rel="stylesheet" href="/assets/css/main.css">
+   <link rel="stylesheet" href="/assets/css/apexcharts.css">
+   <link rel="stylesheet" href="/assets/css/national-chapters.css">
 </head>
 
 <body>
@@ -188,34 +190,38 @@
                   </div>
                </div>
             </div>
-            <!-- Members Count Badge - Bottom Right -->
-            <div class="tp-members-badge" style="position: absolute; bottom: 30px; right: 30px; background: rgba(255, 255, 255, 0.95); padding: 20px 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 10;">
-               <div style="text-align: center;">
-                  <div style="font-size: 36px; font-weight: 700; color: var(--tp-theme-primary, #AB0C2F); margin-bottom: 5px;" id="chapters-national-members-hero">0</div>
-                  <div style="font-size: 14px; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">Total Members</div>
-               </div>
+            <!-- Members Count Plaque - Bottom Right -->
+            <div class="nc-hero-plaque">
+               <div class="nc-hero-count" id="chapters-national-members-hero">0</div>
+               <div class="nc-hero-label">verified members nationwide</div>
             </div>
          </div>
       </section>
 
-      <!-- Map and Chapter Links Section - Map Left, Links Right Side -->
-      <section class="program-area pt-80 pb-60" style="background: #f8f9fa;">
+      <!-- Atlas Index + Membership Census -->
+      <section class="nc-section">
          <div class="pl-40 pr-40">
-            <p class="mb-40">         <p>Our alumni chapters around the world create local networks that help keep the UOL spirit alive, no matter where our graduates are. These chapters organize regional events, strengthen professional and social connections and provide opportunities for alumni to engage with their peers and support university initiatives. They serve as vibrant communities that strengthen the global UOL alumni network.</p>
-         </p>
-            <div class="row align-items-start">
-            
-               <!-- Right Side: National Chapters Links -->
-               <div class="col-12">
-                  <div class="tp-national-chapters-links " id="national-chapters-links">
-                     <!-- Links will be loaded dynamically -->
-                  </div>
+            <div class="nc-split">
+
+               <!-- Left: Find your chapter -->
+               <div class="nc-atlas">
+                  <h2 class="nc-atlas-title">Find your chapter</h2>
+                  <p class="nc-atlas-intro">Our alumni chapters around the world create local networks that help keep the UOL spirit alive, no matter where our graduates are. These chapters organize regional events, strengthen professional and social connections and provide opportunities for alumni to engage with their peers and support university initiatives. They serve as vibrant communities that strengthen the global UOL alumni network.</p>
                </div>
+
+               <!-- Right: Membership census -->
+               <aside class="nc-census" aria-label="Membership by chapter">
+                  <h2 class="nc-census-title">Membership by chapter</h2>
+                  <div class="nc-chart" id="nc-chart" role="img" aria-label="Membership share by chapter"></div>
+                  <p class="nc-census-sub" id="nc-total-sub">Counting members…</p>
+                  <p class="nc-census-note" id="nc-census-note" hidden></p>
+               </aside>
+
             </div>
          </div>
       </section>
 
-      <!-- Chapter Cards Section - Full Width Grid Below -->
+      <!-- Chapter Cards Section -->
       <section class="program-area pt-0 pb-90" style="background: #f8f9fa;">
          <div class="pl-40 pr-40">
             <div class="row">
@@ -238,7 +244,6 @@
                   <!-- National Chapters Section -->
                   <div class="chapter-section-wrapper" id="national-chapters-section" style="display: none;">
                      <div class="chapter-section-header d-flex align-items-center justify-content-between mb-40">
-                        <!-- <h4 class="tp-section-title mb-0">National Chapters</h4> -->
                         <button class="chapter-toggle-btn" type="button" aria-expanded="true" aria-controls="local-chapters-collapse">
                            <i class="fa-solid fa-chevron-down"></i>
                         </button>
@@ -343,705 +348,37 @@
    <script src="/assets/js/main.js"></script>
 
    <!-- API Client Library -->
+   <script src="/assets/js/apexcharts.min.js"></script>
    <script src="/assets/js/api-client.js"></script>
-   <script type="text/javascript" src="/assets/map/mapdata.js"></script>
-   <script type="text/javascript" src="/assets/map/countrymap.js"></script>
-
-   <style>
-      /* Map container styles */
-      #map {
-         width: 100%;
-         position: relative;
-         overflow: hidden;
-         max-width: 100%;
-      }
-
-      /* Hide copyright anchor tag in map */
-      #map_inner > div > a,
-      #map_inner div a,
-      [id*="inner"] > div > a,
-      [id*="inner"] div a,
-      #map [id*="inner"] > div > a,
-      #map [id*="inner"] div a,
-      #map > div > div > a,
-      .tp-chapter-map-wrapper [id*="inner"] > div > a,
-      .tp-chapter-map-wrapper [id*="inner"] div a {
-         display: none !important;
-         visibility: hidden !important;
-         opacity: 0 !important;
-         height: 0 !important;
-         width: 0 !important;
-         overflow: hidden !important;
-         position: absolute !important;
-         left: -9999px !important;
-      }
-
-      .tp-chapters-right .tp-chapter-map-wrapper {
-         width: 100%;
-         max-width: 100%;
-         margin: 0 auto;
-         position: relative;
-         background: white;
-         border-radius: 16px;
-         padding: 20px;
-         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
-      }
-
-      .tp-chapter-map-wrapper {
-      
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
-      width: 100%;
-      overflow: hidden;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-   }
-
-   .tp-chapter-map-wrapper #map {
-
-      min-height: 0;
-      max-height: 540px;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      flex: 0 0 auto;
-      overflow: hidden;
-      position: relative;
-   }
-
-   /* Ensure map internal elements don't overflow */
-   .tp-chapter-map-wrapper #map>* {
-      max-width: 100%;
-      max-height: 100%;
-   }
-
-   .tp-chapter-map-wrapper #map svg {
-      max-width: 100% !important;
-      max-height: 540px !important;
-      width: 100% !important;
-      height: auto !important;
-      display: block;
-   }
-
-   /* Ensure any direct children of map respect height */
-   .tp-chapter-map-wrapper #map>div,
-   .tp-chapter-map-wrapper #map>svg {
-      max-height: 540px !important;
-      height: auto !important;
-   }
-
-   /* Map holder container and all SimpleMaps containers */
-   .tp-chapter-map-wrapper #map_holder,
-   .tp-chapter-map-wrapper [id^="map_holder"],
-   .tp-chapter-map-wrapper [id*="_holder"] {
-      width: 100% !important;
-      max-width: 100% !important;
-      height: 100% !important;
-      max-height: 100% !important;
-      overflow: hidden !important;
-      box-sizing: border-box;
-   }
-
-   /* Ensure all map wrapper divs respect boundaries */
-   .tp-chapter-map-wrapper [id*="map"],
-   .tp-chapter-map-wrapper [id*="holder"] {
-      max-width: 100%;
-      max-height: 100%;
-   }
-
-   .tp-chapter-map-wrapper img {
-      width: 100%;
-      height: auto;
-      max-height: calc(600px - 60px);
-      display: block;
-      object-fit: contain;
-   }
-
-   /* Hide copyright/attribution links in map wrapper */
-   .tp-chapter-map-wrapper a[href*="openstreetmap"],
-   .tp-chapter-map-wrapper a[href*="copyright"],
-   .tp-chapter-map-wrapper a[title*="OpenStreetMap"],
-   .tp-chapter-map-wrapper a[title*="copyright"],
-   .tp-chapter-map-wrapper [id*="inner"] a {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      height: 0 !important;
-      width: 0 !important;
-      overflow: hidden !important;
-   }
-
-   /* Map legend styles */
-   .tp-map-legend {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 14px;
-   }
-
-
-   .tp-map-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-   }
-
-   .tp-map-legend-circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-   }
-
-   .tp-map-legend-circle.active {
-      background-color: #ef4444;
-   }
-
-   .tp-map-legend-circle.coming {
-      background-color: blue;
-   }
-
-   .tp-map-legend-caption {
-      color: #333;
-      font-weight: 500;
-   }
-
-   .city-pin {
-      transition: transform 0.3s ease;
-      display: block;
-   }
-
-   .city-pin:hover {
-      transform: scale(1.3);
-   }
-
-   .city-pin circle {
-      transition: all 0.3s ease;
-   }
-
-   .city-pin:hover circle {
-      fill: #8a0a25 !important;
-      r: 10;
-   }
-
-   @keyframes pulse {
-      0% {
-         opacity: 0.4;
-         transform: scale(1);
-      }
-
-      50% {
-         opacity: 0.6;
-         transform: scale(1.1);
-      }
-
-      100% {
-         opacity: 0.4;
-         transform: scale(1);
-      }
-   }
-
-   .pulse-animation {
-      animation: pulse 2s ease-in-out infinite;
-   }
-
- /* Hide copyright/attribution links in map wrapper */
- .tp-chapter-map-wrapper a[href*="openstreetmap"],
-   .tp-chapter-map-wrapper a[href*="copyright"],
-   .tp-chapter-map-wrapper a[title*="OpenStreetMap"],
-   .tp-chapter-map-wrapper a[title*="copyright"],
-   .tp-chapter-map-wrapper [id*="inner"] a {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      height: 0 !important;
-      width: 0 !important;
-      overflow: hidden !important;
-   }
-   #map_zoom {
-      display: none;
-   }
-      .tp-chapter-section-title {
-         font-size: 32px;
-         font-weight: 600;
-         color: var(--tp-heading-primary, #161613);
-         margin-bottom: 20px;
-      }
-
-      .tp-national-chapters-links {
-         display: grid;
-         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-         gap: 12px;
-         padding: 20px;
-         max-width: 100%;
-         height: 100%;
-      }
-
-      .tp-chapter-link {
-         display: flex;
-         align-items: center;
-         gap: 8px;
-         padding: 12px 20px;
-         background: white;
-         border-radius: 8px;
-         text-decoration: none;
-         color: var(--tp-heading-primary);
-         font-weight: 500;
-         transition: all 0.3s ease;
-         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-         width: 100%;
-         height: 100%;
-         min-width: 0;
-      }
-
-      .tp-chapter-link span {
-         min-width: 0;
-      }
-
-   
-
-      .tp-chapter-link:hover {
-         background: var(--tp-theme-primary);
-         color: white;
-         transform: translateX(5px);
-         text-decoration: none;
-      }
-
-      .tp-chapter-link i {
-         color: var(--tp-theme-primary);
-         transition: color 0.3s ease;
-      }
-
-      .tp-chapter-link:hover i {
-         color: white;
-      }
-
-      /* Members Badge Styles */
-      .tp-members-badge {
-         animation: fadeInUp 0.6s ease-out;
-      }
-
-      @keyframes fadeInUp {
-         from {
-            opacity: 0;
-            transform: translateY(20px);
-         }
-         to {
-            opacity: 1;
-            transform: translateY(0);
-         }
-      }
-
-      @media (max-width: 991px) {
-         .program-area .container {
-            padding-left: 15px;
-            padding-right: 15px;
-         }
-      }
-
-      @media (max-width: 768px) {
-         .tp-members-badge {
-            position: relative !important;
-            bottom: auto !important;
-            right: auto !important;
-            margin-top: 20px;
-            width: 100%;
-         }
-
-         .tp-chapter-map-wrapper #map {
-            height: 400px;
-            min-height: 300px;
-         }
-
-         .tp-chapter-map-wrapper {
-            padding: 15px;
-         }
-
-         .tp-map-legend {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            margin-top: 15px;
-            justify-content: center;
-         }
-
-         .tp-national-chapters-links {
-            grid-template-columns: 1fr;
-         }
-      }
-      /* Ensure chapter cards are equal height */
-      #local-chapters-list {
-         display: flex;
-         flex-wrap: wrap;
-      }
-      #local-chapters-list > [class*="col-"] {
-         display: flex;
-      }
-
-      /* Chapter Card Styling - Equal Heights and Alignment */
-      .tp-financial-item {
-         display: flex;
-         flex-direction: column;
-         height: 100%;
-      }
-
-      .tp-financial-thumb {
-         flex-shrink: 0;
-         height: 220px;
-         min-height: 220px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-      }
-
-      .tp-financial-content {
-         display: flex;
-         flex-direction: column;
-         flex: 1;
-         padding: 25px;
-      }
-
-      .tp-financial-content > div:first-child {
-         display: flex;
-         flex-direction: column;
-         flex: 1;
-         min-height: 0;
-      }
-
-      .tp-financial-content-title {
-         margin-bottom: 15px;
-         min-height: 50px;
-         display: flex;
-         align-items: center;
-      }
-
-      .tp-financial-content p {
-         flex: 1;
-         margin-bottom: 15px;
-         min-height: 60px;
-         display: -webkit-box;
-         -webkit-line-clamp: 3;
-         line-clamp: 3;
-         -webkit-box-orient: vertical;
-         overflow: hidden;
-         text-overflow: ellipsis;
-      }
-
-      .tp-financial-content .d-flex.align-items-center {
-         margin-top: auto;
-         margin-bottom: 15px;
-         min-height: 30px;
-      }
-
-      .tp-about-btn {
-         margin-top: auto;
-         padding-top: 15px;
-      }
-
-      /* Collapsible Chapter Sections */
-      .chapter-section-wrapper {
-         position: relative;
-      }
-
-      .chapter-section-header {
-         cursor: pointer;
-         user-select: none;
-      }
-
-      .chapter-toggle-btn {
-         background: transparent;
-         border: 2px solid var(--tp-theme-primary, #AB0C2F);
-         color: var(--tp-theme-primary, #AB0C2F);
-         width: 45px;
-         height: 45px;
-         border-radius: 50%;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         transition: all 0.3s ease;
-         cursor: pointer;
-         flex-shrink: 0;
-         margin-left: 20px;
-      }
-
-      .chapter-toggle-btn:hover {
-         background: var(--tp-theme-primary, #AB0C2F);
-         color: white;
-         transform: scale(1.1);
-      }
-
-      .chapter-toggle-btn i {
-         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-         font-size: 18px;
-      }
-
-      .chapter-toggle-btn[aria-expanded="false"] i {
-         transform: rotate(-180deg);
-      }
-
-      .chapter-collapsible-content {
-         overflow: hidden;
-         max-height: 10000px;
-         opacity: 1;
-         transform: scaleY(1);
-      }
-
-      .chapter-collapsible-content.collapsed {
-         max-height: 0;
-         opacity: 0;
-         transform: scaleY(0);
-         margin-bottom: 0;
-      }
-
-      /* Chapters Loader Styling */
-      #chapters-loader {
-         min-height: 400px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-      }
-
-      #chapters-loader .tp-preloader-content {
-         text-align: center;
-      }
-
-      #chapters-loader .tp-preloader-logo {
-         position: relative;
-         display: inline-block;
-         margin-bottom: 20px;
-      }
-
-      #chapters-loader .tp-preloader-circle {
-         position: relative;
-         width: 120px;
-         height: 120px;
-         margin: 0 auto;
-         animation: rotate 2s linear infinite;
-      }
-
-      #chapters-loader .tp-preloader-circle svg {
-         width: 100%;
-         height: 100%;
-      }
-
-      #chapters-loader .tp-preloader-circle circle:last-child {
-         stroke-dasharray: 565;
-         stroke-dashoffset: 565;
-         animation: dash 1.5s ease-in-out infinite;
-      }
-
-      #chapters-loader .tp-preloader-logo img {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         width: 60px;
-         height: 60px;
-         object-fit: contain;
-      }
-
-      #chapters-loader .tp-preloader-subtitle {
-         color: var(--tp-theme-primary, #AB0C2F);
-         font-size: 18px;
-         font-weight: 500;
-         margin-top: 20px;
-      }
-
-      @keyframes rotate {
-         100% {
-            transform: rotate(360deg);
-         }
-      }
-
-      @keyframes dash {
-         0% {
-            stroke-dashoffset: 565;
-         }
-         50% {
-            stroke-dashoffset: 0;
-         }
-         100% {
-            stroke-dashoffset: -565;
-         }
-      }
-
-      /* Dashboard Card Styles */
-      .dashboard-card {
-         background: linear-gradient(135deg, rgba(171, 12, 47, 0.05) 0%, rgba(171, 12, 47, 0.02) 100%);
-         border: 1px solid rgba(171, 12, 47, 0.15);
-         border-radius: 16px;
-         padding: 30px;
-         text-align: center;
-         transition: all 0.3s ease;
-         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
-
-      .dashboard-card:hover {
-         transform: translateY(-4px);
-         box-shadow: 0 8px 24px rgba(171, 12, 47, 0.15);
-         border-color: rgba(171, 12, 47, 0.3);
-      }
-
-      .dashboard-card__number {
-         font-size: 42px;
-         font-weight: 700;
-         color: var(--tp-theme-primary, #AB0C2F);
-         margin-bottom: 8px;
-         line-height: 1.2;
-      }
-
-      .dashboard-card__label {
-         font-size: 16px;
-         color: #666;
-         font-weight: 500;
-         text-transform: uppercase;
-         letter-spacing: 0.5px;
-      }
-
-      .tp-btn.active {
-         background: var(--tp-theme-primary, #AB0C2F);
-         color: white;
-      }
-
-      @media (max-width: 768px) {
-         .chapter-section-header {
-            flex-direction: column;
-            gap: 15px;
-         }
-         .chapter-toggle-btn {
-            margin-left: 0;
-         }
-         .tp-financial-thumb {
-            height: 180px;
-            min-height: 180px;
-         }
-         .tp-financial-content-title {
-            min-height: auto;
-         }
-         .tp-financial-content p {
-            min-height: auto;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-         }
-         #chapters-loader {
-            min-height: 300px;
-         }
-         #chapters-loader .tp-preloader-circle {
-            width: 100px;
-            height: 100px;
-         }
-         #chapters-loader .tp-preloader-logo img {
-            width: 50px;
-            height: 50px;
-         }
-         .dashboard-card {
-            padding: 24px 20px;
-         }
-         .dashboard-card__number {
-            font-size: 36px;
-         }
-         .dashboard-card__label {
-            font-size: 14px;
-         }
-      }
-   </style>
 
    <script>
-      // API client is loaded via script tag above
+      const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-      // Fetch total count of verified alumni with chapters filtered by chapter IDs
-      // SQL equivalent: SELECT COUNT(*) FROM tbl_alumni a JOIN alumni_chapter c ON a.alumniid = c.id
-      // WHERE a.verify = 'true' AND (c.chapter1 IN (chapterIds) OR c.chapter2 IN (chapterIds) OR c.chapter3 IN (chapterIds))
-      async function getTotalVerifiedAlumniWithChapters(chapterIds) {
-         if (!window.apiClient || !chapterIds || chapterIds.length === 0) return 0;
-
-         try {
-            const { data: counts, error } = await window.apiClient.getChapterMemberCounts(chapterIds);
-            
-            if (error) {
-               console.error('Error fetching chapter member counts:', error);
-               return 0;
-            }
-
-            // Sum all counts
-            return Object.values(counts).reduce((sum, count) => sum + (count || 0), 0);
-         } catch (error) {
-            console.error('Unexpected error fetching total verified alumni count:', error);
-            return 0;
-         }
-      }
-
-      // Get national chapter IDs from API
-      async function getNationalChapterIds() {
-         if (!window.apiClient) return [];
-         
-         try {
-            const { data: chapters, error } = await window.apiClient.getChapters({ type: 'national' });
-            
-            if (error) {
-               console.error('Error fetching national chapter IDs:', error);
-               return [];
-            }
-            
-            return chapters ? chapters.map(ch => ch.id) : [];
-         } catch (error) {
-            console.error('Unexpected error fetching national chapter IDs:', error);
-            return [];
-         }
-      }
-
-      // Fetch member count for a chapter using API
-      async function getChapterMemberCount(chapterId) {
-         if (!window.apiClient || !chapterId) return 0;
-
-         try {
-            const { count, error } = await window.apiClient.getChapterMemberCount(chapterId);
-
-            if (error) {
-               console.error('Error fetching chapter member count:', error);
-               return 0;
-            }
-
-            return count || 0;
-         } catch (error) {
-            console.error('Unexpected error fetching chapter member count:', error);
-            return 0;
-         }
-      }
-
-      // Helper to build chapter image URL from database filename
       function buildChapterImagePath(imageName) {
          if (!imageName) return null;
-         // If already absolute URL, keep as is
          if (imageName.startsWith('http://') || imageName.startsWith('https://') || imageName.startsWith('//')) {
             return imageName;
          }
-         const BASE_IMAGE_URL = 'https://portal-alumni.uol.edu.pk/images';
-         return `${BASE_IMAGE_URL}/${imageName}`;
+         return 'https://portal-alumni.uol.edu.pk/images/' + imageName;
       }
 
-      // Fetch all national chapters from API
+      function parseCities(cities) {
+         return String(cities || '').split(',').map(c => c.trim()).filter(Boolean);
+      }
+
+      function displayName(raw) {
+         const name = String(raw || 'Chapter').trim();
+         return name.replace(/\s+Chapter\s*$/i, '').trim() || name;
+      }
+
       async function fetchNationalChapters() {
          if (!window.apiClient) return [];
-         
          try {
             const { data: chapters, error } = await window.apiClient.getChapters({ type: 'national' });
-            
             if (error) {
                console.error('Error fetching national chapters from API:', error);
                return [];
             }
-            
             return chapters || [];
          } catch (error) {
             console.error('Unexpected error fetching national chapters:', error);
@@ -1049,264 +386,170 @@
          }
       }
 
-      // Load national chapters from database
-      async function loadChapters() {
-         const localContainer = document.getElementById('local-chapters-list');
-         const loader = document.getElementById('chapters-loader');
-         const nationalSection = document.getElementById('national-chapters-section');
+      function detailUrl(id) {
+         return '/chapters/detail.html?id=' + encodeURIComponent(id);
+      }
 
-         // Show loader, hide section
-         if (loader) loader.style.display = 'block';
-         if (nationalSection) nationalSection.style.display = 'none';
+      const NC_TAIL_RAMP = ['#554D43', '#61594E', '#6E655A', '#7B7165', '#887D71', '#95897C', '#A29587',
+         '#AFA192', '#BCAD9D', '#C8B9A9', '#D1C4B5', '#DACFC2', '#E0D6CA'];
 
-         try {
-            // Fetch national chapters from database
-            const nationalChapters = await fetchNationalChapters();
-            
-            if (!nationalChapters || nationalChapters.length === 0) {
-               localContainer.innerHTML = '<div class="col-12"><p class="text-center">No national chapters available.</p></div>';
-               if (loader) loader.style.display = 'none';
-               if (nationalSection) nationalSection.style.display = 'block';
-               return;
-            }
+      function renderCensus(chapters, total, cityCount) {
+         const chartEl = document.getElementById('nc-chart');
+         const subEl = document.getElementById('nc-total-sub');
+         const noteEl = document.getElementById('nc-census-note');
+         if (!chartEl || !subEl) return;
 
-            // Get national chapter IDs for member count calculation
-            const nationalChapterIds = nationalChapters.map(ch => ch.id);
-            
-            // Get unique count of verified alumni with national chapters
-            const nationalMembers = await getTotalVerifiedAlumniWithChapters(nationalChapterIds);
-            
-            // Fetch member counts for national chapters in parallel
-            const localChaptersWithCounts = await Promise.all(
-               nationalChapters.map(async (chapter) => {
-                  const dbCount = await getChapterMemberCount(chapter.id);
-                  return {
-                     id: chapter.id,
-                     name: chapter.national_chapter || 'Chapter',
-                     description: chapter.description || '',
-                     image: buildChapterImagePath(chapter.chapter_image),
-                     isActive: chapter.is_active !== false, // Default to true if null
-                     memberCount: typeof dbCount === 'number' ? dbCount : 0
-                  };
-               })
-            );
+         const ranked = [...chapters].sort((a, b) => b.count - a.count);
+         const shareOf = c => (total > 0 ? (c.count / total) * 100 : 0);
+         const palette = ranked.map((c, i) => i === 0 ? '#AB0C2F' : NC_TAIL_RAMP[Math.min(i - 1, NC_TAIL_RAMP.length - 1)]);
 
-            localChaptersWithCounts.forEach(chapter => {
-               const col = document.createElement('div');
-               col.className = 'col-lg-3 col-md-3 col-sm-6 mb-30';
-               
-               col.innerHTML = `
-                  <div class="tp-financial-item mb-30 h-100">
-                     <div class="tp-financial-thumb" style="background: #f8f9fa; padding: 0; overflow: hidden;">
-                        ${chapter.image ? 
-                           `<img src="${chapter.image}" alt="${chapter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
-                           `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 30px;">
-                              <i class="fa-solid fa-map-marker-alt" style="font-size: 60px; color: var(--tp-theme-primary, #AB0C2F);"></i>
-                           </div>`
+         subEl.textContent = chapters.length + ' chapters · ' + cityCount + ' cities & towns';
+         chartEl.setAttribute('aria-label', 'Membership share by chapter: ' + ranked.map(c => c.name + ' ' + Math.round(shareOf(c)) + '%').join(', '));
+
+         if (total > 0 && window.ApexCharts) {
+            new ApexCharts(chartEl, {
+               chart: {
+                  type: 'donut',
+                  height: 290,
+                  fontFamily: 'inherit',
+                  animations: { enabled: !window.matchMedia('(prefers-reduced-motion: reduce)').matches }
+               },
+               series: ranked.map(c => c.count),
+               labels: ranked.map(c => c.name),
+               colors: palette,
+               stroke: { width: 2, colors: ['#fff'] },
+               legend: { show: false },
+               dataLabels: { enabled: false },
+               states: {
+                  hover: { filter: { type: 'lighten', value: 0.15 } },
+                  active: { filter: { type: 'lighten', value: 0.15 } }
+               },
+               tooltip: {
+                  y: { formatter: v => v.toLocaleString() + ' members' }
+               },
+               plotOptions: {
+                  pie: {
+                     donut: {
+                        size: '68%',
+                        labels: {
+                           show: true,
+                           name: { show: false },
+                           value: {
+                              show: true,
+                              fontSize: '30px',
+                              fontWeight: 700,
+                              color: '#161613',
+                              formatter: v => Number(v).toLocaleString()
+                           },
+                           total: {
+                              show: true,
+                              showAlways: true,
+                              label: 'verified members',
+                              fontSize: '12px',
+                              fontWeight: 500,
+                              color: '#888',
+                              formatter: () => total.toLocaleString()
+                           }
                         }
-                     </div>
-                        <div class="tp-financial-content">
-                           <div>
-                              <h4 class="tp-financial-content-title"><a href="/chapters/detail.html?id=${chapter.id}">${chapter.name}</a></h4>
-                              <p>${chapter.description}</p>
-                              <div class="d-flex align-items-center flex-wrap gap-2">
-                                 <span class="badge ${chapter.isActive ? 'bg-success' : 'bg-secondary'}">${chapter.isActive ? 'Active' : 'Upcoming'}</span>
-                                 <span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size: 14px;">
-                                    <i class="fa-solid fa-users"></i>
-                                    <span>${chapter.memberCount.toLocaleString()} Members</span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="tp-about-btn">
-                              <a class="tp-btn tp-btn-sm" href="/chapters/detail.html?id=${chapter.id}">Learn More</a>
-                           </div>
-                        </div>
-                  </div>
-               `;
-               localContainer.appendChild(col);
-            });
+                     }
+                  }
+               }
+            }).render();
+         } else if (total > 0) {
+            chartEl.innerHTML = '<div class="nc-sharebar" role="list">'
+               + ranked.map((c, i) => '<span role="listitem" title="' + esc(c.name) + ' — ' + c.count.toLocaleString() + ' members" style="width:' + shareOf(c).toFixed(2) + '%;background:' + palette[i] + '"></span>').join('')
+               + '</div><p class="nc-sharebar-legend">Share of ' + total.toLocaleString() + ' verified members, largest to smallest.</p>';
+         } else {
+            chartEl.innerHTML = '<p class="nc-sharebar-legend">No membership data yet.</p>';
+         }
 
-            // Update members display in hero badge
-            const nationalMembersEl = document.getElementById('chapters-national-members-hero');
-            
-            if (nationalMembersEl) {
-               nationalMembersEl.textContent = nationalMembers > 0 ? nationalMembers.toLocaleString() : '0';
-            }
-
-            // Hide loader and show section
-            if (loader) loader.style.display = 'none';
-            if (nationalSection) nationalSection.style.display = 'block';
-         } catch (error) {
-            console.error('Error loading chapters:', error);
-            // Hide loader and show section even on error
-            if (loader) loader.style.display = 'none';
-            if (nationalSection) nationalSection.style.display = 'block';
-            localContainer.innerHTML = '<div class="col-12"><p class="text-center">Unable to load chapters. Please try again later.</p></div>';
+         const top = ranked[0];
+         if (noteEl && top && total > 0 && top.count / total >= 0.5) {
+            noteEl.textContent = Math.round((top.count / total) * 100) + '% of national members belong to the ' + top.name + ' chapter alone.';
+            noteEl.hidden = false;
          }
       }
 
-      // Load chapters on page load
-      loadChapters();
+      function renderCards(chapters) {
+         const cardsEl = document.getElementById('local-chapters-list');
+         if (!cardsEl) return;
+         cardsEl.innerHTML = chapters.map(ch => {
+            const thumb = ch.image
+               ? '<img src="' + esc(encodeURI(ch.image)) + '" alt="' + esc(ch.rawName) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;">'
+               : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:30px;"><i class="fa-solid fa-map-marker-alt" style="font-size:60px;color:var(--tp-theme-primary,#AB0C2F);"></i></div>';
+            return '<div class="col-lg-3 col-md-3 col-sm-6 mb-30"><div class="tp-financial-item mb-30 h-100">'
+               + '<div class="tp-financial-thumb" style="background:#f8f9fa;padding:0;overflow:hidden;">' + thumb + '</div>'
+               + '<div class="tp-financial-content"><div>'
+               + '<h4 class="tp-financial-content-title"><a href="' + detailUrl(ch.id) + '">' + esc(ch.rawName) + '</a></h4>'
+               + '<p>' + esc(ch.description) + '</p>'
+               + '<div class="d-flex align-items-center flex-wrap gap-2">'
+               + '<span class="badge ' + (ch.isActive ? 'bg-success' : 'bg-secondary') + '">' + (ch.isActive ? 'Active' : 'Upcoming') + '</span>'
+               + '<span class="d-inline-flex align-items-center gap-1 text-muted" style="font-size:14px;"><i class="fa-solid fa-users"></i><span>' + ch.count.toLocaleString() + ' Members</span></span>'
+               + '</div></div>'
+               + '<div class="tp-about-btn"><a class="tp-btn tp-btn-sm" href="' + detailUrl(ch.id) + '">Learn More</a></div>'
+               + '</div></div></div>';
+         }).join('');
+      }
 
-      // Load national chapters links for map
-      async function loadNationalChaptersLinks() {
-         const linksContainer = document.getElementById('national-chapters-links');
-         if (!linksContainer) return;
+      async function initNationalChapters() {
+         const subEl = document.getElementById('nc-total-sub');
+         const loader = document.getElementById('chapters-loader');
+         const section = document.getElementById('national-chapters-section');
+         const cardsEl = document.getElementById('local-chapters-list');
 
+         const chapters = await fetchNationalChapters();
+
+         if (!chapters.length) {
+            if (subEl) subEl.textContent = 'No chapters listed yet.';
+            if (loader) loader.style.display = 'none';
+            if (section) section.style.display = 'block';
+            if (cardsEl) cardsEl.innerHTML = '<div class="col-12"><p class="text-center">No national chapters available.</p></div>';
+            return;
+         }
+
+         let counts = {};
          try {
-            // Fetch national chapters from database
-            const nationalChapters = await fetchNationalChapters();
-            
-            if (!nationalChapters || nationalChapters.length === 0) {
-               return;
-            }
-
-            // Fetch member counts for all chapters in parallel
-            const chaptersWithCounts = await Promise.all(
-               nationalChapters.map(async (chapter) => {
-                  const dbCount = await getChapterMemberCount(chapter.id);
-                  return {
-                     id: chapter.id,
-                     name: chapter.national_chapter || 'Chapter',
-                     memberCount: typeof dbCount === 'number' ? dbCount : 0
-                  };
-               })
-            );
-
-            // Create links for each national chapter with member counts
-            const linksHTML = chaptersWithCounts.map(chapter => {
-               const chapterName = chapter.name || 'Chapter';
-               const citySlug = chapter.id.toString();
-               const memberCount = chapter.memberCount || 0;
-               
-               return `
-                  <a href="/chapters/detail.html?id=${chapter.id}" 
-                     class="tp-chapter-link" 
-                     data-city="${citySlug}"
-                     title="${chapterName}">
-                     <i class="fa-solid fa-map-marker-alt"></i>
-                     <span>${chapterName} (${memberCount.toLocaleString()})</span>
-                  </a>
-               `;
-            }).join('');
-
-            linksContainer.innerHTML = linksHTML;
-
-            // Add interactivity for map pins and links
-            setupMapInteractivity();
-         } catch (error) {
-            console.error('Error loading national chapters links:', error);
+            const resp = await window.apiClient.getChapterMemberCounts(chapters.map(c => c.id));
+            counts = resp.data || {};
+         } catch (e) {
+            console.error('Error fetching chapter member counts:', e);
          }
+
+         const enriched = chapters.map(c => ({
+            id: c.id,
+            rawName: String(c.national_chapter || 'Chapter').trim(),
+            name: displayName(c.national_chapter),
+            cities: parseCities(c.cities),
+            count: Number(counts[String(c.id)]) || 0,
+            image: buildChapterImagePath(c.chapter_image),
+            isActive: c.is_active !== false,
+            description: c.description || ''
+         }));
+
+         const total = enriched.reduce((s, c) => s + c.count, 0);
+         const citySet = new Set();
+         enriched.forEach(c => c.cities.forEach(ct => citySet.add(ct.toLowerCase())));
+
+         renderCensus(enriched, total, citySet.size);
+         renderCards(enriched);
+
+         const plaque = document.getElementById('chapters-national-members-hero');
+         if (plaque) plaque.textContent = total.toLocaleString();
+
+         if (loader) loader.style.display = 'none';
+         if (section) section.style.display = 'block';
       }
 
-      // Setup map pin and link interactivity
-      function setupMapInteractivity() {
-         const cityPins = document.querySelectorAll('.city-pin');
-         const chapterLinks = document.querySelectorAll('.tp-chapter-link');
+      initNationalChapters();
 
-         // Highlight pin when link is hovered
-         chapterLinks.forEach(link => {
-            link.addEventListener('mouseenter', function () {
-               const city = this.getAttribute('data-city');
-               const pin = document.querySelector(`.city-pin[data-city="${city}"]`);
-               if (pin) {
-                  pin.style.transform = 'scale(1.3)';
-                  const circle = pin.querySelector('circle');
-                  if (circle) {
-                     circle.setAttribute('fill', '#8a0a25');
-                     circle.setAttribute('r', '10');
-                  }
-               }
-            });
-
-            link.addEventListener('mouseleave', function () {
-               const city = this.getAttribute('data-city');
-               const pin = document.querySelector(`.city-pin[data-city="${city}"]`);
-               if (pin) {
-                  pin.style.transform = 'scale(1)';
-                  const circle = pin.querySelector('circle');
-                  if (circle) {
-                     circle.setAttribute('fill', '#AB0C2F');
-                     circle.setAttribute('r', '8');
-                  }
-               }
-            });
-         });
-
-         // Highlight link when pin is hovered
-         cityPins.forEach(pin => {
-            pin.addEventListener('mouseenter', function () {
-               const city = this.getAttribute('data-city');
-               const link = document.querySelector(`.tp-chapter-link[data-city="${city}"]`);
-               if (link) {
-                  link.style.background = 'var(--tp-theme-primary)';
-                  link.style.color = 'white';
-                  link.style.transform = 'translateX(5px)';
-                  const icon = link.querySelector('i');
-                  if (icon) icon.style.color = 'white';
-               }
-            });
-
-            pin.addEventListener('mouseleave', function () {
-               const city = this.getAttribute('data-city');
-               const link = document.querySelector(`.tp-chapter-link[data-city="${city}"]`);
-               if (link) {
-                  link.style.background = 'white';
-                  link.style.color = 'var(--tp-heading-primary)';
-                  link.style.transform = 'translateX(0)';
-                  const icon = link.querySelector('i');
-                  if (icon) icon.style.color = 'var(--tp-theme-primary)';
-               }
-            });
-         });
-      }
-
-      // Load national chapters links after map loads
-      document.addEventListener('DOMContentLoaded', function() {
-         // Wait for map to initialize
-         setTimeout(() => {
-            loadNationalChaptersLinks();
-         }, 1000);
-      });
-
-      // Collapsible functionality
-      document.addEventListener('DOMContentLoaded', function() {
-         const toggleButtons = document.querySelectorAll('.chapter-toggle-btn');
-         const sectionHeaders = document.querySelectorAll('.chapter-section-header');
-         
-         function toggleSection(button) {
-            const targetId = button.getAttribute('aria-controls');
-            const content = document.getElementById(targetId);
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
-            
-            if (isExpanded) {
-               // Collapse
-               content.classList.add('collapsed');
-               button.setAttribute('aria-expanded', 'false');
-            } else {
-               // Expand
-               content.classList.remove('collapsed');
-               button.setAttribute('aria-expanded', 'true');
-            }
-         }
-         
-         toggleButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
+      document.addEventListener('DOMContentLoaded', function () {
+         document.querySelectorAll('.chapter-toggle-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
                e.stopPropagation();
-               toggleSection(this);
-            });
-         });
-
-         sectionHeaders.forEach(header => {
-            header.addEventListener('click', function(e) {
-               // Only toggle if clicking on the header itself, not the button
-               if (e.target.closest('.chapter-toggle-btn')) {
-                  return;
-               }
-               const button = this.querySelector('.chapter-toggle-btn');
-               if (button) {
-                  toggleSection(button);
-               }
+               const content = document.getElementById(this.getAttribute('aria-controls'));
+               const isExpanded = this.getAttribute('aria-expanded') === 'true';
+               content.classList.toggle('collapsed', isExpanded);
+               this.setAttribute('aria-expanded', String(!isExpanded));
             });
          });
       });

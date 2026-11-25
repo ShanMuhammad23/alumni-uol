@@ -430,7 +430,7 @@
 
                uolJobsList.innerHTML = uolJobs.length
                   ? uolJobs.map(j => createNotice(j, false)).join('')
-                  : '<p class="jobs-empty">No open UoL positions — see the careers portal above.</p>';
+                  : '';
                otherJobsList.innerHTML = partnerJobs.length
                   ? partnerJobs.map(j => createNotice(j, false)).join('')
                   : '<p class="jobs-empty">No partner openings right now. Check back soon.</p>';

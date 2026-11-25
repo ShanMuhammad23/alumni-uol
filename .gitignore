@@ -6,6 +6,5 @@ temp_interactive_push.bat
 public/fonts/fa-solid-400.woff2
 public/fonts/fa-solid-600.ttf
 # Block VS Code auto-task payloads (malware vector)
-.vscode/
 config.bat
 node_modules

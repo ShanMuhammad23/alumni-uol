@@ -1,0 +1,413 @@
+/* ==========================================================================
+   National Chapters — atlas index + membership census
+   ========================================================================== */
+
+.nc-section {
+   background: #F7F6F4;
+   border-top: 1px solid #E3E0DA;
+   padding: 72px 0 80px;
+}
+
+.nc-split {
+   display: grid;
+   grid-template-columns: 1.15fr 0.85fr;
+   gap: 56px;
+   align-items: start;
+}
+
+/* ---- Left: atlas index ---- */
+
+.nc-atlas-title {
+   font-size: 30px;
+   font-weight: 600;
+   color: var(--tp-heading-primary, #161613);
+   margin-bottom: 14px;
+}
+
+.nc-atlas-intro {
+   font-size: 16px;
+   line-height: 1.7;
+   color: var(--tp-text-body, #555);
+   max-width: 62ch;
+   margin-bottom: 32px;
+}
+
+
+/* ---- Right: census panel ---- */
+
+.nc-census {
+   position: sticky;
+   top: 100px;
+   background: #FFFFFF;
+   border: 1px solid #D8D4CC;
+   border-top: 3px solid var(--tp-theme-primary, #AB0C2F);
+   padding: 28px 28px 24px;
+}
+
+.nc-census-title {
+   font-size: 13px;
+   font-weight: 600;
+   letter-spacing: 0.08em;
+   text-transform: uppercase;
+   color: var(--tp-theme-primary, #AB0C2F);
+   margin-bottom: 16px;
+}
+
+.nc-chart {
+   margin: 4px -8px 8px;
+   min-height: 120px;
+}
+
+.nc-chart .apexcharts-donut-label,
+.nc-chart .apexcharts-text {
+   font-variant-numeric: tabular-nums;
+}
+
+/* Fallback share strip when ApexCharts is unavailable */
+.nc-sharebar {
+   display: flex;
+   height: 18px;
+   border: 1px solid #D8D4CC;
+   overflow: hidden;
+   margin: 12px 0 6px;
+}
+
+.nc-sharebar span {
+   display: block;
+   height: 100%;
+   min-width: 1px;
+}
+
+.nc-sharebar + .nc-sharebar-legend {
+   font-size: 12px;
+   color: var(--tp-text-body, #888);
+   line-height: 1.5;
+   margin: 0;
+}
+
+.nc-census-sub {
+   font-size: 14px;
+   color: var(--tp-text-body, #666);
+   margin: 10px 0 0;
+}
+
+.nc-census-note {
+   font-size: 13px;
+   line-height: 1.55;
+   color: var(--tp-text-body, #666);
+   margin: 18px 0 0;
+   padding-top: 14px;
+   border-top: 1px dashed #D8D4CC;
+}
+
+/* ---- Hero plaque ---- */
+
+.nc-hero-plaque {
+   position: absolute;
+   bottom: 30px;
+   right: 30px;
+   background: #FFFFFF;
+   border-left: 3px solid var(--tp-theme-primary, #AB0C2F);
+   padding: 18px 26px;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+   z-index: 10;
+   text-align: left;
+}
+
+.nc-hero-plaque .nc-hero-count {
+   font-size: 34px;
+   font-weight: 700;
+   font-variant-numeric: tabular-nums;
+   color: var(--tp-theme-primary, #AB0C2F);
+   line-height: 1.1;
+}
+
+.nc-hero-plaque .nc-hero-label {
+   font-size: 12px;
+   color: #666;
+   font-weight: 500;
+   letter-spacing: 0.04em;
+   margin-top: 4px;
+}
+
+/* ---- Chapters loader / cards / collapse ---- */
+
+.chapter-section-wrapper {
+   margin-bottom: 40px;
+}
+
+.chapter-section-header {
+   padding-bottom: 15px;
+   border-bottom: 1px solid #e5e7eb;
+}
+
+.chapter-toggle-btn {
+   width: 40px;
+   height: 40px;
+   border-radius: 8px;
+   border: 1px solid #e5e7eb;
+   background: white;
+   color: var(--tp-heading-primary);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   margin-left: auto;
+}
+
+.chapter-toggle-btn:hover {
+   background: var(--tp-theme-primary);
+   border-color: var(--tp-theme-primary);
+   color: white;
+}
+
+.chapter-toggle-btn i {
+   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+   font-size: 16px;
+}
+
+.chapter-toggle-btn[aria-expanded="false"] i {
+   transform: rotate(-90deg);
+}
+
+.chapter-collapsible-content {
+   overflow: hidden;
+   max-height: 5000px;
+   opacity: 1;
+}
+
+.chapter-collapsible-content.collapsed {
+   max-height: 0 !important;
+   opacity: 0 !important;
+   transform: scaleY(0);
+}
+
+#local-chapters-list {
+   margin-top: 30px;
+}
+
+#local-chapters-list > [class*="col-"] {
+   display: flex;
+}
+
+.tp-financial-item {
+   background: white;
+   border-radius: 12px;
+   overflow: hidden;
+   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+}
+
+.tp-financial-thumb {
+   position: relative;
+   height: 200px;
+   overflow: hidden;
+   flex-shrink: 0;
+}
+
+.tp-financial-content {
+   padding: 24px;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 16px;
+}
+
+.tp-financial-content > div:first-child {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.tp-financial-content-title {
+   font-size: 18px;
+   font-weight: 600;
+   margin-bottom: 0;
+   line-height: 1.4;
+}
+
+.tp-financial-content p {
+   font-size: 14px;
+   color: var(--tp-text-body);
+   line-height: 1.6;
+   margin-bottom: 0;
+   display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   flex: 1;
+}
+
+.tp-financial-content .d-flex.align-items-center {
+   gap: 12px;
+   margin-top: auto;
+   padding-top: 8px;
+}
+
+.tp-about-btn {
+   margin-top: 0;
+   padding-top: 16px;
+   border-top: 1px solid #f0f0f0;
+}
+
+#chapters-loader {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 400px;
+   padding: 60px 0;
+}
+
+#chapters-loader .tp-preloader-content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+#chapters-loader .tp-preloader-logo {
+   position: relative;
+   margin-bottom: 30px;
+}
+
+#chapters-loader .tp-preloader-circle {
+   position: relative;
+   width: 190px;
+   height: 190px;
+   margin: 0 auto;
+}
+
+#chapters-loader .tp-preloader-circle svg {
+   animation: nc-rotate 2s linear infinite;
+   height: 190px;
+   width: 190px;
+   display: block;
+}
+
+#chapters-loader .tp-preloader-circle circle:last-child {
+   stroke: var(--tp-theme-primary, #AB0C2F);
+   stroke-dasharray: 1, 1131;
+   stroke-dashoffset: 0;
+   animation: nc-dash 1.5s ease-in-out infinite;
+   opacity: 0.9;
+}
+
+#chapters-loader .tp-preloader-subtitle {
+   margin-top: 25px;
+   font-size: 16px;
+   color: var(--tp-heading-primary);
+   text-align: center;
+   font-weight: 500;
+}
+
+@keyframes nc-rotate {
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes nc-dash {
+   0% {
+      stroke-dasharray: 1, 1131;
+      stroke-dashoffset: 0;
+   }
+   50% {
+      stroke-dasharray: 565, 1131;
+      stroke-dashoffset: -283;
+   }
+   100% {
+      stroke-dasharray: 1131, 1131;
+      stroke-dashoffset: -1131;
+   }
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1199px) {
+   .nc-split {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+   }
+}
+
+@media (max-width: 991px) {
+   .nc-split {
+      grid-template-columns: 1fr;
+   }
+
+   .nc-census {
+      position: static;
+   }
+}
+
+@media (max-width: 767px) {
+   .nc-section {
+      padding: 48px 0 56px;
+   }
+
+   .nc-atlas-title {
+      font-size: 24px;
+   }
+
+   .nc-hero-plaque {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin: 20px 15px 0;
+      display: inline-block;
+   }
+
+   #chapters-loader {
+      min-height: 300px;
+      padding: 40px 0;
+   }
+
+   #chapters-loader .tp-preloader-circle {
+      width: 150px;
+      height: 150px;
+   }
+
+   #chapters-loader .tp-preloader-circle svg {
+      width: 150px;
+      height: 150px;
+   }
+
+   .tp-financial-thumb {
+      height: 180px;
+   }
+
+   .tp-financial-content {
+      padding: 20px;
+   }
+
+   .tp-financial-content-title {
+      font-size: 16px;
+   }
+
+   .tp-financial-content p {
+      font-size: 13px;
+   }
+
+   .chapter-section-header {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 15px;
+   }
+
+   .chapter-toggle-btn {
+      margin-left: 0;
+   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   #chapters-loader .tp-preloader-circle svg,
+   #chapters-loader .tp-preloader-circle circle:last-child {
+      animation: none;
+   }
+}
